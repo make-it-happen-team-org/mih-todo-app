@@ -1,4 +1,4 @@
-const ApplicationConfiguration = (() => {
+const appConfig = (() => {
   // Init module configuration options
   const applicationModuleName = 'mih';
   const applicationModuleVendorDependencies = [

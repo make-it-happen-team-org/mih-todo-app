@@ -1,3 +1,3 @@
 'use strict';
 
-ApplicationConfiguration.registerModule('migrate');
+appConfig.registerModule('migrate');

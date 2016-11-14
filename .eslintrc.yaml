@@ -12,6 +12,7 @@
 
   globals:
     _: true
+    appConfig: true
 
   rules:
     indent:

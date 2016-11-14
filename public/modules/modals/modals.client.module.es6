@@ -1,3 +1,3 @@
 'use strict';
 
-ApplicationConfiguration.registerModule('modals');
+appConfig.registerModule('modals');
