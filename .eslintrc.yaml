@@ -2,6 +2,7 @@
   ecmaFeatures: {}
   extends:
     - airbnb-base
+    - angular
   plugins:
     - smells
 
