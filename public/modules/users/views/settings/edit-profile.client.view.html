@@ -6,17 +6,17 @@
 			<section class="col-md-3">
 				<form class="signin form-horizontal">
 					<fieldset>
-						<div class="form-group text-center">
+						<div class="auth-form__form-group text-center">
 							<img ng-src="{{settings.imageURL}}" alt="{{settings.user.displayName}}" class="img-thumbnail user-profile-picture">
 						</div>
 
-						<div class="text-center form-group" ng-hide="settings.uploader.queue.length">
+						<div class="text-center auth-form__form-group" ng-hide="settings.uploader.queue.length">
 						  <span class="btn btn-default btn-file">
 							  Select Image <input type="file" nv-file-select uploader="settings.uploader">
 						  </span>
 						</div>
 
-						<div class="text-center form-group" ng-show="settings.uploader.queue.length">
+						<div class="text-center auth-form__form-group" ng-show="settings.uploader.queue.length">
 							<button class="btn btn-primary" ng-click="settings.uploadProfilePicture();">Upload</button>
 							<button class="btn btn-default" ng-click="settings.cancelUpload();">Cancel</button>
 						</div>
@@ -29,10 +29,10 @@
 					  autocomplete="off" novalidate
 				>
 					<fieldset>
-						<div class="form-group">
+						<div class="auth-form__form-group">
 							<label for="email" class="col-sm-4 control-label">Email</label>
 							<div class="col-sm-8">
-								<input type="email" id="email" name="email" class="form-control" placeholder="Email"
+								<input type="email" id="email" name="email" class="auth-form__form-control form-control" placeholder="Email"
 									   data-ng-model="settings.user.email" ng-model-options="{ debounce: 400}"
 									   required
 								>
@@ -42,12 +42,12 @@
 								</div>
 							</div>
 						</div>
-						<div class="form-group">
+						<div class="auth-form__form-group">
 							<label for="username" class="col-sm-4 control-label">Username</label>
 							<div class="col-sm-8">
 
 								<!-- TODO: refactor data-ng-change into a directive -->
-								<input type="text" id="username" name="username" class="form-control" placeholder="Username"
+								<input type="text" id="username" name="username" class="auth-form__form-control form-control" placeholder="Username"
 									   data-ng-model="settings.user.username" ng-model-options="{ debounce: 400}"
 									   data-ng-change="settings.MIHUtils.convertMultipleSpaces(settings.user, 'username')"
 									   required
@@ -60,26 +60,26 @@
 					</fieldset>
 
 					<fieldset>
-						<div class="form-group">
+						<div class="auth-form__form-group">
 							<label for="currentPassword" class="col-sm-4 control-label">Current Password</label>
 							<div class="col-sm-8">
-								<input type="password" id="currentPassword" name="currentPassword" class="form-control"
+								<input type="password" id="currentPassword" name="currentPassword" class="auth-form__form-control form-control"
 									   placeholder="Current Password" data-ng-model="settings.user.currentPassword"
 								>
 							</div>
 						</div>
-						<div class="form-group">
+						<div class="auth-form__form-group">
 							<label for="newPassword" class="col-sm-4 control-label">New Password</label>
 							<div class="col-sm-8">
-								<input type="password" id="newPassword" name="newPassword" class="form-control"
+								<input type="password" id="newPassword" name="newPassword" class="auth-form__form-control form-control"
 									   placeholder="New Password" data-ng-model="settings.user.newPassword"
 								>
 							</div>
 						</div>
-						<div class="form-group">
+						<div class="auth-form__form-group">
 							<label for="verifyPassword" class="col-sm-4 control-label">Verify Password</label>
 							<div class="col-sm-8">
-								<input type="password" id="verifyPassword" name="verifyPassword" class="form-control"
+								<input type="password" id="verifyPassword" name="verifyPassword" class="auth-form__form-control form-control"
 									   placeholder="Verify Password" data-ng-model="settings.user.verifyPassword"
 								>
 							</div>
@@ -87,7 +87,7 @@
 					</fieldset>
 
 					<fieldset>
-						<div class="form-group">
+						<div class="auth-form__form-group">
 							<div class="col-sm-4">
 								<label for="add-new-booked-slot" class="control-label">Don't disturb me</label>
 								<button id="add-new-booked-slot" type="button" class="btn btn-default pull-right"
@@ -98,13 +98,13 @@
 							</div>
 
 							<div class="col-sm-8">
-								<div class="form-group" ng-repeat="(i, booked) in settings.user.predefinedSettings.booked">
+								<div class="auth-form__form-group" ng-repeat="(i, booked) in settings.user.predefinedSettings.booked">
 									<ng-form name="bookedTime" class="booked-time">
 										<div class="col-sm-5">
 											<div class="row">
 												<div class="col-sm-12">
 													<label for="booked-start-time-{{$index}}" class="col-sm-12 control-label">From: </label>
-													<input id="booked-start-time-{{$index}}" type="time" class="form-control"
+													<input id="booked-start-time-{{$index}}" type="time" class="auth-form__form-control form-control"
 														   required name="startTime"
 														   data-ng-model="booked.startTime" ng-model-options="{ updateOn: 'blur' }"
 													>
@@ -120,7 +120,7 @@
 											<div class="row">
 												<div class="col-sm-12">
 													<label for="booked-end-time{{$index}}" class="col-sm-12 control-label">To: </label>
-													<input id="booked-end-time{{$index}}" type="time" class="form-control"
+													<input id="booked-end-time{{$index}}" type="time" class="auth-form__form-control form-control"
 														   required name="endTime"
 														   data-ng-model="booked.endTime" ng-model-options="{ updateOn: 'blur' }"
 													>
@@ -144,12 +144,12 @@
 					</fieldset>
 
 					<fieldset>
-						<div class="form-group">
+						<div class="auth-form__form-group">
 							<label for="reminder" class="col-sm-4 control-label">Reminder: </label>
 							<div class="col-sm-8">
 								<div class="row">
 									<div class="col-sm-3">
-										<input id="reminder" type="number" class="form-control" name="reminder" required
+										<input id="reminder" type="number" class="auth-form__form-control form-control" name="reminder" required
 											   data-ng-model="settings.user.predefinedSettings.reminder" ng-model-options="{ updateOn: 'blur' }"
 										>
 									</div>
@@ -164,11 +164,11 @@
 					</fieldset>
 
 					<fieldset>
-						<div class="form-group">
+						<div class="auth-form__form-group">
 							<label class="col-sm-4 control-label">Working time</label>
 
 							<div class="col-sm-12 working-days">
-								<div class="form-group" ng-repeat="dayName in settings.workingDays" ng-init="dayOpts = settings.user.predefinedSettings.workingHours[dayName]">
+								<div class="auth-form__form-group" ng-repeat="dayName in settings.workingDays" ng-init="dayOpts = settings.user.predefinedSettings.workingHours[dayName]">
 									<ng-form name="workingDay">
 										<div class="col-sm-2 col-sm-offset-2 day-label">
 											<label>
@@ -179,7 +179,7 @@
 
 										<div class="col-sm-4 working-from-wrapper">
 											<label for="working-day-start-{{$index}}" class="col-sm-12 control-label">From: </label>
-											<input id="working-day-start-{{$index}}" type="time" class="form-control" name="workingDayStart"
+											<input id="working-day-start-{{$index}}" type="time" class="auth-form__form-control form-control" name="workingDayStart"
 												   data-ng-model="dayOpts.start" data-ng-disabled="!dayOpts.isWorkingDay"
 												   ng-model-options="{ updateOn: 'blur' }"
 												   required
@@ -194,7 +194,7 @@
 											<div class="row">
 												<div class="col-sm-12">
 													<label for="working-day-end-{{$index}}" class="col-sm-12 control-label">To: </label>
-													<input id="working-day-end-{{$index}}" type="time" class="form-control" name="workingDayEnd"
+													<input id="working-day-end-{{$index}}" type="time" class="auth-form__form-control form-control" name="workingDayEnd"
 														   data-ng-model="dayOpts.end" data-ng-disabled="!dayOpts.isWorkingDay"
 														   ng-model-options="{ updateOn: 'blur' }"
 														   required

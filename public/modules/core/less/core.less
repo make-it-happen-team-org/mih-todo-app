@@ -1,9 +1,12 @@
 @import "logo/core.logo.less";
 @import "socials/core.socials.less";
-@import "login/core.login.less";
 @import "datepicker/core.datepicker.less";
 @import "navigation/core.navigation.less";
 @import "sidebar/core.sidebar.less";
+
+.text-uppercase {
+  text-transform: uppercase;
+}
 
 .undecorated-link:hover { text-decoration: none; }
 
@@ -132,7 +135,13 @@ div.ui-notification {
 }
 
 .error-message {
-  .error-text { color: @error-message-color; }
+  .error-text {
+    margin: 0;
+    padding: .1em .75em;
+    color: @login-font-color;
+    background-color: @login-error-color;
+    font-size: @login-error-message-font-size;
+  }
 }
 
 // ---------------- PRIORITY ----------------

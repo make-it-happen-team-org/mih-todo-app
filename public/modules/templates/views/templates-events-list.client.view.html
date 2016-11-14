@@ -6,7 +6,7 @@
 <section data-ng-controller="templatesEventsListController as templatesEventsListCtrl">
 	<!-- 'templatesEventsListCtrl.templatesList.length > 3' as we have two predefined templates (sick, vacation) -->
 	<!-- and this templates hidden at this list but present in collection -->
-	<div class="form-group todo-list-controls" data-ng-show="templatesEventsListCtrl.templatesList.length > 3">
+	<div class="auth-form__form-group todo-list-controls" data-ng-show="templatesEventsListCtrl.templatesList.length > 3">
 		<a class="controls-link" ng-click="templatesEventsListCtrl.sortReverse = !templatesEventsListCtrl.sortReverse">
 			<i class="fa fa-sort-amount-desc" aria-hidden="true" ng-hide="templatesEventsListCtrl.sortReverse"></i>
 			<i class="fa fa-sort-amount-asc" aria-hidden="true" ng-show="templatesEventsListCtrl.sortReverse"></i>

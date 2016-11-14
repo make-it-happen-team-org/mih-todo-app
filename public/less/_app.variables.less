@@ -1,21 +1,41 @@
 // TODO Reorganize variables
 // ---------------- Fonts ----------------
-@font-open-sans-regular: 'open_sansregular';
-@font-open-sans-italic: 'open_sansbold_italic';
-@font-open-sans-bold: 'open_sansbold';;
-@font-open-sans-bold-italic: 'open_sansbold_italic';
+@font-open-sans-regular: 'open_sansregular', Arial, sans-serif;
+@font-open-sans-italic: 'open_sansbold_italic', Arial, sans-serif;
+@font-open-sans-bold: 'open_sansbold', Arial, sans-serif;
+@font-open-sans-bold-italic: 'open_sansbold_italic', Arial, sans-serif;
+@default-font-size: 16px;
 
 // ---------------- Login Page ----------------
-@login-bg-color-with-opasity: rgba(23, 40, 55, 83);
-@login-input-bg-color: rgb(23, 40, 55);
+@login-error-color: #ED5565;
+@login-valid-color: #1AAA8F;
+
 @login-input-font-color: #859CB1;
 @login-font-color: #FFF;
 @login-sing-in-btn-color: #1AAA8F;
+@login-sing-in-btn-hover-color: #119B7F;
 @login-create-account-btn-color: #1C84C6;
+@login-create-account-btn-hover-color: #1176B7;
+@login-btn-font-color: #FFF;
+
+@login-auth-bg-img: url('/modules/users/img/backgrounds/bg-1.jpg');
+@login-bg-color: #172837;
+
+@login-input-bg-color: #172837;
+@login-input-border-color: #859CB1;
+@login-input-font-color: #859CB1;
+
+@login-form-max-width: 460px;
+@login-form-min-width: 200px;
+
+@login-form-font-size: .8125em;
+@login-error-message-font-size: .75em;
+
+@login-link-dimension: 2.375em;
 
 // ---------------- Socials ----------------
 @socials-facebook-color: #3B5998;
-@socials-tweeter-color: #55ACEE;
+@socials-twitter-color: #55ACEE;
 @socials-vk-color: #507299;
 
 // ---------------- BASE COLORS ----------------
@@ -74,14 +94,17 @@
 @color-lavender: #E8F2F9;
 
 // ---------------- AUTHORIZATION PAGES ----------------
-@auth-bg-img: url('/modules/users/img/backgrounds/bg-1.jpg');
+@intro-color: #FFF;
+@auth-page--popover-brd-right: #303030;
+
+// ---------------- Logo ----------------
 @logo-lg-light: url('/modules/users/img/logo-lg-light.png');
 @logo-lg-dark: url('/modules/users/img/logo-lg-dark.png');
-@mobile-backdrop: rgba(0, 0, 0, 0.7);
-@intro-backdrop: rgba(0, 0, 0, .5);
-@auth-aside-bg: #FFF;
-@intro-color: #FFF;
-@uath-page--popover-brd-right: #303030;
 
 // ---------------- SCREENS ----------------
 @mobile-display: ~"only screen and (max-width: 667px)";
+
+
+// ---------------- Popover ----------------
+@popover-font-size: .625em;
+@popover-font-color: #2f4050;

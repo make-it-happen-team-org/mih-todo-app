@@ -1,3 +1,4 @@
+// ------------------------ Angular ------------------------
 [ng\:cloak],
 [ng-cloak],
 [data-ng-cloak],
@@ -7,12 +8,41 @@
   display: none !important;
 }
 
-.browsehappy.jumbotron.hide,
-body.ng-cloak { display: block; }
+// ------------------------ 3-rd party libs ------------------------
+.auth-form {
+  .has-error {
+    .control-label {
+      color: @login-btn-font-color;
+    }
+  }
 
-body {
-  font-size: 16px;
-  background: @body-background-color;
+  .form-control:focus,
+  .single-line:focus {
+    border: 1px solid @login-input-border-color!important;
+
+    &.ng-invalid {
+      border: 1px solid @login-error-color!important;
+    }
+
+    &.ng-valid {
+      border: 1px solid @login-valid-color!important;
+    }
+  }
+}
+
+.browsehappy.jumbotron.hide,
+body.ng-cloak {
+  display: block;
+
+}
+
+
+// ------------------------ browser ------------------------
+body.mih-app {
+  color: #FFF;
+  font-size: @default-font-size;
+  font-family:@font-open-sans-regular;
+  overflow-x: auto;
 }
 
 a { color: @link-color; }

@@ -12,17 +12,17 @@
 			<form class="form-horizontal col-xs-8" name="templateForm" novalidate>
 				<fieldset class="row">
 					<div class="col-xs-6">
-						<div class="form-group">
+						<div class="auth-form__form-group">
 							<label class="control-label label-padding" for="title">Title*</label>
 							<input type="text" data-ng-model="template.title" name="title" id="title"
-								   class="form-control input-round-borders" placeholder="Title" required >
+								   class="auth-form__form-control form-control input-round-borders" placeholder="Title" required >
 							<div ng-show="templateForm.title.$error.required" class="error-message">
 								<p class="help-block error-text">Please fill Task title</p>
 							</div>
 						</div>
 						<div class="field-group">
 							<label class="field-label" for="title">Type</label>
-							<select class="form-control" data-ng-model="template.type">
+							<select class="auth-form__form-control form-control" data-ng-model="template.type">
 								<option value="sick">Sick</option>
 								<option value="vacation">Vacation</option>
 								<option value="event">Event</option>
@@ -31,14 +31,14 @@
 					</div>
 
 					<div class="col-xs-6">
-						<div class="form-group">
+						<div class="auth-form__form-group">
 							<label class="control-label label-padding" for="notes">Notes</label>
-							<textarea class="form-control notes-area" id="notes" data-ng-model="template.notes"></textarea>
+							<textarea class="auth-form__form-control form-control notes-area" id="notes" data-ng-model="template.notes"></textarea>
 							<div ng-show="validationError.notes" class="error">
 								{{validationError.notes.message}}
 							</div>
 						</div>
-						<div class="form-group">
+						<div class="auth-form__form-group">
 							<button class="btn btn-danger template-action pull-left"
 									ng-click="templates.remove(template, 'eventTemplates')"
 							>Delete</button>

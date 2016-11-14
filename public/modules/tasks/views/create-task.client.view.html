@@ -15,14 +15,14 @@
 									<div class="field-group" ng-class="{ error: validationError.title }">
 										<label class="field-label" for="title">Title*</label>
 										<input type="text" data-ng-model="newTask.title"  id="title"
-											   class="form-control input-round-borders" placeholder="Title" required >
+											   class="auth-form__form-control form-control input-round-borders" placeholder="Title" required >
 										<div ng-show="validationError.title" class="error">
 											{{validationError.title.message}}
 										</div>
 									</div>
 									<div class="field-group">
 										<label class="field-label" for="templates">Template</label>
-										<select class="form-control" id="templates" data-ng-change="loadTaskTemplate(selectedTemplate)"
+										<select class="auth-form__form-control form-control" id="templates" data-ng-change="loadTaskTemplate(selectedTemplate)"
 												data-ng-model="selectedTemplate" data-ng-options="template.title for template in user.taskTemplates"
 										>
 											<option value="">Select template</option>
@@ -31,7 +31,7 @@
 									<div class="field-group">
 										<label class="field-label" for="priority">Priority*</label>
 										<div data-ng-class="'item-priority-' + newTask.priority">
-											<select name="priority" id="priority" class="form-control item-priority" data-ng-model="newTask.priority"  data-ng-change="clearSlotsList()">
+											<select name="priority" id="priority" class="auth-form__form-control form-control item-priority" data-ng-model="newTask.priority"  data-ng-change="clearSlotsList()">
 												<option value="1" class="item-priority-1">Urgent and Important</option>
 												<option value="2" class="item-priority-2">Not Urgent but Important</option>
 												<option value="3" class="item-priority-3">Urgent but not Important</option>
@@ -93,7 +93,7 @@
 								<div class="col-md-4 col-sm-12">
 									<div class="field-group">
 										<label class="field-label" for="notes">Notes</label>
-										<textarea id="notes" class="form-control" data-ng-model="newTask.notes"></textarea>
+										<textarea id="notes" class="auth-form__form-control form-control" data-ng-model="newTask.notes"></textarea>
 										<div ng-show="validationError.notes" class="error">
 											{{validationError.notes.message}}
 										</div>

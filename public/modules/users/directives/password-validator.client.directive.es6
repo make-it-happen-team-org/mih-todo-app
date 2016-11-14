@@ -10,7 +10,7 @@ angular.module('users')
 				html: true,
 				trigger: 'focus',
 				autoClose: false,
-				placement: 'right-bottom',
+				placement: 'bottom',
 				scope: scope
 			});
 			scope.errors = PasswordValidator.getResult("").errors;

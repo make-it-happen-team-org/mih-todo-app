@@ -12,17 +12,17 @@
 					<fieldset class="row">
 						<div class="form-holder clearfix">
 							<div class="column-wrapper col-xs-6 col-sm-4">
-								<div class="form-group">
+								<div class="auth-form__form-group">
 									<label for="title">Title*</label>
-									<input type="text" data-ng-model="event.title" id="title" class="form-control input-round-borders" placeholder="Title"/>
+									<input type="text" data-ng-model="event.title" id="title" class="auth-form__form-control form-control input-round-borders" placeholder="Title"/>
 								</div>
-								<div class="form-group checkbox">
+								<div class="auth-form__form-group checkbox">
 									<label for="saveAsTemplate">
 										<input type="checkbox" data-ng-model="event.isATemplate" id="saveAsTemplate"/>
 										Save as a new template
 									</label>
 								</div>
-								<div class="form-group">
+								<div class="auth-form__form-group">
 									<div class="checkbox">
 										<label for="withoutDates">
 											<input type="checkbox" data-ng-model="event.withoutDates" id="withoutDates"/>
@@ -32,17 +32,17 @@
 								</div>
 							</div>
 							<div class="column-wrapper col-xs-6 col-sm-4">
-								<div class="form-group">
+								<div class="auth-form__form-group">
 									<datetime-picker data-type="startTime" data-label="Start date" data-activity="event" data-picker-id="startDatePicker" data-linked-picker-id="endDatePicker"></datetime-picker>
 								</div>
-								<div class="form-group">
+								<div class="auth-form__form-group">
 									<datetime-picker data-type="endTime" data-label="End date" data-activity="event" data-picker-id="endDatePicker"></datetime-picker>
 								</div>
 							</div>
 							<div class="column-wrapper col-xs-6 col-sm-4">
-								<div class="form-group">
+								<div class="auth-form__form-group">
 									<label for="notes">Notes</label>
-									<textarea id="notes" class="form-control" data-ng-model="event.notes"></textarea>
+									<textarea id="notes" class="auth-form__form-control form-control" data-ng-model="event.notes"></textarea>
 								</div>
 							</div>
 						</div>
