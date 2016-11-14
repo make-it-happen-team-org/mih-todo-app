@@ -23,7 +23,7 @@
                           |
                           [less_module]
                           |           |
-                          |           [module_name].[less_module_name].less|
+                          |           _[module_name].[less_module_name].less|
                           |
                           [module-name].less => Agrgregate less modules
 ```
