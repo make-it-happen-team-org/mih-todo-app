@@ -5,14 +5,15 @@
 // TODO: injectable service works, but is not a perfect idea
 
 class MIHUtils {
-	constructor() {
+  constructor() {
 
-	}
-	convertMultipleSpaces(model, prop) {
-		model[prop] = model[prop].replace(/\s+/g, ' ');
-	}
+  }
+
+  convertMultipleSpaces(model, prop) {
+    model[prop] = model[prop].replace(/\s+/g, ' ');
+  }
 }
 
 
 angular.module('mih.utils')
-	.service('MIHUtils', MIHUtils);
+  .service('MIHUtils', MIHUtils);
