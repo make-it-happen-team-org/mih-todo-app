@@ -1,8 +1,7 @@
 class ModalsController {
-
   /** @ngInject */
   constructor(ModalsService, $scope, $rootScope) {
-    Object.assign(this, {
+    Object.assign(this, { // eslint-disable-line angular/controller-as-vm
       ModalsService,
       $scope,
       $rootScope
@@ -11,20 +10,22 @@ class ModalsController {
 
   renderModalData() {
     return {
-      warning: this.$scope.ngDialogData.warningMsg,
-      title: this.$scope.ngDialogData.modalTitle,
-      timeToFree: this.$scope.ngDialogData.timeToFree,
-      firstHandler: this.$scope.ngDialogData.buttonsMsg.firstHandler,
-      secondHandler: this.$scope.ngDialogData.buttonsMsg.secondHandler
+      warning: this.$scope.ngDialogData.warningMsg, // eslint-disable-line angular/controller-as-vm
+      title: this.$scope.ngDialogData.modalTitle, // eslint-disable-line angular/controller-as-vm
+      timeToFree: this.$scope.ngDialogData.timeToFree, // eslint-disable-line angular/controller-as-vm
+      firstHandler: this.$scope.ngDialogData.buttonsMsg.firstHandler, // eslint-disable-line angular/controller-as-vm
+      secondHandler: this.$scope.ngDialogData.buttonsMsg.secondHandler // eslint-disable-line angular/controller-as-vm
     };
   }
 
   firstWayHandle() {
-    this.$rootScope.$broadcast(`CONFLICTED_${this.$scope.ngDialogData.type}_FIRST`);
+    // eslint-disable-next-line angular/controller-as-vm
+    this.$rootScope.$broadcast(`CONFLICTED_${ this.$scope.ngDialogData.type }_FIRST`);
   }
 
   secondWayHandle() {
-    this.$rootScope.$broadcast(`CONFLICTED_${this.$scope.ngDialogData.type}_SECOND`);
+    // eslint-disable-next-line angular/controller-as-vm
+    this.$rootScope.$broadcast(`CONFLICTED_${ this.$scope.ngDialogData.type }_SECOND`);
   }
 }
 

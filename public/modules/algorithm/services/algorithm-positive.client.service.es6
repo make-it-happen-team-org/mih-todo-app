@@ -1,5 +1,5 @@
 class AlgorithmPositive {
-
+  /** @ngInject */
   constructor() {
     Object.assign(this, {});
   }

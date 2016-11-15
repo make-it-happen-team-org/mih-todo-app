@@ -1,6 +1,4 @@
 class ModalsService {
-
-  /** @ngInject */
   constructor(ngDialog) {
     Object.assign(this, {
       ngDialog

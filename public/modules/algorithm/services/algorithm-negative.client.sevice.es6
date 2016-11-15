@@ -1,5 +1,4 @@
 class AlgorithmNegative {
-
   /** @ngInject */
   constructor($rootScope, Slots, $timeout, ModalsService, MODALS_TASK_MESSAGES, MODALS_EVENT_MESSAGES, MODALS_EVENTS) {
     Object.assign(this, {

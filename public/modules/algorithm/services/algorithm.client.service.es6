@@ -1,4 +1,5 @@
 class TimeSlot {
+  /** @ngInject */
   constructor(duration, priority) {
     this.duration = duration;
     this.priority = parseInt(priority, 10);
@@ -6,6 +7,7 @@ class TimeSlot {
 }
 
 class Slot {
+  /** @ngInject */
   constructor(duration, priority, dayId) {
     this.duration = duration;
     this.priority = parseInt(priority, 10);
@@ -19,6 +21,7 @@ class Day {
     return { 0: 'sun', 1: 'mon', 2: 'tue', 3: 'wed', 4: 'thu',  5: 'fri', 6: 'sat' };
   };
 
+  /** @ngInject */
   constructor(data) {
     Object.assign(this, data);
     this.date = new Date(this.date);
