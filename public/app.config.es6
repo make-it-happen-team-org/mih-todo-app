@@ -1,3 +1,5 @@
+// Creating in global scope module
+// eslint-disable-next-line
 const appConfig = (() => {
   // Init module configuration options
   const applicationModuleName = 'mih';

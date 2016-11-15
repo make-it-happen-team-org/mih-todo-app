@@ -1,6 +1,7 @@
-import { AlgorithmServerController  as algorithm } from '../controllers/algorithm.server.controller';
+const algorithm = require('../controllers/algorithm.server.controller').AlgorithmServerController;
 
-export default app => {
+module.exports = function (app) {
+  // Root routing
   app.route('/algorithm/free-time').get(algorithm.getFreeTime);
   app.route('/algorithm/occupied-time').get(algorithm.getOccupiedTime);
 };

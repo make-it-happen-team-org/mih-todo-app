@@ -1,6 +1,6 @@
 'use strict';
 
-const config = require('../../../config/config').outlook;
+const config = require('../../../config/app/config').outlook;
 
 const {clientID, clientSecret, site, authorizationPath, tokenPath} = config;
 

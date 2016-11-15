@@ -3,7 +3,7 @@
 /**
  * Module dependencies.
  */
-var applicationConfiguration = require('./config/config');
+var applicationConfiguration = require('./config/app/config');
 
 // Karma configuration
 module.exports = function(config) {

@@ -1,8 +1,9 @@
-var fs = require('fs');
+const fs = require('fs');
 
-module.exports = function (grunt) {
+// eslint-disable-next-line
+module.exports = (grunt) => {
   // Unified Watch Object
-  var watchFiles = {
+  const watchFiles = {
     serverViews: ['server/views/**/*.*'],
     serverJS: ['gruntfile.js', 'server.js', 'config/**/*.js', 'server/**/*.js', '!server/tests/'],
     clientViews: ['public/modules/**/views/**/*.html'],
@@ -62,9 +63,7 @@ module.exports = function (grunt) {
           expand: true,
           src: watchFiles.clientLESS,
           ext: '.css',
-          rename: function (base, src) {
-            return src.replace('/less/', '/css/');
-          }
+          rename: (base, src) => src.replace('/less/', '/css/')
         }]
       }
     },
@@ -132,7 +131,7 @@ module.exports = function (grunt) {
           'save-live-edit': true,
           'no-preload': true,
           'stack-trace-limit': 50,
-          'hidden': []
+          hidden: []
         }
       }
     },
@@ -162,7 +161,7 @@ module.exports = function (grunt) {
       },
       test: {
         NODE_ENV: 'test'
-      },
+      }
     },
     mochaTest: {
       src: watchFiles.mochaTests,
@@ -181,22 +180,21 @@ module.exports = function (grunt) {
       localConfig: {
         src: 'config/env/local.example.js',
         dest: 'config/env/local.js',
-        filter: function () {
-          return !fs.existsSync('config/env/local.js');
-        }
+        filter: () => !fs.existsSync('config/env/local.js')
       }
     },
     clean: {
       compiledJs: [
         'public/modules/**/*.js', 'public/modules/**/*.js.map',
         'public/modules/**/application.js', 'public/modules/**/application.js.map',
-        'public/modules/**/config.js', 'public/modules/**/config.js.map',
+        'public/modules/**/index.js', 'public/modules/**/index.js.map',
         'server/**/*.js', 'server/**/*.js.map'
       ]
     }
   });
 
   // Load NPM tasks
+// eslint-disable-next-line
   require('load-grunt-tasks')(grunt);
   grunt.loadNpmTasks('grunt-contrib-clean');
 
@@ -204,9 +202,9 @@ module.exports = function (grunt) {
   grunt.option('force', true);
 
   // A Task for loading the configuration object
-  grunt.task.registerTask('loadConfig', 'Task that loads the config into a grunt option.', function () {
-    var init = require('./config/init')();
-    var config = require('./config/config');
+  grunt.task.registerTask('loadConfig', 'Task that loads the config into a grunt option.', () => {
+    require('./config').setEnvironment(); // eslint-disable-line
+    const config = require('./config/app/config'); // eslint-disable-line
 
     grunt.config.set('applicationJavaScriptFiles', config.assets.js);
     grunt.config.set('applicationCSSFiles', config.assets.css);
