@@ -9,4 +9,4 @@ class MIHUtils {
 }
 
 angular.module('mih.utils')
-  .factory('MIHUtils', MIHUtils);
+  .service('MIHUtils', MIHUtils);
