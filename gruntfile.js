@@ -11,7 +11,7 @@ module.exports = function(grunt) {
 		clientJS: ['public/js/**/*.js', 'public/**/*.es6', '!public/**/*.compiled.js'],
 		allES6: ['public/**/*.es6', 'server-app-folder/**/*.es6'],
 		clientCSS: ['public/assets/**/*.css'],
-		clientLESS: ['public/modules/**/less/*.less'],
+		clientLESS: ['public/less/*.main.less'],
 		mochaTestsES6: ['server-app-folder/tests/**/*.es6'],
 		mochaTests: ['server-app-folder/tests/**/*.js']
 	};

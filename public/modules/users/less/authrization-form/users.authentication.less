@@ -1,0 +1,112 @@
+@import "_users.auth-btns.less";
+@import "_users.popover.less";
+@import "_users.auth-form.form-control.less";
+
+.auth {
+  &-page {
+    height: 100%;
+    background-image: @login-auth-bg-img;
+    background-size: cover;
+
+    &:before {
+      content: '';
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      display: block;
+      background-color: @login-bg-color;
+      opacity: .83;
+    }
+
+    .row { height: 100%; }
+
+    &__description {
+      max-width: @login-description-max-width;
+      margin: 5em auto 0 auto;
+      color: @login-font-color;
+      font-size: @login-form-font-size;
+      text-align: center;
+    }
+
+    .popover_mixin();
+  }
+
+  &-form {
+    max-width: @login-form-max-width;
+    min-width: @login-form-min-width;
+    margin: 0 auto;
+    color: inherit;
+
+    &-group {
+      &__content {
+        margin: 2em 0 1.5em 0;
+        color: @login-font-color;
+        font-size: @login-form-font-size;
+        text-align: center;
+        text-transform: uppercase;
+      }
+
+      &__link {
+        position: relative;
+        display: inline-block;
+        height: @login-link-dimension;
+        width: @login-link-dimension;
+        border-radius: 50%;
+        color: @login-font-color;
+
+        & ~ .auth-form-group__link { margin-left: 1em; }
+
+        .fa {
+          .position-to-canter-absolute();
+        }
+
+        &:hover,
+        &:focus {
+          color: @login-font-color;
+          transition: all .5s;
+        }
+
+        &--facebook {
+          background-color: @socials-facebook-color;
+
+          &:hover,
+          &:focus {
+            background-color: darken(@socials-facebook-color, 10%);
+          }
+        }
+
+        &--vk {
+          background-color: @socials-vk-color;
+
+          &:hover,
+          &:focus {
+            background-color: darken(@socials-vk-color, 10%);
+          }
+        }
+
+        &--twitter {
+          background-color: @socials-twitter-color;
+
+          &:hover,
+          &:focus {
+            background-color: darken(@socials-twitter-color, 10%);
+          }
+        }
+      }
+    }
+
+    &__label {
+      font-size: @login-form-font-size;
+    }
+
+    .auth-form__btn-mixin ();
+
+    &__form-group {
+      margin-bottom: 1em;
+    }
+
+    .auth-form-control();
+  }
+}
