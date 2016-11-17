@@ -74,11 +74,11 @@ Use documentation annotation for this.
 ## Angular code style notes
 
 ### Naming
-Controller names should start with uppercase letter and finishes with Ctrl
-Service name should start from uppercase if it is instantiable value or with lowercase if not and finishes with **Srv**
-Factory name should start from uppercase if it is instantiable value or with lowercase if not and finishes with **Fct**
-Value name should start from uppercase if it is instantiable value or with lowercase if not and finishes with **Val**
-Constant name should start from uppercase if it is instantiable value or with lowercase if not and finishes with **Const** suffixes (accordingly)
+Controller names should start with uppercase letter and finishes with Controller
+Service name should start from uppercase if it is instantiable value or with lowercase if not and finishes with **Service**
+Factory name should start from uppercase if it is instantiable value or with lowercase if not and finishes with **Factory**
+Value name should start from uppercase if it is instantiable value or with lowercase if not and finishes with **Value**
+Constant name should start from uppercase if it is instantiable value or with lowercase if not and finishes with **Constant** suffixes (accordingly)
 
 File name should have the pattern:
 > <dashed-component-name>.<type>.js
