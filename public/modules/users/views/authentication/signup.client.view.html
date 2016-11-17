@@ -1,49 +1,73 @@
-<h1 class="app-logo only-mobile">Make It Happen</h1>
-<h2 class="auth-title">Registration</h2>
-<form name="signupForm" data-ng-controller="AuthenticationController" data-ng-submit="signup(signupForm.$valid)" class="form-horizontal" novalidate autocomplete="off">
-	<fieldset>
-		<div class="form-group" ng-class="{'has-error':  signupForm.submitted && signupForm.email.$invalid || signupForm.email.$dirty && signupForm.email.$invalid}">
-			<label for="email">Email</label>
-			<input type="email" id="email" name="email" class="form-control" data-ng-model="credentials.email" placeholder="Email" required>
-			<div ng-show="signupForm.submitted || signupForm.email.$dirty" class="error-message">
-				<p ng-show="signupForm.email.$error.required" class="help-block error-text">Please enter your email</p>
-				<p ng-show="signupForm.email.$error.email" class="help-block error-text">Please enter a valid email</p>
-			</div>
-		</div>
-		<div class="form-group" ng-class="{'has-error':  signupForm.submitted && signupForm.username.$invalid || signupForm.username.$dirty && signupForm.username.$invalid}">
-			<label for="username">Username</label>
-			<input type="text" id="username" name="username" class="form-control" data-ng-model="credentials.username" placeholder="Username" required>
-			<div ng-show="signupForm.submitted || signupForm.username.$dirty" class="error-message">
-				<p ng-show="signupForm.username.$error.required" class="help-block error-text">Please enter your username</p>
-			</div>
-		</div>
-		<div class="form-group" ng-class="{'has-error':  signupForm.submitted && signupForm.password.$invalid || signupForm.password.$dirty && signupForm.password.$invalid}">
-			<label for="password">Password</label>
-			<input type="password" id="password" name="password" class="form-control" data-ng-model="credentials.password" placeholder="Password" required password-validator ng-change="validatePassword()" ng-blur="notifyIfInvalid()">
-			<div ng-show="signupForm.submitted" class="error-message">
-				<p ng-show="signupForm.username.$error.required" class="help-block error-text">Please enter your password</p>
-			</div>
-			<script type="text/ng-template" id="validationErrorsTmp.html">
-				<div ng-show="errors.length > 0">
-					<p class="error-popover-title text-danger">
-						The password must:</p>
-					<p ng-repeat="error in errors">{{error}}</p>
-				</div>
-				<div ng-show="errors.length == 0">
-					<p class="error-popover-title text-navy">
-						The password is valid
-					</p>
-				</div>
-			</script>
-		</div>
-		<div class="text-center form-group">
-			<button type="submit" class="btn btn-large btn-block btn-primary">Sign up</button>&nbsp; or&nbsp;
-			<a href="/#!/signin" class="show-signup btn btn-large btn-block btn-primary">Sign in</a>
-		</div>
-		<div data-ng-show="error" class="text-center text-danger">
-			<strong data-ng-bind="error"></strong>
-		</div>
-	</fieldset>
+<form name="signupForm"
+      data-ng-controller="AuthenticationController"
+      data-ng-submit="signup(signupForm.$valid)"
+      class="form-horizontal"
+      novalidate
+      autocomplete="off">
+  <h1 class="app-logo">Make It Happen</h1>
+  <fieldset>
+    <div class="auth-form__form-group"
+         data-ng-class="{'has-error': signupForm.submitted && signupForm.email.$invalid || signupForm.email.$dirty && signupForm.email.$invalid}">
+      <label for="email" class="text-uppercase auth-form__label">Email</label>
+      <input type="email"
+             id="email"
+             name="email"
+             class="auth-form__form-control form-control"
+             data-ng-model="credentials.email"
+             placeholder="Email"
+             required>
+      <div data-ng-show="signupForm.submitted || signupForm.email.$dirty" class="error-message">
+        <p data-ng-show="signupForm.email.$error.required" class="help-block error-text">Please enter your email</p>
+        <p data-ng-show="signupForm.email.$error.email" class="help-block error-text">Please enter a valid email</p>
+      </div>
+    </div>
+    <div class="auth-form__form-group"
+         data-ng-class="{'has-error': signupForm.submitted && signupForm.username.$invalid || signupForm.username.$dirty && signupForm.username.$invalid}">
+      <label for="username" class="text-uppercase auth-form__label">Username</label>
+      <input type="text"
+             id="username"
+             name="username"
+             class="auth-form__form-control form-control"
+             data-ng-model="credentials.username"
+             placeholder="Username"
+             required>
+      <div data-ng-show="signupForm.submitted || signupForm.username.$dirty"
+           class="error-message">
+        <p data-ng-show="signupForm.username.$error.required" class="help-block error-text">Please enter your username</p>
+      </div>
+    </div>
+    <div class="auth-form__form-group"
+         data-ng-class="{'has-error': signupForm.submitted && signupForm.password.$invalid || signupForm.password.$dirty && signupForm.password.$invalid}">
+      <label for="password" class="text-uppercase auth-form__label">Password</label>
+      <input type="password"
+             id="password"
+             name="password"
+             class="auth-form__form-control form-control"
+             data-ng-model="credentials.password"
+             placeholder="Password"
+             required
+             password-validator
+             data-ng-change="validatePassword()"
+             data-ng-blur="notifyIfInvalid()">
+      <div data-ng-show="signupForm.submitted" class="error-message">
+        <p data-ng-show="signupForm.username.$error.required" class="help-block error-text">Please enter your password</p>
+      </div>
+      <script type="text/ng-template" id="validationErrorsTmp.html">
+        <div data-ng-show="errors.length > 0">
+          <p class="error-popover-title text-danger"> The password must:</p>
+          <p data-ng-repeat="error in errors">{{error}}</p>
+        </div>
+        <p  data-ng-show="errors.length === 0" class="error-popover-title text-navy"> The password is valid</p>
+      </script>
+    </div>
+    <div class="text-center auth-form__form-group">
+      <a href="/#!/signin" class="show-signup btn btn-large btn-block btn-primary  auth-form__btn auth-form__btn--green text-uppercase auth-form__label">Sign in</a>
+      <button type="submit" class="btn btn-large btn-block btn-primary  auth-form__btn auth-form__btn--blue text-uppercase auth-form__label">Create account</button>
+    </div>
+    <div data-ng-show="error" class="text-center text-danger">
+      <strong data-ng-bind="error"></strong>
+    </div>
+  </fieldset>
 </form>
 
 
