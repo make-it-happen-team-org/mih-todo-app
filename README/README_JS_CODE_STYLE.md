@@ -1,27 +1,5 @@
 # JS Code style notes
 
-## Tooling
-
-We do use ESLint for code style managing.
-So in some cases you should perform code static analysis yourself
-
-To understand better the topic, please look [this link](http://elijahmanor.com/javascript-smells/?utm```source=javascriptweekly&utm```medium=email) and watch the video there:
-
-### First of all setup using ESLint in your IDE.
-> For Webstorm you can do this Settings -> (Search ESLint) -> Enable. And also set it to use local package
->
-> The second thing is to meet some code style guides and tools:
-> 1. ESLint: http://ESLint.org/docs/rules/
-> 2. code smells plugin: https://github.com/elijahmanor/ESLint-plugin-smells
-> 3. angular plugin: https://github.com/Gillespie59/ESLint-plugin-angular
->
-> If you have troubles with ESLint hints first of all understand which rule you are to brake (consult rules list)
-
-### The second thing to remember here - do remember that disabling of ESLint is prohibited.
-> Only in some very rare cases where library files brake this rule.
-> For instance provide some Cap instance which should be called without new,
-> or you need to paste some json data and it is better to save it's syntax to be able to update it easily.
-
 ## Common
 
   ```
@@ -96,9 +74,7 @@ Use documentation annotation for this.
 ## Angular code style notes
 
 ### Naming
-Module names should start from **mih**
 Controller names should start with uppercase letter and finishes with Ctrl
-Directive name should start from **mih**
 Service name should start from uppercase if it is instantiable value or with lowercase if not and finishes with **Srv**
 Factory name should start from uppercase if it is instantiable value or with lowercase if not and finishes with **Fct**
 Value name should start from uppercase if it is instantiable value or with lowercase if not and finishes with **Val**
