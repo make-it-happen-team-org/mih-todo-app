@@ -264,7 +264,7 @@ module.exports = function (grunt) {
 		config.assets.jsFullPath = [];
 		config.assets.js.forEach(function (pattern) {
 			config.assets.jsFullPath.push(grunt.file.expand(pattern));
-		});
+		}
 
 		grunt.file.write(
 			'index.html',
