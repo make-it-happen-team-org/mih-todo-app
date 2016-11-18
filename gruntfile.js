@@ -2,7 +2,7 @@
 
 var fs = require('fs');
 
-module.exports = function(grunt) {
+module.exports = function (grunt) {
 	// Unified Watch Object
 	var watchFiles = {
 		serverViews: ['server-app-folder/views/**/*.*'],
@@ -78,7 +78,7 @@ module.exports = function(grunt) {
 					expand: true,
 					src: watchFiles.clientLESS,
 					ext: '.css',
-					rename: function(base, src){
+					rename: function (base, src) {
 						return src.replace('/less/', '/css/');
 					}
 				}]
@@ -197,7 +197,7 @@ module.exports = function(grunt) {
 			localConfig: {
 				src: 'config/env/local.example.js',
 				dest: 'config/env/local.js',
-				filter: function() {
+				filter: function () {
 					return !fs.existsSync('config/env/local.js');
 				}
 			}
@@ -218,7 +218,7 @@ module.exports = function(grunt) {
 	grunt.option('force', true);
 
 	// A Task for loading the configuration object
-	grunt.task.registerTask('loadConfig', 'Task that loads the config into a grunt option.', function() {
+	grunt.task.registerTask('loadConfig', 'Task that loads the config into a grunt option.', function () {
 		var init = require('./config/init')();
 		var config = require('./config/config');
 
@@ -249,4 +249,29 @@ module.exports = function(grunt) {
 	grunt.registerTask('test', [/*'copy:localConfig',*/ 'test:server', 'test:client']);
 	grunt.registerTask('test:server', ['clean:compiledJs', 'babel:es6', 'env:test', 'mochaTest']);
 	grunt.registerTask('test:client', ['clean:compiledJs', 'babel:es6', 'env:test', 'karma:unit']);
+
+	grunt.task.registerTask('buildIndexFile', function () {
+		require('./config/init')();
+		var config = require('./config/config');
+
+		grunt.file.setBase('public/');
+
+		config.assets.cssFullPath = [];
+		config.assets.css.forEach(function (pattern) {
+			config.assets.cssFullPath.push(grunt.file.expand(pattern));
+		});
+
+		config.assets.jsFullPath = [];
+		config.assets.js.forEach(function (pattern) {
+			config.assets.jsFullPath.push(grunt.file.expand(pattern));
+		});
+
+		grunt.file.write(
+			'index.html',
+			grunt.template.process(
+				grunt.file.read('index.template.html'),
+				{data: config}
+			)
+		)
+	});
 };
