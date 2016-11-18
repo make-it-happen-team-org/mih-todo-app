@@ -1,5 +1,3 @@
-'use strict';
-
 module.exports = {
 	app: {
 		title: 'Make It Happen',
@@ -86,8 +84,8 @@ module.exports = {
 			]
 		},
 		css: [
-			'public/inspinia/css/*.css',
-			'public/css/app.css'
+			'inspinia/css/*.css',
+			'css/app.css'
 		],
 		js: [
 			'config.js',
@@ -97,14 +95,14 @@ module.exports = {
 			'modules/*/*[!tests]*/*.js'
 		],
 		tests: [
-			'public/lib/angular-mocks/angular-mocks.js',
-			'public/modules/*/tests/*.js'
+			'lib/angular-mocks/angular-mocks.js',
+			'modules/*/tests/*.js'
 		]
 	},
 	profilesFolder: './modules/users/img/profiles/',
 	uploads: {
 		profileUpload: {
-			dest: './public/modules/users/img/profiles/', // Profile upload destination path
+			dest: './modules/users/img/profiles/', // Profile upload destination path
 			limits: {
 				fileSize: 3 * 1024 * 1024 // Max file size in bytes (3 MB)
 			}
