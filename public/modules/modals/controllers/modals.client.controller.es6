@@ -14,8 +14,12 @@ class ModalsController {
       warning: this.$scope.ngDialogData.warningMsg,
       title: this.$scope.ngDialogData.modalTitle,
       timeToFree: this.$scope.ngDialogData.timeToFree,
-      firstHandler: this.$scope.ngDialogData.buttonsMsg.firstHandler,
-      secondHandler: this.$scope.ngDialogData.buttonsMsg.secondHandler
+      bodyMsg: {
+        leaveAsIs: this.$scope.ngDialogData.bodyMsg.leaveAsIs,
+        shift: this.$scope.ngDialogData.bodyMsg.shift
+      },
+      firstHandler: this.$scope.ngDialogData.buttonsMsg.leaveAsIs,
+      secondHandler: this.$scope.ngDialogData.buttonsMsg.shift
     };
   }
 

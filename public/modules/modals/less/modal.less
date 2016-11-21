@@ -1,0 +1,66 @@
+.mih-modal-theme {
+  &.ngdialog {
+    & .ngdialog-content {
+      border-radius: 0;
+      padding: 0;
+    }
+    & .ngdialog-close {
+      &:before {
+        font-size: 24px;
+        font-weight: 700;
+        height: 24px;
+        right: 8px;
+        text-align: center;
+        top: 13px;
+        width: 25px;
+      }
+    }
+    & .ngdialog-overlay {
+      background: rgba(0, 0, 0, 0.7);
+    }
+  }
+  &__header {
+    background-color: @header-color;
+    color: #FFF;
+    text-transform: uppercase;
+    padding: 14px;
+    min-height: 15px;
+  }
+  &__title {
+
+  }
+  &__body {
+
+  }
+  &__footer {
+
+  }
+  &-body {
+    &__warning {
+      &-ways {
+
+      }
+    }
+    &__handle-by-leaving {
+      &--free-time {
+
+      }
+    }
+    &__handle-by-shifting {
+    }
+
+  }
+
+  &-footer {
+    &__leave-button {
+      border-radius: 0;
+      background-color: @leave-as-is;
+    }
+    &__shift-button {
+      border-radius: 0;
+      background-color: @shift-slots;
+    }
+  }
+
+}
+

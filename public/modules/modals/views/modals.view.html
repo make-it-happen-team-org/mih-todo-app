@@ -1,19 +1,28 @@
 <div data-ng-controller="ModalsController as modal">
-  <div class="modal-header">
-    <h3 class="modal-title">{{modal.renderModalData().title}}</h3>
+  <div class="mih-modal-theme__header">
+    <h3 class="modal-title mih-modal-theme__title">{{modal.renderModalData().title}}</h3>
   </div>
-  <div class="modal-body">
-    <p>{{modal.renderModalData().warning}}</p>
+  <div class="modal-body mih-modal-theme__body mih-modal-theme-body">
+    <p class="mih-modal-theme-body__warning">{{modal.renderModalData().warning}}</p>
+    <span class="mih-modal-theme-body__warning-ways">You can:</span>
+    <ul>
+      <li class="mih-modal-theme-body__handle-by-leaving">
+        <i class="fa fa-circle" aria-hidden="true"></i>
+        {{modal.renderModalData().bodyMsg.leaveAsIs}}
+        <span class="mih-modal-theme-body__handle-by-leaving--free-time">{{modal.renderModalData().timeToFree}}</span>
+      </li>
+      <li class="mih-modal-theme-body__handle-by-shifting">
+        <i class="fa fa-circle" aria-hidden="true"></i>
+        {{modal.renderModalData().bodyMsg.shift}}</li>
+    </ul>
   </div>
-  <div class="modal-footer">
-    <button class="btn btn-primary" type="button"
-      data-ng-click="modal.firstWayHandle()">
-      {{modal.renderModalData().firstHandler}} {{modal.renderModalData().timeToFree}}
+  <div class="modal-footer mih-modal-theme__footer mih-modal-theme-footer">
+    <button class="btn mih-modal-theme-footer__leave-button" type="button" data-ng-click="modal.firstWayHandle()">
+      {{modal.renderModalData().firstHandler}}
     </button>
-    <button class="btn btn-warning" type="button"
-      data-ng-click="modal.secondWayHandle()"
-      data-ng-disabled="false">
+    <button class="btn btn mih-modal-theme-footer__shift-button" type="button" data-ng-click="modal.secondWayHandle()" data-ng-disabled="false">
       {{modal.renderModalData().secondHandler}}
     </button>
   </div>
 </div>
+
