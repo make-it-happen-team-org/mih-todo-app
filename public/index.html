@@ -44,7 +44,6 @@
 		<link rel="stylesheet" href="lib/ng-dialog/css/ngDialog-theme-default.css">
 	
 
-
 	
 		
 			<link rel="stylesheet" href="inspinia/css/animate.css">
@@ -55,33 +54,7 @@
 		
 	
 		
-			<link rel="stylesheet" href="modules/calendar/css/calendar.css">
-		
-			<link rel="stylesheet" href="modules/core/css/core.css">
-		
-			<link rel="stylesheet" href="modules/core/css/variables.css">
-		
-			<link rel="stylesheet" href="modules/events/css/events.css">
-		
-			<link rel="stylesheet" href="modules/events/css/eventsList.css">
-		
-			<link rel="stylesheet" href="modules/migrate/css/migrate.css">
-		
-			<link rel="stylesheet" href="modules/schedule-notifications/css/notifications.css">
-		
-			<link rel="stylesheet" href="modules/tasks/css/createTask.css">
-		
-			<link rel="stylesheet" href="modules/tasks/css/task-slots.css">
-		
-			<link rel="stylesheet" href="modules/tasks/css/taskList.css">
-		
-			<link rel="stylesheet" href="modules/tasks/css/taskTemplate.css">
-		
-			<link rel="stylesheet" href="modules/users/css/authentication.css">
-		
-			<link rel="stylesheet" href="modules/users/css/forgotpass.css">
-		
-			<link rel="stylesheet" href="modules/users/css/settings.css">
+			<link rel="stylesheet" href="css/app.css">
 		
 	
 
@@ -93,11 +66,11 @@
 
 <body class="ng-cloak">
 	<div class="main-view-container">
-		<section class="page-wrapper" ng-if="window.user">
+		<section class="page-wrapper" ng-if="user">
 			<ng-include src="'/modules/core/views/sidebar/sidebar.client.view.html'"></ng-include>
 			<ng-include src="'/modules/core/views/main.client.view.html'"></ng-include>
 		</section>
-		<section class="page-wrapper" ng-if="!window.user">
+		<section class="page-wrapper" ng-if="!user">
 			<ng-include src="'/modules/core/views/login.client.view.html'"></ng-include>
 		</section>
 	</div>
@@ -290,6 +263,8 @@
 			<script type="text/javascript" src="modules/users/services/authentication.client.service.js"></script>
 		
 			<script type="text/javascript" src="modules/users/services/password-validator.client.service.js"></script>
+		
+			<script type="text/javascript" src="modules/users/services/session.client.service.js"></script>
 		
 			<script type="text/javascript" src="modules/users/services/users.client.service.js"></script>
 		
