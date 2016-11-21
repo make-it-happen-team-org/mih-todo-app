@@ -10,15 +10,15 @@ exports.getUserBySession = (req, res) => {
             return;
         }
 
-        // TODO Remove this crap! 
+        // TODO Remove this crap!
         // https://github.com/Automattic/mongoose/issues/1975
-        if(!data.session){
+        if(!data || !data.session){
             res.json({error:'Session was not established'});
             return;
         }
 
         let output = data.session.toString();
-        
+
         let regex = /"user":"([0-9a-zA-Z]+)"/g;
         let userInfo = regex.exec(output);
         if(userInfo === null){
@@ -39,5 +39,5 @@ exports.getUserBySession = (req, res) => {
             });
         }
     });
-} 
+}
 
