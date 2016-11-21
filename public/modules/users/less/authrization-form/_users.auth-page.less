@@ -1,0 +1,29 @@
+.auth-page {
+  position: relative;
+  background-image: @login-auth-bg-img;
+  background-size: cover;
+
+  &:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: block;
+    background-color: @login-bg-color;
+    opacity: .83;
+  }
+
+  .row { height: 100%; }
+
+  &__description {
+    max-width: @login-description-max-width;
+    margin: 9rem auto 15rem auto;
+    color: @login-font-color;
+    font-size: inherit;
+    text-align: center;
+  }
+
+  .popover_mixin();
+}

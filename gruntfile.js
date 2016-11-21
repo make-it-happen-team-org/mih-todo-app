@@ -26,26 +26,12 @@ module.exports = function (grunt) {
 					livereload: true
 				}
 			},
-			// serverJS: {
-			// 	files: watchFiles.serverJS,
-			// 	tasks: ['jshint'],
-			// 	options: {
-			// 		livereload: true
-			// 	}
-			// },
 			clientViews: {
 				files: watchFiles.clientViews,
 				options: {
 					livereload: true
 				}
 			},
-			// clientJS: {
-			// 	files: watchFiles.clientJS,
-			// 	tasks: ['jshint'],
-			// 	options: {
-			// 		livereload: true
-			// 	}
-			// },
 			allES6: {
 				files: watchFiles.allES6,
 				tasks: ['build-es6', 'jshint'],
