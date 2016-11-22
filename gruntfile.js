@@ -11,7 +11,7 @@ module.exports = function (grunt) {
 		clientJS: ['public/js/**/*.js', 'public/**/*.es6', '!public/**/*.compiled.js'],
 		allES6: ['public/**/*.es6', 'server-app-folder/**/*.es6'],
 		clientCSS: ['public/assets/**/*.css'],
-		clientLESS: ['public/less/*.main.less'],
+		clientLESS: ['public/**/*.less'],
 		mochaTestsES6: ['server-app-folder/tests/**/*.es6'],
 		mochaTests: ['server-app-folder/tests/**/*.js']
 	};
@@ -26,26 +26,12 @@ module.exports = function (grunt) {
 					livereload: true
 				}
 			},
-			// serverJS: {
-			// 	files: watchFiles.serverJS,
-			// 	tasks: ['jshint'],
-			// 	options: {
-			// 		livereload: true
-			// 	}
-			// },
 			clientViews: {
 				files: watchFiles.clientViews,
 				options: {
 					livereload: true
 				}
 			},
-			// clientJS: {
-			// 	files: watchFiles.clientJS,
-			// 	tasks: ['jshint'],
-			// 	options: {
-			// 		livereload: true
-			// 	}
-			// },
 			allES6: {
 				files: watchFiles.allES6,
 				tasks: ['build-es6', 'jshint'],
@@ -227,7 +213,7 @@ module.exports = function (grunt) {
 	});
 
 	// Default task(s).
-	grunt.registerTask('default', ['server']);
+	grunt.registerTask('default', ['server', 'buildIndexFile']);
 	grunt.registerTask('server', ['build', 'minify', 'env:development', 'concurrent:server']);
 
 	// Development tasks - when external server is needed (e.g. debug through IDE)

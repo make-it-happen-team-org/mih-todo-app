@@ -4,7 +4,10 @@
       class="form-horizontal"
       novalidate
       autocomplete="off">
-  <h1 class="app-logo">Make It Happen</h1>
+  <div class="app-logo">
+    <img class="app-logo__img" src="/modules/users/img/logo-lg-light.png" alt="Make It Happen">
+    <h1 class="app-logo__description">Make It Happen</h1>
+  </div>
   <fieldset>
     <div class="auth-form__form-group"
          data-ng-class="{'has-error': signupForm.submitted && signupForm.email.$invalid || signupForm.email.$dirty && signupForm.email.$invalid}">
@@ -16,10 +19,10 @@
              data-ng-model="credentials.email"
              placeholder="Email"
              required>
-      <div data-ng-show="signupForm.submitted || signupForm.email.$dirty" class="error-message">
-        <p data-ng-show="signupForm.email.$error.required" class="help-block error-text">Please enter your email</p>
-        <p data-ng-show="signupForm.email.$error.email" class="help-block error-text">Please enter a valid email</p>
-      </div>
+      <div class="error-message">
+        <p data-ng-show="(signupForm.email.$dirty && signupForm.email.$invalid && signupForm.email.$error.email) || (signupForm.submitted && signupForm.email.$error.email)" class="help-block error-text">Please enter a valid email</p>
+        <p data-ng-show="(signupForm.email.$dirty && signupForm.email.$invalid) || (signupForm.submitted && signupForm.email.$error.required)" class="help-block error-text">Please enter your email</p>
+      </diup
     </div>
     <div class="auth-form__form-group"
          data-ng-class="{'has-error': signupForm.submitted && signupForm.username.$invalid || signupForm.username.$dirty && signupForm.username.$invalid}">
@@ -49,8 +52,8 @@
              password-validator
              data-ng-change="validatePassword()"
              data-ng-blur="notifyIfInvalid()">
-      <div data-ng-show="signupForm.submitted" class="error-message">
-        <p data-ng-show="signupForm.username.$error.required" class="help-block error-text">Please enter your password</p>
+      <div class="error-message">
+        <p data-ng-show="(signinForm.password.$dirty && signinForm.password.$invalid) || (signinForm.submitted && signinForm.password.$error.required)" class="help-block error-text">Please enter a password</p>
       </div>
       <script type="text/ng-template" id="validationErrorsTmp.html">
         <div data-ng-show="errors.length > 0">
