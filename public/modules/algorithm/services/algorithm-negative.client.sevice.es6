@@ -54,11 +54,7 @@ class AlgorithmNegative {
             resolve(this.slotsOccupiedSlots);
 
             let aggregatedTasksWithSlots = this.aggregateTasksWithSlots(this.slotsOccupiedSlots);
-            let tasksWithLeftTimeData    = this.leftTimeBeforeDeadline(aggregatedTasksWithSlots);
-
-            this.tasksWithShiftAbilities = this.checkShiftAbilities(tasksWithLeftTimeData);
-            //TODO: check posibility to shift tasks for days before deadline (get days free time before deadline)
-            this.recalculateExistingTasks(this.tasksWithShiftAbilities);
+            this.leftTimeBeforeDeadline(aggregatedTasksWithSlots);
           });
     });
   }
@@ -123,11 +119,19 @@ class AlgorithmNegative {
           return value.duration;
         }));
 
-      //FIXME: get only working hours
-      tasks[key].leftHoursBeforeDeadline = parseInt(((new Date(tasks[key].days.endTime) - this.startDate) / (1000 * 60 * 60)).toFixed(1));
+      //TODO: think how to get freeTime in less expensive way
+      return new Promise(resolve => {
+        this.getSlots(new Date(this.startDate), new Date(tasks[key].days.endTime), 'free-time')
+          .then(res => {
+            tasks[key].leftHoursBeforeDeadline = this.delegate.getTotalFreeHoursInDailyMap(this.delegate.getFreeHoursDailyMapFromSlots(res.data));
+            resolve(res.data);
+          })
+          .then(() => {
+            let tasksWithShiftAbilities = this.checkShiftAbilities(tasks);
+            this.recalculateExistingTasks(tasksWithShiftAbilities);
+          });
+      });
     }, this);
-
-    return tasks;
   }
 
   checkShiftAbilities(tasks) {
