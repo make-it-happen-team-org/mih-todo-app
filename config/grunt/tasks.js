@@ -1,11 +1,11 @@
 const watchFiles = require('./watch-files');
 
-const less =             {
-  options : {
-    plugins : [ new (require('less-plugin-autoprefix'))({browsers : [ "last 3 versions" ]}) ]
+const less = {
+  options: {
+    plugins: [new (require('less-plugin-autoprefix'))({ browsers: ["last 3 versions"] })]
   },
-  dist: {
-    files:   [{
+  dist:    {
+    files: [{
       expand: true,
       src:    'public/less/app.main.less',
       dest:   'public/dist/css',
@@ -17,16 +17,16 @@ const less =             {
   }
 };
 
-const jshint =           {
+const jshint = {
   all: {
-    src: watchFiles.clientJS.concat(watchFiles.serverJS),
-      options: {
+    src:     watchFiles.clientJS.concat(watchFiles.serverJS),
+    options: {
       jshintrc: true
     }
   }
 };
 
-const uglify =           {
+const uglify = {
   production: {
     options: {
       mangle: false
@@ -37,7 +37,7 @@ const uglify =           {
   }
 };
 
-const cssmin =           {
+const cssmin = {
   combine: {
     files: {
       'public/dist/application.min.css': '<%= applicationCSSFiles %>'
@@ -45,7 +45,7 @@ const cssmin =           {
   }
 };
 
-const babel =            {
+const babel = {
   es6: {
     files: [
       {
@@ -58,13 +58,13 @@ const babel =            {
   }
 };
 
-const nodemon =          {
+const nodemon = {
   dev: {
     script:  'server-app-folder/server.js',
-      options: {
+    options: {
       nodeArgs: ['--debug'],
-        ext:      'js,html',
-        watch:    watchFiles.serverViews.concat(watchFiles.serverJS)
+      ext:      'js,html',
+      watch:    watchFiles.serverViews.concat(watchFiles.serverJS)
     }
   }
 };
@@ -73,17 +73,17 @@ const nodeInspector = {
   custom: {
     options: {
       'web-port':          1337,
-        'web-host':          'localhost',
-        'debug-port':        5858,
-        'save-live-edit':    true,
-        'no-preload':        true,
-        'stack-trace-limit': 50,
-        'hidden':            []
+      'web-host':          'localhost',
+      'debug-port':        5858,
+      'save-live-edit':    true,
+      'no-preload':        true,
+      'stack-trace-limit': 50,
+      'hidden':            []
     }
   }
 };
 
-const ngAnnotate =       {
+const ngAnnotate = {
   production: {
     files: {
       'public/dist/js/main.js': '<%= applicationJavaScriptFiles %>'
@@ -91,18 +91,18 @@ const ngAnnotate =       {
   }
 };
 
-const concurrent =       {
+const concurrent = {
   server:    ['nodemon', 'watch'],
-    debug:     ['nodemon', 'watch', 'nodeInspector'],
-    buildSrc:  ['build-less', 'build-es6'],
-    minifySrc: ['cssmin', 'uglify'],
-    options:   {
+  debug:     ['nodemon', 'watch', 'nodeInspector'],
+  buildSrc:  ['build-less', 'build-es6'],
+  minifySrc: ['cssmin', 'uglify'],
+  options:   {
     logConcurrentOutput: true,
-      limit:               10
+    limit:               10
   }
 };
 
-const env =              {
+const env = {
   development: {
     NODE_ENV: 'development'
   },
@@ -114,50 +114,50 @@ const env =              {
   },
 };
 
-const karma =            {
+const karma = {
   unit: {
     configFile: 'karma.conf.js'
   }
 };
 
-const clean =            {
+const clean = {
   compiledJs: [
     'public/modules/**/*.js', 'public/modules/**/*.js.map',
     'server-app-folder/**/*.js', 'server-app-folder/**/*.js.map', '!server-app-folder/server.js'
   ]
 };
 
-const watch =            {
+const watch = {
   serverViews: {
     files:   watchFiles.serverViews,
-      options: {
+    options: {
       livereload: true
     }
   },
   clientViews: {
     files:   watchFiles.clientViews,
-      options: {
+    options: {
       livereload: true
     }
   },
   allES6:      {
     files:   watchFiles.allES6,
-      tasks:   ['build-es6', 'jshint'],
-      options: {
+    tasks:   ['build-es6', 'jshint'],
+    options: {
       livereload: true
     }
   },
   clientCSS:   {
     files:   watchFiles.clientCSS,
-      tasks:   ['csslint'],
-      options: {
+    tasks:   ['csslint'],
+    options: {
       livereload: true
     }
   },
   clientLESS:  {
     files:   watchFiles.clientLESS,
-      tasks:   ['build-less'],
-      options: {
+    tasks:   ['build-less'],
+    options: {
       livereload: true
     }
   }
