@@ -16,6 +16,8 @@ module.exports = function (grunt) {
     mochaTests:    ['server-app-folder/tests/**/*.js']
   };
 
+  grunt.loadNpmTasks('grunt-autoprefixer');
+
   // Project Configuration
   grunt.initConfig({
     pkg:              grunt.file.readJSON('package.json'),
@@ -55,13 +57,17 @@ module.exports = function (grunt) {
       }
     },
     less:             {
+      options : {
+        plugins : [ new (require('less-plugin-autoprefix'))({browsers : [ "last 3 versions" ]}) ]
+      },
       dist: {
-        files: [{
+        files:   [{
           expand: true,
-          src:    watchFiles.clientLESS,
+          src:    'public/less/app.main.less',
+          dest:   'public/dist/css',
           ext:    '.css',
-          rename: function (base, src) {
-            return src.replace('/less/', '/css/');
+          rename: function (base) {
+            return `${ base }/main.css`;
           }
         }]
       }
@@ -80,7 +86,7 @@ module.exports = function (grunt) {
           mangle: false
         },
         files:   {
-          'public/dist/application.min.js': 'public/dist/application.js'
+          'public/dist/js/main.min.js': 'public/dist/js/main.js'
         }
       }
     },
@@ -129,7 +135,7 @@ module.exports = function (grunt) {
     ngAnnotate:       {
       production: {
         files: {
-          'public/dist/application.js': '<%= applicationJavaScriptFiles %>'
+          'public/dist/js/main.js': '<%= applicationJavaScriptFiles %>'
         }
       }
     },
