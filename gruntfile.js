@@ -11,7 +11,7 @@ module.exports = function (grunt) {
 		clientJS: ['public/js/**/*.js', 'public/**/*.es6', '!public/**/*.compiled.js'],
 		allES6: ['public/**/*.es6', 'server-app-folder/**/*.es6'],
 		clientCSS: ['public/assets/**/*.css'],
-		clientLESS: ['public/less/*.main.less'],
+		clientLESS: ['public/**/*.less', '!public/lib/**/*.less'],
 		mochaTestsES6: ['server-app-folder/tests/**/*.es6'],
 		mochaTests: ['server-app-folder/tests/**/*.js']
 	};
@@ -227,7 +227,7 @@ module.exports = function (grunt) {
 	});
 
 	// Default task(s).
-	grunt.registerTask('default', ['server']);
+	grunt.registerTask('default', ['buildIndexFile', 'server']);
 	grunt.registerTask('server', ['build', 'minify', 'env:development', 'concurrent:server']);
 
 	// Development tasks - when external server is needed (e.g. debug through IDE)

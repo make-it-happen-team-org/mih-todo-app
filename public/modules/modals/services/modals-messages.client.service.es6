@@ -4,11 +4,11 @@ angular.module('modals')
     modalTitle: 'Confirm Window',
     warningMsg: 'Not sufficient free time for a new task',
     bodyMsg: {
-      leaveAsIs: 'Increase deadline or reduce estimation',
+      leaveAsIs: 'Increase a deadline or reduce an estimation',
       shift: 'Shift existing slots'
     },
     buttonsMsg: {
-      leaveAsIs: 'Free Up Time',
+      leaveAsIs: 'Free up time',
       shift: 'Shift slots'
     }
   })
