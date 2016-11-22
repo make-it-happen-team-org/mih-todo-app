@@ -6,12 +6,12 @@ module.exports = function (grunt) {
 	// Unified Watch Object
 	var watchFiles = {
 		serverViews: ['server-app-folder/views/**/*.*'],
-		serverJS: ['gruntfile.js', 'server.js', 'config/**/*.js', 'server-app-folder/**/*.js', '!server-app-folder/tests/'],
+		serverJS: ['gruntfile.js', 'server-app-folder/server.js', 'config/**/*.js', 'server-app-folder/**/*.js', '!server-app-folder/tests/'],
 		clientViews: ['public/modules/**/views/**/*.html'],
 		clientJS: ['public/js/**/*.js', 'public/**/*.es6', '!public/**/*.compiled.js'],
 		allES6: ['public/**/*.es6', 'server-app-folder/**/*.es6'],
 		clientCSS: ['public/assets/**/*.css'],
-		clientLESS: ['public/**/*.less'],
+		clientLESS: ['public/**/*.less', '!public/lib/**/*.less'],
 		mochaTestsES6: ['server-app-folder/tests/**/*.es6'],
 		mochaTests: ['server-app-folder/tests/**/*.js']
 	};
@@ -117,7 +117,7 @@ module.exports = function (grunt) {
 		},
 		nodemon: {
 			dev: {
-				script: 'server.js',
+				script: 'server-app-folder/server.js',
 				options: {
 					nodeArgs: ['--debug'],
 					ext: 'js,html',
