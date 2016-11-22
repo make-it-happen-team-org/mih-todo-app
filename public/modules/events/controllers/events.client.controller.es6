@@ -22,7 +22,7 @@ angular.module('events').controller('EventsController',
 					validationError: undefined,
 					notes: undefined
 				};
-
+			//TODO: replace with angular.toJson()
 			$scope.eventData = JSON.parse(JSON.stringify(defaultEventData));
 
 			let getPresetTitle = function getPresetTitle(eventPresetParam) {
@@ -183,6 +183,7 @@ angular.module('events').controller('EventsController',
 			};
 			$scope.clearFormData = function () {
 				$scope.selectedTemplate = null;
+				//TODO: replace with angular.toJson()
 				$scope.eventData = JSON.parse(JSON.stringify(defaultEventData));
 			};
 		}]);

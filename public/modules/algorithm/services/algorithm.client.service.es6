@@ -9,19 +9,19 @@ class Slot {
   constructor(duration, priority, dayId) {
     this.duration = duration;
     this.priority = parseInt(priority, 10);
-    this.start = (new Date(dayId)).setHours(0, 0, 0);
-    this.end = (new Date(dayId)).setHours(23, 59, 0);
+    this.start    = (new Date(dayId)).setHours(0, 0, 0);
+    this.end      = (new Date(dayId)).setHours(23, 59, 0);
   }
 }
 
 class Day {
   static get daysMap() {
-    return { 0: 'sun', 1: 'mon', 2: 'tue', 3: 'wed', 4: 'thu',  5: 'fri', 6: 'sat' };
+    return { 0: 'sun', 1: 'mon', 2: 'tue', 3: 'wed', 4: 'thu', 5: 'fri', 6: 'sat' };
   };
 
   constructor(data) {
     Object.assign(this, data);
-    this.date = new Date(this.date);
+    this.date     = new Date(this.date);
     this.settings = window.user.predefinedSettings.workingHours[Day.daysMap[this.date.getDay()]];
     this.date.setHours(0, 0, 0, 0);
 
@@ -52,16 +52,16 @@ class Day {
 
   createCalendarSlot(slot) {
     var freeTimeStart = new Date(this.freeTimeStart),
-        freeTimeEnd = new Date(freeTimeStart);
+        freeTimeEnd   = new Date(freeTimeStart);
 
     freeTimeEnd.setMinutes(freeTimeEnd.getMinutes() + slot.duration * 60);
     this.freeTimeStart = freeTimeEnd;
 
     return {
-      type: slot.type || 'task',
-      title: slot.title || 'temp',
-      start: freeTimeStart,
-      end: freeTimeEnd,
+      type:      slot.type || 'task',
+      title:     slot.title || 'temp',
+      start:     freeTimeStart,
+      end:       freeTimeEnd,
       className: slot.type || 'task'
     };
   }
@@ -73,32 +73,32 @@ class Algorithm {
   }
 
   constructor(Slots, Authentication, AlgorithmServer, AlgorithmPositive, AlgorithmNegative, $injector) {
-    this.Slots = Slots;
-    this.user = Authentication.user;
+    this.Slots           = Slots;
+    this.user            = Authentication.user;
     this.AlgorithmServer = AlgorithmServer;
-    this.Notification = $injector.get('Notification');
+    this.Notification    = $injector.get('Notification');
 
     this.AlgorithmPositive = AlgorithmPositive;
     this.AlgorithmNegative = AlgorithmNegative;
 
-    this.slotsRange = [];
+    this.slotsRange         = [];
     this.slotsOccupiedSlots = [];
-    this.priorityConfig = {
-      '1' : {
-        recommendedDuration : 3,
-        isBalancedLoad : false
+    this.priorityConfig     = {
+      '1': {
+        recommendedDuration: 3,
+        isBalancedLoad:      false
       },
-      '2' : {
-        recommendedDuration : 2,
-        isBalancedLoad : true
+      '2': {
+        recommendedDuration: 2,
+        isBalancedLoad:      true
       },
-      '3' : {
-        recommendedDuration : 2,
-        isBalancedLoad : false
+      '3': {
+        recommendedDuration: 2,
+        isBalancedLoad:      false
       },
-      '4' : {
-        recommendedDuration : 1,
-        isBalancedLoad : true
+      '4': {
+        recommendedDuration: 1,
+        isBalancedLoad:      true
       }
     };
   }
@@ -122,9 +122,9 @@ class Algorithm {
 
   getSlots(startDate, endDate, type) {
     return this.AlgorithmServer.get({
-      q: type,
+      q:     type,
       start: startDate,
-      end: endDate
+      end:   endDate
     }).$promise;
   }
 
@@ -133,25 +133,25 @@ class Algorithm {
     endDate.setHours(0, 0, 0, 0);
 
     Algorithm.algorithmBranchDataSetter([this.AlgorithmNegative, this.AlgorithmPositive], {
-      startDate: startDate,
-      endDate: endDate,
+      startDate:  startDate,
+      endDate:    endDate,
       estimation: estimation,
-      priority: priority,
-      delegate: this
+      priority:   priority,
+      delegate:   this
     });
 
     return new Promise(resolve => {
       this.getSlots(startDate, endDate, 'free-time')
-        .then(res => {
-          // TODO: inconsistent object structure! First time is array, then - object.
-          this.slotsRange = res.data;
+          .then(res => {
+            // TODO: inconsistent object structure! First time is array, then - object.
+            this.slotsRange = res.data;
 
-          // TODO: store response data separately, because fn below has side effects,
-          // TODO: overwrites, so we cannot rely on this.slotsRange if we need consistency
-          this.freeSlotsGroupedByDays = res.data;
-          this.getDaysRecommendations(priority, estimation);
-          resolve(this.slotsRange);
-        });
+            // TODO: store response data separately, because fn below has side effects,
+            // TODO: overwrites, so we cannot rely on this.slotsRange if we need consistency
+            this.freeSlotsGroupedByDays = res.data;
+            this.getDaysRecommendations(priority, estimation);
+            resolve(this.slotsRange);
+          });
     });
   }
 
@@ -171,10 +171,10 @@ class Algorithm {
   }
 
   getFreeHoursDailyMapFromSlots(freeSlotsByDays) {
-    return _.map(freeSlotsByDays, function(dayFreeSlots, dayId) {
+    return _.map(freeSlotsByDays, function (dayFreeSlots, dayId) {
       let day = {
         freeTime: _(dayFreeSlots).map(slot => slot.duration).sum(),
-        date: dayId
+        date:     dayId
       };
 
       return day;
@@ -186,7 +186,7 @@ class Algorithm {
   }
 
   getTimeAvailabilityFromSlotsGroupedByDays() {
-    let dailyMap = this.getFreeHoursDailyMapFromSlots(this.freeSlotsGroupedByDays);
+    let dailyMap        = this.getFreeHoursDailyMapFromSlots(this.freeSlotsGroupedByDays);
     let totalAvailHours = this.getTotalFreeHoursInDailyMap(dailyMap);
 
     return {
@@ -196,15 +196,15 @@ class Algorithm {
   }
 
   getDaysRecommendations(priority, estimation) {
-    let {dailyMap, totalAvailHours} = this.getTimeAvailabilityFromSlotsGroupedByDays();
+    let { dailyMap, totalAvailHours } = this.getTimeAvailabilityFromSlotsGroupedByDays();
 
-    var data = {
+    var data            = {
           estimation,
           availableHoursPerDay: dailyMap,
-          availableDaysAmount: dailyMap.length,
-          recommendedDuration: this.priorityConfig[priority].recommendedDuration
+          availableDaysAmount:  dailyMap.length,
+          recommendedDuration:  this.priorityConfig[priority].recommendedDuration
         },
-        isBalancedLoad = this.priorityConfig[priority].isBalancedLoad,
+        isBalancedLoad  = this.priorityConfig[priority].isBalancedLoad,
         recommendations = {};
 
     if (estimation <= totalAvailHours) {
