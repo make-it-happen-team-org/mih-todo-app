@@ -24,7 +24,6 @@
 		<link rel="stylesheet" href="<%= url %>">
 	<% }); %>
 
-
 	<% _.forEach(assets.cssFullPath, function(cssRules) { %>
 		<% _.forEach(cssRules, function(url) { %>
 			<link rel="stylesheet" href="<%= url %>">
@@ -39,11 +38,11 @@
 
 <body class="ng-cloak">
 	<div class="main-view-container">
-		<section class="page-wrapper" ng-if="window.user">
+		<section class="page-wrapper" ng-if="user">
 			<ng-include src="'/modules/core/views/sidebar/sidebar.client.view.html'"></ng-include>
 			<ng-include src="'/modules/core/views/main.client.view.html'"></ng-include>
 		</section>
-		<section class="page-wrapper" ng-if="!window.user">
+		<section class="page-wrapper" ng-if="!user">
 			<ng-include src="'/modules/core/views/login.client.view.html'"></ng-include>
 		</section>
 	</div>

@@ -23,7 +23,7 @@ angular.module(ApplicationConfiguration.applicationModuleName)
 		datepickerConfig.formatDay = 'd';
 		datepickerConfig.startingDay = 1;
 	})
-	.run(($rootScope, Authentication, $state) => {
+	.run(($rootScope, Authentication, $state, $http, $window) => {
 		//Prevent anonymous user access to all pages except auth
 		const notLoggedUserAvailableStates = ['signin', 'signup'];
 
@@ -31,6 +31,13 @@ angular.module(ApplicationConfiguration.applicationModuleName)
 			if (!Authentication.user && notLoggedUserAvailableStates.indexOf(toState.name) == -1) {
 				event.preventDefault();
 				$state.transitionTo("signin");
+			}
+		});
+
+		//TODO: Refactor app init posses
+		$http.get(`/session`).then(response => {
+			if (response.data._id) {
+				$rootScope.user = $window.user = Authentication.user = response.data;
 			}
 		});
 	});
