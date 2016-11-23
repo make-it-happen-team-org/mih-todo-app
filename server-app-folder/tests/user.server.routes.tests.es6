@@ -8,7 +8,7 @@ var should = require('should'),
 	path = require('path'),
 	mongoose = require('mongoose'),
 	User = mongoose.model('User'),
-	app = require('../../server'),
+	app = require('../server'),
 	agent = request.agent(app);
 
 /**

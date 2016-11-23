@@ -1,0 +1,40 @@
+@import "../mixins/_users.auth-btn-mixin.less";
+@import "../mixins/_users.popover-mixin.less";
+@import "../mixins/_users.auth-form-control-mixin.less";
+@import "_users.auth-error-msg.less";
+@import "_users.auth-form.less";
+@import (once) "../../../../less/_app.variables.less";
+
+.auth-form {
+  max-width: @login-form-max-width;
+  min-width: @login-form-min-width;
+  margin: 0 auto;
+  color: inherit;
+
+  .auth-form__form-group {
+    &.has-error {
+      .ng-invalid {
+        border: 1px solid @login-error-color;
+      }
+    }
+  }
+
+  &__sing-in-separator {
+    margin: 3.5rem 0 2.5rem 0;
+    color: inherit;
+    font-size: inherit;
+    text-align: center;
+    text-transform: uppercase;
+  }
+
+  &__label {
+    font-size: inherit;
+  }
+
+  &__form-group {
+    margin-bottom: 1.3rem;
+  }
+
+  .auth-form-btn-mixin();
+  .auth-form-control-mixin();
+}
