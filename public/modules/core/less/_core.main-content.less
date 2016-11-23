@@ -1,0 +1,29 @@
+@import (once) "../../../less/_app.variables.less";
+
+a.main-view-container {
+  height: 100%;
+
+  > section { height: 100%; }
+}
+
+.main-content {
+  position: relative;
+  height: 100%;
+  z-index: 2;
+  color: @main-font-color;
+  transition: margin .5s;
+
+  &.with-sidebar { margin-left: 300px; }
+
+  .container-wrapper {
+    position: relative;
+    min-height: 100%;
+
+    .navbar-default {
+      padding: 0 15px;
+      box-sizing: border-box;
+      background: @main-navbar-default-bg-color;
+      box-shadow: none;
+    }
+  }
+}
