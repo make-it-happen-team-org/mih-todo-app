@@ -10,6 +10,27 @@
   margin: 0 auto;
   color: inherit;
 
+  &-wrapper {
+    padding: .5em 0 1em 0;
+    text-align: right;
+    transition: all .5s;
+
+    &--reset-password {
+      text-align: center;
+    }
+
+    &__link {
+      font-size: 1.3rem;
+      color: @login-btn-font-color;
+
+      &:hover,
+      &:focus {
+        text-decoration: underline;
+        color: @login-btn-font-color;
+      }
+    }
+  }
+
   .auth-form__form-group {
     &.has-error {
       .ng-invalid {
@@ -27,8 +48,7 @@
   }
 
   &__label {
-
-    font-size: inherit;
+    font-size: 1.3rem;
   }
 
   &__form-group {
