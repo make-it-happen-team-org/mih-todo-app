@@ -1,0 +1,25 @@
+@import (once) "../../../../less/_app.variables.less";
+
+.auth-form-control-mixin {
+  .auth-form__form-control {
+    height: 3.8rem;
+    box-sizing: border-box;
+    background-color: @login-input-bg-color;
+    border: 1px solid @login-input-border-color;
+    color: @login-input-font-color;
+    font-size: 1.4rem;
+    line-height: 3.8rem;
+
+    &.ng-invalid {
+      border: 1px solid @login-error-color;
+    }
+
+    &.ng-valid {
+      border: 1px solid @login-valid-color;
+    }
+
+    &.ng-pristine {
+      border: 1px solid @login-pristine-color;
+    }
+  }
+}

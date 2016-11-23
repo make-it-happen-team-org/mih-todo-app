@@ -1,0 +1,28 @@
+@import (once) "../../../../less/_app.variables.less";
+
+.auth-form-btn-mixin {
+  .auth-form__btn {
+    margin-top: .9em;
+    transition: all .5s;
+    cursor: pointer;
+    color: @login-btn-font-color;
+    border-radius: 0;
+
+    &--green {
+      background-color: @login-sing-in-btn-color;
+
+      &:hover {
+        background-color: @login-sing-in-btn-hover-color;
+      }
+    }
+
+    &--blue {
+      background-color: @login-create-account-btn-color;
+
+      &:hover {
+        background-color: @login-create-account-btn-hover-color;
+        color: @login-btn-font-color;
+      }
+    }
+  }
+}

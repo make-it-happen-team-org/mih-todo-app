@@ -1,0 +1,52 @@
+@import (once) "../../../less/_app.variables.less";
+@import (once) "../../../less/_app.mixins.less";
+
+.socials {
+  position: relative;
+  display: inline-block;
+  height: @socials-dimension;
+  width: @socials-dimension;
+  border-radius: 50%;
+  color: @login-font-color;
+
+  & ~ & { margin-left: 1em; }
+
+  .fa {
+    font-size: 2rem;
+
+    .position-to-canter-absolute();
+  }
+
+  &:hover,
+  &:focus {
+    color: @login-font-color;
+    transition: all .5s;
+  }
+
+  &--facebook {
+    background-color: @socials-facebook-color;
+
+    &:hover,
+    &:focus {
+      background-color: darken(@socials-facebook-color, 10%);
+    }
+  }
+
+  &--vk {
+    background-color: @socials-vk-color;
+
+    &:hover,
+    &:focus {
+      background-color: darken(@socials-vk-color, 10%);
+    }
+  }
+
+  &--twitter {
+    background-color: @socials-twitter-color;
+
+    &:hover,
+    &:focus {
+      background-color: darken(@socials-twitter-color, 10%);
+    }
+  }
+}

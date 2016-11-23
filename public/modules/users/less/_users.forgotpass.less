@@ -1,0 +1,27 @@
+@import (once) "../../../less/_app.variables.less";
+
+.forgot {
+  &-password {
+    padding: .5em 0 1em 0;
+    text-align: right;
+    transition: all .5s;
+
+    &__link {
+      font-size: inherit;
+      color: @login-btn-font-color;
+
+      &:hover,
+      &:focus {
+        text-decoration: underline;
+        color: @login-btn-font-color;
+      }
+    }
+
+  }
+
+  &-reset-pass {
+    width: 100%;
+
+    .btn-primary { width: 100%; }
+  }
+}
