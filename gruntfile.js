@@ -226,9 +226,10 @@ module.exports = function(grunt) {
 		grunt.config.set('applicationCSSFiles', config.assets.css);
 	});
 
-	// Default task(s).
-	grunt.registerTask('default', ['server']);
-	grunt.registerTask('server', ['build', 'minify', 'env:development', 'concurrent:server']);
+  // Default task(s).
+  grunt.registerTask('default', ['server']);
+  grunt.registerTask('server', ['build', 'minify', 'env:production', 'concurrent:server']);
+  grunt.registerTask('local', ['build', 'minify', 'env:development', 'concurrent:server']);
 
 	// Development tasks - when external server is needed (e.g. debug through IDE)
 	grunt.registerTask('dev', ['build', 'watch']);
