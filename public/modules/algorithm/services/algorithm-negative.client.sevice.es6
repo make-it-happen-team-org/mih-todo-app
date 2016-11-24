@@ -52,11 +52,20 @@ class AlgorithmNegative {
             };
 
             resolve(this.slotsOccupiedSlots);
-
-            let aggregatedTasksWithSlots = this.aggregateTasksWithSlots(this.slotsOccupiedSlots);
+            return this.aggregateTasksWithSlots(this.slotsOccupiedSlots);
+          })
+          .then((aggregatedTasksWithSlots) => {
             this.leftTimeBeforeDeadline(aggregatedTasksWithSlots);
           });
     });
+  }
+
+  _findIndexForSlots(arr, taskId) {
+    return arr.reduce((newArr, elem, index) => {
+      if (elem === taskId)
+        newArr.push(index);
+      return newArr;
+    }, []);
   }
 
   /**
@@ -71,12 +80,8 @@ class AlgorithmNegative {
     let slots = data.slots; //obj
 
     let concatSlots = {
-      arrayOfPassedSlots: slots.passedSlots.map(value => {
-        return value.taskId;
-      }),
-      arrayOfFutureSlots: slots.futureSlots.map(value => {
-        return value.taskId;
-      })
+      arrayOfPassedSlots: slots.passedSlots.map(value => { return value.taskId; }),
+      arrayOfFutureSlots: slots.futureSlots.map(value => { return value.taskId; })
     };
 
     tasks.forEach((value, key) => {
@@ -88,12 +93,8 @@ class AlgorithmNegative {
       let indexArrPassed = this._findIndexForSlots(concatSlots.arrayOfPassedSlots, value._id);
       let indexArrFuture = this._findIndexForSlots(concatSlots.arrayOfFutureSlots, value._id);
 
-      indexArrPassed.forEach(index => {
-        tasks[key].slots.passedSlots.push(slots.passedSlots[index]);
-      });
-      indexArrFuture.forEach(index => {
-        tasks[key].slots.futureSlots.push(slots.futureSlots[index]);
-      });
+      indexArrPassed.forEach(index => { tasks[key].slots.passedSlots.push(slots.passedSlots[index]); });
+      indexArrFuture.forEach(index => { tasks[key].slots.futureSlots.push(slots.futureSlots[index]); });
     });
 
     return tasks;
@@ -103,7 +104,7 @@ class AlgorithmNegative {
    *
    * @param tasks
    * @returns {Array}
-   * @description Gets tasks array and calculates left time before deadline.
+   * @description Gets tasks array and calculates left working time before deadline.
    */
   checkShiftAbilities(tasks) {
     let filteredTasks = [];
@@ -122,7 +123,6 @@ class AlgorithmNegative {
   }
 
   leftTimeBeforeDeadline(tasks) {
-    //TODO: split into two functions
     tasks.forEach((value, key) => {
       tasks[key].leftEstimation = tasks[key].estimation - _.sum(tasks[key].slots.passedSlots.map(value => {
           return value.duration;
@@ -135,8 +135,7 @@ class AlgorithmNegative {
               resolve(res.data);
             })
             .then(() => {
-              let tasksWithShiftAbilities = this.checkShiftAbilities(tasks);
-              this.recalculateExistingTasks(tasksWithShiftAbilities);
+              this.recalculateExistingTasks(this.checkShiftAbilities(tasks));
             });
       });
     }, this);
@@ -150,7 +149,9 @@ class AlgorithmNegative {
    */
   findAppropriateSlotsToShift(tasksToShift, freeSlots) {
     let hoursToFree = this.estimation - this.totalAvailHours;
+    var _this = this;
 
+    //TODO: implement shifting by priority
     tasksToShift.forEach(function (value, key) {
       value.slots.futureSlots.forEach(function (v, index) {
         let slotDuration = v.duration;
@@ -166,13 +167,12 @@ class AlgorithmNegative {
                 value.slots.futureSlots[index].end   = new Date(new Date(val.start).setHours(new Date(val.start).getHours() + 3)).toISOString();
 
                 this.Slots.update(value.slots.futureSlots[index]);
+
                 //TODO: update calendar
-                //this.delegate.$scope.apply();
               }
             }, this);
           }
         }, this);
-
       }, this);
     }, this);
   }
@@ -195,14 +195,6 @@ class AlgorithmNegative {
         this.closeModalInstance();
       });
     });
-  }
-
-  _findIndexForSlots(arr, taskId) {
-    return arr.reduce((newArr, elem, index) => {
-      if (elem === taskId)
-        newArr.push(index);
-      return newArr;
-    }, []);
   }
 
   openModalForDecision(slotType, additionalData) {
