@@ -45,20 +45,16 @@
                    data-ng-show="(signinForm.password.$dirty && signinForm.password.$invalid) || (signinForm.submitted && signinForm.password.$error.required)">
                     Please enter a password</p>
             </div>
-            <div class="forgot-password">
-                <a class="forgot-password__link" href="/#!/password/forgot">
+            <div class="auth-form-wrapper login-form-container--singin">
+                <a class="auth-form-wrapper__link" href="/#!/password/forgot">
                     Forgot your password?</a>
             </div>
         </div>
         <div class="auth-form__form-group">
-            <button class="btn btn-primary btn-block  auth-form__btn auth-form__btn--green text-uppercase auth-form__label"
-                    type="submit">
-                Sign in</button>
-        </div>
-        <div class="auth-form__form-group">
-            <a class="btn btn-block auth-form__btn auth-form__btn--blue text-uppercase auth-form__label"
-               href="/#!/signup">
-                Create an account</a>
+            <button class="auth-form__btn auth-form__btn--green"
+                    type="submit"> Sign in</button>
+            <a class="auth-form__btn auth-form__btn--blue"
+               href="/#!/signup">Create an account</a>
         </div>
         <div class="text-center text-danger" data-ng-show="error">
             <strong data-ng-bind="error"></strong>

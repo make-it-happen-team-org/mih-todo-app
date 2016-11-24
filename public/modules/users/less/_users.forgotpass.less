@@ -2,26 +2,38 @@
 
 .forgot {
   &-password {
-    padding: .5em 0 1em 0;
-    text-align: right;
-    transition: all .5s;
+    &-form {
+      .auth-form__form-control {
+        margin-bottom: 3.5rem;
+      }
 
-    &__link {
-      font-size: inherit;
-      color: @login-btn-font-color;
-
-      &:hover,
-      &:focus {
-        text-decoration: underline;
-        color: @login-btn-font-color;
+      &__description {
+        margin: 1.3rem 0 0 0;
       }
     }
-
   }
 
   &-reset-pass {
     width: 100%;
 
     .btn-primary { width: 100%; }
+  }
+}
+
+.auth-title-wrapper {
+  text-align: center;
+  height: 8.5rem;
+
+  &__title {
+    color: inherit;
+    font-family: @font-open-sans-light;
+    margin: 0 0 1.6rem 0;
+    font-size: 2.5rem;
+  }
+
+  &__description {
+    color: inherit;
+    margin: 0 0 1.6rem 0;
+    font-size: 1.4rem;
   }
 }

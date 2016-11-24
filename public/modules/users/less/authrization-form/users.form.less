@@ -2,7 +2,6 @@
 @import "../mixins/_users.popover-mixin.less";
 @import "../mixins/_users.auth-form-control-mixin.less";
 @import "_users.auth-error-msg.less";
-@import "_users.auth-form.less";
 @import (once) "../../../../less/_app.variables.less";
 
 .auth-form {
@@ -10,6 +9,27 @@
   min-width: @login-form-min-width;
   margin: 0 auto;
   color: inherit;
+
+  &-wrapper {
+    padding: .5em 0 1em 0;
+    text-align: right;
+    transition: all .5s;
+
+    &--reset-password {
+      text-align: center;
+    }
+
+    &__link {
+      font-size: 1.3rem;
+      color: @login-btn-font-color;
+
+      &:hover,
+      &:focus {
+        text-decoration: underline;
+        color: @login-btn-font-color;
+      }
+    }
+  }
 
   .auth-form__form-group {
     &.has-error {
@@ -28,7 +48,7 @@
   }
 
   &__label {
-    font-size: inherit;
+    font-size: 1.3rem;
   }
 
   &__form-group {

@@ -5,6 +5,8 @@
   position: relative;
   background-image: @login-auth-bg-img;
   background-size: cover;
+  height: 100%;
+  overflow: hidden;
 
   &:before {
     content: '';
@@ -23,6 +25,7 @@
   &__description {
     max-width: @login-description-max-width;
     margin: 9rem auto 15rem auto;
+    line-height: 2.4rem;
     color: @login-font-color;
     font-size: inherit;
     text-align: center;

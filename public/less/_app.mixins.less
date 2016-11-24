@@ -4,3 +4,53 @@
   left: 50%;
   transform: translate(-50%, -50%);
 }
+
+.placeholder(@font-color) {
+  &::-webkit-input-placeholder       {
+    color: @font-color;
+    opacity: 1;
+    transition: opacity 0.3s ease;
+  }
+  
+  &::-moz-placeholder                {
+    color: @font-color;
+    opacity: 1;
+    transition: opacity 0.3s ease;
+  }
+
+  &:-moz-placeholder                 {
+    color: @font-color;
+    opacity: 1;
+    transition: opacity 0.3s ease;
+  }
+
+  &:-ms-input-placeholder            {
+    color: @font-color;
+    opacity: 1;
+    transition: opacity 0.3s ease;
+  }
+
+  &:focus::-webkit-input-placeholder {
+    color: @font-color;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  &:focus::-moz-placeholder          {
+    color: @font-color;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  &:focus:-moz-placeholder           {
+    color: @font-color;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  &:focus:-ms-input-placeholder      {
+    color: @font-color;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+}

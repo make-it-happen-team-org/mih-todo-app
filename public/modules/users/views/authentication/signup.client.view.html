@@ -1,4 +1,4 @@
-<form class="form-horizontal"
+<form class="singup-form form-horizontal"
       name="signupForm"
       data-ng-controller="AuthenticationController"
       data-ng-submit="signup(signupForm.$valid)"
@@ -13,7 +13,7 @@
     <fieldset>
         <div class="auth-form__form-group"
              data-ng-class="{'has-error': signupForm.submitted && signupForm.email.$invalid || signupForm.email.$dirty && signupForm.email.$invalid}">
-            <label for="email" class="text-uppercase auth-form__label">Email</label>
+            <label class="text-uppercase auth-form__label" for="email">Email</label>
             <input class="auth-form__form-control form-control"
                    id="email"
                    type="email"
@@ -64,24 +64,14 @@
                     <p class="help-block error-text" data-ng-show="(signinForm.password.$dirty && signinForm.password.$invalid) || (signinForm.submitted && signinForm.password.$error.required)">
                         Please enter a password</p>
                 </div>
-                <script type="text/ng-template" id="validationErrorsTmp.html">
-                    <div data-ng-show="errors.length > 0">
-                        <p class="error-popover-title text-danger">
-                            The password must:</p>
-                        <p data-ng-repeat="error in errors">{{error}}</p>
-                    </div>
-                    <p class="error-popover-title text-navy"
-                       data-ng-show="errors.length === 0">
-                        The password is valid</p>
-                </script>
             </div>
             <div class="text-center auth-form__form-group">
-                <a href="/#!/signin"
-                   class="show-signup btn btn-large btn-block btn-primary  auth-form__btn auth-form__btn--green text-uppercase auth-form__label">Sign
-                    in</a>
-                <button class="btn btn-large btn-block btn-primary  auth-form__btn auth-form__btn--blue text-uppercase auth-form__label"
+                <button class="auth-form__btn auth-form__btn--blue"
                         type="submit">
                     Create account</button>
+                <a href="/#!/signin"
+                   class="show-signup auth-form__btn auth-form__btn--green">Sign
+                    in</a>
             </div>
             <div class="text-center text-danger"
                  data-ng-show="error">
@@ -90,4 +80,13 @@
     </fieldset>
 </form>
 
-
+<script type="text/ng-template" id="validationErrorsTmp.html">
+    <div data-ng-show="errors.length > 0">
+        <p class="error-popover-title text-danger">
+            The password must:</p>
+        <p data-ng-repeat="error in errors">{{error}}</p>
+    </div>
+    <p class="error-popover-title text-navy"
+       data-ng-show="errors.length === 0">
+        The password is valid</p>
+</script>
