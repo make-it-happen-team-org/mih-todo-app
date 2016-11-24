@@ -108,11 +108,6 @@ class AlgorithmNegative {
     }, this);
   }
 
-  //duration: this.estimation,
-  //priority: this.priority,
-  //end     : this.endDate.getTime(),
-  //start   : this.startDate.getTime()
-
   leftTimeBeforeDeadline(tasks) {
     tasks.forEach((value, key) => {
       tasks[key].leftEstimation = tasks[key].estimation - _.sum(tasks[key].slots.passedSlots.map(value => {
@@ -150,11 +145,19 @@ class AlgorithmNegative {
     return filteredTasks;
   }
 
-  aggregateTasksWithSlots(data) {
-    var tasks = data.tasks; //arr
-    var slots = data.slots; //obj
+  _findIndexForSlots(arr, taskId) {
+    return arr.reduce((newArr, elem, index) => {
+      if (elem === taskId)
+        newArr.push(index);
+      return newArr;
+    }, []);
+  }
 
-    var concatSlots = {
+  aggregateTasksWithSlots(data) {
+    let tasks = data.tasks; //arr
+    let slots = data.slots; //obj
+
+    let concatSlots = {
       arrayOfPassedSlots: slots.passedSlots.map(value => {
         return value.taskId;
       }),
@@ -169,17 +172,8 @@ class AlgorithmNegative {
         futureSlots: []
       };
 
-      var indexArrPassed = concatSlots.arrayOfPassedSlots.reduce((newArr, elem, index) => {
-        if (elem === value._id)
-          newArr.push(index);
-        return newArr;
-      }, []);
-
-      var indexArrFuture = concatSlots.arrayOfFutureSlots.reduce((newArr, elem, index) => {
-        if (elem === value._id)
-          newArr.push(index);
-        return newArr;
-      }, []);
+      let indexArrPassed = this._findIndexForSlots(concatSlots.arrayOfPassedSlots, value._id);
+      let indexArrFuture = this._findIndexForSlots(concatSlots.arrayOfFutureSlots, value._id);
 
       indexArrPassed.forEach(index => {
         tasks[key].slots.passedSlots.push(slots.passedSlots[index]);

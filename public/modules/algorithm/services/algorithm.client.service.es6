@@ -208,11 +208,8 @@ class Algorithm {
         recommendations = {};
 
     if (estimation <= totalAvailHours) {
-      // Positive branch
       recommendations = isBalancedLoad ? this.AlgorithmPositive.getBalancedRecommendations(data) : this.AlgorithmPositive.getIntensiveRecommendations(data);
-
     } else {
-      // Negative branch
       this.AlgorithmNegative.initialize('task', totalAvailHours);
     }
     this.slotsRange = this.getSuitableSlots(recommendations, priority);
