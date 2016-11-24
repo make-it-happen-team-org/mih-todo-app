@@ -24,20 +24,20 @@ angular.module(ApplicationConfiguration.applicationModuleName)
 		datepickerConfig.startingDay = 1;
 	})
 	.run(($rootScope, Authentication, $state, $http, $window) => {
-		//Prevent anonymous user access to all pages except auth
-		const notLoggedUserAvailableStates = ['signin', 'signup'];
-
-		$rootScope.$on("$stateChangeStart", function(event, toState){
-			if (!Authentication.user && notLoggedUserAvailableStates.indexOf(toState.name) == -1) {
-				event.preventDefault();
-				$state.transitionTo("signin");
-			}
-		});
-
 		//TODO: Refactor app init posses
 		$http.get(`/session`).then(response => {
 			if (response.data._id) {
 				$rootScope.user = $window.user = Authentication.user = response.data;
+
+				//Prevent anonymous user access to all pages except auth
+				const notLoggedUserAvailableStates = ['signin', 'signup'];
+
+				$rootScope.$on("$stateChangeStart", function(event, toState){
+					if (!Authentication.user && notLoggedUserAvailableStates.indexOf(toState.name) == -1) {
+						event.preventDefault();
+						$state.transitionTo("signin");
+					}
+				});
 			}
 		});
 	});
