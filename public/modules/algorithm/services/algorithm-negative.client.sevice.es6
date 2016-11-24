@@ -149,7 +149,6 @@ class AlgorithmNegative {
    */
   findAppropriateSlotsToShift(tasksToShift, freeSlots) {
     let hoursToFree = this.estimation - this.totalAvailHours;
-    var _this = this;
 
     //TODO: implement shifting by priority
     tasksToShift.forEach(function (value, key) {
@@ -167,8 +166,6 @@ class AlgorithmNegative {
                 value.slots.futureSlots[index].end   = new Date(new Date(val.start).setHours(new Date(val.start).getHours() + 3)).toISOString();
 
                 this.Slots.update(value.slots.futureSlots[index]);
-
-                //TODO: update calendar
               }
             }, this);
           }
@@ -192,6 +189,7 @@ class AlgorithmNegative {
     }).then(() => {
       this.$timeout(() => {
         this.findAppropriateSlotsToShift(tasks, freeSlots);
+        this.$rootScope.$broadcast('slotShiftedFromNegative');
         this.closeModalInstance();
       });
     });

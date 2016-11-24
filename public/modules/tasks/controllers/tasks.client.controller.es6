@@ -56,7 +56,7 @@ angular.module('tasks').controller('TasksController',
 					$scope.slotsRange = getSlotsByTask();
 				});
 			});
-			
+
 			var date = new Date(),
 				dateMax = new Date(Date.now() + (365 * 24 * 60 * 60 * 1000));
 
@@ -131,6 +131,24 @@ angular.module('tasks').controller('TasksController',
 				clearSlotsList();
 				$scope.$apply();
 			});
+
+      $rootScope.$on('slotShiftedFromNegative', function () {
+        console.log('start automatic crete');
+        getNewSlots($scope.newTask);
+
+        var queries = [saveTask($scope.newTask)];
+
+        if ($scope.newTask.isATemplate || $scope.selectedTemplate) {
+          queries.push(updateTaskTemplates($scope.newTask));
+        }
+
+        Promise.all(queries).then(() => {
+          $location.path('/');
+          $rootScope.$broadcast('NEW_TASK_MODIFY');
+          Notification.success(`Task "${$scope.newTask.title}" was successfully created`);
+        });
+        console.log('end automatic crete');
+      });
 
 			$scope.createMode = () => {
 				var newTask;
