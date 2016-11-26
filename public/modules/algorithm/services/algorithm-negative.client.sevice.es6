@@ -34,17 +34,10 @@ class AlgorithmNegative {
     //this.$rootScope.$on(this.MODALS_EVENTS.eventSecond, event => { console.log('second event fired', event); });
   }
 
-  getSlots(startDate, endDate, type) {
-    return this.delegate.AlgorithmServer.get({
-      q:     type,
-      start: startDate,
-      end:   endDate
-    }).$promise;
-  }
-
   getOccupiedSlots(startDate, endDate) {
+    console.log('root', this.$rootScope);
     return new Promise(resolve => {
-      this.getSlots(startDate, endDate, 'occupied-time')
+      this.delegate.getSlots(startDate, endDate, 'occupied-time')
           .then(res => {
             this.slotsOccupiedSlots = {
               slots: res.slots,
@@ -129,7 +122,7 @@ class AlgorithmNegative {
         }));
 
       return new Promise(resolve => {
-        this.getSlots(new Date(this.startDate), new Date(tasks[key].days.endTime), 'free-time')
+        this.delegate.getSlots(new Date(this.startDate), new Date(tasks[key].days.endTime), 'free-time')
             .then(res => {
               tasks[key].leftHoursBeforeDeadline = this.delegate.getTotalFreeHoursInDailyMap(this.delegate.getFreeHoursDailyMapFromSlots(res.data));
               resolve(res.data);
@@ -179,7 +172,7 @@ class AlgorithmNegative {
 
     return new Promise(resolve => {
       tasks.forEach(function (value, key) {
-        this.getSlots(new Date(this.startDate.setDate(this.startDate.getDate() + 1)), value.days.endTime, 'free-time')
+        this.delegate.getSlots(new Date(this.startDate.setDate(this.startDate.getDate() + 1)), value.days.endTime, 'free-time')
             .then(res => {
               this.slots = res.data;
               freeSlots.push(this.slots);
@@ -189,7 +182,10 @@ class AlgorithmNegative {
     }).then(() => {
       this.$timeout(() => {
         this.findAppropriateSlotsToShift(tasks, freeSlots);
+
+        this.$rootScope.$$listenerCount['slotShiftedFromNegative'] = 1;
         this.$rootScope.$broadcast('slotShiftedFromNegative');
+
         this.closeModalInstance();
       });
     });

@@ -132,21 +132,21 @@ angular.module('tasks').controller('TasksController',
 				$scope.$apply();
 			});
 
-      $rootScope.$on('slotShiftedFromNegative', function () {
+      $scope.$on('slotShiftedFromNegative', function () {
         console.log('start automatic crete');
-        getNewSlots($scope.newTask);
-
-        var queries = [saveTask($scope.newTask)];
-
-        if ($scope.newTask.isATemplate || $scope.selectedTemplate) {
-          queries.push(updateTaskTemplates($scope.newTask));
-        }
-
-        Promise.all(queries).then(() => {
-          $location.path('/');
-          $rootScope.$broadcast('NEW_TASK_MODIFY');
-          Notification.success(`Task "${$scope.newTask.title}" was successfully created`);
-        });
+        //getNewSlots($scope.newTask);
+        //
+        //var queries = [saveTask($scope.newTask)];
+        //
+        //if ($scope.newTask.isATemplate || $scope.selectedTemplate) {
+        //  queries.push(updateTaskTemplates($scope.newTask));
+        //}
+        //
+        //Promise.all(queries).then(() => {
+        //  $location.path('/');
+        //  $rootScope.$broadcast('NEW_TASK_MODIFY');
+        //  Notification.success(`Task "${$scope.newTask.title}" was successfully created`);
+        //});
         console.log('end automatic crete');
       });
 

@@ -24,11 +24,11 @@ class ModalsController {
   }
 
   firstWayHandle() {
-    this.$rootScope.$broadcast(`CONFLICTED_${this.$scope.ngDialogData.type}_FIRST`);
+    this.$scope.$emit(`CONFLICTED_${this.$scope.ngDialogData.type}_FIRST`);
   }
 
   secondWayHandle() {
-    this.$rootScope.$broadcast(`CONFLICTED_${this.$scope.ngDialogData.type}_SECOND`);
+    this.$scope.$emit(`CONFLICTED_${this.$scope.ngDialogData.type}_SECOND`);
   }
 }
 
