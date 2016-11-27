@@ -1,15 +1,14 @@
 class AlgorithmNegative {
 
   /** @ngInject */
-  constructor($rootScope, Slots, $timeout, ModalsService, MODALS_TASK_MESSAGES, MODALS_EVENT_MESSAGES, MODALS_EVENTS) {
+  constructor($rootScope, Slots, $timeout, ModalsService, MODALS_TASK_MESSAGES, MODALS_EVENT_MESSAGES) {
     Object.assign(this, {
       $rootScope,
       Slots,
       $timeout,
       ModalsService,
       MODALS_TASK_MESSAGES,
-      MODALS_EVENT_MESSAGES,
-      MODALS_EVENTS
+      MODALS_EVENT_MESSAGES
     });
 
     this.slotTypes = {
@@ -19,37 +18,27 @@ class AlgorithmNegative {
   }
 
   initialize(slotType, totalAvailTime) {
-    let additionalMsg = `(you need to free up ${this.estimation - totalAvailTime} h)`;
-    this.openModalForDecision(slotType, additionalMsg);
-
+    this.openModalForDecision(slotType, `(you need to free up ${this.estimation - totalAvailTime} h)`);
     this.totalAvailHours = totalAvailTime;
-    this.$rootScope.$on(this.MODALS_EVENTS.taskFirst, () => {
-      this.closeModalInstance();
-    });
-    this.$rootScope.$on(this.MODALS_EVENTS.taskSecond, () => {
-      this.getOccupiedSlots(this.startDate, this.endDate);
-    });
-
-    //this.$rootScope.$on(this.MODALS_EVENTS.eventFirst, () => { this.closeModalInstance();  });
-    //this.$rootScope.$on(this.MODALS_EVENTS.eventSecond, event => { console.log('second event fired', event); });
   }
 
   getOccupiedSlots(startDate, endDate) {
     console.log('root', this.$rootScope);
+
     return new Promise(resolve => {
       this.delegate.getSlots(startDate, endDate, 'occupied-time')
-          .then(res => {
-            this.slotsOccupiedSlots = {
-              slots: res.slots,
-              tasks: res.tasks
-            };
+        .then(res => {
+          this.slotsOccupiedSlots = {
+            slots: res.slots,
+            tasks: res.tasks
+          };
 
-            resolve(this.slotsOccupiedSlots);
-            return this.aggregateTasksWithSlots(this.slotsOccupiedSlots);
-          })
-          .then((aggregatedTasksWithSlots) => {
-            this.leftTimeBeforeDeadline(aggregatedTasksWithSlots);
-          });
+          resolve(this.slotsOccupiedSlots);
+          return this.aggregateTasksWithSlots(this.slotsOccupiedSlots);
+        })
+        .then((aggregatedTasksWithSlots) => {
+          this.leftTimeBeforeDeadline(aggregatedTasksWithSlots);
+        });
     });
   }
 
@@ -128,6 +117,7 @@ class AlgorithmNegative {
               resolve(res.data);
             })
             .then(() => {
+              //TODO: think on this !!!!!!maybe this cause en loop?
               this.recalculateExistingTasks(this.checkShiftAbilities(tasks));
             });
       });
@@ -182,10 +172,7 @@ class AlgorithmNegative {
     }).then(() => {
       this.$timeout(() => {
         this.findAppropriateSlotsToShift(tasks, freeSlots);
-
-        this.$rootScope.$$listenerCount['slotShiftedFromNegative'] = 1;
         this.$rootScope.$broadcast('slotShiftedFromNegative');
-
         this.closeModalInstance();
       });
     });

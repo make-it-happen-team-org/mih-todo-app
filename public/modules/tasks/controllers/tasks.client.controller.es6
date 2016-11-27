@@ -42,9 +42,9 @@ class TasksController {
 // Tasks controller
 angular.module('tasks').controller('TasksController',
 	['$scope', '$rootScope', '$stateParams', '$location', 'Authentication', 'Tasks', 'Users', '$timeout', 'Algorithm',
-		'Slots', 'Notification',
+		'Slots', 'Notification', '$document',
 		function ($scope, $rootScope, $stateParams, $location, Authentication, Tasks, Users, $timeout, Algorithm,
-				  Slots, Notification) {
+				  Slots, Notification, $document) {
 			$scope.authentication = Authentication;
 			$scope.isATemplate = false;
 			$scope.user = Authentication.user;
@@ -132,22 +132,23 @@ angular.module('tasks').controller('TasksController',
 				$scope.$apply();
 			});
 
-      $scope.$on('slotShiftedFromNegative', function () {
-        console.log('start automatic crete');
-        //getNewSlots($scope.newTask);
+      var slotShiftedFromNegative = $rootScope.$on('slotShiftedFromNegative', () => {
+        getNewSlots($scope.newTask);
+        //$document.find('#foobar').triggerHandler('click');
+
+        //	var queries = [saveTask($scope.newTask)];
         //
-        //var queries = [saveTask($scope.newTask)];
+        //	if ($scope.newTask.isATemplate || $scope.selectedTemplate) {
+        //		queries.push(updateTaskTemplates($scope.newTask));
+        //	}
         //
-        //if ($scope.newTask.isATemplate || $scope.selectedTemplate) {
-        //  queries.push(updateTaskTemplates($scope.newTask));
-        //}
-        //
-        //Promise.all(queries).then(() => {
-        //  $location.path('/');
-        //  $rootScope.$broadcast('NEW_TASK_MODIFY');
-        //  Notification.success(`Task "${$scope.newTask.title}" was successfully created`);
-        //});
-        console.log('end automatic crete');
+        //	Promise.all(queries).then(() => {
+        //		$location.path('/');
+        //		$rootScope.$broadcast('NEW_TASK_MODIFY');
+        //		Notification.success(`Task "${$scope.newTask.title}" was successfully created`);
+        //	});
+        //	console.log('end automatic crete');
+        slotShiftedFromNegative();
       });
 
 			$scope.createMode = () => {
@@ -292,23 +293,23 @@ angular.module('tasks').controller('TasksController',
 				});
 			};
 
-			var getNewSlots = (model) => {
-				Algorithm
-					.generateSlots(
-						new Date(model.days.startTime),
-						new Date(model.days.endTime),
-						model.priority,
-						model.estimation,
-						$scope.user.predefinedSettings.workingHours
-					)
-					.then(slotsRange => {
-						$timeout(() => {
-							$scope.timeAvailability = Algorithm.getTimeAvailabilityFromSlotsGroupedByDays();
-							return $scope.slotsRange = slotsRange;
-						});
-					})
-				;
-			};
+      var getNewSlots = (model) => {
+        Algorithm.generateSlots(
+          new Date(model.days.startTime),
+          new Date(model.days.endTime),
+          model.priority,
+          model.estimation,
+          $scope.user.predefinedSettings.workingHours
+        ).then(slotsRange => {
+          $timeout(() => {
+            $scope.timeAvailability = Algorithm.getTimeAvailabilityFromSlotsGroupedByDays();
+            if (!slotsRange.length) {
+              Algorithm.AlgorithmNegative.initialize('task', $scope.timeAvailability.totalAvailHours);
+            }
+            return $scope.slotsRange = slotsRange;
+          });
+        });
+      };
 
 			var recalcChart = () => {
 				var progress = getFormattedProgress();

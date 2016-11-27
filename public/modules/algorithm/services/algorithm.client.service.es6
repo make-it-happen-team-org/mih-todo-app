@@ -209,9 +209,7 @@ class Algorithm {
 
     if (estimation <= totalAvailHours) {
       recommendations = isBalancedLoad ? this.AlgorithmPositive.getBalancedRecommendations(data) : this.AlgorithmPositive.getIntensiveRecommendations(data);
-    } else {
-      this.AlgorithmNegative.initialize('task', totalAvailHours);
-    }
+    } 
     this.slotsRange = this.getSuitableSlots(recommendations, priority);
   }
 }

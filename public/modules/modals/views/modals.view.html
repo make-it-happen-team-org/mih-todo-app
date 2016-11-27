@@ -1,28 +1,28 @@
 <div data-ng-controller="ModalsController as modal">
   <div class="mih-modal-theme__header">
-    <h3 class="modal-title mih-modal-theme__title">{{modal.renderModalData().title}}</h3>
+    <h3 class="modal-title mih-modal-theme__title">{{modal.title}}</h3>
   </div>
   <div class="mih-modal-theme__body mih-modal-theme-body">
-    <p class="mih-modal-theme-body__warning">{{modal.renderModalData().warning}}</p>
+    <p class="mih-modal-theme-body__warning">{{modal.warning}}</p>
     <span class="mih-modal-theme-body__warning-ways">You can:</span>
     <ul class="mih-modal-theme-body__list">
       <li class="mih-modal-theme-body__handle-by-shifting">
         <i class="fa fa-circle" aria-hidden="true"></i>
-        {{modal.renderModalData().bodyMsg.shift}}
+        {{modal.bodyMsg.shift}}
       </li>
       <li class="mih-modal-theme-body__handle-by-leaving">
         <i class="fa fa-circle" aria-hidden="true"></i>
-        {{modal.renderModalData().bodyMsg.leaveAsIs}}
-        <span class="mih-modal-theme-body__handle-by-leaving--free-time">{{modal.renderModalData().timeToFree}}</span>
+        {{modal.bodyMsg.leaveAsIs}}
+        <span class="mih-modal-theme-body__handle-by-leaving--free-time">{{modal.timeToFree}}</span>
       </li>
     </ul>
   </div>
   <div class="mih-modal-theme__footer mih-modal-theme-footer">
-    <button class="btn mih-modal-theme-footer__button mih-modal-theme-footer__button--shift" type="button" data-ng-click="modal.secondWayHandle()" data-ng-disabled="false">
-      {{modal.renderModalData().secondHandler}}
+    <button id="foo" class="btn mih-modal-theme-footer__button mih-modal-theme-footer__button--shift" type="button" data-ng-click="modal.shiftHandler()">
+      {{modal.shiftMsg}}
     </button>
-    <button class="btn mih-modal-theme-footer__button mih-modal-theme-footer__button--leave" type="button" data-ng-click="modal.firstWayHandle()">
-      {{modal.renderModalData().firstHandler}}
+    <button class="btn mih-modal-theme-footer__button mih-modal-theme-footer__button--leave" type="button" data-ng-click="modal.leaveAsIsHandler()">
+      {{modal.leaveAsIsMsg}}
     </button>
   </div>
 </div>

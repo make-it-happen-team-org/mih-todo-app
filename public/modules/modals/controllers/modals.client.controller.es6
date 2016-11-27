@@ -1,34 +1,30 @@
 class ModalsController {
 
   /** @ngInject */
-  constructor(ModalsService, $scope, $rootScope) {
+  constructor(ModalsService, $scope, $rootScope, Algorithm) {
     Object.assign(this, {
       ModalsService,
       $scope,
-      $rootScope
+      $rootScope,
+      Algorithm
     });
-  }
-
-  renderModalData() {
-    return {
-      warning: this.$scope.ngDialogData.warningMsg,
-      title: this.$scope.ngDialogData.modalTitle,
-      timeToFree: this.$scope.ngDialogData.timeToFree,
-      bodyMsg: {
-        leaveAsIs: this.$scope.ngDialogData.bodyMsg.leaveAsIs,
-        shift: this.$scope.ngDialogData.bodyMsg.shift
-      },
-      firstHandler: this.$scope.ngDialogData.buttonsMsg.leaveAsIs,
-      secondHandler: this.$scope.ngDialogData.buttonsMsg.shift
+    this.warning = this.$scope.ngDialogData.warningMsg;
+    this.title = this.$scope.ngDialogData.modalTitle;
+    this.timeToFree = this.$scope.ngDialogData.timeToFree;
+    this.bodyMsg = {
+      leaveAsIs: this.$scope.ngDialogData.bodyMsg.leaveAsIs,
+      shift: this.$scope.ngDialogData.bodyMsg.shift
     };
+    this.leaveAsIsMsg = this.$scope.ngDialogData.buttonsMsg.leaveAsIs;
+    this.shiftMsg = this.$scope.ngDialogData.buttonsMsg.shift
   }
 
-  firstWayHandle() {
-    this.$scope.$emit(`CONFLICTED_${this.$scope.ngDialogData.type}_FIRST`);
+  leaveAsIsHandler() {
+    this.Algorithm.AlgorithmNegative.closeModalInstance();
   }
 
-  secondWayHandle() {
-    this.$scope.$emit(`CONFLICTED_${this.$scope.ngDialogData.type}_SECOND`);
+  shiftHandler() {
+    this.Algorithm.AlgorithmNegative.getOccupiedSlots(this.Algorithm.AlgorithmNegative.startDate, this.Algorithm.AlgorithmNegative.endDate);
   }
 }
 
