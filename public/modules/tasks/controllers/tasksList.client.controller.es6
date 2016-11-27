@@ -1,36 +1,45 @@
-'use strict';
-
 class TasksListController {
-	/** @ngInject */
-	constructor($rootScope, Authentication, Tasks) {
-		this.authentication = Authentication;
-		this.tasks = Tasks.query();
-		this.Tasks = Tasks;
-		this.status = {};
-		this.status.isComplete = false;
+  /** @ngInject */
+  constructor($rootScope, Authentication, Tasks) {
+    Object.assign(this, { $rootScope, Authentication, Tasks });
 
-		$rootScope.$on('NEW_TASK_MODIFY', () => {
-			this.find();
-		});
+    const attachEvents = () => {
+      this.$rootScope.$on('NEW_TASK_MODIFY', () => {
+        this.find();
+      });
+    };
 
-		this.sortType = localStorage.getItem('sidebarTodoSortOrderBy') || 'days.endTime';
-		this.sortReverse = localStorage.getItem('sidebarTodoSortOrderReverse') || false;
-	}
+    this.authentication = Authentication;
+    this.tasks          = Tasks.query();
+    this.status         = { isComplete: false };
+    TasksListController.getFromLocalStorage();
 
-	sortListBy(type) {
-		localStorage.setItem('sidebarTodoSortOrderBy', type);
-		localStorage.setItem('sidebarTodoSortOrderReverse', !this.sortReverse);
-		this.sortType = type;
-		this.sortReverse = !this.sortReverse;
-	}
+    attachEvents();
+  }
 
-	find () {
-		this.tasks = this.Tasks.query();
-	}
+  sortListBy(type) {
+    TasksListController.saveToLocalStorage(type);
+    this.sortType    = type;
+    this.sortReverse = !this.sortReverse;
+  }
 
-	getTaskDonePercentage(task) {
-		return +((task.progress * 100) / task.estimation).toFixed(2);
-	}
+  find() {
+    this.tasks = this.Tasks.query();
+  }
+
+  static getTaskDonePercentage(task) {
+    return +((task.progress * 100) / task.estimation).toFixed(2);
+  }
+
+  static saveToLocalStorage(type) {
+    localStorage.setItem('sidebarTodoSortOrderBy', type);
+    localStorage.setItem('sidebarTodoSortOrderReverse', !this.sortReverse);
+  }
+
+  static getFromLocalStorage() {
+    this.sortType    = localStorage.getItem('sidebarTodoSortOrderBy') || 'days.endTime';
+    this.sortReverse = localStorage.getItem('sidebarTodoSortOrderReverse') || false;
+  }
 }
 
 angular.module('tasks').controller('TasksListController', TasksListController);
