@@ -6,24 +6,26 @@
   .page-wrapper { height: 100%; }
 }
 
-.main-content {
+.main-wrapper {
   position: relative;
   height: 100%;
+  margin-left: 300px;
+  transition: margin .5s;
   z-index: 2;
   color: @main-font-color;
-  transition: margin .5s;
+  background: @body-background-color;
 
-  &.with-sidebar { margin-left: 300px; }
+  &__category-control {
+    width: 100%;
+    border: none;
 
-  .container-wrapper {
-    position: relative;
-    min-height: 100%;
+    option { background-color: @aside-background-color; }
+  }
 
-    .navbar-default {
-      padding: 0 15px;
-      box-sizing: border-box;
-      background: @main-navbar-default-bg-color;
-      box-shadow: none;
-    }
+  .navbar-default {
+    padding: 0 15px;
+    box-sizing: border-box;
+    background: @main-navbar-default-bg-color;
+    box-shadow: none;
   }
 }

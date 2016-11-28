@@ -1,16 +1,14 @@
 class EventsListController {
   /** @ngInject */
-  constructor($rootScope, Events) {
-    Object.assign(this, { $rootScope, Events });
+  constructor($scope, Events) {
+    Object.assign(this, { $scope, Events });
 
-    const attachEvents = () => {
-      this.$rootScope.$on('NEW_EVENTS_MODIFY', () => {
-        this.find();
-      });
-    };
+    const attachEvent = this.$scope.$on('NEW_EVENTS_MODIFY', () => {
+      this.find();
+    });
 
     this.events = this.Events.query();
-    attachEvents();
+    attachEvent();
   }
 
   find() {
