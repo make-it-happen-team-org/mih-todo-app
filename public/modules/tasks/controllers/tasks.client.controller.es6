@@ -42,9 +42,9 @@ class TasksController {
 // Tasks controller
 angular.module('tasks').controller('TasksController',
 	['$scope', '$rootScope', '$stateParams', '$location', 'Authentication', 'Tasks', 'Users', '$timeout', 'Algorithm',
-		'Slots', 'Notification', '$document',
+		'Slots', 'Notification',
 		function ($scope, $rootScope, $stateParams, $location, Authentication, Tasks, Users, $timeout, Algorithm,
-				  Slots, Notification, $document) {
+				  Slots, Notification) {
 			$scope.authentication = Authentication;
 			$scope.isATemplate = false;
 			$scope.user = Authentication.user;
@@ -132,22 +132,31 @@ angular.module('tasks').controller('TasksController',
 				$scope.$apply();
 			});
 
-      var slotShiftedFromNegative = $rootScope.$on('slotShiftedFromNegative', () => {
-        getNewSlots($scope.newTask);
-        //$document.find('#foobar').triggerHandler('click');
+      var slotShiftedFromNegative = $scope.$on('slotShiftedFromNegative', () => {
+        //FIXME: this was done to avoid loop creation.
+        //TODO: Need to investigate why double listener fire causes
+        if ($rootScope.$$listenerCount.slotShiftedFromNegative === 1) {
+          console.log('before', $rootScope.$$listenerCount.slotShiftedFromNegative);
 
-        //	var queries = [saveTask($scope.newTask)];
-        //
-        //	if ($scope.newTask.isATemplate || $scope.selectedTemplate) {
-        //		queries.push(updateTaskTemplates($scope.newTask));
-        //	}
-        //
-        //	Promise.all(queries).then(() => {
-        //		$location.path('/');
-        //		$rootScope.$broadcast('NEW_TASK_MODIFY');
-        //		Notification.success(`Task "${$scope.newTask.title}" was successfully created`);
-        //	});
-        //	console.log('end automatic crete');
+						getNewSlots($scope.newTask);
+						$timeout(() => {
+							var queries = [saveTask($scope.newTask)];
+
+							if ($scope.newTask.isATemplate || $scope.selectedTemplate) {
+								queries.push(updateTaskTemplates($scope.newTask));
+							}
+
+							Promise.all(queries).then(() => {
+								$location.path('/');
+								$rootScope.$broadcast('NEW_TASK_MODIFY');
+								Notification.success(`Task "${$scope.newTask.title}" was successfully created`);
+							});
+						}, 2000);
+					//$document.find('#foobar').triggerHandler('click');
+
+					//	console.log('end automatic crete');
+          console.log('after', $rootScope.$$listenerCount.slotShiftedFromNegative);
+        }
         slotShiftedFromNegative();
       });
 
