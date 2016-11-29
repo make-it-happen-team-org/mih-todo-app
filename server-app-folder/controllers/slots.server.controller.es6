@@ -48,6 +48,7 @@ export class SlotsServerController {
 							return;
 						}
 						Slot.find({
+							taskId: { $exists: true },
 							start: {$gte: new Date(newSlot.start.toUTCString())},
 							end: {$lte: new Date(newSlot.end.toUTCString())},
 							userId: req.user._id
