@@ -1,33 +1,25 @@
 class MigrateService {
-	/** @ngInject */
-	constructor($http) {
-		Object.assign(this, {
-			$http
-		});
-	}
+    /** @ngInject */
+    constructor($http, Events) {
+        Object.assign(this, {
+            Events,
+            $http
+        });
+    }
 
-	getOutlookAuthUrl() {
-		return this.$http.get('/migrate/outlook/get-auth-url').then(responce => responce.data);
-	}
+    importEvents(evets) {
+        return new this.Events(evets).$importEvents(response => {
+            response.data.forEach(result => {
+                evets.forEach(event => {
+                    if (event.id == result.id) {
+                        event.status = result.message;
+                    }
+                });
 
-	getOutlookCalendarEvents(params) {
-		return this.$http.get('/migrate/outlook/get-calendar-events', {params}).then(responce => responce.data);
-	}
-
-	convertOutlookCalendarEvents(events) {
-		return events.map(event => {
-			return {
-				id: event.Id,
-				type: 'event',
-				title: event.Subject,
-				notes: event.BodyPreview,
-				days: {
-					startTime: event.Start.DateTime,
-					endTime: event.End.DateTime
-				}
-			}
-		});
-	}
+                return evets;
+            })
+        });
+    }
 }
 
 angular.module('migrate').service('MigrateService', MigrateService);

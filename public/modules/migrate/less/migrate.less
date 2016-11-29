@@ -1,28 +1,47 @@
-.migration {
-	.outlook {
-		.api-call-btn {
-			margin-top: 22px;
-		}
+.migrate {
+  &-table {
+    .api-call-btn {
+      margin-top: 22px;
+    }
 
-		.no-events {
-			padding: 20px;
-			font-size: 16px;
-			text-align: center;
-		}
+    .no-events {
+      padding: 20px;
+      font-size: 16px;
+      text-align: center;
+    }
 
-		.event-date {
-			margin-top: 14px;
-		}
+    .event-date {
+      margin-top: 14px;
+    }
 
-		.events-list {
-			font-size: 14px;
-			margin: 10px;
-			table-layout: fixed;
+    .events-list {
+      font-size: 14px;
+      margin: 10px;
+      table-layout: fixed;
 
-			td, th {
-				padding: 10px;
-				word-break: break-word;
-			}
-		}
-	}
+      td, th {
+        padding: 10px;
+        word-break: break-all;
+      }
+    }
+  }
+
+  &-services {
+    text-align: center;
+
+    li {
+      display: inline-block;
+
+      a {
+        display: block;
+        height: 50px;
+        margin: 20px;
+
+        img {
+          display: block;
+          max-height: 100%;
+        }
+      }
+    }
+  }
 }
