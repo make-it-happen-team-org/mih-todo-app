@@ -37,7 +37,7 @@ class AlgorithmNegative {
           return this.aggregateTasksWithSlots(this.slotsOccupiedSlots);
         })
         .then((aggregatedTasksWithSlots) => {
-          this.leftTimeBeforeDeadline(aggregatedTasksWithSlots);
+          this.recalculateExistingTasks(aggregatedTasksWithSlots);
         });
     });
   }
@@ -82,47 +82,15 @@ class AlgorithmNegative {
     return tasks;
   }
 
-  /**
-   *
-   * @param tasks
-   * @returns {Array}
-   * @description Gets tasks array and calculates left working time before deadline.
-   */
-  checkShiftAbilities(tasks) {
-    let filteredTasks = [];
-
-    tasks.forEach((value, key) => {
-      tasks[key].canShiftWithinDeadline = (tasks[key].leftHoursBeforeDeadline - tasks[key].leftEstimation >= 0);
-    });
-
-    tasks.some(value => {
-      if (value.canShiftWithinDeadline >= 0) {
-        filteredTasks.push(value);
-      }
-    });
-
-    return filteredTasks;
+  isShiftCapable(hoursBeforeDeadline, leftEstimation) {
+    return !!(hoursBeforeDeadline - leftEstimation);
   }
 
-  leftTimeBeforeDeadline(tasks) {
-    tasks.forEach((value, key) => {
-      tasks[key].leftEstimation = tasks[key].estimation - _.sum(tasks[key].slots.passedSlots.map(value => {
-          return value.duration;
-        }));
-
-      return new Promise(resolve => {
-        this.delegate.getSlots(new Date(this.startDate), new Date(tasks[key].days.endTime), 'free-time')
-            .then(res => {
-              tasks[key].leftHoursBeforeDeadline = this.delegate.getTotalFreeHoursInDailyMap(this.delegate.getFreeHoursDailyMapFromSlots(res.data));
-              resolve(res.data);
-            })
-            .then(() => {
-              //TODO: think on this !!!!!!maybe this cause en loop?
-              this.recalculateExistingTasks(this.checkShiftAbilities(tasks));
-            });
-      });
-    }, this);
-  }
+  leftEstimationCalc(task) {
+    return task.estimation - _.sum(task.slots.passedSlots.map(value => {
+      return value.duration;
+    }));
+  };
 
   /**
    *
@@ -131,10 +99,10 @@ class AlgorithmNegative {
    * @description shifts future task slots to the appropriate free time
    */
   findAppropriateSlotsToShift(tasksToShift, freeSlots) {
-    let hoursToFree = this.estimation - this.totalAvailHours;
+    let hoursToFree           = this.estimation - this.totalAvailHours;
+    let sortedTasksByPriority = _.reverse(tasksToShift);
 
-    //TODO: implement shifting by priority
-    tasksToShift.forEach(function (value, key) {
+    sortedTasksByPriority.forEach(function (value, key) {
       value.slots.futureSlots.forEach(function (v, index) {
         let slotDuration = v.duration;
         let freePlaces   = freeSlots[key];
@@ -142,11 +110,13 @@ class AlgorithmNegative {
         Object.keys(freePlaces).forEach(function (ky, ind) {
           while (hoursToFree > 0) {
             freePlaces[ky].forEach(function (val, k) {
+              //TODO: think maybe there is no need to check freeSlotDuration as we have sorting mechanism
               if (val.duration >= slotDuration) {
                 hoursToFree -= slotDuration;
 
                 value.slots.futureSlots[index].start = val.start;
-                value.slots.futureSlots[index].end   = new Date(new Date(val.start).setHours(new Date(val.start).getHours() + 3)).toISOString();
+                //TODO: what does it mean +3? changed to this.estimation. works?
+                value.slots.futureSlots[index].end   = new Date(new Date(val.start).setHours(new Date(val.start).getHours() + this.estimation)).toISOString();
 
                 this.Slots.update(value.slots.futureSlots[index]);
               }
@@ -162,19 +132,43 @@ class AlgorithmNegative {
 
     return new Promise(resolve => {
       tasks.forEach(function (value, key) {
-        this.delegate.getSlots(new Date(this.startDate.setDate(this.startDate.getDate() + 1)), value.days.endTime, 'free-time')
+        //TODO:check this change with time
+        //TODO:double check this.startDate!!
+        console.log('startDate', new Date(this.startDate).toISOString());
+        console.log('endDate', value.days.endTime);
+        //new Date(this.startDate.setDate(this.startDate.getDate() + 1)).toISOString();
+        this.delegate.getSlots(new Date(this.startDate.setDate(this.startDate.getDate() + 1)).toISOString(), value.days.endTime, 'free-time')
             .then(res => {
               this.slots = res.data;
-              freeSlots.push(this.slots);
+
+              tasks[key].leftHoursBeforeDeadline = this.delegate.getTotalFreeHoursInDailyMap(this.delegate.getFreeHoursDailyMapFromSlots(res.data));
+              tasks[key].leftEstimation = this.leftEstimationCalc(value);
+              tasks[key].isShiftCapable = this.isShiftCapable(tasks[key].leftHoursBeforeDeadline, tasks[key].leftEstimation);
+
+              freeSlots.splice(key, 0, this.slots);
+              //freeSlots.push(this.slots);
               resolve(this.slots);
             });
       }, this);
     }).then(() => {
       this.$timeout(() => {
-        this.findAppropriateSlotsToShift(tasks, freeSlots);
+        let indexes = [];
+
+        let filteredTasks = _.filter(tasks, (task, index) => {
+          if (!task.isShiftCapable) { indexes.push(index); }
+          return task.isShiftCapable;
+        });
+
+        console.log('freeSlotsBefore', freeSlots);
+        for (var i = indexes.length-1; i >= 0; i--) {
+          freeSlots.splice(indexes[i], 1);
+        }
+        console.log('freeSlotsAfter', freeSlots);
+
+        this.findAppropriateSlotsToShift(filteredTasks, freeSlots);
         this.$rootScope.$broadcast('slotShiftedFromNegative');
         this.closeModalInstance();
-      });
+      }, 1500);
     });
   }
 
