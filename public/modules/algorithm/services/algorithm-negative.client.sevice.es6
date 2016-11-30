@@ -1,12 +1,12 @@
 class AlgorithmNegative {
 
   /** @ngInject */
-  constructor($rootScope, Slots, $timeout, ModalsService, MODALS_TASK_MESSAGES, MODALS_EVENT_MESSAGES) {
+  constructor($rootScope, Slots, ModalsService, TimeService, MODALS_TASK_MESSAGES, MODALS_EVENT_MESSAGES) {
     Object.assign(this, {
       $rootScope,
       Slots,
-      $timeout,
       ModalsService,
+      TimeService,
       MODALS_TASK_MESSAGES,
       MODALS_EVENT_MESSAGES
     });
@@ -114,8 +114,8 @@ class AlgorithmNegative {
               if (val.duration >= slotDuration) {
                 hoursToFree -= slotDuration;
 
+                //TODO: use timeService here too
                 value.slots.futureSlots[index].start = val.start;
-                //TODO: what does it mean +3? changed to this.estimation. works?
                 value.slots.futureSlots[index].end   = new Date(new Date(val.start).setHours(new Date(val.start).getHours() + this.estimation)).toISOString();
 
                 this.Slots.update(value.slots.futureSlots[index]);
@@ -132,12 +132,11 @@ class AlgorithmNegative {
 
     return new Promise(resolve => {
       tasks.forEach(function (value, key) {
-        //TODO:check this change with time
-        //TODO:double check this.startDate!!
-        console.log('startDate', new Date(this.startDate).toISOString());
+
         console.log('endDate', value.days.endTime);
-        //new Date(this.startDate.setDate(this.startDate.getDate() + 1)).toISOString();
-        this.delegate.getSlots(new Date(this.startDate.setDate(this.startDate.getDate() + 1)).toISOString(), value.days.endTime, 'free-time')
+
+        //TODO: check value.days.endTime. should be in ISO format
+        this.delegate.getSlots(this.TimeService.appendDaysToISODate(this.startDate, 1), value.days.endTime, 'free-time')
             .then(res => {
               this.slots = res.data;
 
@@ -151,7 +150,6 @@ class AlgorithmNegative {
             });
       }, this);
     }).then(() => {
-      this.$timeout(() => {
         let indexes = [];
 
         let filteredTasks = _.filter(tasks, (task, index) => {
@@ -160,7 +158,7 @@ class AlgorithmNegative {
         });
 
         console.log('freeSlotsBefore', freeSlots);
-        for (var i = indexes.length-1; i >= 0; i--) {
+        for (var i = indexes.length - 1; i >= 0; i--) {
           freeSlots.splice(indexes[i], 1);
         }
         console.log('freeSlotsAfter', freeSlots);
@@ -168,7 +166,6 @@ class AlgorithmNegative {
         this.findAppropriateSlotsToShift(filteredTasks, freeSlots);
         this.$rootScope.$broadcast('slotShiftedFromNegative');
         this.closeModalInstance();
-      }, 1500);
     });
   }
 

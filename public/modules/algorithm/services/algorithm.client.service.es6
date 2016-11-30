@@ -69,10 +69,10 @@ class Day {
 
 class Algorithm {
   static get $inject() {
-    return ['Slots', 'Authentication', 'AlgorithmServer', 'AlgorithmPositive', 'AlgorithmNegative', '$injector'];
+    return ['Slots', 'Authentication', 'AlgorithmServer', 'AlgorithmPositive', 'AlgorithmNegative', 'TimeService', '$injector'];
   }
 
-  constructor(Slots, Authentication, AlgorithmServer, AlgorithmPositive, AlgorithmNegative, $injector) {
+  constructor(Slots, Authentication, AlgorithmServer, AlgorithmPositive, AlgorithmNegative, TimeService, $injector) {
     this.Slots           = Slots;
     this.user            = Authentication.user;
     this.AlgorithmServer = AlgorithmServer;
@@ -80,6 +80,7 @@ class Algorithm {
 
     this.AlgorithmPositive = AlgorithmPositive;
     this.AlgorithmNegative = AlgorithmNegative;
+    this.TimeService = TimeService;
 
     this.slotsRange         = [];
     this.slotsOccupiedSlots = [];
@@ -133,15 +134,15 @@ class Algorithm {
     endDate.setHours(0, 0, 0, 0);
 
     Algorithm.algorithmBranchDataSetter([this.AlgorithmNegative, this.AlgorithmPositive], {
-      startDate:  startDate,
-      endDate:    endDate,
+      startDate:  this.TimeService.fromDateToISOFormat(startDate),
+      endDate:    this.TimeService.fromDateToISOFormat(endDate),
       estimation: estimation,
       priority:   priority,
       delegate:   this
     });
 
     return new Promise(resolve => {
-      this.getSlots(startDate, endDate, 'free-time')
+      this.getSlots(this.TimeService.fromDateToISOFormat(startDate), this.TimeService.fromDateToISOFormat(endDate), 'free-time')
           .then(res => {
             // TODO: inconsistent object structure! First time is array, then - object.
             this.slotsRange = res.data;
