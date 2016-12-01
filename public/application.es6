@@ -7,7 +7,7 @@ angular.module(ApplicationConfiguration.applicationModuleName, ApplicationConfig
 // Setting HTML5 Location Mode
 angular.module(ApplicationConfiguration.applicationModuleName)
     .config(['$locationProvider', 'NotificationProvider',
-        function ($locationProvider, NotificationProvider) {
+        ($locationProvider, NotificationProvider) => {
             $locationProvider.hashPrefix('!');
 
             NotificationProvider.setOptions({
@@ -15,17 +15,18 @@ angular.module(ApplicationConfiguration.applicationModuleName)
                 positionY: 'top'
             });
         }])
-    .config(function (datepickerConfig) {
+    .config((datepickerConfig) => {
         // http://stackoverflow.com/questions/20678009/remove-week-column-and-button-from-angular-ui-bootstrap-datepicker
         datepickerConfig.showWeeks = false;
         datepickerConfig.formatYear = 'yy';
         datepickerConfig.formatMonth = 'MMM';
         datepickerConfig.formatDay = 'd';
         datepickerConfig.startingDay = 1;
-    });
+    })
+    .constant('endpointUrl', ApplicationConfiguration.endpointUrl);
 
 //Then define the init function for starting up the application
-angular.element(document).ready(function () {
+angular.element(document).ready(() => {
     //Fixing facebook bug with redirect
     if (window.location.hash === '#_=_') window.location.hash = '#!';
 

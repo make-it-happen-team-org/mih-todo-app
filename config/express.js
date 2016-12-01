@@ -24,11 +24,11 @@ var fs = require('fs'),
 	consolidate = require('consolidate'),
 	path = require('path');
 
-module.exports = function(db) {
+module.exports = (db) => {
 	// Initialize express server-app-folder
 	var app = express();
 
-	app.use(function(req, res, next) {
+	app.use((req, res, next) => {
 		res.header('Access-Control-Allow-Credentials', true);
 		res.header('Access-Control-Allow-Origin', req.headers.origin);
 		res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
@@ -44,7 +44,7 @@ module.exports = function(db) {
 	});
 
 	// Globbing model files
-	config.getGlobbedFiles('./server-app-folder/models/**/*.js').forEach(function(modelPath) {
+	config.getGlobbedFiles('./server-app-folder/models/**/*.js').forEach((modelPath) => {
 		require(path.resolve(modelPath));
 	});
 
@@ -56,7 +56,7 @@ module.exports = function(db) {
 	app.locals.cssFiles = config.getCSSAssets();
 
 	// Passing the request url to environment locals
-	app.use(function(req, res, next) {
+	app.use((req, res, next) => {
 		res.locals.url = req.protocol + '://' + req.headers.host + req.url;
 		next();
 	});
@@ -64,7 +64,7 @@ module.exports = function(db) {
 	// Should be placed before express.static
 	app.use(compression({
 		// only compress files for the following content types
-		filter: function(req, res) {
+		filter: (req, res) => {
 			return (/json|text|javascript|css/).test(res.getHeader('Content-Type'));
 		},
 		// zlib option for compression level
@@ -133,12 +133,12 @@ module.exports = function(db) {
 	app.use(flash());
 
 	// Globbing routing files
-	config.getGlobbedFiles('./server-app-folder/routes/**/*.js').forEach(function(routePath) {
+	config.getGlobbedFiles('./server-app-folder/routes/**/*.js').forEach((routePath) => {
 		require(path.resolve(routePath))(app);
 	});
 
 	// Assume 'not found' in the error msgs is a 404. this is somewhat silly, but valid, you can do whatever you like, set properties, use instanceof etc.
-	app.use(function(err, req, res, next) {
+	app.use((err, req, res, next) => {
 		// If the error object doesn't exists
 		if (!err) return next();
 
@@ -152,7 +152,7 @@ module.exports = function(db) {
 	});
 
 	// Assume 404 since no middleware responded
-	app.use(function(req, res) {
+	app.use((req, res) => {
 		res.status(404).render('404', {
 			url: req.originalUrl,
 			error: 'Not Found'
