@@ -7,11 +7,11 @@ class GoogleCalendarService {
     }
 
     getAuthUrl() {
-        return this.$http.get('/migrate/google-calendar/get-auth-url').then(responce => responce.data);
+        return this.$http.get('migrate/google-calendar/get-auth-url').then(responce => responce.data);
     }
 
     getCalendarEvents(params) {
-        return this.$http.get('/migrate/google-calendar/get-calendar-events', {params}).then(responce => responce.data);
+        return this.$http.get('migrate/google-calendar/get-calendar-events', {params}).then(responce => responce.data);
     }
 
     convertCalendarEvents(events) {

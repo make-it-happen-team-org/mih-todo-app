@@ -6,13 +6,13 @@ angular.module('schedule-notifications').config(['$stateProvider',
 		// view scheme is: "viewname@statename"
 		// "viewname@" renders into the ui-view='viewname' of the root template
 		$stateProvider
-			.state('overdue', {
+			.state('restricted.overdue', {
 				url: '/overdue',
 				views: {
 					'aside@': {
 						templateUrl: 'modules/schedule-notifications/views/list-notifications.client.view.html'
 					},
-					'main-view@': {
+					'main-view@restricted': {
 						templateUrl: 'modules/calendar/views/calendar.client.view.html'
 					}
 				},
@@ -20,13 +20,13 @@ angular.module('schedule-notifications').config(['$stateProvider',
 					menuLabel: "track progress"
 				}
 			})
-			.state('overdue.edit', {
+			.state('restricted.overdue.edit', {
 				url: '/:taskId/edit',
 				views: {
 					'aside@': {
 						templateUrl: 'modules/schedule-notifications/views/list-notifications.client.view.html'
 					},
-					'main-view@': {
+					'main-view@restricted': {
 						templateUrl: 'modules/tasks/views/edit-task.client.view.html'
 					}
 				}

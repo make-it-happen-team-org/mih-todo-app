@@ -28,6 +28,21 @@ module.exports = function(db) {
 	// Initialize express server-app-folder
 	var app = express();
 
+	app.use(function(req, res, next) {
+		res.header('Access-Control-Allow-Credentials', true);
+		res.header('Access-Control-Allow-Origin', req.headers.origin);
+		res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
+		res.header('Access-Control-Allow-Headers', 'X-Requested-With, X-HTTP-Method-Override, Content-Type, Accept');
+
+		// intercept OPTIONS method
+		if ('OPTIONS' == req.method) {
+			res.send(200);
+		}
+		else {
+			next();
+		}
+	});
+
 	// Globbing model files
 	config.getGlobbedFiles('./server-app-folder/models/**/*.js').forEach(function(modelPath) {
 		require(path.resolve(modelPath));

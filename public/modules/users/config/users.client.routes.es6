@@ -4,7 +4,7 @@
 
 angular.module('users').config(['$stateProvider', function ($stateProvider) {
 	// Users state routing
-	$stateProvider.state('profile', {
+	$stateProvider.state('restricted.profile', {
 		url: '/settings/profile',
 		views: {
 			'aside': { templateUrl: 'modules/core/views/sidebar/todo.client.view.html' },

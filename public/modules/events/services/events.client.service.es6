@@ -14,7 +14,7 @@ angular.module('events')
 					method: 'DELETE'
 				},
 				importEvents: {
-					url: '/events/import/outlook',
+					url: 'events/import/outlook',
 					method: 'POST'
 				}
 			});

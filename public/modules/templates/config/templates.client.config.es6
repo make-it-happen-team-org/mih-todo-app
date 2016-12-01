@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('templates').config(['$stateProvider', function ($stateProvider) {
-	$stateProvider.state('templates', {
+	$stateProvider.state('restricted.templates', {
 		url: '/templates',
 		params: {
 			templateId: '',

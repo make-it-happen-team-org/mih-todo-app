@@ -6,9 +6,9 @@ angular.module('core').controller('SidebarController', ['$scope', '$injector',
 
 		let Ctrl = this;
 		Ctrl.topStatesInNavDropdown = [
-			$state.get('todo_state'),
-			$state.get('overdue'),
-			$state.get('templates')
+			$state.get('restricted.todo_state'),
+			$state.get('restricted.overdue'),
+			$state.get('restricted.templates')
 		];
 
 		Ctrl.goToState = function (newState) {

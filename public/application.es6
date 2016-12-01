@@ -6,47 +6,29 @@ angular.module(ApplicationConfiguration.applicationModuleName, ApplicationConfig
 
 // Setting HTML5 Location Mode
 angular.module(ApplicationConfiguration.applicationModuleName)
-	.config(['$locationProvider', 'NotificationProvider',
-		function ($locationProvider, NotificationProvider) {
-		$locationProvider.hashPrefix('!');
+    .config(['$locationProvider', 'NotificationProvider',
+        function ($locationProvider, NotificationProvider) {
+            $locationProvider.hashPrefix('!');
 
-		NotificationProvider.setOptions({
-			positionX: 'center',
-			positionY: 'top'
-		});
-	}])
-	.config(function (datepickerConfig) {
-		// http://stackoverflow.com/questions/20678009/remove-week-column-and-button-from-angular-ui-bootstrap-datepicker
-		datepickerConfig.showWeeks = false;
-		datepickerConfig.formatYear = 'yy';
-		datepickerConfig.formatMonth = 'MMM';
-		datepickerConfig.formatDay = 'd';
-		datepickerConfig.startingDay = 1;
-	})
-	.run(($rootScope, Authentication, $state, $http, $window) => {
-		//TODO: Refactor app init posses
-		$http.get(`/session`).then(response => {
-			if (response.data._id) {
-				$rootScope.user = $window.user = Authentication.user = response.data;
-
-				//Prevent anonymous user access to all pages except auth
-				const notLoggedUserAvailableStates = ['signin', 'signup'];
-
-				$rootScope.$on("$stateChangeStart", function(event, toState){
-					if (!Authentication.user && notLoggedUserAvailableStates.indexOf(toState.name) == -1) {
-						event.preventDefault();
-						$state.transitionTo("signin");
-					}
-				});
-			}
-		});
-	});
+            NotificationProvider.setOptions({
+                positionX: 'center',
+                positionY: 'top'
+            });
+        }])
+    .config(function (datepickerConfig) {
+        // http://stackoverflow.com/questions/20678009/remove-week-column-and-button-from-angular-ui-bootstrap-datepicker
+        datepickerConfig.showWeeks = false;
+        datepickerConfig.formatYear = 'yy';
+        datepickerConfig.formatMonth = 'MMM';
+        datepickerConfig.formatDay = 'd';
+        datepickerConfig.startingDay = 1;
+    });
 
 //Then define the init function for starting up the application
 angular.element(document).ready(function () {
-	//Fixing facebook bug with redirect
-	if (window.location.hash === '#_=_') window.location.hash = '#!';
+    //Fixing facebook bug with redirect
+    if (window.location.hash === '#_=_') window.location.hash = '#!';
 
-	//Then init the app
-	angular.bootstrap(document, [ApplicationConfiguration.applicationModuleName]);
+    //Then init the app
+    angular.bootstrap(document, [ApplicationConfiguration.applicationModuleName]);
 });

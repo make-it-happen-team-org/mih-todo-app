@@ -1,7 +1,7 @@
 <li class="active">
 	<div href="#" class="nav-item">
 		<span class="nav-label">Tasks</span>
-		<a data-ui-sref="todo_state.tasks.create" class="fa fa-plus-circle add-task"></a>
+		<a data-ui-sref="restricted.todo_state.tasks.create" class="fa fa-plus-circle add-task"></a>
 	</div>
 
 	<section ng-controller="TasksListController as taskListCtrl">
@@ -33,7 +33,7 @@
 		<ul class="nav nav-second-level in collapse">
 			<li data-ng-repeat="task in taskListCtrl.tasks | orderBy: taskListCtrl.sortType : taskListCtrl.sortReverse | filter:taskListCtrl.status:strict"
 				class="task-list-item">
-				<a data-ui-sref="todo_state.tasks.edit({ taskId: task._id })" class="task-list-item">
+				<a data-ui-sref="restricted.todo_state.tasks.edit({ taskId: task._id })" class="task-list-item">
 					<span class="task-priority fa fa-circle {{'task-priority-' + task.priority}}"></span>
 					<span class="nav-label task-name" data-ng-bind="task.title"></span>
 					<span class="pull-right label label-danger">{{taskListCtrl.getTaskDonePercentage(task)}}%</span>
