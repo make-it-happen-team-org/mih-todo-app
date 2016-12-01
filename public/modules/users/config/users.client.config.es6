@@ -3,16 +3,16 @@ angular.module('users').config(($httpProvider) => {
     $httpProvider.defaults.withCredentials = true;
 
     /** @ngInject */
-    $httpProvider.interceptors.push(($q, $location, Authentication) => {
+    $httpProvider.interceptors.push(($q, $location, Authentication, endpointUrl) => {
         return {
-            request: function (config) {
+            request: (config) => {
                 if (!/html/.test(config.url)) {
-                    config.url = `http://localhost:3000/${config.url}`;
+                    config.url = `${endpointUrl}/${config.url}`;
                 }
 
                 return config;
             },
-            responseError: function responseError(rejection) {
+            responseError: rejection => {
                 switch (rejection.status) {
                     case 401:
                         // Deauthenticate the global user

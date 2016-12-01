@@ -11,7 +11,7 @@ angular.module('users').controller('AuthenticationController', ['$scope', '$http
 			$scope.signupForm.submitted = true;
 			return false;
 		}
-		$http.post('/auth/signup', $scope.credentials).success(function (response) {
+		$http.post('auth/signup', $scope.credentials).success(function (response) {
 			// If successful we assign the response to the global user model
 			$scope.authentication.user = response;
 
@@ -28,7 +28,7 @@ angular.module('users').controller('AuthenticationController', ['$scope', '$http
 			$scope.signinForm.submitted = true;
 			return false;
 		}
-		$http.post('/auth/signin', $scope.credentials).success(function (response) {
+		$http.post('auth/signin', $scope.credentials).success(function (response) {
 			// If successful we assign the response to the global user model
 			$scope.authentication.user = response;
 
