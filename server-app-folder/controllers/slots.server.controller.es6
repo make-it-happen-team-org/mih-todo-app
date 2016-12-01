@@ -29,55 +29,19 @@ export class SlotsServerController {
 	}
 
 	static create(req, res) {
-		var promises = [],
-			workingHours = req.user.predefinedSettings.workingHours,
-			timeForSlot,
-			workingDay,
-			hoursForSlot,
-			minutesForSlot;
-
-		Object.keys(req.body).forEach(function (key) {
-			promises.push(new Promise(function (resolve) {
-				var newSlot = new Slot(req.body[key]);
-				newSlot.save(function (error) {
+		let promises = [];
+		Object.keys(req.body).forEach((key)  => {
+			promises.push(new Promise((resolve) => {
+				let newSlot = new Slot(req.body[key]);
+				newSlot.save((error) => {
 					if (error) {
-						resolve(false)
+						resolve(false);
 					} else {
 						if (newSlot.eventId) {
 							resolve(true);
 							return;
 						}
-						Slot.find({
-							start: {$gte: new Date(newSlot.start.toUTCString())},
-							end: {$lte: new Date(newSlot.end.toUTCString())},
-							userId: req.user._id
-						}).sort({priority: 1}).exec(function (err, slots) {
-							if (err) {
-								return res.status(400).send({
-									message: errorHandler.getErrorMessage(err)
-								});
-							} else {
-								workingDay = moment(newSlot.start).format('dddd').toLowerCase().slice(0, 3);
-								timeForSlot = workingHours[workingDay].start.split(":"),
-									hoursForSlot = parseInt(timeForSlot[0], 10),
-									minutesForSlot = parseInt(timeForSlot[1], 10);
-								slots.forEach(function (slot) {
-									slot.start = newSlot.start.setHours(hoursForSlot, minutesForSlot);
-									slot.end = newSlot.end.setHours(hoursForSlot + slot.duration, minutesForSlot + slot.duration % 1 * 60);
-									slot.save(function (err) {
-										if (err) {
-											return res.status(400).send({
-												message: err
-											});
-										}
-									});
-									hoursForSlot += parseInt(slot.duration, 10);
-									minutesForSlot = (minutesForSlot + slot.duration % 1 * 60) % 60;
-								});
-								SlotEmailNotificationCtrl.doScheduleEmailForFutureSlot(newSlot);
-								resolve(true);
-							}
-						});
+						SlotsServerController.recalcTimeForSlotsWithinDayByPriority(req, res, {newSlot, resolve});
 					}
 				});
 			}));
@@ -113,6 +77,46 @@ export class SlotsServerController {
 
 	static remove(req, res) {
 
+	}
+
+	static recalcTimeForSlotsWithinDayByPriority(req, res, cfg) {
+		let workingHours = req.user.predefinedSettings.workingHours,
+			workingDay = moment(cfg.newSlot.start).format('dddd').toLowerCase().slice(0, 3),
+			timeForSlot = workingHours[workingDay].start.split(':'),
+			hoursForSlot = parseInt(timeForSlot[0], 10),
+			minutesForSlot = parseInt(timeForSlot[1], 10);
+
+		Slot.find({
+			taskId: { $exists: true },
+			start: {$gte: new Date(cfg.newSlot.start.toUTCString())},
+			end: {$lte: new Date(cfg.newSlot.end.toUTCString())},
+			userId: req.user._id
+		}).sort({priority: 1}).exec((err, slots) => {
+			if (err) {
+				return res.status(400).send({
+					message: errorHandler.getErrorMessage(err)
+				});
+			} else {
+				slots.forEach((slot) => {
+					slot.start = cfg.newSlot.start.setHours(hoursForSlot, minutesForSlot);
+					slot.end = cfg.newSlot.end.setHours(hoursForSlot + slot.duration, minutesForSlot + slot.duration % 1 * 60);
+
+                    slot.save((err) =>{
+						if (err) {
+							return res.status(400).send({
+								message: err
+							});
+						}
+					});
+
+					hoursForSlot += parseInt(slot.duration, 10);
+					minutesForSlot = (minutesForSlot + slot.duration % 1 * 60) % 60;
+				});
+
+				SlotEmailNotificationCtrl.doScheduleEmailForFutureSlot(cfg.newSlot);
+				cfg.resolve(true);
+			}
+		});
 	}
 
 	static slotByID(req, res, next, id) {
