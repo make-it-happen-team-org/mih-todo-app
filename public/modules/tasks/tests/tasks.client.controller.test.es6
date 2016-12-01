@@ -1,5 +1,3 @@
-'use strict';
-
 (function() {
 	// Tasks Controller Spec
 	describe('Tasks Controller Tests', function() {

@@ -1,4 +1,3 @@
-'use strict';
 angular.module('users')
 .directive('passwordValidator', ['PasswordValidator', "$popover", function(PasswordValidator,$popover ) {
 	return {

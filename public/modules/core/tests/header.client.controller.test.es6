@@ -1,16 +1,15 @@
 (function () {
-	describe('HomeController', function () {
+	describe('HeaderController', function () {
 		//Initialize global variables
-		var scope, HomeController;
+		var scope, HeaderController;
 
 		// Load the main application module
 		beforeEach(module(ApplicationConfiguration.applicationModuleName));
 
-		beforeEach(inject(function ($controller, $rootScope, Authentication) {
+		beforeEach(inject(function ($controller, $rootScope) {
 			scope = $rootScope.$new();
-			scope.authentication = Authentication;
 
-			HomeController = $controller('HomeController', {
+			HeaderController = $controller('HeaderController', {
 				$scope: scope
 			});
 		}));

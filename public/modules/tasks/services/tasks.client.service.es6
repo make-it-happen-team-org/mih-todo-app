@@ -1,5 +1,4 @@
 //Tasks service used to communicate Tasks REST endpoints
-'use strict';
 
 angular.module('tasks').factory('Tasks', ['$resource',
 	function ($resource) {
