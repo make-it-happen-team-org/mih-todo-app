@@ -30,12 +30,12 @@ export class SlotsServerController {
 
 	static create(req, res) {
 		let promises = [];
-		Object.keys(req.body).forEach(function (key) {
-			promises.push(new Promise(function (resolve) {
-				var newSlot = new Slot(req.body[key]);
-				newSlot.save(function (error) {
+		Object.keys(req.body).forEach((key)  => {
+			promises.push(new Promise((resolve) => {
+				let newSlot = new Slot(req.body[key]);
+				newSlot.save((error) => {
 					if (error) {
-						resolve(false)
+						resolve(false);
 					} else {
 						if (newSlot.eventId) {
 							resolve(true);
@@ -82,7 +82,7 @@ export class SlotsServerController {
 	static recalcTimeForSlotsWithinDayByPriority(req, res, cfg) {
 		let workingHours = req.user.predefinedSettings.workingHours,
 			workingDay = moment(cfg.newSlot.start).format('dddd').toLowerCase().slice(0, 3),
-			timeForSlot = workingHours[workingDay].start.split(":"),
+			timeForSlot = workingHours[workingDay].start.split(':'),
 			hoursForSlot = parseInt(timeForSlot[0], 10),
 			minutesForSlot = parseInt(timeForSlot[1], 10);
 
@@ -91,17 +91,17 @@ export class SlotsServerController {
 			start: {$gte: new Date(cfg.newSlot.start.toUTCString())},
 			end: {$lte: new Date(cfg.newSlot.end.toUTCString())},
 			userId: req.user._id
-		}).sort({priority: 1}).exec(function (err, slots) {
+		}).sort({priority: 1}).exec((err, slots) => {
 			if (err) {
 				return res.status(400).send({
 					message: errorHandler.getErrorMessage(err)
 				});
 			} else {
-				slots.forEach(function (slot) {
+				slots.forEach((slot) => {
 					slot.start = cfg.newSlot.start.setHours(hoursForSlot, minutesForSlot);
 					slot.end = cfg.newSlot.end.setHours(hoursForSlot + slot.duration, minutesForSlot + slot.duration % 1 * 60);
 
-                    slot.save(function (err) {
+                    slot.save((err) =>{
 						if (err) {
 							return res.status(400).send({
 								message: err
