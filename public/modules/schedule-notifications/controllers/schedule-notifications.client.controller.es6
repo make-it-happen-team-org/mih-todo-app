@@ -1,5 +1,3 @@
-'use strict';
-
 // Notifications controller
 angular.module('schedule-notifications').controller('ScheduleNotificationsController',
 	['$scope', '$rootScope', '$stateParams', 'Authentication', 'ScheduleNotifications', '$interval', '$location', '$state', 'Slots', 'Tasks', 'Notification',

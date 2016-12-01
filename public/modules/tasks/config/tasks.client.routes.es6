@@ -1,5 +1,3 @@
-'use strict';
-
 //Setting up route
 angular.module('tasks').config(['$stateProvider',
 	function ($stateProvider) {

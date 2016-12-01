@@ -1,5 +1,3 @@
-'use strict';
-
 angular.module('events')
 	.factory('Events', ['$resource',
 		function ($resource) {

@@ -1,5 +1,3 @@
-'use strict';
-
 //Setting up route
 angular.module('schedule-notifications').config(['$stateProvider',
 	function ($stateProvider) {

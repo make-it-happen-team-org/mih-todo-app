@@ -1,5 +1,3 @@
-'use strict';
-
 angular.module('templates').config(['$stateProvider', function ($stateProvider) {
 	$stateProvider.state('restricted.templates', {
 		url: '/templates',

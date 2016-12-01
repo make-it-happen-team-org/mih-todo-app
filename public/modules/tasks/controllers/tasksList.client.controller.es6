@@ -1,5 +1,3 @@
-'use strict';
-
 class TasksListController {
 	/** @ngInject */
 	constructor($rootScope, Authentication, Tasks) {

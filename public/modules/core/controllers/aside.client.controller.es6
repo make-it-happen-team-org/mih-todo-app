@@ -1,5 +1,3 @@
-'use strict';
-
 angular.module('core').controller('SidebarController', ['$scope', '$injector',
 	function ($scope, $injector) {
 		let $state = $injector.get('$state');

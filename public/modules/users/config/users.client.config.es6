@@ -1,5 +1,3 @@
-'use strict';
-
 /** @ngInject */
 angular.module('users').config(($httpProvider) => {
     $httpProvider.defaults.withCredentials = true;

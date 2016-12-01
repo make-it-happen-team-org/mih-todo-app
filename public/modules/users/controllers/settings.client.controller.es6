@@ -1,5 +1,3 @@
-'use strict';
-
 class SettingsController {
 	static get $inject() {
 		return ['$injector'];

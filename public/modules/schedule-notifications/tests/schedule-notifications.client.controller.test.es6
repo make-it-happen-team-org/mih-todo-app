@@ -1,5 +1,3 @@
-'use strict';
-
 (function() {
 	// Notifications Controller Spec
 	describe('Notifications Controller Tests', function() {

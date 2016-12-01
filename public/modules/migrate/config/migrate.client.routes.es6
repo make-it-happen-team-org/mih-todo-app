@@ -1,5 +1,3 @@
-'use strict';
-
 /** @ngInject */
 let migrationRoute = ($stateProvider) => {
     $stateProvider
