@@ -8,19 +8,19 @@
 	<ul class="nav navbar-top-links navbar-right">
 		<li>
 			<!-- TODO: tight coupling! string -->
-			<a class='top-link' ui-sref="restricted.todo_state.events.create({ eventPresetType: 'sick' })">
+			<a class='top-link' data-ui-sref="restricted.todo_state.events.create({ eventPresetType: 'sick' })">
 				<i class="fa fa-heartbeat" aria-hidden="true"></i>Sick today
 			</a>
 		</li>
 		<li>
 			<!-- TODO: tight coupling! string -->
-			<a class='top-link' ui-sref="restricted.todo_state.events.create({ eventPresetType: 'vacation' })">
+			<a class='top-link' data-ui-sref="restricted.todo_state.events.create({ eventPresetType: 'vacation' })">
 				<i class="fa fa-plane" aria-hidden="true"></i>
 				Vacation
 			</a>
 		</li>
 		<li>
-			<a class='top-link' ui-sref="restricted.todo_state">
+			<a class='top-link' data-ui-sref="restricted.todo_state">
 				<i class="fa fa-calendar calendar-btn" aria-hidden="true"></i>
 			</a>
 		</li>
