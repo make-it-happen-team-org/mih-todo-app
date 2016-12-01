@@ -2,10 +2,11 @@
 
 class Calendar {
     /** @ngInject */
-    constructor(Slots, ScheduleNotifications, uiCalendarConfig, $rootScope, Authentication, $http) {
+    constructor(Slots, ScheduleNotifications, uiCalendarConfig, $rootScope, $scope, Authentication, $http) {
         Object.assign(this, {
             $http,
             Slots,
+            $scope,
             $rootScope
         });
 
@@ -38,7 +39,7 @@ class Calendar {
         };
 
         //Listen for new task form slot generation
-        this.$rootScope.$on('NEW_SLOTS_GENERATED', (e, slots) => this.renderBookedSlots(slots));
+        this.$scope.$on('NEW_SLOTS_GENERATED', (e, slots) => this.renderBookedSlots(slots));
         this.setBusinessHours()
     }
 
@@ -64,7 +65,7 @@ class Calendar {
     }
 
     setBusinessHours() {
-        var nonWorkingHours = [];
+        let nonWorkingHours = [];
 
         Object.keys(this.user.predefinedSettings.workingHours).forEach(key => {
             let day = this.user.predefinedSettings.workingHours[key];
