@@ -1,5 +1,3 @@
-'use strict';
-
 (function() {
 	// Events Controller Spec
 	describe('Events list Controller Tests', function() {

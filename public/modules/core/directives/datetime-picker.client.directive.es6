@@ -1,4 +1,3 @@
-'use strict';
 angular.module('core')
 .directive('datetimePicker', function(){
 	return {

@@ -1,5 +1,3 @@
-'use strict';
-
 (function () {
 	// Authentication controller Spec
 	describe('AuthenticationController', function () {
@@ -43,7 +41,7 @@
 
 		it('$scope.signin() should login with a correct user and password', function () {
 			// Test expected GET request
-			$httpBackend.when('POST', '/auth/signin').respond(200, 'Fred');
+			$httpBackend.when('POST', 'auth/signin').respond(200, 'Fred');
 
 			scope.signin(true);
 			$httpBackend.flush();
@@ -55,7 +53,7 @@
 
 		it('$scope.signin() should fail to log in with nothing', function () {
 			// Test expected POST request
-			$httpBackend.expectPOST('/auth/signin').respond(400, {
+			$httpBackend.expectPOST('auth/signin').respond(400, {
 				'message': 'Missing credentials'
 			});
 
@@ -72,7 +70,7 @@
 			scope.credentials = 'Bar';
 
 			// Test expected POST request
-			$httpBackend.expectPOST('/auth/signin').respond(400, {
+			$httpBackend.expectPOST('auth/signin').respond(400, {
 				'message': 'Unknown user'
 			});
 
@@ -86,7 +84,7 @@
 		it('$scope.signup() should register with correct data', function () {
 			// Test expected GET request
 			scope.authentication.user = 'Fred';
-			$httpBackend.when('POST', '/auth/signup').respond(200, 'Fred');
+			$httpBackend.when('POST', 'auth/signup').respond(200, 'Fred');
 
 			scope.signup(true);
 			$httpBackend.flush();
@@ -99,7 +97,7 @@
 
 		it('$scope.signup() should fail to register with duplicate Email', function() {
 			// Test expected POST request
-			$httpBackend.when('POST', '/auth/signup').respond(400, {
+			$httpBackend.when('POST', 'auth/signup').respond(400, {
 				'message': 'Email already exists'
 			});
 

@@ -1,5 +1,3 @@
-'use strict';
-
 angular.module('core').controller('HomeController', ['$scope', 'Authentication', '$location', '$timeout', function ($scope, Authentication, $location, $timeout) {
 	var _this = this;
 

@@ -1,5 +1,3 @@
-'use strict';
-
 // PasswordValidator service used for testing the password strength
 angular.module('users').factory('PasswordValidator', ['$window',
 	function ($window) {

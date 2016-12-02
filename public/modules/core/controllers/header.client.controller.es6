@@ -1,5 +1,3 @@
-'use strict';
-
 class HeaderController {
 	/** @ngInject */
 	constructor($scope, Authentication, $state, TemplatesService) {

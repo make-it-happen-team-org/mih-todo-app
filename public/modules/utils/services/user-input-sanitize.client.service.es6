@@ -1,5 +1,3 @@
-'use strict';
-
 // TODO: refactor into a directive, with isolate scope
 // TODO: scope.$watch( element.value ) ?
 // TODO: injectable service works, but is not a perfect idea

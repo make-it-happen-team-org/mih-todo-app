@@ -1,5 +1,3 @@
-'use strict';
-
 angular.module('schedule-notifications').directive('notificationTooltip', function(){
     return {
         restrict: 'EA',

@@ -1,5 +1,3 @@
-'use strict';
-
 // Notifications controller
 angular.module('tasks').directive('taskProgress', function(){
 	return {

@@ -1,5 +1,3 @@
-'use strict';
-
 // Events controller
 angular.module('events').controller('EventsController',
 	['$scope', '$rootScope', '$stateParams', '$location', 'Users', 'Authentication', 'Events', 'Notification',

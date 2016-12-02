@@ -1,5 +1,3 @@
-'use strict';
-
 angular.module('tasks').directive('taskSlots', function(){
 	return {
 		restrict: 'EA',
