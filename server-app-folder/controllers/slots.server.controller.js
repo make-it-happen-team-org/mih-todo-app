@@ -1,6 +1,5 @@
-'use strict';
+const SlotEmailNotificationCtrl = require('./notifications-by-email.server.controller').EmailSlots;
 
-import {EmailSlots as SlotEmailNotificationCtrl} from './notifications-by-email.server.controller';
 var mongoose = require('mongoose'),
 	errorHandler = require('./errors.server.controller'),
 	moment = require('moment'),
@@ -11,7 +10,7 @@ var mongoose = require('mongoose'),
 // TODO: figure out if require() of the module calls fn twice
 new SlotEmailNotificationCtrl();
 
-export class SlotsServerController {
+class SlotsServerController {
 	static list(req, res) {
 		Slot.find({
 			start: {$gte: new Date(req.query.start).toUTCString()},
@@ -128,3 +127,5 @@ export class SlotsServerController {
 		});
 	}
 }
+
+exports.SlotsServerController = SlotsServerController;

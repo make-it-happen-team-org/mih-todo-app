@@ -1,5 +1,3 @@
-'use strict';
-
 var mongoose = require('mongoose'),
   errorHandler = require('./errors.server.controller'),
   Slot = mongoose.model('Slot'),
@@ -12,7 +10,7 @@ var timeToMinutes = time=> time.split(':').reduce((prev, cur) => ((parseInt(prev
 
 var getSlotDuration = (start, end) => (end - start) / 3600000;
 
-export class AlgorithmServerController {
+class AlgorithmServerController {
 	static getFreeTime(req, res) {
 		var start = new Date(req.query.start),
 			end = new Date(req.query.end);
@@ -161,3 +159,5 @@ export class AlgorithmServerController {
     });
   }
 }
+
+exports.AlgorithmServerController = AlgorithmServerController;
