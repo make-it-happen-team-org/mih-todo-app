@@ -1,5 +1,3 @@
-'use strict';
-
 module.exports = function (app) {
 	var users = require('../controllers/users.server.controller');
 	var events = require('../controllers/events.server.controller');

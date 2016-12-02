@@ -1,5 +1,3 @@
-'use strict';
-
 var mongoose = require('mongoose'),
 	ObjectId = require("mongodb").ObjectID,
 	errorHandler = require('./errors.server.controller'),

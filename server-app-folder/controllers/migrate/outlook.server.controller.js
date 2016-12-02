@@ -1,5 +1,3 @@
-'use strict';
-
 const config = require('../../../config/config');
 const outlookConfig = config.migrate.outlook;
 

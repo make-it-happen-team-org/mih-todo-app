@@ -1,5 +1,3 @@
-'use strict';
-
 /**
  * Module dependencies.
  */
@@ -15,7 +13,7 @@ var mongoose = require('mongoose'),
 	schedule = require('node-schedule')
 	;
 
-export class EmailSlots {
+class EmailSlots {
 	constructor() {
 		let _class = EmailSlots;
 
@@ -157,3 +155,5 @@ export class EmailSlots {
 		});
 	}
 }
+
+exports.EmailSlots = EmailSlots;

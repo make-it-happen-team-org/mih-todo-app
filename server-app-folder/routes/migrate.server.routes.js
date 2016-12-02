@@ -1,5 +1,3 @@
-'use strict';
-
 module.exports = function (app) {
     const outlook = require('../controllers/migrate/outlook.server.controller');
     const googleCalendar = require('../controllers/migrate/google-calendar.server.controller');

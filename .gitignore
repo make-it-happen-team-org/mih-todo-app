@@ -1,6 +1,3 @@
-server-app-folder/**/*.js
-!server-app-folder/server.js
-server-app-folder/**/*.map
 server-app-folder/tests/coverage/
 
 public/*.js
