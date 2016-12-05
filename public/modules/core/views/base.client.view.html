@@ -1,4 +1,7 @@
-<section class="page-wrapper" data-ng-if="user">
+<section class="page-wrapper"
+         data-ng-controller="HomeController as homeCtrl"
+         data-ng-class="{'page-wrapper--collapsed': homeCtrl.sidebarCollapsed}"
+         data-ng-if="user">
     <ng-include src="'/modules/core/views/sidebar/sidebar.client.view.html'"></ng-include>
     <ng-include src="'/modules/core/views/main.client.view.html'"></ng-include>
 </section>
