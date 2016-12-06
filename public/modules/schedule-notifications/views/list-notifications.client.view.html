@@ -1,14 +1,21 @@
-<section data-ng-controller="ScheduleNotificationsController" data-ng-init="find()">
-	<ul class="nav nav-second-level in collapse">
-		<li data-ng-repeat="overdueTask in notifications.overdueTasks">
-			<a ui-sref="overdue.edit({ taskId: overdueTask._id })" class="task-list-item">
-				<span class="task-priority fa fa-circle {{'task-priority-' + overdueTask.priority}}"></span>
-				<span class="nav-label task-name" data-ng-bind="overdueTask.title"></span>
-				<span class="pull-right label label-danger" data-ng-bind="getTaskDonePercentage(overdueTask) + '%'"> 0% </span>
-			</a>
-		</li>
-	</ul>
-	<div class="text-center text-muted p-y-1" data-ng-hide="notifications.overdueTasks.length">
-		No overdue tasks yet.
-	</div>
-</section>
+<ul class="left-sidebar__list"
+    data-ng-controller="ScheduleNotificationsController"
+    data-ng-init="find()">
+    <li data-ng-repeat="overdueTask in notifications.overdueTasks">
+        <a class="left-sidebar__block left-sidebar-list-item {{'task-priority-' + overdueTask.priority}}"
+           data-ui-sref="todo_state.tasks.edit({ taskId: task._id })">
+            <div class="left-sidebar-list-item__title">
+                <span data-ng-bind="overdueTask.title"></span>
+            </div>
+            <div class="progress__wrapper">
+                <progress class="progress"
+                          max="100"
+                          value="{{getTaskDonePercentage(overdueTask)}}"></progress>
+                <div class="progress-value"></div>
+                <div class="progress-bg">
+                    <div class="progress-bar"></div>
+                </div>
+            </div>
+        </a>
+    </li>
+</ul>
