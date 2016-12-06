@@ -35,7 +35,7 @@ class Calendar {
 		};
 
 		//Listen for new task form slot generation
-		this.$rootScope.$on('NEW_SLOTS_GENERATED', (e, slots) => this.renderBookedSlots(slots));
+		//this.$rootScope.$on('NEW_SLOTS_GENERATED', (e, slots) => this.renderBookedSlots(slots));
 		this.setBusinessHours()
 	}
 

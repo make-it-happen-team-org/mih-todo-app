@@ -1,20 +1,18 @@
 class AlgorithmNegative {
 
   /** @ngInject */
-  constructor($rootScope, Slots, ModalsService, TimeService, MODALS_TASK_MESSAGES, MODALS_EVENT_MESSAGES) {
+  constructor($rootScope, Slots, ModalsService, TimeService, MODALS_TASK_MESSAGES) {
     Object.assign(this, {
       $rootScope,
       Slots,
       ModalsService,
       TimeService,
       MODALS_TASK_MESSAGES,
-      MODALS_EVENT_MESSAGES
+      slotTypes: {
+        task:  'task',
+        event: 'event'
+      }
     });
-
-    this.slotTypes = {
-      task:  'task',
-      event: 'event'
-    };
   }
 
   initialize(slotType, totalAvailTime) {
@@ -23,8 +21,6 @@ class AlgorithmNegative {
   }
 
   getOccupiedSlots(startDate, endDate) {
-    console.log('root', this.$rootScope);
-
     return new Promise(resolve => {
       this.delegate.getSlots(startDate, endDate, 'occupied-time')
         .then(res => {
@@ -102,14 +98,14 @@ class AlgorithmNegative {
     let hoursToFree           = this.estimation - this.totalAvailHours;
     let sortedTasksByPriority = _.reverse(tasksToShift);
 
-    sortedTasksByPriority.forEach(function (value, key) {
-      value.slots.futureSlots.forEach(function (v, index) {
+    sortedTasksByPriority.forEach((value, key) =>{
+      value.slots.futureSlots.forEach((v, index) => {
         let slotDuration = v.duration;
         let freePlaces   = freeSlots[key];
 
-        Object.keys(freePlaces).forEach(function (ky, ind) {
+        Object.keys(freePlaces).forEach((ky, ind) => {
           while (hoursToFree > 0) {
-            freePlaces[ky].forEach(function (val, k) {
+            freePlaces[ky].forEach((val, k) => {
               //TODO: think maybe there is no need to check freeSlotDuration as we have sorting mechanism
               if (val.duration >= slotDuration) {
                 hoursToFree -= slotDuration;
@@ -120,11 +116,11 @@ class AlgorithmNegative {
 
                 this.Slots.update(value.slots.futureSlots[index]);
               }
-            }, this);
+            });
           }
-        }, this);
-      }, this);
-    }, this);
+        });
+      });
+    });
   }
 
   recalculateExistingTasks(tasks) {
@@ -136,7 +132,7 @@ class AlgorithmNegative {
         console.log('endDate', value.days.endTime);
 
         //TODO: check value.days.endTime. should be in ISO format
-        this.delegate.getSlots(this.TimeService.appendDaysToISODate(this.startDate, 1), value.days.endTime, 'free-time')
+        this.delegate.getSlots(this.TimeService.appendDaysToISODate(this.startDate, 1), this.TimeService.fromDateToISOFormat(value.days.endTime), 'free-time')
             .then(res => {
               this.slots = res.data;
 
@@ -144,8 +140,9 @@ class AlgorithmNegative {
               tasks[key].leftEstimation = this.leftEstimationCalc(value);
               tasks[key].isShiftCapable = this.isShiftCapable(tasks[key].leftHoursBeforeDeadline, tasks[key].leftEstimation);
 
+              //TODO: is this right index?
               freeSlots.splice(key, 0, this.slots);
-              //freeSlots.push(this.slots);
+
               resolve(this.slots);
             });
       }, this);

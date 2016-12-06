@@ -51,7 +51,7 @@ class Day {
   }
 
   createCalendarSlot(slot) {
-    var freeTimeStart = new Date(this.freeTimeStart),
+    let freeTimeStart = new Date(this.freeTimeStart),
         freeTimeEnd   = new Date(freeTimeStart);
 
     freeTimeEnd.setMinutes(freeTimeEnd.getMinutes() + slot.duration * 60);
@@ -68,19 +68,18 @@ class Day {
 }
 
 class Algorithm {
-  static get $inject() {
-    return ['Slots', 'Authentication', 'AlgorithmServer', 'AlgorithmPositive', 'AlgorithmNegative', 'TimeService', '$injector'];
-  }
 
+  /** @ngInject */
   constructor(Slots, Authentication, AlgorithmServer, AlgorithmPositive, AlgorithmNegative, TimeService, $injector) {
-    this.Slots           = Slots;
-    this.user            = Authentication.user;
-    this.AlgorithmServer = AlgorithmServer;
-    this.Notification    = $injector.get('Notification');
-
-    this.AlgorithmPositive = AlgorithmPositive;
-    this.AlgorithmNegative = AlgorithmNegative;
-    this.TimeService = TimeService;
+    Object.assign(this, {
+      Slots,
+      user: Authentication.user,
+      AlgorithmServer,
+      Notification: $injector.get('Notification'),
+      AlgorithmPositive,
+      AlgorithmNegative,
+      TimeService
+    });
 
     this.slotsRange         = [];
     this.slotsOccupiedSlots = [];
@@ -157,7 +156,7 @@ class Algorithm {
   }
 
   getSuitableSlots(recommendations, priority) {
-    var suitableSlots = [],
+    let suitableSlots = [],
         slot;
 
     Object.keys(this.slotsRange).forEach(dayId => {
@@ -198,8 +197,7 @@ class Algorithm {
 
   getDaysRecommendations(priority, estimation) {
     let { dailyMap, totalAvailHours } = this.getTimeAvailabilityFromSlotsGroupedByDays();
-
-    var data            = {
+    let data = {
           estimation,
           availableHoursPerDay: dailyMap,
           availableDaysAmount:  dailyMap.length,
