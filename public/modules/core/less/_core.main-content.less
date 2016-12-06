@@ -9,11 +9,22 @@
 .main-wrapper {
   position: relative;
   height: 100%;
-  margin-left: 300px;
+  margin-left: @sidebar-width;
   transition: margin .5s;
   z-index: 2;
   color: @main-font-color;
   background: @body-background-color;
+
+  &::before {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: @sidebar-width;
+    background-color: @color-cloud-burst;
+    content: '';
+    transition: left .5s;
+  }
 
   &__category-control {
     width: 100%;

@@ -9,7 +9,7 @@
 .left-sidebar-title {
   float: left;
   margin: 0;
-  width: 60%;
+  width: 50%;
   height: 5rem;
   line-height: 5rem;
   font-size: 1.3rem;
@@ -22,10 +22,21 @@
   position: absolute;
   top: 50%;
   margin-left: -1.7rem;
-  width: .7rem;
-  height: .7rem;
+  width: .8rem;
+  height: .8rem;
   border-radius: 50%;
   background-color: @color;
   transform: translateY(-50%);
   content: '';
+}
+
+.nav-item-toggler {
+  position: absolute;
+  right: 0;
+  top: 55%;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  content: '';
+  transform: translate(-50%);
 }

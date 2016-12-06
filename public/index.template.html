@@ -25,9 +25,9 @@
     <% }); %>
 
     <% _.forEach(assets.cssFullPath, function(cssRules) { %>
-        <% _.forEach(cssRules, function(url) { %>
-        <link rel="stylesheet" href="<%= url %>">
-        <% }); %>
+    <% _.forEach(cssRules, function(url) { %>
+    <link rel="stylesheet" href="<%= url %>">
+    <% }); %>
     <% }); %>
 
     <!-- HTML5 Shim -->
@@ -38,11 +38,15 @@
 
 <body class="ng-cloak">
 <div class="main-view-container">
-    <section class="page-wrapper" data-ng-if="user">
+    <section class="page-wrapper"
+             data-ng-controller="HomeController as homeCtrl"
+             data-ng-class="{'page-wrapper--collapsed': homeCtrl.sidebarCollapsed}"
+             data-ng-if="user">
         <ng-include src="'/modules/core/views/sidebar/sidebar.client.view.html'"></ng-include>
         <ng-include src="'/modules/core/views/main.client.view.html'"></ng-include>
     </section>
-    <section class="page-wrapper" data-ng-if="!user">
+    <section class="page-wrapper"
+             data-ng-if="!user">
         <ng-include src="'/modules/core/views/login.client.view.html'"></ng-include>
     </section>
 </div>
@@ -53,9 +57,9 @@
 <% }); %>
 
 <% _.forEach(assets.jsFullPath, function(jsRules) { %>
-    <% _.forEach(jsRules, function(url) { %>
-    <script type="text/javascript" src="<%= url %>"></script>
-    <% }); %>
+<% _.forEach(jsRules, function(url) { %>
+<script type="text/javascript" src="<%= url %>"></script>
+<% }); %>
 <% }); %>
 
 <% if (process.env.NODE_ENV === 'development') { %>

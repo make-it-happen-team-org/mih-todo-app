@@ -19,6 +19,12 @@
       }
     }
 
-    .main-wrapper { margin-left: 0}
+    .main-wrapper {
+      margin-left: 0;
+
+      &:before {
+        left: -@sidebar-width;
+      }
+    }
   }
 }

@@ -34,9 +34,10 @@
 @priority-4-color: #676A6C;
 
 // ---------------- SCREENS ----------------
-@mobile-display: ~"only screen and (max-width: 768px)";
-@tablet-display: ~"only screen and (max-width: 992px)";
-@desktop-display: ~"only screen and (max-width: 1200px)";
+@mobile-media: ~"only screen and (max-width: 768px)";
+@tablet-media: ~"only screen and (min-width: 768px)";
+@wide-tablet-media: ~"only screen and (min-width: 992px)";
+@desktop-media: ~"only screen and (min-width: 1200px)";
 
 // ---------------- ERROR COLORS ----------------
 @error-text: #FA787E;
@@ -109,6 +110,6 @@
 @main-navbar-default-bg-color: #FFF;
 
 // ---------------- SIDEBAR ----------------
-@sidebar-width: 300px;
+@sidebar-width: 30rem;
 @sidebar-width-collapsed: 68px;
 @sidebar-outline-color: rgba(255, 255, 255, .5);

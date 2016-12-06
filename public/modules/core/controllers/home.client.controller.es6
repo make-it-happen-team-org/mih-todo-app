@@ -1,24 +1,24 @@
-'use strict';
+function toggleSidebarHandler () {
+  this.sidebarCollapsed = !this.sidebarCollapsed;
+  this.$timeout(() => {
+    this.$scope.$broadcast('rzSliderForceRender');
+  }, 500);
+}
 
-angular.module('core').controller('HomeController', ['$scope', 'Authentication', '$location', '$timeout', function ($scope, Authentication, $location, $timeout) {
-	var _this = this;
+class HomeController {
+  /** @ngInject */
+  constructor($scope, Authentication, $location, $timeout) {
+    Object.assign(this, {$scope, Authentication, $location, $timeout});
 
-	// If user is not signed in then redirect back home
-	if (!Authentication.user) $location.path('/signin');
+    if (!Authentication.user) {
+      $location.path('/signin');
+    }
+    this.sidebarCollapsed = false;
 
-	this.withSidebar = true;
+    $scope.$on('toggleSidebar', toggleSidebarHandler.bind(this));
+  }
+}
 
-	$scope.$on('toggleSidebar', function () {
-		_this.withSidebar = !_this.withSidebar;
-
-		reRenderDashboardElements();
-	});
-
-
-	var reRenderDashboardElements = () => {
-		// refresh estimation slider
-		$timeout(function() {
-			$scope.$broadcast('rzSliderForceRender');
-		}, 600);
-	}
-}]);
+angular
+  .module('core')
+  .controller('HomeController', HomeController);
