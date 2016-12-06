@@ -1,0 +1,37 @@
+@import (once) "../../../../less/_app.variables.less";
+
+.left-sidebar-header {
+  text-transform: uppercase;
+  color: inherit;
+  transition: color .5s;
+
+  &:focus {
+    color: @light-text;
+    outline: none;
+  }
+
+  &:hover {
+    color: @base-color;
+  }
+
+  &__title {
+    .left-sidebar-title();
+  }
+
+  &__button {
+    float: right;
+    height: 100%;
+    color: inherit;
+    font-size: 1.8rem;
+    line-height: 5rem;
+
+    &:focus,
+    &:active {
+      color: lighten(@base-color, 10%);
+    }
+
+    &:hover {
+      color: @base-color;
+    }
+  }
+}

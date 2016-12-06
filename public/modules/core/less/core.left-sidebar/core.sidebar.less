@@ -1,0 +1,40 @@
+@import (once) "../../../../less/_app.variables.less";
+@import (once) "../_.core.mixins.less";
+@import (once) "./_core.sidebar.toggler.less";
+@import (once) "./_core.sidebar.header.less";
+@import (once) "./_core.sidebar.list-item.less";
+@import (once) "./_core.sidebar.nav-item.less";
+@import (once) "./_core.sidebar.progress.less";
+
+.left-sidebar {
+  position: absolute;
+  z-index: 3;
+  background-color: @color-pickled-bluewood;
+  top: 6rem;
+  left: 0;
+  width: @sidebar-width;
+  transition: margin .5s;
+
+  &__wrapper {
+    .left-sidebar-toggle-wrapper(@color-cloud-burst);
+    position: fixed;
+    z-index:5;
+  }
+
+  &__block {
+    position: relative;
+    display: block;
+    padding: 0 2rem 0 3.8rem;
+    height:5rem;
+
+    &--group {
+      padding: 0 2rem;
+      background-color: @aside-background-color;
+
+      &-nav {
+        border-bottom: 1px solid @color-bali-hai;
+        background-color: @color-cloud-burst;
+      }
+    }
+  }
+}

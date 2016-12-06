@@ -1,10 +1,5 @@
 @import (once) "../../../less/_app.variables.less";
 
-.todo-list-controls {
-  padding: 5px 15px;
-  background: @todo-list-controls-color;
-  text-align: right;
-}
 .controls-link {
   font-size: 1.3em;
   padding: 0 5px;
@@ -69,19 +64,6 @@
     padding: 8px 0;
     border-bottom: 1px solid @task-list-header-bg-color;
 
-    .tasks-item-priority {
-      display: inline-block;
-      font-size: 1.5em;
-      color: inherit;
-      margin: 0 10px;
-      vertical-align: middle;
-
-      &.tasks-priority1 { color: @priority-1-color; }
-      &.tasks-priority2 { color: @priority-2-color; }
-      &.tasks-priority3 { color: @priority-3-color; }
-      &.tasks-priority4 { color: @priority-4-color; }
-    }
-
     .tasks-item-percent {
       display: inline-block;
       vertical-align: middle;
@@ -108,23 +90,12 @@
   }
 }
 
+
 .left-sidebar {
   .task {
-    &-priority-1 {color: @priority-1-color; }
-    &-priority-2 {color: @priority-2-color; }
-    &-priority-3 {color: @priority-3-color; }
-    &-priority-4 {color: @priority-4-color; }
+    &-priority-1::before { background-color: @priority-1-color; }
+    &-priority-2::before { background-color: @priority-2-color; }
+    &-priority-3::before { background-color: @priority-3-color; }
+    &-priority-4::before { background-color: @priority-4-color; }
   }
 }
-
-.task-list-item {
-  .task-name {
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    max-width: 75%;
-    display: inline-block;
-    overflow: hidden;
-  }
-}
-
-

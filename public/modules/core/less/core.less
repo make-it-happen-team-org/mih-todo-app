@@ -1,7 +1,7 @@
 @import "_core.logo.less";
 @import "_core.datepicker.less";
 @import "_core.navigation.less";
-@import "_core.sidebar.less";
+@import "core.left-sidebar/core.sidebar.less";
 @import "_core.socials.less";
 @import "_core.main-content.less";
 @import "_core.page-wrapper.less";
@@ -15,15 +15,7 @@
 .only-mobile {
   display: none;
 
-  @media @mobile-display { display: block; }
-}
-
-.add-task {
-  float: right;
-  color: inherit;
-  font-size: 1.3em;
-
-  &:hover { color: @base-color; }
+  @media @tablet-media { display: block; }
 }
 
 .nav-item {
@@ -35,27 +27,6 @@
 
   &:hover { background: @nav-iten-hover; }
 }
-
-.task-list-item {
-  .task-priority {
-    margin-right: 10px;
-  }
-}
-
-.p-r-1 { padding-right: 5px; }
-
-.p-l-1 { padding-left: 5px; }
-
-.p-1 {
-  padding-right: 5px;
-  padding-left: 5px;
-}
-
-.p-y-1 {
-  padding-top: 5px;
-  padding-bottom: 5px;
-}
-
 
 .ui-sref.back { margin-bottom: 20px; }
 
@@ -110,33 +81,29 @@ div.ui-notification {
 
   &-priority-1 {
     border-left: 10px solid @color-dark-pink;
-    color: @color-dark-pink;
+    background-color: @color-dark-pink;
 
-    // TODO important WHY?
-    .item-priority:focus { border-color: @color-dark-pink !important; }
+    .item-priority:focus { border-color: @color-dark-pink!important; }
   }
 
   &-priority-2 {
     border-left: 10px solid @color-sun;
-    color: @color-sun;
+    background-color: @color-sun;
 
-    // TODO important WHY?
-    .item-priority:focus { border-color: @color-sun !important; }
+    .item-priority:focus { border-color: @color-sun!important; }
   }
 
   &-priority-3 {
     border-left: 10px solid @color-mountain-meadow;
-    color: @color-mountain-meadow;
+    background-color: @color-mountain-meadow;
 
-    // TODO important WHY?
-    .item-priority:focus { border-color: @color-mountain-meadow !important; }
+    .item-priority:focus { border-color: @color-mountain-meadow!important; }
   }
 
   &-priority-4 {
     border-left: 10px solid @color-mid-grey;
-    color: @color-mid-grey;
+    background-color: @color-mid-grey;
 
-    // TODO important WHY?
-    .item-priority:focus { border-color: @color-mid-grey !important; }
+    .item-priority:focus { border-color: @color-mid-grey!important; }
   }
 }
