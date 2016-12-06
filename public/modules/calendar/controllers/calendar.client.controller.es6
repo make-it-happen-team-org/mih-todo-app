@@ -55,14 +55,13 @@ class Calendar {
     generateBgSlot(start, end, dayIndex) {
         if (dayIndex === 7) dayIndex = 0; //For sunday
 
-        return {
-            start: start,
-            end: end,
-            color: '#e8f2f9',
-            rendering: 'background',
-            dow: [dayIndex]
-        }
-    }
+		return {
+			start: start,
+			end: end,
+			rendering: 'background',
+			dow: [dayIndex]
+		}
+	}
 
     setBusinessHours() {
         let nonWorkingHours = [];

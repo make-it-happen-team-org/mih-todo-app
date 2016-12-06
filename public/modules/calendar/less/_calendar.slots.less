@@ -1,0 +1,81 @@
+@import "../../../less/_app.variables.less";
+
+.fc-event {
+    margin: 0;
+    padding: .42em;
+    border-radius: 0;
+    font: 0.91em/1.3em @font-open-sans-bold;
+
+    .fc-bg { opacity: 0; }
+
+    .fc-time { display: none; }
+
+    .fc-end-resizer {
+        bottom: 3px;
+        left: -@calendar-slot-border-width;
+        font-family: 'FontAwesome';
+        opacity: .6;
+
+        &:after { content: "\f0dd"; }
+
+        &:hover { opacity: 1; }
+    }
+
+    &.task {
+        border-width: 0 0 0 @calendar-slot-border-width;
+
+        &-priority-1 {
+            background-color: @calendar-task-priority-1-bg-color;
+            border-color: @calendar-task-priority-1-border-color;
+        }
+
+        &-priority-2 {
+            background-color: @calendar-task-priority-2-bg-color;
+            border-color: @calendar-task-priority-2-border-color;
+        }
+
+        &-priority-3 {
+            background-color: @calendar-task-priority-3-bg-color;
+            border-color: @calendar-task-priority-3-border-color;
+        }
+
+        &-priority-4 {
+            background-color: @calendar-task-priority-4-bg-color;
+            border-color: @calendar-task-priority-4-border-color;
+        }
+    }
+
+    &.event {
+        border: none;
+        text-transform: capitalize;
+
+        &.sick,
+        &.vacation {
+            .fc-title {
+                text-transform: uppercase;
+                text-align: center;
+
+                &:before {
+                    margin-right: .5em;
+                    font-family: 'FontAwesome';
+                }
+            }
+        }
+
+        &.sick {
+            background-color: @calendar-event-sick-bg-color;
+            color: @calendar-event-sick-font-color;
+
+            .fc-title:before { content: "\f21e"; }
+        }
+
+        &.vacation {
+            background-color: @calendar-event-vac-bg-color;
+            color: @calendar-event-vac-font-color;
+
+            .fc-title:before { content: "\f072"; }
+        }
+
+        .fc-end-resizer { left: 0; }
+    }
+}

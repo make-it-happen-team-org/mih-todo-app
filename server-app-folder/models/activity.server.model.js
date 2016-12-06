@@ -148,6 +148,10 @@ var ActivitySchema = new Schema(_.extend({
 	withoutDates: {
 		type: Boolean,
 		default: false
+	}, 
+	className: {
+		type: Array,
+		default: false
 	}
 }, taskTemplate));
 
