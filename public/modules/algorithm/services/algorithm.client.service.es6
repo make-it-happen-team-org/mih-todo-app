@@ -70,8 +70,9 @@ class Day {
 class Algorithm {
 
   /** @ngInject */
-  constructor(Slots, Authentication, AlgorithmServer, AlgorithmPositive, AlgorithmNegative, TimeService, $injector) {
+  constructor($q, Slots, Authentication, AlgorithmServer, AlgorithmPositive, AlgorithmNegative, TimeService, $injector) {
     Object.assign(this, {
+      $q,
       Slots,
       user: Authentication.user,
       AlgorithmServer,
@@ -129,6 +130,8 @@ class Algorithm {
   }
 
   generateSlots(startDate, endDate, priority, estimation) {
+    let defer = this.$q.defer();
+
     startDate.setHours(0, 0, 0, 0);
     endDate.setHours(0, 0, 0, 0);
 
@@ -140,19 +143,21 @@ class Algorithm {
       delegate:   this
     });
 
-    return new Promise(resolve => {
-      this.getSlots(this.TimeService.fromDateToISOFormat(startDate), this.TimeService.fromDateToISOFormat(endDate), 'free-time')
-          .then(res => {
-            // TODO: inconsistent object structure! First time is array, then - object.
-            this.slotsRange = res.data;
+    this.getSlots(this.TimeService.fromDateToISOFormat(startDate), this.TimeService.fromDateToISOFormat(endDate), 'free-time')
+      .then(res => {
+        // TODO: inconsistent object structure! First time is array, then - object.
+        this.slotsRange = res.data;
 
-            // TODO: store response data separately, because fn below has side effects,
-            // TODO: overwrites, so we cannot rely on this.slotsRange if we need consistency
-            this.freeSlotsGroupedByDays = res.data;
-            this.getDaysRecommendations(priority, estimation);
-            resolve(this.slotsRange);
-          });
-    });
+        // TODO: store response data separately, because fn below has side effects,
+        // TODO: overwrites, so we cannot rely on this.slotsRange if we need consistency
+        this.freeSlotsGroupedByDays = res.data;
+        this.getDaysRecommendations(priority, estimation);
+        defer.resolve(this.slotsRange);
+      }, err => {
+        defer.reject(err);
+      });
+
+    return defer.promise;
   }
 
   getSuitableSlots(recommendations, priority) {
