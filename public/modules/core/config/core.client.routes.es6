@@ -15,7 +15,7 @@ angular.module('core').config(['$stateProvider', '$urlRouterProvider', function 
                 user: (SessionService, $state) => {
                     return SessionService.getSession().then(user => {
                         if (!user._id) {
-                            $state.go('signin');
+                            $state.go('auth.signin');
                         } else {
                             SessionService.setUser(user);
 

@@ -20,8 +20,7 @@ angular.module(ApplicationConfiguration.applicationModuleName)
         datepickerConfig.formatMonth = 'MMM';
         datepickerConfig.formatDay = 'd';
         datepickerConfig.startingDay = 1;
-    })
-    .constant('endpointUrl', ApplicationConfiguration.endpointUrl);
+    });
 
 //Then define the init function for starting up the application
 angular.element(document).ready(() => {
