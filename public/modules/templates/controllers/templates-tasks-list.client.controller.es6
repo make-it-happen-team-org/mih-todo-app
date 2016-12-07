@@ -7,7 +7,7 @@ class templatesTasksListController {
 	}
 
 	viewTemplate(templateId) {
-		this.$state.go('templates', {
+		this.$state.go('restricted.templates', {
 			templateId: templateId,
 			templateType: 'taskTemplates'
 		})

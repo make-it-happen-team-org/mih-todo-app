@@ -17,7 +17,6 @@ const ApplicationConfiguration = (() => {
         'angular-loading-bar',
         'ngDialog'
     ];
-    const endpointUrl = 'http://localhost:3000';
 
     // Add a new vertical module
     const registerModule = function registerModule(moduleName, dependencies) {
@@ -31,7 +30,6 @@ const ApplicationConfiguration = (() => {
     return {
         applicationModuleVendorDependencies,
         applicationModuleName,
-        registerModule,
-        endpointUrl
+        registerModule
     };
 })();
