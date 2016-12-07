@@ -136,7 +136,7 @@ angular.module('events').controller('EventsController',
 					classNames.push(defaultTemplateType);
 				}
 
-				$scope.eventData.classNames = classNames;
+				$scope.eventData.className = classNames;
 
 				new Events($scope.eventData).$save(() => {
 					$scope.events = [];
