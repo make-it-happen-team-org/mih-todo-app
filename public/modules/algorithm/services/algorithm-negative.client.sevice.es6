@@ -108,7 +108,6 @@ class AlgorithmNegative {
         Object.keys(freePlaces).forEach((ky, ind) => {
           while (hoursToFree > 0) {
             freePlaces[ky].forEach((val, k) => {
-              //TODO: think maybe there is no need to check freeSlotDuration as we have sorting mechanism
               if (val.duration >= slotDuration) {
                 hoursToFree -= slotDuration;
 
@@ -132,28 +131,22 @@ class AlgorithmNegative {
     tasks.forEach((value, key) => {
       deferObj[key] = this.delegate.getSlots(
           this.TimeService.appendDaysToISODate(this.startDate, 1),
-          this.TimeService.fromDateToISOFormat(value.days.endTime), //TODO: time error
+          this.TimeService.addTimeZoneToISODate(value.days.endTime),
           'free-time'
       );
     });
 
-    $q.all(deferObj)
+    this.$q.all(deferObj)
       .then(data => {
-        console.log('deferData', data);
-
         tasks.forEach((value, key) => {
-          console.log('endDateDefer', value.days.endTime);
-
-          this.slots = data[key].data; //???
+          this.slots = data[key].data;
 
           value.leftHoursBeforeDeadline = this.delegate.getTotalFreeHoursInDailyMap(this.delegate.getFreeHoursDailyMapFromSlots(this.slots));
           value.leftEstimation = this.leftEstimationCalc(value);
           value.isShiftCapable = this.isShiftCapable(value.leftHoursBeforeDeadline, value.leftEstimation);
-
-          //TODO: is this right index?
+          
           freeSlots.splice(key, 0, this.slots);
         });
-
       })
       .then(() => {
         let indexes = [];
@@ -162,12 +155,10 @@ class AlgorithmNegative {
           if (!task.isShiftCapable) { indexes.push(index); }
           return task.isShiftCapable;
         });
-
-        console.log('freeSlotsBefore', freeSlots);
+        
         for (var i = indexes.length - 1; i >= 0; i--) {
           freeSlots.splice(indexes[i], 1);
         }
-        console.log('freeSlotsAfter', freeSlots);
 
         this.findAppropriateSlotsToShift(filteredTasks, freeSlots);
         this.$rootScope.$broadcast('slotShiftedFromNegative');

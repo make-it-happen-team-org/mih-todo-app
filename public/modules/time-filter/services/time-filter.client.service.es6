@@ -27,6 +27,11 @@ class TimeService {
     let convertedFromISO = this.fromISOFormatToDate(isoDate);
     return this.fromDateToISOFormat(new Date(convertedFromISO.setDate(convertedFromISO.getDate() + daysToAdd)));
   }
+
+  addTimeZoneToISODate(isoDate) {
+    let convertedFromISO = this.fromISOFormatToDate(isoDate);
+    return this.fromDateToISOFormat(new Date(convertedFromISO.setHours(convertedFromISO.getHours() - this.timeZoneInHours)));
+  }
 }
 
 angular.module('timeFilter').service('TimeService', TimeService);

@@ -130,28 +130,30 @@ angular.module('tasks').controller('TasksController',
             });
 
             var slotShiftedFromNegative = $scope.$on('slotShiftedFromNegative', () => {
-                //FIXME: this was done to avoid loop creation.
                 //TODO: Need to investigate why double listener fire causes
                 if ($rootScope.$$listenerCount.slotShiftedFromNegative === 1) {
-                    getNewSlots($scope.newTask);
+                    let model = $scope.newTask;
 
-                    $scope.$watch($scope.slotsHaveBeenGenerated, (newVal, oldVal) => {
-                        console.log('slotsHaveBeenGenerated', newVal, oldVal);
+                    Algorithm.generateSlots(
+                        new Date(model.days.startTime),
+                        new Date(model.days.endTime),
+                        model.priority,
+                        model.estimation,
+                        $scope.user.predefinedSettings.workingHours
+                    ).then(slotsRange => {
+                        $scope.slotsRange = slotsRange;
 
-                        if (newVal) {
-                            //TODO: works?
-                            var queries = [saveTask($scope.newTask)];
+                        let queries = [saveTask(model)];
 
-                            if ($scope.newTask.isATemplate || $scope.selectedTemplate) {
-                                queries.push(updateTaskTemplates($scope.newTask));
-                            }
-
-                            Promise.all(queries).then(() => {
-                                $location.path('/');
-                                $rootScope.$broadcast('NEW_TASK_MODIFY');
-                                Notification.success(`Task '${$scope.newTask.title}' was successfully created`);
-                            });
+                        if (model.isATemplate || $scope.selectedTemplate) {
+                            queries.push(updateTaskTemplates(model));
                         }
+
+                        Promise.all(queries).then(() => {
+                            $location.path('/');
+                            $rootScope.$broadcast('NEW_TASK_MODIFY');
+                            Notification.success(`Task '${model.title}' was successfully created`);
+                        });
                     });
                 }
                 slotShiftedFromNegative();
@@ -300,6 +302,7 @@ angular.module('tasks').controller('TasksController',
             };
 
             var getNewSlots = (model) => {
+
                 Algorithm.generateSlots(
                     new Date(model.days.startTime),
                     new Date(model.days.endTime),
@@ -312,7 +315,6 @@ angular.module('tasks').controller('TasksController',
                         if (!slotsRange.length) {
                             Algorithm.AlgorithmNegative.initialize('task', $scope.timeAvailability.totalAvailHours);
                         }
-                        $scope.slotsHaveBeenGenerated = true;
                         return $scope.slotsRange = slotsRange;
                     });
                 });
