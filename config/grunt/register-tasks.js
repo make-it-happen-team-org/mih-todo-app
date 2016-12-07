@@ -6,37 +6,43 @@ module.exports = (grunt) => {
         'clean',
         'less',
         'babel',
-        'buildIndexFile'
+        'buildDevIndex'
     ]);
 
     // Build task(s).
-    grunt.registerTask('build', ['env:production', 'concurrent:buildSrc', 'concurrent:minifySrc']);
+    grunt.registerTask('prebuild', [
+        'env:development',
+        'loadConfig',
+        'less:prod',
+        'ngAnnotate',
+        'htmlmin',
+        'copy:prodImg',
+        'copy:prodFonts',
+        'uglify'
+    ]);
 
-    // Test task.
-    grunt.registerTask('test', ['karma:unit']);
+    grunt.registerTask('build', [
+        'env:production',
+        'loadConfig',
+        'buildProdIndex'
+    ]);
 
-    grunt.task.registerTask('buildIndexFile', () => {
-        require('../init')();
+    grunt.task.registerTask('buildProdIndex', () => {
+        grunt.file.write(
+            'build/index.html',
+            grunt.template.process(
+                grunt.file.read('index.template.html'),
+                {data: grunt.config.get('config')}
+            )
+        )
+    });
 
-        const config = require('../config');
-
-        grunt.file.setBase('public/');
-
-        config.assets.cssFullPath = [];
-        config.assets.css.forEach((pattern) => {
-            config.assets.cssFullPath.push(grunt.file.expand(pattern));
-        });
-
-        config.assets.jsFullPath = [];
-        config.assets.js.forEach((pattern) => {
-            config.assets.jsFullPath.push(grunt.file.expand(pattern));
-        });
-
+    grunt.task.registerTask('buildDevIndex', () => {
         grunt.file.write(
             'index.html',
             grunt.template.process(
                 grunt.file.read('index.template.html'),
-                {data: config}
+                {data: grunt.config.get('config')}
             )
         )
     });
@@ -47,7 +53,25 @@ module.exports = (grunt) => {
 
         const config = require('../config');
 
-        grunt.config.set('applicationJavaScriptFiles', config.assets.js);
-        grunt.config.set('applicationCSSFiles', config.assets.css);
+        grunt.file.setBase('public/');
+
+        config.assets.cssFullPath = [];
+        config.assets.css.forEach((path) => {
+            const filePath = /\*/.test(path) ? grunt.file.expand(path) : [path];
+
+            config.assets.cssFullPath.push(filePath);
+        });
+
+        config.assets.jsFullPath = [];
+        config.assets.js.forEach((path) => {
+            const filePath = /\*/.test(path) ? grunt.file.expand(path) : [path];
+
+            config.assets.jsFullPath.push(filePath);
+        });
+
+        grunt.config.set('config', config);
     });
+
+    // Test task.
+    grunt.registerTask('test', ['karma:unit']);
 };
