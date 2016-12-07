@@ -3,11 +3,11 @@ angular.module('users').config(($httpProvider) => {
     $httpProvider.defaults.withCredentials = true;
 
     /** @ngInject */
-    $httpProvider.interceptors.push(($q, $location, Authentication, endpointUrl) => {
+    $httpProvider.interceptors.push(($q, $location, Authentication, $window) => {
         return {
             request: (config) => {
                 if (!/html/.test(config.url)) {
-                    config.url = `${endpointUrl}/${config.url}`;
+                    config.url = `${$window.MIH.endpointUrl}/${config.url}`;
                 }
 
                 return config;

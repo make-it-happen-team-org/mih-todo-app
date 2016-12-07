@@ -2,12 +2,13 @@
 
 module.exports = {
     db: {
-        uri: 'mongodb://localhost/mean-test',
+        uri: 'mongodb://localhost/mean-dev',
         options: {
             user: '',
             pass: ''
         }
     },
+    endpointUrl: 'http://localhost:3000',
     log: {
         // Can specify one of 'combined', 'common', 'dev', 'short', 'tiny'
         format: 'dev',

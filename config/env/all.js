@@ -85,8 +85,7 @@ module.exports = {
         },
         css: [
             'inspinia/css/*.css',
-            'dist/**/*.css',
-            'modules/**/*.css'
+            'css/app.main.css'
         ],
         js: [
             'config.js',

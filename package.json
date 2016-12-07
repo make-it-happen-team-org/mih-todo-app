@@ -7,6 +7,7 @@
   },
   "scripts": {
     "start": "grunt",
+    "develop": "set NODE_ENV=development&&nodemon ./server-app-folder/server.js --debug",
     "test": "grunt test",
     "postinstall": "bower install --config.interactive=false"
   },
@@ -67,8 +68,7 @@
     "grunt-karma": "~0.9.0",
     "grunt-mocha-test": "~0.12.1",
     "grunt-ng-annotate": "~0.4.0",
-    "grunt-node-inspector": ">=0.1.3",
-    "grunt-nodemon": "~0.3.0",
+    "nodemon": "^1.11.0",
     "karma": "~0.12.0",
     "karma-chrome-launcher": "~0.1.2",
     "karma-coverage": "~0.2.0",
