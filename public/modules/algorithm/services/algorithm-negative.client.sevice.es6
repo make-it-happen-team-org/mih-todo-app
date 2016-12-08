@@ -64,7 +64,7 @@ class AlgorithmNegative {
       arrayOfFutureSlots: slots.futureSlots.map(value => { return value.taskId; })
     };
 
-    tasks.forEach((value, key) => {
+    _.forEach(tasks, (value, key) => {
       tasks[key].slots = {
         passedSlots: [],
         futureSlots: []
@@ -73,8 +73,8 @@ class AlgorithmNegative {
       let indexArrPassed = this._findIndexForSlots(concatSlots.arrayOfPassedSlots, value._id);
       let indexArrFuture = this._findIndexForSlots(concatSlots.arrayOfFutureSlots, value._id);
 
-      indexArrPassed.forEach(index => { tasks[key].slots.passedSlots.push(slots.passedSlots[index]); });
-      indexArrFuture.forEach(index => { tasks[key].slots.futureSlots.push(slots.futureSlots[index]); });
+      _.forEach(indexArrPassed, index => { tasks[key].slots.passedSlots.push(slots.passedSlots[index]); });
+      _.forEach(indexArrFuture, index => { tasks[key].slots.futureSlots.push(slots.futureSlots[index]); });
     });
 
     return tasks;
@@ -90,6 +90,16 @@ class AlgorithmNegative {
     }));
   };
 
+  _freeSlotsUpdate(key, newValue, freeSlots) {
+    _.forEach(freeSlots, (value, index) => {
+      if (value[key]) {
+        value[key] = newValue;
+      }
+    });
+
+    return freeSlots;
+  }
+
   /**
    *
    * @param {Array} tasksToShift, {Object} freeSlots
@@ -97,30 +107,43 @@ class AlgorithmNegative {
    * @description shifts future task slots to the appropriate free time
    */
   findAppropriateSlotsToShift(tasksToShift, freeSlots) {
-    let hoursToFree           = this.estimation - this.totalAvailHours;
     let sortedTasksByPriority = _.reverse(tasksToShift);
+    let sortedFreeSlotsByPriority = _.reverse(freeSlots);
+    let hoursToFree = this.estimation - this.totalAvailHours;
+    let counter = 0;
 
-    sortedTasksByPriority.forEach((value, key) =>{
-      value.slots.futureSlots.forEach((v, index) => {
-        let slotDuration = v.duration;
-        let freePlaces   = freeSlots[key];
+    _.forEach(sortedTasksByPriority, (value, key) => {
+      let slotDuration = value.slots.futureSlots[counter].duration;
+      let freePlaces = sortedFreeSlotsByPriority[counter];
 
-        Object.keys(freePlaces).forEach((ky, ind) => {
-          while (hoursToFree > 0) {
-            freePlaces[ky].forEach((val, k) => {
-              if (val.duration >= slotDuration) {
-                hoursToFree -= slotDuration;
+      if (hoursToFree <= 0) { return false; }
 
-                //TODO: check time and use TimeService
-                value.slots.futureSlots[index].start = val.start;
-                value.slots.futureSlots[index].end   = new Date(new Date(val.start).setHours(new Date(val.start).getHours() + this.estimation)).toISOString();
+      _.forEach(Object.keys(freePlaces), (freeDay, index) => {
 
-                this.Slots.update(value.slots.futureSlots[index]);
-              }
-            });
+        if (hoursToFree <= 0) { return false; }
+
+        _.forEach(freePlaces[freeDay], (freeSlot, i) => {
+          if (freeSlot.duration >= slotDuration) {
+
+            value.slots.futureSlots[counter].start = freeSlot.start;
+            value.slots.futureSlots[counter].end = new Date(new Date(freeSlot.start).setHours(new Date(freeSlot.start).getHours() + value.slots.futureSlots[counter].duration)).toISOString();
+
+            hoursToFree -= slotDuration;
+
+            freeSlot.start = value.slots.futureSlots[counter].end;
+            freeSlot.duration = freeSlot.duration - value.slots.futureSlots[counter].duration;
+
+            sortedFreeSlotsByPriority = this._freeSlotsUpdate(freeDay, freePlaces[freeDay], sortedFreeSlotsByPriority);
+
+            console.log(this.Slots);
+
+            this.Slots.update(value.slots.futureSlots[counter]);
+            return false;
           }
         });
       });
+
+      counter = (key === sortedTasksByPriority.length) ? counter + 1 : counter;
     });
   }
 
@@ -138,7 +161,7 @@ class AlgorithmNegative {
 
     this.$q.all(deferObj)
       .then(data => {
-        tasks.forEach((value, key) => {
+        _.forEach(tasks, (value, key) => {
           this.slots = data[key].data;
 
           value.leftHoursBeforeDeadline = this.delegate.getTotalFreeHoursInDailyMap(this.delegate.getFreeHoursDailyMapFromSlots(this.slots));
