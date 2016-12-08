@@ -11,9 +11,6 @@ angular.module('events').config(['$stateProvider',
 			})
 			.state('todo_state.events.create', {
 				url: '/create?eventPresetType',
-				params: {
-					eventPresetType: undefined
-				},
 				views: {
 					'main-view@': {
 						templateUrl: 'modules/events/views/create-event.client.view.html'

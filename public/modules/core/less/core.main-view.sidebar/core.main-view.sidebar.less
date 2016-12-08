@@ -6,20 +6,14 @@
 @import (once) "./_core.sidebar.nav-item.less";
 @import (once) "./_core.sidebar.progress.less";
 
-.left-sidebar {
+.sidebar {
   position: absolute;
   z-index: 3;
-  background-color: @color-pickled-bluewood;
-  top: 6rem;
+  background-color: @color-blue-whale-blue-s53;
+  top: 0;
   left: 0;
   width: @sidebar-width;
-  transition: margin .5s;
-
-  &__wrapper {
-    .left-sidebar-toggle-wrapper(@color-cloud-burst);
-    position: fixed;
-    z-index:5;
-  }
+  transition: left .5s;
 
   &__block {
     position: relative;
@@ -32,8 +26,8 @@
       background-color: @aside-background-color;
 
       &-nav {
-        border-bottom: 1px solid @color-bali-hai;
-        background-color: @color-cloud-burst;
+        border-bottom: 1px solid @color-bali-hai-blue-s25;
+        background-color: @color-blue-whale-blue-s53;
       }
     }
   }

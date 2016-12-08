@@ -1,8 +1,8 @@
 @import (once) "../../../../less/_app.variables.less";
 @import (once) "../_.core.mixins.less";
 
-.left-sidebar-list-item {
-  background-color: @color-cloud-burst;
+.sidebar-list-item {
+  background-color: @color-blue-whale-blue-s53;
   color: inherit;
   transition: background-color .5s;
 
@@ -13,15 +13,15 @@
 
   &:hover {
     color: inherit;
-    background-color: @color-big-stone;
+    background-color: @color-blue-whale-blue-s58;
   }
 
   &::before {
-    .left-sidebar-list-circle(@base-color)
+    .sidebar-list-circle(@color-mountain-meadow-green-s85)
   }
 
   &__title {
-    .left-sidebar-title();
+    .sidebar-title();
     font-size: 1.3rem;
     font-family: @font-open-sans-bold;
   }
@@ -31,7 +31,7 @@
     height: 100%;
     line-height: 5rem;
     box-sizing: border-box;
-    color: @color-bali-hai;
+    color: @color-bali-hai-blue-s25;
 
     &--event-day {
       padding-top: .9rem;

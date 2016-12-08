@@ -1,10 +1,9 @@
 @import "_core.logo.less";
 @import "_core.datepicker.less";
 @import "_core.navigation.less";
-@import "core.left-sidebar/core.sidebar.less";
+@import "core.main-view.sidebar/core.main-view.sidebar.less";
 @import "_core.socials.less";
 @import "_core.main-content.less";
-@import "_core.page-wrapper.less";
 
 .text-uppercase {
   text-transform: uppercase;
@@ -16,16 +15,6 @@
   display: none;
 
   @media @tablet-media { display: block; }
-}
-
-.nav-item {
-  color: inherit;
-  padding: 14px 20px 14px 25px;
-  position: relative;
-  font-size: 1.2em;
-  cursor: pointer;
-
-  &:hover { background: @nav-iten-hover; }
 }
 
 .ui-sref.back { margin-bottom: 20px; }
@@ -54,7 +43,7 @@ div.ui-notification {
     line-height: 1;
   }
 
-  &.success { background: @base-color; }
+  &.success { background: @color-mountain-meadow-green-s85; }
 
   .message {
     background-color: transparent;
@@ -77,33 +66,33 @@ div.ui-notification {
 
 // ---------------- PRIORITY ----------------
 .item {
-  &-priority { color: @color-mid-grey; }
+  &-priority { color: @color-mid-grey-s4; }
 
   &-priority-1 {
-    border-left: 10px solid @color-dark-pink;
-    background-color: @color-dark-pink;
+    border-left: 10px solid @priority-1-color;
+    background-color: @priority-1-color;
 
-    .item-priority:focus { border-color: @color-dark-pink!important; }
+    .item-priority:focus { border-color: @priority-1-color; }
   }
 
   &-priority-2 {
-    border-left: 10px solid @color-sun;
-    background-color: @color-sun;
+    border-left: 10px solid @priority-2-color;
+    background-color: @priority-2-color;
 
-    .item-priority:focus { border-color: @color-sun!important; }
+    .item-priority:focus { border-color: @priority-2-color; }
   }
 
   &-priority-3 {
-    border-left: 10px solid @color-mountain-meadow;
-    background-color: @color-mountain-meadow;
+    border-left: 10px solid @priority-3-color;
+    background-color: @priority-3-color;
 
-    .item-priority:focus { border-color: @color-mountain-meadow!important; }
+    .item-priority:focus { border-color: @priority-3-color; }
   }
 
   &-priority-4 {
-    border-left: 10px solid @color-mid-grey;
-    background-color: @color-mid-grey;
+    border-left: 10px solid @priority-4-color;
+    background-color: @priority-4-color;
 
-    .item-priority:focus { border-color: @color-mid-grey!important; }
+    .item-priority:focus { border-color: @priority-4-color; }
   }
 }

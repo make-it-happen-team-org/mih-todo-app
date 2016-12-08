@@ -1,12 +1,4 @@
-.left-sidebar-toggle-wrapper(@color) {
-  width: @sidebar-width;
-  height: 6rem;
-  top: 0;
-  left: 0;
-  background-color: @color;
-}
-
-.left-sidebar-title {
+.sidebar-title {
   float: left;
   margin: 0;
   width: 50%;
@@ -18,7 +10,7 @@
   overflow: hidden;
 }
 
-.left-sidebar-list-circle(@color) {
+.sidebar-list-circle(@color) {
   position: absolute;
   top: 50%;
   margin-left: -1.7rem;
@@ -39,4 +31,20 @@
   border-style: solid;
   content: '';
   transform: translate(-50%);
+}
+
+.nav-btn(@text-transform, @color, @bg) {
+  display: inline-block;
+  height: @header-height;
+  line-height: @header-height;
+  font-size: 1.4rem;
+  text-transform: @text-transform;
+  color: @color;
+  border: none;
+  background-color: @bg;
+  transition: background-color .5s, color .3s;
+
+  &:hover {
+    color: @color;
+  }
 }

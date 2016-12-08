@@ -1,21 +1,21 @@
 @import (once) "../../../../less/_app.variables.less";
 
-.left-sidebar-header {
-  text-transform: uppercase;
-  color: inherit;
+.sidebar-header {
+  position: relative;
+  color: @sidebar-color;
   transition: color .5s;
 
   &:focus {
-    color: @light-text;
+    color: @sidebar-color;
     outline: none;
   }
 
   &:hover {
-    color: @base-color;
+    color: @sidebar-color--hover;
   }
 
   &__title {
-    .left-sidebar-title();
+    .sidebar-title();
   }
 
   &__button {
@@ -27,11 +27,11 @@
 
     &:focus,
     &:active {
-      color: lighten(@base-color, 10%);
+      color: lighten(@sidebar-color--hover, 10%);
     }
 
     &:hover {
-      color: @base-color;
+      color: @sidebar-color--hover;
     }
   }
 }

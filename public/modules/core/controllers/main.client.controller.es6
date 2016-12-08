@@ -5,7 +5,7 @@ function toggleSidebarHandler () {
   }, 500);
 }
 
-class HomeController {
+class MainController {
   /** @ngInject */
   constructor($scope, Authentication, $location, $timeout) {
     Object.assign(this, {$scope, Authentication, $location, $timeout});
@@ -21,4 +21,4 @@ class HomeController {
 
 angular
   .module('core')
-  .controller('HomeController', HomeController);
+  .controller('MainController', MainController);

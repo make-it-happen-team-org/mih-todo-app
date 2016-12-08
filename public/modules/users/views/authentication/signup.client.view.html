@@ -14,7 +14,7 @@
         <div class="auth-form__form-group"
              data-ng-class="{'has-error': signupForm.submitted && signupForm.email.$invalid || signupForm.email.$dirty && signupForm.email.$invalid}">
             <label class="text-uppercase auth-form__label" for="email">Email</label>
-            <input class="auth-form__form-control form-control"
+            <input class="login-view__form-control form-control"
                    id="email"
                    type="email"
                    name="email"
@@ -36,7 +36,7 @@
                 <input type="text"
                        id="username"
                        name="username"
-                       class="auth-form__form-control form-control"
+                       class="login-view__form-control form-control"
                        data-ng-model="credentials.username"
                        placeholder="Username"
                        required>
@@ -53,7 +53,7 @@
                 <input type="password"
                        id="password"
                        name="password"
-                       class="auth-form__form-control form-control"
+                       class="login-view__form-control form-control"
                        data-ng-model="credentials.password"
                        placeholder="Password"
                        required
@@ -66,11 +66,11 @@
                 </div>
             </div>
             <div class="text-center auth-form__form-group">
-                <button class="auth-form__btn auth-form__btn--blue"
+                <button class="login-view__btn login-view__btn--blue"
                         type="submit">
                     Create account</button>
                 <a href="/#!/signin"
-                   class="show-signup auth-form__btn auth-form__btn--green">Sign
+                   class="show-signup login-view__btn login-view__btn--green">Sign
                     in</a>
             </div>
             <div class="text-center text-danger"

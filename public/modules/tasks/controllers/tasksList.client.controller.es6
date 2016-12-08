@@ -54,9 +54,6 @@ class TasksListController {
       } else {
         this.tasks = TasksListController.bulbSortForEndTime(this.tasks).reverse();
       }
-      this.tasks.forEach(e => {
-        console.log(e.days.endTime)
-      });
       break;
     }
     case 'isComplete': {
@@ -84,7 +81,9 @@ class TasksListController {
   }
 
   getTaskDonePercentage(task) {
-    return +((task.progress * 100) / task.estimation).toFixed(2);
+    const result = +((task.progress * 100) / task.estimation).toFixed(2);
+
+    return result < 100 ? result : 100;
   }
 
   getFiltersFromLocalStorage() {

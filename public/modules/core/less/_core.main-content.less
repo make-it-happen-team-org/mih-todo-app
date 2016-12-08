@@ -1,42 +1,59 @@
 @import (once) "../../../less/_app.variables.less";
 
-.main-view-container {
-  height: 100%;
-
-  .page-wrapper { height: 100%; }
-}
-
-.main-wrapper {
+.main-view {
   position: relative;
-  height: 100%;
-  margin-left: @sidebar-width;
-  transition: margin .5s;
-  z-index: 2;
-  color: @main-font-color;
-  background: @body-background-color;
+  overflow-X: hidden;
+  max-width: @main-max-width;
+  margin: 0 auto;
+  height: 100vh;
 
-  &::before {
-    position: fixed;
-    top: 0;
-    left: 0;
-    height: 100%;
-    width: @sidebar-width;
-    background-color: @color-cloud-burst;
-    content: '';
+  &--collapsed {
+    .sidebar {
+      top: 0;
+      padding-top: @header-height;
+      left: -@sidebar-width;
+
+      &__toggler-wrapper {
+        position: absolute;
+        width: @sidebar-width-collapsed;
+        right: -@sidebar-width-collapsed;
+        left: auto;
+      }
+    }
+
+    .main-view__content {
+      left: 0;
+      width: 100%;
+
+      &:before {
+        left: -@sidebar-width;
+      }
+    }
+
+    .main-view__header {
+      padding-left: @sidebar-width-collapsed;
+    }
+  }
+
+  &__content {
+    position: relative;
+    left: @sidebar-width;
     transition: left .5s;
-  }
+    width: calc(@main-width);
+    height: 100%;
+    z-index: 2;
+    color: @main-font-color;
+    background: @main-white-lilac-white-s0;
 
-  &__category-control {
-    width: 100%;
-    border: none;
-
-    option { background-color: @aside-background-color; }
-  }
-
-  .navbar-default {
-    padding: 0 15px;
-    box-sizing: border-box;
-    background: @main-navbar-default-bg-color;
-    box-shadow: none;
+    &::before {
+      position: absolute;
+      top: 0;
+      left: -@sidebar-width;
+      height: 100%;
+      width: @sidebar-width;
+      background-color: @color-blue-whale-blue-s53;
+      content: '';
+      transition: left .5s;
+    }
   }
 }

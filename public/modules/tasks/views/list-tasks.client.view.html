@@ -1,57 +1,55 @@
-<a class="left-sidebar-header left-sidebar__block left-sidebar__block--group"
+<a class="sidebar-header sidebar__block sidebar__block--group"
    data-ui-sref="todo_state.tasks.create">
-    <h3 class="left-sidebar-header__title">Tasks</h3>
-    <span class="left-sidebar-header__button fa fa-plus-circle add-task"></span>
+    <h3 class="sidebar-header__title">Tasks</h3>
+    <span class="sidebar-header__button fa fa-plus-circle add-task"></span>
 </a>
 
-<div data-ng-controller="TasksListController as taskListCtrl">
-    <div class="left-sidebar__block left-sidebar__block--group left-sidebar__block--group-nav"
-         data-ng-show="taskListCtrl.tasks.length > 1">
-        <div class="left-sidebar__nav-item-wrapper left-sidebar__nav-item-wrapper--left">
-            <div class="left-sidebar__nav-item">Sort by:</div>
-            <a class="left-sidebar__nav-item left-sidebar__nav-item--sort left-sidebar__nav-item--sort-priority"
-               data-ng-class="{
+<div class="sidebar__block sidebar__block--group sidebar__block--group-nav"
+     data-ng-show="taskListCtrl.tasks.length > 1">
+    <div class="sidebar__nav-item-wrapper sidebar__nav-item-wrapper--left">
+        <div class="sidebar__nav-item">Sort by:</div>
+        <a class="sidebar__nav-item sidebar__nav-item--sort sidebar__nav-item--sort-priority"
+           data-ng-class="{
                'sort-reverse-up': taskListCtrl.renderSortOption() === 'ascPriority',
                'sort-reverse-down': taskListCtrl.renderSortOption() === 'descPriority'
                }"
-               data-ng-click="taskListCtrl.sortListBy('priority')">Priority</a>
-            <a class="left-sidebar__nav-item left-sidebar__nav-item--sort left-sidebar__nav-item--sort-time"
-               data-ng-class="{
+           data-ng-click="taskListCtrl.sortListBy('priority')">Priority</a>
+        <a class="sidebar__nav-item sidebar__nav-item--sort sidebar__nav-item--sort-time"
+           data-ng-class="{
                'sort-reverse-up': taskListCtrl.renderSortOption() === 'ascTime',
                'sort-reverse-down': taskListCtrl.renderSortOption() === 'descTime'
                }"
-               data-ng-click="taskListCtrl.sortListBy('time')">Time</a>
-        </div>
-        <div class="left-sidebar__nav-item-wrapper left-sidebar__nav-item-wrapper--right">
-            <div class="left-sidebar__nav-item left-sidebar__nav-item-complete">
-                <input class="left-sidebar__nav-item--task-checkbox"
-                       id="left-sidebar__nav-item--task-checkbox"
-                       type="checkbox"
-                       data-ng-model="taskListCtrl.filter.isComplete"/>
-                <label class="left-sidebar__nav-item--task-checkbox-label"
-                       for="left-sidebar__nav-item--task-checkbox"
-                       data-ng-click="taskListCtrl.sortListBy('isComplete')"></label>
-            </div>
+           data-ng-click="taskListCtrl.sortListBy('time')">Time</a>
+    </div>
+    <div class="sidebar__nav-item-wrapper sidebar__nav-item-wrapper--right">
+        <div class="sidebar__nav-item sidebar__nav-item-complete">
+            <input class="sidebar__nav-item--task-checkbox"
+                   id="sidebar__nav-item--task-checkbox"
+                   type="checkbox"
+                   data-ng-model="taskListCtrl.filter.isComplete"/>
+            <label class="sidebar__nav-item--task-checkbox-label"
+                   for="sidebar__nav-item--task-checkbox"
+                   data-ng-click="taskListCtrl.sortListBy('isComplete')"></label>
         </div>
     </div>
-
-    <ul class="left-sidebar__list">
-        <li data-ng-repeat="task in taskListCtrl.tasks">
-            <a class="left-sidebar__block left-sidebar-list-item {{'task-priority-' + task.priority}}"
-               data-ui-sref="todo_state.tasks.edit({ taskId: task._id })">
-                <div class="left-sidebar-list-item__title">
-                    <span data-ng-bind="task.title"></span>
-                </div>
-                <div class="progress__wrapper">
-                    <progress class="progress"
-                              max="100"
-                              value="{{taskListCtrl.getTaskDonePercentage(task)}}"></progress>
-                    <div class="progress-value"></div>
-                    <div class="progress-bg">
-                        <div class="progress-bar"></div>
-                    </div>
-                </div>
-            </a>
-        </li>
-    </ul>
 </div>
+
+<ul class="sidebar__list">
+    <li data-ng-repeat="task in taskListCtrl.tasks">
+        <a class="sidebar__block sidebar-list-item {{'task-priority-' + task.priority}}"
+           data-ui-sref="todo_state.tasks.edit({ taskId: task._id })">
+            <div class="sidebar-list-item__title">
+                <span data-ng-bind="task.title"></span>
+            </div>
+            <div class="progress__wrapper">
+                <progress class="progress"
+                          max="100"
+                          value="{{taskListCtrl.getTaskDonePercentage(task)}}"></progress>
+                <div class="progress-value"></div>
+                <div class="progress-bg">
+                    <div class="progress-bar"></div>
+                </div>
+            </div>
+        </a>
+    </li>
+</ul>

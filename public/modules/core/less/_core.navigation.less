@@ -1,29 +1,102 @@
 @import (once) "../../../less/_app.variables.less";
+@import (once) "./_.core.mixins.less";
 
-.navbar-right i { font-size: 20px; }
+.main-view__header {
+  height: @header-height;
+  padding: 0 1rem;
+  background-color: @header-bg-color;
+  color: @login-input-font-color;
+}
 
-.navbar-header {
-  > .page-title {
-    display: inline-block;
-    vertical-align: middle;
-    margin: 0 0 0 15px;
-    line-height: 50px;
+.header-nav-element {
+  display: inline-block;
+  padding: 0 .7rem;
+  vertical-align: top;
+
+  &-link {
+    .nav-btn(none, @header-color, @header-btn-bg-color);
+
+    &:hover {
+      .fa::before { color:  @header-color--hover; }
+    }
+
+    .fa {
+      &::before {
+        padding-right: .5rem;
+        transition: color .5s;
+      }
+
+      &:hover::before {
+        color: @header-color--hover;
+      }
+    }
   }
 
-  > .menu-btn {
-    display: inline-block;
-    vertical-align: middle;
-    cursor: pointer;
-    font-size: 1.5em;
+  &-tab {
+    .nav-btn(uppercase, @header-color, @header-btn-bg-color);
+
+    &:hover {
+      background-color:  @header-btn-bg-color--hover;
+      color: @header-color--hover;
+    }
+
+    &-holder {
+      float: left;
+
+      &__item {
+        display: inline-block;
+      }
+    }
   }
 
-  &__username {
-    max-width: 100px;
-    display: inline-block;
+  &-btn-holder {
+    float: right;
+
+    &__item {
+      height: @header-height;
+      line-height: @header-height;
+    }
+
+    &__dropdown-toggle {
+      height: @header-height;
+      line-height: @header-height;
+      background-color: @header-btn-bg-color;
+      border: none;
+    }
+
+    &__profile-image {
+      height: @header-height - 2.5rem;
+      border-radius: 50%;
+    }
+  }
+}
+
+// ---------------- NOTIFICATION ----------------
+.notifications-info {
+  position: relative;
+  .nav-btn(none, @header-color, @header-btn-bg-color);
+
+  &:hover {
+    .fa::before { color:  @header-color--hover; }
+  }
+
+  &__label {
+    position: absolute;
+    bottom: @header-notification-label-dimension/4 + @header-height/2;
+    right: -@header-notification-label-dimension/2;
+    width: @header-notification-label-dimension;
+    height: @header-notification-label-dimension;
+    line-height: @header-notification-label-dimension;
+    color: @header-color--hover;
     text-align: center;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    vertical-align: middle;
+    font-size: 1rem;
+    border-radius: 50%;
+    background-color: @header-notification-bg-color--default;
+    transition: background-color .5s;
+
+    &--primary {
+      background-color: @header-notification-bg-color--regular;
+    }
   }
 }
 
@@ -47,6 +120,4 @@
     overflow: hidden;
     width: 48px;
   }
-
-  .profile-image { height: 48px; }
 }

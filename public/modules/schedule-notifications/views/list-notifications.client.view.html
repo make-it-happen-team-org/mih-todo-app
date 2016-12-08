@@ -1,10 +1,10 @@
-<ul class="left-sidebar__list"
-    data-ng-controller="ScheduleNotificationsController"
-    data-ng-init="find()">
+<ul class="sidebar__list"
+    data-ng-init="find()"
+    data-ng-controller="ScheduleNotificationsController as notificationCtrl">
     <li data-ng-repeat="overdueTask in notifications.overdueTasks">
-        <a class="left-sidebar__block left-sidebar-list-item {{'task-priority-' + overdueTask.priority}}"
+        <a class="sidebar__block sidebar-list-item {{'task-priority-' + overdueTask.priority}}"
            data-ui-sref="todo_state.tasks.edit({ taskId: task._id })">
-            <div class="left-sidebar-list-item__title">
+            <div class="sidebar-list-item__title">
                 <span data-ng-bind="overdueTask.title"></span>
             </div>
             <div class="progress__wrapper">

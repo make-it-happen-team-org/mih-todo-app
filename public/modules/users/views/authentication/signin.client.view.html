@@ -14,7 +14,7 @@
         <div class="auth-form__form-group"
              data-ng-class="{'has-error': signinForm.submitted && signinForm.email.$invalid || signinForm.email.$dirty && signinForm.email.$invalid}">
             <label class="control-label text-uppercase auth-form__label" for="email">Email</label>
-            <input class="auth-form__form-control form-control"
+            <input class="login-view__form-control form-control"
                    id="email"
                    type="email"
                    name="email"
@@ -33,7 +33,7 @@
         <div class="auth-form__form-group"
              data-ng-class="{'has-error': signinForm.submitted && signinForm.password.$invalid}">
             <label class="control-label text-uppercase auth-form__label" for="password">Password</label>
-            <input class="auth-form__form-control form-control"
+            <input class="login-view__form-control form-control"
                    id="password"
                    type="password"
                    name="password"
@@ -51,9 +51,9 @@
             </div>
         </div>
         <div class="auth-form__form-group">
-            <button class="auth-form__btn auth-form__btn--green"
+            <button class="login-view__btn login-view__btn--green"
                     type="submit"> Sign in</button>
-            <a class="auth-form__btn auth-form__btn--blue"
+            <a class="login-view__btn login-view__btn--blue"
                href="/#!/signup">Create an account</a>
         </div>
         <div class="text-center text-danger" data-ng-show="error">
