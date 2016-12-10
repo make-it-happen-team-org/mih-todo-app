@@ -166,10 +166,8 @@ class AlgorithmNegative {
 
     this.$q.all(defObj)
       .then(() => {
-        this.Slots.sortWithinOneDay(/*some params goes here*/);
-      })
-      .then(() => {
         return successfullyShiftedTasks;
+        //this.Slots.sortWithinOneDay(/*some params goes here*/);
       });
   }
 
