@@ -28,6 +28,10 @@ export class SlotsServerController {
 		})
 	}
 
+	static sortWithinOneDay(req, res) {
+		
+	}
+
 	static create(req, res) {
 		var promises = [],
 			workingHours = req.user.predefinedSettings.workingHours,

@@ -90,14 +90,34 @@ class AlgorithmNegative {
     }));
   };
 
-  _freeSlotsUpdate(key, newValue, freeSlots) {
+  _freeSlotsUpdate(key, indexInArr, newValue, freeSlots) {
     _.forEach(freeSlots, (value, index) => {
       if (value[key]) {
-        value[key] = newValue;
+        value[key][indexInArr] = newValue;
       }
     });
 
     return freeSlots;
+  }
+
+  getFreeSlotByDuration(slotDuration, freePlaces) {
+    var fitSlot = {};
+
+    _.forEach(Object.keys(freePlaces), (value, key) => {
+      if (!_.isEmpty(fitSlot)) { return false; };
+
+      _.forEach(freePlaces[value], (val, ind) => {
+        if (val.duration >= slotDuration) {
+          fitSlot = _.assignIn(fitSlot, val);
+          fitSlot.date = value;
+          fitSlot.index = ind;
+          return false;
+        }
+      });
+
+    });
+
+    return fitSlot;
   }
 
   /**
@@ -111,40 +131,46 @@ class AlgorithmNegative {
     let sortedFreeSlotsByPriority = _.reverse(freeSlots);
     let hoursToFree = this.estimation - this.totalAvailHours;
     let counter = 0;
+    let successfullyShiftedTasks = false;
+    let defObj = {};
 
     _.forEach(sortedTasksByPriority, (value, key) => {
+      if (hoursToFree <= 0) {
+        successfullyShiftedTasks = true;
+        return false;
+      };
+
       let slotDuration = value.slots.futureSlots[counter].duration;
-      let freePlaces = sortedFreeSlotsByPriority[counter];
+      let freePlaces = sortedFreeSlotsByPriority[key];
+      let fitSlot = this.getFreeSlotByDuration(slotDuration, freePlaces);
 
-      if (hoursToFree <= 0) { return false; }
+      if (_.isEmpty(fitSlot)) { return; }
 
-      _.forEach(Object.keys(freePlaces), (freeDay, index) => {
+      value.slots.futureSlots[counter].start = fitSlot.start;
+      value.slots.futureSlots[counter].end = new Date(new Date(fitSlot.start).setHours(new Date(fitSlot.start).getHours() + slotDuration)).toISOString();
 
-        if (hoursToFree <= 0) { return false; }
+      hoursToFree -= slotDuration;
 
-        _.forEach(freePlaces[freeDay], (freeSlot, i) => {
-          if (freeSlot.duration >= slotDuration) {
+      let updatefitSlot = {
+        start: value.slots.futureSlots[counter].end,
+        duration: fitSlot.duration - slotDuration,
+        end: fitSlot.end
+      };
 
-            value.slots.futureSlots[counter].start = freeSlot.start;
-            value.slots.futureSlots[counter].end = new Date(new Date(freeSlot.start).setHours(new Date(freeSlot.start).getHours() + value.slots.futureSlots[counter].duration)).toISOString();
+      sortedFreeSlotsByPriority = this._freeSlotsUpdate(fitSlot.date, fitSlot.index, updatefitSlot, sortedFreeSlotsByPriority);
 
-            hoursToFree -= slotDuration;
-
-            freeSlot.start = value.slots.futureSlots[counter].end;
-            freeSlot.duration = freeSlot.duration - value.slots.futureSlots[counter].duration;
-
-            sortedFreeSlotsByPriority = this._freeSlotsUpdate(freeDay, freePlaces[freeDay], sortedFreeSlotsByPriority);
-
-            console.log(this.Slots);
-
-            this.Slots.update(value.slots.futureSlots[counter]);
-            return false;
-          }
-        });
-      });
+      defObj[key] = this.Slots.update(value.slots.futureSlots[counter]);
 
       counter = (key === sortedTasksByPriority.length) ? counter + 1 : counter;
     });
+
+    this.$q.all(defObj)
+      .then(() => {
+        this.Slots.sortWithinOneDay(/*some params goes here*/);
+      })
+      .then(() => {
+        return successfullyShiftedTasks;
+      });
   }
 
   recalculateExistingTasks(tasks) {

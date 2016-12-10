@@ -141,6 +141,10 @@ angular.module('tasks').controller('TasksController',
                         model.estimation,
                         $scope.user.predefinedSettings.workingHours
                     ).then(slotsRange => {
+                        if (!slotsRange.length) {
+                            Notification.warning('Not Free Slots for this task');
+                            return;
+                        }
                         $scope.slotsRange = slotsRange;
 
                         let queries = [saveTask(model)];

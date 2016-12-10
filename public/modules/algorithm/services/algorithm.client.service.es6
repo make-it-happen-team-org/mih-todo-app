@@ -70,13 +70,12 @@ class Day {
 class Algorithm {
 
   /** @ngInject */
-  constructor($q, Slots, Authentication, AlgorithmServer, AlgorithmPositive, AlgorithmNegative, TimeService, $injector) {
+  constructor($q, Slots, Authentication, AlgorithmServer, AlgorithmPositive, AlgorithmNegative, TimeService) {
     Object.assign(this, {
       $q,
       Slots,
       user: Authentication.user,
       AlgorithmServer,
-      Notification: $injector.get('Notification'),
       AlgorithmPositive,
       AlgorithmNegative,
       TimeService
