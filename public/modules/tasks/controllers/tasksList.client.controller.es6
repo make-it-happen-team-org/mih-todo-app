@@ -1,13 +1,13 @@
 class TasksListController {
 	/** @ngInject */
-	constructor($rootScope, Authentication, Tasks) {
+	constructor($scope, Authentication, Tasks) {
 		this.authentication = Authentication;
 		this.tasks = Tasks.query();
 		this.Tasks = Tasks;
 		this.status = {};
 		this.status.isComplete = false;
 
-		$rootScope.$on('NEW_TASK_MODIFY', () => {
+		$scope.$on('NEW_TASK_MODIFY', () => {
 			this.find();
 		});
 

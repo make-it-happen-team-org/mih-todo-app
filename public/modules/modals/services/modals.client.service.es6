@@ -6,14 +6,15 @@ class ModalsService {
       ngDialog
     });
   }
-
+  
   getModalWindowOpen(msg) {
     this.ngDialog.open({
       template: '/modules/modals/views/modals.view.html',
       controller: 'ModalsController',
       controllerAs: 'modal',
-      width: '60%',
+      width: '55%',
       className: 'ngdialog-theme-default',
+      appendClassName: 'mih-modal-theme',
       data: msg
     });
   }
