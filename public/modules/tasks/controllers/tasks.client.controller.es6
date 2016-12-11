@@ -142,7 +142,6 @@ angular.module('tasks').controller('TasksController',
                         $scope.user.predefinedSettings.workingHours
                     ).then(slotsRange => {
                         if (!slotsRange.length) {
-                            Notification.warning('Not Free Slots for this task');
                             return;
                         }
                         $scope.slotsRange = slotsRange;
@@ -157,11 +156,17 @@ angular.module('tasks').controller('TasksController',
                             $location.path('/');
                             $rootScope.$broadcast('NEW_TASK_MODIFY');
                             Notification.success(`Task '${model.title}' was successfully created`);
+                            slotShiftedFromNegative();
                         });
                     });
+                } else {
+                    clearDoubleControllerFire($rootScope.$$listenerCount.slotShiftedFromNegative);
                 }
-                slotShiftedFromNegative();
             });
+
+            function clearDoubleControllerFire(times) {
+                new Array(times).fill(1).forEach((value, key) => { slotShiftedFromNegative(); });
+            }
 
             $scope.createMode = () => {
                 var newTask;
