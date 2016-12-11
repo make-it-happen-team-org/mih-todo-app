@@ -98,7 +98,7 @@ class AlgorithmNegative {
     }
 
     getFreeSlotByDuration(slotDuration, freePlaces) {
-        var fitSlot = {};
+        let fitSlot = {};
 
         _.forEach(Object.keys(freePlaces), (value, key) => {
             if (!_.isEmpty(fitSlot)) { return false; };
