@@ -1,3 +1,4 @@
+@import (once) "../../../less/_app.mixins.less";
 @import "_core.logo.less";
 @import "_core.datepicker.less";
 @import "_core.navigation.less";
@@ -11,11 +12,11 @@
 
 .undecorated-link:hover { text-decoration: none; }
 
-.only-mobile {
-  display: none;
-
-  @media @tablet-media { display: block; }
-}
+.phone ({
+  .only-mobile {
+    display: none;
+  }
+});
 
 .ui-sref.back { margin-bottom: 20px; }
 

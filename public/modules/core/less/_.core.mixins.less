@@ -48,3 +48,51 @@
     color: @color;
   }
 }
+
+.collapsed-header-mixin {
+  .from-tablet {
+    color: transparent;
+    font-size: 0;
+  }
+
+  .fa::before {
+    padding-right: 0;
+  }
+
+  .header-nav-element {
+    &__item {
+      width: 3rem;
+    }
+
+    &__user-profile {
+      width: 8rem;
+      text-align: left;
+    }
+  }
+}
+
+.header-mixin {
+  .from-tablet {
+    color: inherit;
+    font-size: 1.4rem;
+  }
+
+  .fa::before {
+    padding-right: .5rem;
+  }
+
+  .header-nav-element {
+    &__item {
+      width: 9rem;
+    }
+
+    &__user-profile {
+      width: 10rem;
+      text-align: left;
+    }
+
+    &__notifications {
+      width: 3rem;
+    }
+  }
+}

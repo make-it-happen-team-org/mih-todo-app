@@ -1,6 +1,7 @@
-<nav data-ng-show="headerCtrl.Authentication.user">
+<nav class="header-nav-element__container"
+        data-ng-show="headerCtrl.Authentication.user">
 
-    <ul class="header-nav-element header-nav-element-tab-holder"
+    <ul class="header-nav-element header-nav-element__list header-nav-element-tab-holder"
             data-ng-controller="HeaderController as headerCtrl">
         <li class="header-nav-element-tab-holder__item" data-ng-repeat="state in headerCtrl.topStatesInNavDropdown">
             <button class="header-nav-element-tab"
@@ -9,36 +10,49 @@
     </ul>
 
 
-    <ul class="header-nav-element header-nav-element-btn-holder">
-        <li class="header-nav-element  header-nav-element-btn-holder__item">
+    <ul class="header-nav-element header-nav-element__list header-nav-element-btn-holder">
+        <li class="header-nav-element header-nav-element__item header-nav-element-btn-holder__item">
             <a class="header-nav-element-link" data-ui-sref="todo_state.events.create({ eventPresetType: 'sick' })">
-                <i class="fa fa-heartbeat" aria-hidden="true">Sick today</i>
+                <i class="fa fa-heartbeat" aria-hidden="true"></i>
+                <span class="from-tablet">Sick today</span>
             </a>
         </li>
-        <li class="header-nav-element  header-nav-element-btn-holder__item">
+        <li class="header-nav-element header-nav-element__item header-nav-element-btn-holder__item">
             <a class="header-nav-element-link" data-ui-sref="todo_state.events.create({ eventPresetType: 'vacation' })">
-                <i class="fa fa-plane" aria-hidden="true">Vacation</i>
+                <i class="fa fa-plane" aria-hidden="true"></i>
+                <span class="from-tablet">Vacation</span>
             </a>
         </li>
-        <li class="header-nav-element  header-nav-element-btn-holder__item">
+        <li class="header-nav-element header-nav-element__item header-nav-element-btn-holder__item">
             <a class="header-nav-element-link" data-ui-sref="todo_state">
-                <i class="fa fa-calendar calendar-btn" aria-hidden="true">Calendar</i>
+                <i class="fa fa-calendar calendar-btn" aria-hidden="true"></i>
+                <span class="from-tablet">Calendar</span>
             </a>
         </li>
-        <li class="header-nav-element header-nav-element-btn-holder__item  header-nav-element-btn-holder__item--nav-notifications dropdown" data-notification-tooltip></li>
-        <li class="header-nav-element header-nav-element-btn-holder__item header-nav-element-btn-holder__item--user-profile dropdown nav-user-profile">
-            <button class="header-nav-element-btn-holder__dropdown-toggle dropdown-toggle"
-                    data-toggle="dropdown">
-                <span class="header-nav-element-btn-holder__username" data-ng-bind="headerCtrl.user.username"></span>
+        <li class="header-nav-element header-nav-element__item header-nav-element-btn-holder__item header-nav-element__notifications"
+            data-notification-tooltip></li>
+        <li class="header-nav-element header-nav-element__item header-nav-element-btn-holder__item header-nav-element__user-profile">
+            <button class="header-nav-element-btn-holder__dropdown-toggle"
+                    data-ng-click="headerCtrl.toggleDropdown('user')">
+                <span class="from-tablet header-nav-element-btn-holder__username" data-ng-bind="headerCtrl.user.username"></span>
                 <img class="header-nav-element-btn-holder__profile-image" src="{{headerCtrl.user.profileImageURL}}">
                 <span class="header-nav-element-btn-holder__caret caret"></span>
             </button>
 
-            <ul class="header-nav-element header-nav-element--dropdown-menu dropdown">
-                <li><a href="#!/settings/profile">Settings</a></li>
-                <li><a href="#!/templates">My templates</a></li>
-                <li><a href="#!/migrate">Import content</a></li>
-                <li><a href="/auth/signout">Logout</a></li>
+            <ul class="header-nav-element  header-nav-element__list dropdown-menu-container"
+                data-ng-class="{'dropdown-menu-container--collapse': !headerCtrl.dropdown.user}">
+                <li class="notification-item">
+                    <a class="dropdown-menu-container__link" href="#!/settings/profile">Settings</a
+                    ></li>
+                <li class="notification-item">
+                    <a class="dropdown-menu-container__link" href="#!/templates">My templates</a>
+                </li>
+                <li class="notification-item">
+                    <a class="dropdown-menu-container__link" href="#!/migrate">Import content</a>
+                </li>
+                <li class="notification-item">
+                    <a class="dropdown-menu-container__link" href="/auth/signout">Logout</a>
+                </li>
             </ul>
         </li>
     </ul>

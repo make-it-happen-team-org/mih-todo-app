@@ -1,9 +1,12 @@
-
 // ----------------------------------------------- SCREENS -----------------------------------------------
-@mobile-media: ~"only screen and (max-width: 768px)";
-@tablet-media: ~"only screen and (min-width: 768px)";
-@wide-tablet-media: ~"only screen and (min-width: 992px)";
-@desktop-media: ~"only screen and (min-width: 1200px)";
+// Responsive Breakpoints
+@phone-min: 320px;
+@phone-max: 767px;
+@tablet-portrait-min: 768px;
+@tablet-portrait-max: 980px;
+@tablet-landscape-min: 981px;
+@tablet-landscape-max: 1240px;
+@desktop-min: 1241px;
 
 // ---------------------------------------------  - FONTS ------------------------------------------------
 @font-open-sans-light: 'open_sanslight', Arial, sans-serif;
@@ -32,6 +35,7 @@
 @main-white-lilac-white-s0: #F3F3F4;
 @color-10-percent-opacity-white: rgba(255, 255, 255, .1);
 @color-50-percent-opacity-white: rgba(255, 255, 255, .5);
+@color-175-percent-opacity-black: rgba(0, 0, 0, .175);
 @color-mid-grey-s4: #676A6C;
 @color-hit-grey-s0: #AEAFAF;
 @color-light-grey-s0: #D6D6D6;
@@ -50,7 +54,7 @@
 @color-biscay-blue-s41: #2F4050;
 @color-blue-whale-blue-s53: #1E3141;
 @color-blue-whale-blue-s58: #172837;
-@color-bali-hai-blue-s25: #879eb4;
+@color-bali-hai-blue-s25: #879EB4;
 @color-mariner-blue-s61: #3B5998;
 @color-san-marino-blue-s47: #507299;
 @color-denim-blue-s85: #1C84C6;
@@ -150,9 +154,31 @@
 @header-color: @color-bali-hai-blue-s25;
 @header-color--hover: @light-text;
 @header-line-height: @header-height;
-@header-btn-bg-color: transparent;
+@header-btn-bg-color: @color-biscay-blue-s41;
 @header-bg-color: @color-biscay-blue-s41;
 @header-btn-bg-color--hover: @color-blue-whale-blue-s53;
 @header-notification-bg-color--regular: @color-mountain-meadow-green-s85;
 @header-notification-bg-color--default: @color-hit-grey-s0;
 @header-notification-label-dimension: 1.4rem;
+@header-font-size: 1.4rem;
+@header-min-width: 60rem;
+@header-media-tablet: 1100px;
+@header-media-tablet-collapsed: 860px;
+
+// ------------------------------------------------ DROPDOWN -----------------------------------------------
+@dropdown-height: 5rem;
+@dropdown-line-height: 2.2rem;
+@dropdown-min-width: 20rem;
+@dropdown-padding: 0 1em;
+@dropdown-color: @light-text;
+@dropdown-bg-color: @color-blue-whale-blue-s53;
+@dropdown-bg-color--hover: @color-blue-whale-blue-s58;
+@dropdown-box-shadow: 0 .6rem 1.2rem @color-175-percent-opacity-black;
+@dropdown-notification-border: @color-bali-hai-blue-s25;
+@dropdown-fa-dimention: 2rem;
+@dropdown-fa-top: @dropdown-height/2 - @dropdown-fa-dimention/2;
+@dropdown-fa-right: 1em;
+@dropdown-badge-color: @color-blue-whale-blue-s53;
+@dropdown-badge-color--hover: @color-blue-whale-blue-s58;
+@dropdown-badge-bg-color: @color-bali-hai-blue-s25;
+@dropdown-badge-bg-color--hover: @color-white;
