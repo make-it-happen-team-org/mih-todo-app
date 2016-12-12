@@ -1,6 +1,4 @@
-'use strict';
-
-var socialConfig = require('../social.config.js');
+let socialConfig = require('../social.config.js');
 
 module.exports = {
     db: {

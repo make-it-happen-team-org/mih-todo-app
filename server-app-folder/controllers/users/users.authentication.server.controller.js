@@ -2,21 +2,21 @@
  * Module dependencies.
  */
 
-var _ = require('lodash'),
-    errorHandler = require('../errors.server.controller'),
-    mongoose = require('mongoose'),
-    passport = require('passport'),
-    User = mongoose.model('User');
+let _ = require('lodash');
+let errorHandler = require('../errors.server.controller');
+let mongoose = require('mongoose');
+let passport = require('passport');
+let User = mongoose.model('User');
 
 /**
  * Signup
  */
-exports.signup = function (req, res) {
+let signup = function (req, res) {
 	// For security measurement we remove the roles from the req.body object
 	delete req.body.roles;
 	// Init Variables
-	var user = new User(req.body);
-	var message = null;
+	let user = new User(req.body);
+	let message = null;
 
 	// Add missing user fields
 	user.provider = 'local';
@@ -52,7 +52,7 @@ exports.signup = function (req, res) {
 /**
  * Signin after passport authentication
  */
-exports.signin = function (req, res, next) {
+let signin = function (req, res, next) {
 	passport.authenticate('local', function (err, user, info) {
 		if (err || !user) {
 			res.status(400).send(info);
@@ -75,7 +75,7 @@ exports.signin = function (req, res, next) {
 /**
  * Signout
  */
-exports.signout = function (req, res) {
+let signout = function (req, res) {
 	req.logout();
 	res.redirect('/#!/signin');
 };
@@ -83,10 +83,9 @@ exports.signout = function (req, res) {
 /**
  * OAuth callback
  */
-exports.oauthCallback = function (strategy) {
+let oauthCallback = function (strategy) {
 	return function (req, res, next) {
 		passport.authenticate(strategy, function (err, user) {
-			debugger;
 			if (err || !user) {
 				return res.redirect('/#!/signin');
 			}
@@ -104,10 +103,10 @@ exports.oauthCallback = function (strategy) {
 /**
  * Helper function to save or update a OAuth user profile
  */
-exports.saveOAuthUserProfile = function (req, providerUserProfile, done) {
+let saveOAuthUserProfile = function (req, providerUserProfile, done) {
 
 	// Define a search query to find existing user with current provider profile
-	var searchQuery = {
+	let searchQuery = {
 		$or: [{email: providerUserProfile.email}]
 	};
 
@@ -136,9 +135,9 @@ exports.saveOAuthUserProfile = function (req, providerUserProfile, done) {
 /**
  * Remove OAuth provider
  */
-exports.removeOAuthProvider = function (req, res, next) {
-	var user = req.user;
-	var provider = req.param('provider');
+let removeOAuthProvider = function (req, res, next) {
+	let user = req.user;
+	let provider = req.param('provider');
 
 	if (user && provider) {
 		// Delete the additional provider
@@ -165,4 +164,13 @@ exports.removeOAuthProvider = function (req, res, next) {
 			}
 		});
 	}
+};
+
+module.exports = {
+	signin: signin,
+	signup: signup,
+	signout: signout,
+	oauthCallback: oauthCallback,
+	saveOAuthUserProfile: saveOAuthUserProfile,
+	removeOAuthProvider: removeOAuthProvider
 };
