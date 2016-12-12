@@ -6,7 +6,7 @@ module.exports = {
         description: 'Application for self organization',
         keywords: 'Make It Happen'
     },
-    endpointUrl: 'http://localhost:3000',
+    endpointUrl: 'https://make-it-happen-app.herokuapp.com/',
     db: {
         uri: 'mongodb://devuser:devuser2day@ds031167.mlab.com:31167/mih'
     },
