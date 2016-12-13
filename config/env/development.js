@@ -1,4 +1,4 @@
-'use strict';
+let socialConfig = require('../social.config.js');
 
 module.exports = {
     db: {
@@ -22,14 +22,23 @@ module.exports = {
         title: 'MIH - Development Environment'
     },
     facebook: {
-        clientID: process.env.FACEBOOK_ID || 'APP_ID',
-        clientSecret: process.env.FACEBOOK_SECRET || 'APP_SECRET',
-        callbackURL: '/auth/facebook/callback'
+        clientID: socialConfig.facebook.clientID,
+        clientSecret: socialConfig.facebook.clientSecret,
+        callbackURL: '/auth/facebook/callback',
+        profileFields: ['email']
     },
     twitter: {
-        clientID: process.env.TWITTER_KEY || 'CONSUMER_KEY',
-        clientSecret: process.env.TWITTER_SECRET || 'CONSUMER_SECRET',
-        callbackURL: '/auth/twitter/callback'
+        clientID: socialConfig.twitter.clientID,
+        clientSecret: socialConfig.twitter.clientSecret,
+        callbackURL: '/auth/twitter/callback',
+        profileFields: ['email']
+    },
+    vkontakte: {
+        clientID: socialConfig.vkontakte.clientID,
+        clientSecret: socialConfig.vkontakte.clientSecret,
+        callbackURL: '/auth/vkontakte/callback',
+        scope: socialConfig.vkontakte.scope,
+        profileFields: ['email']
     },
     google: {
         clientID: process.env.GOOGLE_ID || 'APP_ID',

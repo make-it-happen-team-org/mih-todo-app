@@ -2,21 +2,21 @@
  * Module dependencies.
  */
 
-var _ = require('lodash'),
-    errorHandler = require('../errors.server.controller'),
-    mongoose = require('mongoose'),
-    passport = require('passport'),
-    User = mongoose.model('User');
+let _ = require('lodash');
+let errorHandler = require('../errors.server.controller');
+let mongoose = require('mongoose');
+let passport = require('passport');
+let User = mongoose.model('User');
 
 /**
  * Signup
  */
-exports.signup = function (req, res) {
+let signup = function (req, res) {
 	// For security measurement we remove the roles from the req.body object
 	delete req.body.roles;
 	// Init Variables
-	var user = new User(req.body);
-	var message = null;
+	let user = new User(req.body);
+	let message = null;
 
 	// Add missing user fields
 	user.provider = 'local';
@@ -52,7 +52,7 @@ exports.signup = function (req, res) {
 /**
  * Signin after passport authentication
  */
-exports.signin = function (req, res, next) {
+let signin = function (req, res, next) {
 	passport.authenticate('local', function (err, user, info) {
 		if (err || !user) {
 			res.status(400).send(info);
@@ -75,17 +75,17 @@ exports.signin = function (req, res, next) {
 /**
  * Signout
  */
-exports.signout = function (req, res) {
+let signout = function (req, res) {
 	req.logout();
-	res.redirect('/');
+	res.redirect('/#!/signin');
 };
 
 /**
  * OAuth callback
  */
-exports.oauthCallback = function (strategy) {
+let oauthCallback = function (strategy) {
 	return function (req, res, next) {
-		passport.authenticate(strategy, function (err, user, redirectURL) {
+		passport.authenticate(strategy, function (err, user) {
 			if (err || !user) {
 				return res.redirect('/#!/signin');
 			}
@@ -94,7 +94,7 @@ exports.oauthCallback = function (strategy) {
 					return res.redirect('/#!/signin');
 				}
 
-				return res.redirect(redirectURL || '/');
+				return res.redirect('/#!/todo');
 			});
 		})(req, res, next);
 	};
@@ -103,80 +103,41 @@ exports.oauthCallback = function (strategy) {
 /**
  * Helper function to save or update a OAuth user profile
  */
-exports.saveOAuthUserProfile = function (req, providerUserProfile, done) {
-	if (!req.user) {
-		// Define a search query fields
-		var searchMainProviderIdentifierField = 'providerData.' + providerUserProfile.providerIdentifierField;
-		var searchAdditionalProviderIdentifierField = 'additionalProvidersData.' + providerUserProfile.provider + '.' + providerUserProfile.providerIdentifierField;
+let saveOAuthUserProfile = function (req, providerUserProfile, done) {
 
-		// Define main provider search query
-		var mainProviderSearchQuery = {};
-		mainProviderSearchQuery.provider = providerUserProfile.provider;
-		mainProviderSearchQuery[searchMainProviderIdentifierField] = providerUserProfile.providerData[providerUserProfile.providerIdentifierField];
+	// Define a search query to find existing user with current provider profile
+	let searchQuery = {
+		$or: [{email: providerUserProfile.email}]
+	};
 
-		// Define additional provider search query
-		var additionalProviderSearchQuery = {};
-		additionalProviderSearchQuery[searchAdditionalProviderIdentifierField] = providerUserProfile.providerData[providerUserProfile.providerIdentifierField];
-
-		// Define a search query to find existing user with current provider profile
-		var searchQuery = {
-			$or: [mainProviderSearchQuery, additionalProviderSearchQuery]
-		};
-
-		User.findOne(searchQuery, function (err, user) {
-			if (err) {
-				return done(err);
-			} else {
-				if (!user) {
-					var possibleUsername = providerUserProfile.username || (providerUserProfile.email ? providerUserProfile.email.split('@')[0] : '');
-
-					User.findUniqueUsername(possibleUsername, null, function (availableUsername) {
-						user = new User({
-							username: availableUsername,
-							email: providerUserProfile.email,
-							provider: providerUserProfile.provider,
-							providerData: providerUserProfile.providerData
-						});
-
-						// And save the user
-						user.save(function (err) {
-							return done(err, user);
-						});
-					});
-				} else {
-					return done(err, user);
-				}
-			}
-		});
-	} else {
-		// User is already logged in, join the provider data to the existing user
-		var user = req.user;
-
-		// Check if user exists, is not signed in using this provider, and doesn't have that provider data already configured
-		if (user.provider !== providerUserProfile.provider && (!user.additionalProvidersData || !user.additionalProvidersData[providerUserProfile.provider])) {
-			// Add the provider data to the additional provider data field
-			if (!user.additionalProvidersData) user.additionalProvidersData = {};
-			user.additionalProvidersData[providerUserProfile.provider] = providerUserProfile.providerData;
-
-			// Then tell mongoose that we've updated the additionalProvidersData field
-			user.markModified('additionalProvidersData');
-
-			// And save the user
-			user.save(function (err) {
-				return done(err, user, '/#!/settings/accounts');
-			});
+	User.findOne(searchQuery, function (err, user) {
+		if (err) {
+			return done(err);
 		} else {
-			return done(new Error('User is already connected using this provider'), user);
+			if (!user) {
+				user = new User({
+					username: providerUserProfile.email,
+					email: providerUserProfile.email,
+					provider: 'social'
+				});
+
+				// And save the user
+				user.save(function (err) {
+					return done(err, user);
+				});
+			} else {
+				return done(err, user);
+			}
 		}
-	}
+	});
 };
 
 /**
  * Remove OAuth provider
  */
-exports.removeOAuthProvider = function (req, res, next) {
-	var user = req.user;
-	var provider = req.param('provider');
+let removeOAuthProvider = function (req, res, next) {
+	let user = req.user;
+	let provider = req.param('provider');
 
 	if (user && provider) {
 		// Delete the additional provider
@@ -203,4 +164,13 @@ exports.removeOAuthProvider = function (req, res, next) {
 			}
 		});
 	}
+};
+
+module.exports = {
+	signin: signin,
+	signup: signup,
+	signout: signout,
+	oauthCallback: oauthCallback,
+	saveOAuthUserProfile: saveOAuthUserProfile,
+	removeOAuthProvider: removeOAuthProvider
 };
