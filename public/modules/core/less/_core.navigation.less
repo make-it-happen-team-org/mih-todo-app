@@ -60,7 +60,10 @@
   &-link {
     .nav-btn(none, @header-color, @header-btn-bg-color);
 
+    &:focus,
     &:hover {
+      color: @header-color;
+
       .fa::before { color:  @header-color--hover; }
     }
 
