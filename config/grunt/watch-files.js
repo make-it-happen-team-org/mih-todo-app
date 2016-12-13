@@ -1,11 +1,9 @@
 module.exports = {
-    clientViews: ['public/modules/**/views/**/*.html'],
-    clientCSS: ['public/assets/**/*.css'],
-    allES6: ['public/**/*.es6'],
-    clientLESS: ['public/**/*.less', '!public/lib/**/*.less'],
+    clientViews: ['modules/**/views/**/*.html'],
+    clientCSS: ['assets/**/*.css'],
+    allES6: ['**/*.es6'],
+    clientLESS: ['**/*.less', '!lib/**/*.less'],
     clientJS: [
-        'public/js/**/*.js',
-        'public/**/*.es6',
-        '!public/**/*.compiled.js'
+        '**/*.es6'
     ]
 };

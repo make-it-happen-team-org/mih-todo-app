@@ -1,14 +1,17 @@
 'use strict';
 
 module.exports = {
+    app: {
+        title: 'Make It Happen',
+        description: 'Application for self organization',
+        keywords: 'Make It Happen'
+    },
+    endpointUrl: 'https://make-it-happen-app.herokuapp.com/',
     db: {
         uri: 'mongodb://devuser:devuser2day@ds031167.mlab.com:31167/mih'
     },
     log: {
-        // Can specify one of 'combined', 'common', 'dev', 'short', 'tiny'
         format: 'combined',
-        // Stream defaults to process.stdout
-        // Uncomment to enable logging to a log on the file system
         options: {
             stream: 'access.log'
         }
@@ -16,20 +19,18 @@ module.exports = {
     assets: {
         lib: {
             css: [
-                'public/lib/bootstrap/dist/css/bootstrap.min.css',
-                'public/lib/bootstrap/dist/css/bootstrap-theme.min.css',
+                'inspinia/css/lib.min.css'
             ],
             js: [
-                'public/lib/angular/angular.min.js',
-                'public/lib/angular-resource/angular-resource.min.js',
-                'public/lib/angular-animate/angular-animate.min.js',
-                'public/lib/angular-ui-router/release/angular-ui-router.min.js',
-                'public/lib/angular-ui-utils/ui-utils.min.js',
-                'public/lib/angular-bootstrap/ui-bootstrap-tpls.min.js'
+                'js/lib.min.js'
             ]
         },
-        css: 'public/dist/application.min.css',
-        js: 'public/dist/application.min.js'
+        css: [
+            'css/app.min.css'
+        ],
+        js: [
+            'js/app.min.js'
+        ]
     },
     facebook: {
         clientID: process.env.FACEBOOK_ID || 'APP_ID',

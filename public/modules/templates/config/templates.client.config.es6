@@ -11,7 +11,6 @@ angular.module('templates').config(['$stateProvider', function ($stateProvider) 
 				templateUrl: 'modules/core/views/sidebar/template-groups-list.client.view.html'
 			},
 			'main-view': {
-				/** @ngInject */
 				templateUrl: $stateParams => {
 					switch ($stateParams.templateType) {
 						case 'eventTemplates':
