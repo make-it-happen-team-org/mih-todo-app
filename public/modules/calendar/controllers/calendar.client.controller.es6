@@ -29,7 +29,7 @@ class Calendar {
                     center: 'title',
                     right: 'agendaDay, agendaWeek, month'
                 },
-                scrollTime: hours.map(day => day.start).min().value(),
+                scrollTime: hours.map( day => day.start ).min().value(),
                 businessHours: false,
                 firstDay: 1,
                 defaultView: 'agendaWeek',
