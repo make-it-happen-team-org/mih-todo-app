@@ -1,3 +1,5 @@
+// Setting up route
+
 angular.module('core').config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
     let HOME_URL = '/todo';
 
