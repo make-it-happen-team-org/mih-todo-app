@@ -6,10 +6,9 @@
     "npm": ">=1.4.28"
   },
   "scripts": {
-    "start": "grunt",
-    "develop": "set NODE_ENV=development&&nodemon ./server-app-folder/server.js --debug",
-    "test": "grunt test",
-    "postinstall": "bower install --config.interactive=false"
+    "preinstall": "node  dev_config/npm/npm.pre-install.js",
+    "postinstall": "node  dev_config/npm/npm.post-install.js",
+    "develop": "set NODE_ENV=development&&nodemon ./server-app-folder/server.js --debug"
   },
   "dependencies": {
     "angular-bootstrap-datetimepicker": "^1.0.1",
