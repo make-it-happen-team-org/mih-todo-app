@@ -1,5 +1,3 @@
-'use strict';
-
 class TemplatesController {
 	/** @ngInject */
 	constructor(template, Authentication, Users, Notification, $state, TemplatesService) {
@@ -34,7 +32,7 @@ class TemplatesController {
 
 			const lastUsedTemplate = this.TemplatesService.getLastUsed(templateType, updatedUser);
 
-			this.$state.go('templates', {
+			this.$state.go('restricted.templates', {
 				templateId: lastUsedTemplate._id,
 				templateType: templateType
 			});

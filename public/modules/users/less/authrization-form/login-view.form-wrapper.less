@@ -1,0 +1,61 @@
+@import "../mixins/_login-view.btn-mixin.less";
+@import "../mixins/_login-view.popover-mixin.less";
+@import "../mixins/_login-view.form-mixin.less";
+@import "_login-view.error-msg.less";
+@import (once) "../../../../less/_app.variables.less";
+
+.auth-form {
+  position: relative;
+  max-width: @login-form-max-width;
+  min-width: @login-form-min-width;
+  margin: 0 auto;
+  color: inherit;
+
+  &-wrapper {
+    padding: .5em 0 1em 0;
+    text-align: right;
+    transition: all .5s;
+
+    &--reset-password {
+      text-align: center;
+    }
+
+    &__link {
+      font-size: 1.3rem;
+      color: @login-btn-font-color;
+
+      &:hover,
+      &:focus {
+        text-decoration: underline;
+        color: @login-btn-font-color;
+      }
+    }
+  }
+
+  .auth-form__form-group {
+    &.has-error {
+      .ng-invalid {
+        border: 1px solid @login-error-color;
+      }
+    }
+  }
+
+  &__sing-in-separator {
+    margin: 3.5rem 0 2.5rem 0;
+    color: inherit;
+    font-size: inherit;
+    text-align: center;
+    text-transform: uppercase;
+  }
+
+  &__label {
+    font-size: 1.3rem;
+  }
+
+  &__form-group {
+    margin-bottom: 1.3rem;
+  }
+
+  .login-view-btn-mixin();
+  .login-view-control-mixin();
+}

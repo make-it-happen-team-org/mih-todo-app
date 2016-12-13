@@ -1,187 +1,222 @@
 class AlgorithmNegative {
 
-  /** @ngInject */
-  constructor($rootScope, Slots, $timeout, ModalsService, MODALS_TASK_MESSAGES, MODALS_EVENT_MESSAGES, MODALS_EVENTS) {
-    Object.assign(this, {
-      $rootScope,
-      Slots,
-      $timeout,
-      ModalsService,
-      MODALS_TASK_MESSAGES,
-      MODALS_EVENT_MESSAGES,
-      MODALS_EVENTS
-    });
-
-    this.slotTypes = {
-      task : 'task',
-      event: 'event'
-    };
-  }
-
-  initialize(slotType, totalAvailTime) {
-    let additionalMsg = `(you need to free up ${this.estimation - totalAvailTime} h)`;
-    this.openModalForDecision(slotType, additionalMsg);
-
-    this.totalAvailHours = totalAvailTime;
-    this.$rootScope.$on(this.MODALS_EVENTS.taskFirst, () => { this.closeModalInstance(); });
-    this.$rootScope.$on(this.MODALS_EVENTS.taskSecond, () => { this.getOccupiedSlots(this.startDate, this.endDate); });
-
-    //this.$rootScope.$on(this.MODALS_EVENTS.eventFirst, () => { this.closeModalInstance();  });
-    //this.$rootScope.$on(this.MODALS_EVENTS.eventSecond, event => { console.log('second event fired', event); });
-  }
-
-  getSlots(startDate, endDate, type) {
-    return this.delegate.AlgorithmServer.get({
-      q: type,
-      start: startDate,
-      end: endDate
-    }).$promise;
-  }
-
-  getOccupiedSlots(startDate, endDate) {
-    return new Promise(resolve => {
-      this.getSlots(startDate, endDate, 'occupied-time')
-        .then(res => {
-          this.slotsOccupiedSlots = {
-            slots: res.slots,
-            tasks: res.tasks
-          };
-
-          resolve(this.slotsOccupiedSlots);
-
-          let aggregatedTasksWithSlots = this.aggregateTasksWithSlots(this.slotsOccupiedSlots);
-          let tasksWithLeftTimeData = this.leftTimeBeforeDeadline(aggregatedTasksWithSlots);
-
-          this.tasksWithShiftAbilities = this.checkShiftAbilities(tasksWithLeftTimeData);
-          //TODO: check posibility to shift tasks for days before deadline (get days free time before deadline)
-          this.recalculateExistingTasks(this.tasksWithShiftAbilities);
+    /** @ngInject */
+    constructor($rootScope, $q, Slots, ModalsService, TimeService, MODALS_TASK_MESSAGES) {
+        Object.assign(this, {
+            $rootScope,
+            $q,
+            Slots,
+            ModalsService,
+            TimeService,
+            MODALS_TASK_MESSAGES,
+            slotTypes: {
+                task:  'task',
+                event: 'event'
+            }
         });
-    });
-  }
-
-  //TODO: how to decrease quantity of requests?
-  recalculateExistingTasks(tasks) {
-      let freeSlots = [];
-
-      return new Promise(resolve => {
-          tasks.forEach(function(value, key) {
-              this.getSlots(new Date(this.startDate.setDate(this.startDate.getDate() + 1)), value.days.endTime, 'free-time')
-                  .then(res => {
-                      this.slots = res.data;
-                      freeSlots.push(this.slots);
-                      resolve(this.slots);
-                  });
-          }, this);
-      }).then(() => {
-          this.$timeout(() => {
-              this.findAppropriateSlotsToShift(tasks, freeSlots);
-              this.closeModalInstance();
-          });
-        });
-  }
-
-    findAppropriateSlotsToShift(tasksToShift, freeSlots) {
-        let hoursToFree = this.estimation - this.totalAvailHours;
-
-        tasksToShift.forEach(function(value, key) {
-            value.slots.futureSlots.forEach(function(v, index) {
-                let slotDuration = v.duration;
-                let freePlaces = freeSlots[key];
-
-                Object.keys(freePlaces).forEach(function(ky, ind) {
-                    while (hoursToFree > 0) {
-                        freePlaces[ky].forEach(function (val, k) {
-                            if (val.duration >= slotDuration) {
-                                hoursToFree -= slotDuration;
-
-                                value.slots.futureSlots[index].start = val.start;
-                                value.slots.futureSlots[index].end = new Date(new Date(val.start).setHours(new Date(val.start).getHours() + 3)).toISOString();
-
-                                this.Slots.update(value.slots.futureSlots[index]);
-                                //this.delegate.$scope.apply();
-                            }
-                        }, this);
-                    }
-                }, this);
-
-            }, this);
-        }, this);
     }
 
-    //duration: this.estimation,
-    //priority: this.priority,
-    //end     : this.endDate.getTime(),
-    //start   : this.startDate.getTime()
+    initialize(slotType, totalAvailTime) {
+        this.openModalForDecision(slotType, `(you need to free up ${this.estimation - totalAvailTime} h)`);
+        this.totalAvailHours = totalAvailTime;
+    }
 
-  leftTimeBeforeDeadline(tasks) {
-    tasks.forEach((value, key) => {
-      tasks[key].leftEstimation = tasks[key].estimation - _.sum(tasks[key].slots.passedSlots.map(value => {
-        return value.duration;
-      }));
+    getOccupiedSlots(startDate, endDate) {
+        let defer = this.$q.defer();
 
-    //FIXME: get only working hours
-      tasks[key].leftHoursBeforeDeadline = parseInt(((new Date(tasks[key].days.endTime) - this.startDate) / (1000 * 60 * 60)).toFixed(1));
-    }, this);
+        this.delegate.getSlots(startDate, endDate, 'occupied-time')
+            .then(res => {
+                this.slotsOccupiedSlots = {
+                    slots: res.slots,
+                    tasks: res.tasks
+                };
 
-    return tasks;
-  }
-  checkShiftAbilities(tasks) {
-    let filteredTasks = [];
+                defer.resolve(this.slotsOccupiedSlots);
 
-    tasks.forEach((value, key) => {
-      tasks[key].canShiftWithinDeadline = (tasks[key].leftHoursBeforeDeadline - tasks[key].leftEstimation >= 0);
-    });
+                return this.aggregateTasksWithSlots(this.slotsOccupiedSlots);
+            })
+            .then((aggregatedTasksWithSlots) => {
+                this.recalculateExistingTasks(aggregatedTasksWithSlots);
+            });
+    }
 
-    tasks.some(value => {
-      if (value.canShiftWithinDeadline >= 0) {
-        filteredTasks.push(value);
-      }
-    });
+    _findIndexForSlots(arr, taskId) {
+        return arr.reduce((newArr, elem, index) => {
+            if (elem === taskId)
+                newArr.push(index);
+            return newArr;
+        }, []);
+    }
 
-    return filteredTasks;
-  }
-  aggregateTasksWithSlots(data) {
-    var tasks = data.tasks; //arr
-    var slots = data.slots; //obj
+    /**
+     *
+     * @param data
+     * @returns {Array} tasks
+     * @description Gets object with slots and tasks from promise and aggregates each task with its slots
+     * so each task has field slots with passed and future slots
+     */
+    aggregateTasksWithSlots(data) {
+        let tasks = data.tasks; //arr
+        let slots = data.slots; //obj
 
-    var concatSlots = {
-      arrayOfPassedSlots: slots.passedSlots.map(value => { return value.taskId; }),
-      arrayOfFutureSlots: slots.futureSlots.map(value => { return value.taskId; })
+        let concatSlots = { arrayOfPassedSlots: slots.passedSlots.map(value => { return value.taskId; }),
+            arrayOfFutureSlots: slots.futureSlots.map(value => { return value.taskId; })
+        };
+
+        _.forEach(tasks, (value, key) => {
+            tasks[key].slots = {
+                passedSlots: [],
+                futureSlots: []
+            };
+
+            let indexArrPassed = this._findIndexForSlots(concatSlots.arrayOfPassedSlots, value._id);
+            let indexArrFuture = this._findIndexForSlots(concatSlots.arrayOfFutureSlots, value._id);
+
+            _.forEach(indexArrPassed, index => { tasks[key].slots.passedSlots.push(slots.passedSlots[index]); });
+            _.forEach(indexArrFuture, index => { tasks[key].slots.futureSlots.push(slots.futureSlots[index]); });
+        });
+
+        return tasks;
+    }
+
+    isShiftCapable(hoursBeforeDeadline, leftEstimation) {
+        return !!(hoursBeforeDeadline - leftEstimation);
+    }
+
+    leftEstimationCalc(task) {
+        return task.estimation - _.sum(task.slots.passedSlots.map(value => { return value.duration; }));
     };
 
-    tasks.forEach((value, key) => {
-      tasks[key].slots = {
-        passedSlots: [],
-        futureSlots: []
-      };
+    _freeSlotsUpdate(key, indexInArr, newValue, freeSlots) {
+        _.forEach(freeSlots, (value, index) => {
+            if (value[key]) {
+                value[key][indexInArr] = newValue;
+            }
+        });
 
-      var indexArrPassed = concatSlots.arrayOfPassedSlots.reduce((newArr, elem, index) => {
-        if (elem === value._id)
-          newArr.push(index);
-        return newArr;
-      }, []);
+        return freeSlots;
+    }
 
-      var indexArrFuture = concatSlots.arrayOfFutureSlots.reduce((newArr, elem, index) => {
-        if (elem === value._id)
-          newArr.push(index);
-        return newArr;
-      }, []);
+    getFreeSlotByDuration(slotDuration, freePlaces) {
+        let fitSlot = {};
 
-      indexArrPassed.forEach(index => { tasks[key].slots.passedSlots.push(slots.passedSlots[index]); });
-      indexArrFuture.forEach(index => { tasks[key].slots.futureSlots.push(slots.futureSlots[index]); });
-    });
+        _.forEach(Object.keys(freePlaces), (value, key) => {
+            if (!_.isEmpty(fitSlot)) { return false; };
 
-    return tasks;
-  }
-  openModalForDecision(slotType, additionalData) {
-    let msg = (slotType === this.slotTypes.task) ? this.MODALS_TASK_MESSAGES : this.MODALS_EVENT_MESSAGES;
+            _.forEach(freePlaces[value], (val, ind) => {
+                if (val.duration >= slotDuration) {
+                    fitSlot       = _.assignIn(fitSlot, val);
+                    fitSlot.date  = value;
+                    fitSlot.index = ind;
+                    return false;
+                }
+            });
+        });
 
-    msg.timeToFree = additionalData;
-    this.ModalsService.getModalWindowOpen(msg);
-  }
-  closeModalInstance() {
-    this.ModalsService.getModalWindowClose();
-  }
+        return fitSlot;
+    }
+
+    /**
+     *
+     * @param {Array} tasksToShift, {Object} freeSlots
+     * @param freeSlots
+     * @description shifts future task slots to the appropriate free time
+     */
+    findAppropriateSlotsToShift(tasksToShift, freeSlots) {
+        let sortedTasksByPriority     = _.reverse(tasksToShift);
+        let sortedFreeSlotsByPriority = _.reverse(freeSlots);
+        let hoursToFree               = this.estimation - this.totalAvailHours;
+        let counter                   = 0;
+        let defObj                    = {};
+
+        _.forEach(sortedTasksByPriority, (value, key) => {
+            if (hoursToFree <= 0) { return false; };
+
+            let slotDuration = value.slots.futureSlots[counter].duration;
+            let freePlaces   = sortedFreeSlotsByPriority[key];
+            let fitSlot      = this.getFreeSlotByDuration(slotDuration, freePlaces);
+
+            if (_.isEmpty(fitSlot)) { return; }
+
+            value.slots.futureSlots[counter].start = fitSlot.start;
+            value.slots.futureSlots[counter].end   = this.TimeService.appendHoursToISODate(fitSlot.start, slotDuration);
+
+            hoursToFree -= slotDuration;
+
+            let updatefitSlot = {
+                start:    value.slots.futureSlots[counter].end,
+                duration: fitSlot.duration - slotDuration,
+                end:      fitSlot.end
+            };
+
+            sortedFreeSlotsByPriority = this._freeSlotsUpdate(fitSlot.date, fitSlot.index, updatefitSlot, sortedFreeSlotsByPriority);
+
+            defObj[key] = this.Slots.update(value.slots.futureSlots[counter]);
+
+            counter = (key === sortedTasksByPriority.length) ? counter + 1 : counter;
+        });
+
+        this.$q.all(defObj)
+            .then((res) => {
+                if (res) {
+                    this.$rootScope.$broadcast('slotShiftedFromNegative');
+                }
+                this.closeModalInstance();
+            });
+    }
+
+    recalculateExistingTasks(tasks) {
+        let freeSlots = [];
+        let deferObj  = {};
+
+        tasks.forEach((value, key) => {
+            deferObj[key] = this.delegate.getSlots(
+                this.TimeService.appendDaysToISODate(this.startDate, 1),
+                this.TimeService.addTimeZoneToISODate(value.days.endTime),
+                'free-time'
+            );
+        });
+
+        this.$q.all(deferObj)
+            .then(data => {
+                _.forEach(tasks, (value, key) => {
+                    this.slots = data[key].data;
+
+                    value.leftHoursBeforeDeadline = this.delegate.getTotalFreeHoursInDailyMap(this.delegate.getFreeHoursDailyMapFromSlots(this.slots));
+                    value.leftEstimation          = this.leftEstimationCalc(value);
+                    value.isShiftCapable          = this.isShiftCapable(value.leftHoursBeforeDeadline, value.leftEstimation);
+
+                    freeSlots.splice(key, 0, this.slots);
+                });
+            })
+            .then(() => {
+                let indexes = [];
+
+                let filteredTasks = _.filter(tasks, (task, index) => {
+                    if (!task.isShiftCapable) {
+                        indexes.push(index);
+                    }
+                    return task.isShiftCapable;
+                });
+
+                for (var i = indexes.length - 1; i >= 0; i--) {
+                    freeSlots.splice(indexes[i], 1);
+                }
+
+                this.findAppropriateSlotsToShift(filteredTasks, freeSlots);
+            });
+    }
+
+    openModalForDecision(slotType, additionalData) {
+        let msg = (slotType === this.slotTypes.task) ? this.MODALS_TASK_MESSAGES : this.MODALS_EVENT_MESSAGES;
+
+        msg.timeToFree = additionalData;
+        this.ModalsService.getModalWindowOpen(msg);
+    }
+
+    closeModalInstance() {
+        this.ModalsService.getModalWindowClose();
+    }
 }
 
 angular.module('algorithm').service('AlgorithmNegative', AlgorithmNegative);

@@ -1,5 +1,3 @@
-'use strict';
-
 angular.module('events')
 	.factory('Events', ['$resource',
 		function ($resource) {
@@ -14,7 +12,7 @@ angular.module('events')
 					method: 'DELETE'
 				},
 				importEvents: {
-					url: '/events/import/outlook',
+					url: 'events/import/outlook',
 					method: 'POST'
 				}
 			});

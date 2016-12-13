@@ -1,183 +1,212 @@
 const watchFiles = require('./watch-files');
 
-const less = {
-  options: {
-    plugins: [new (require('less-plugin-autoprefix'))({ browsers: ["last 3 versions"] })]
-  },
-  dist:    {
-    files: [{
-      expand: true,
-      src:    'public/less/app.main.less',
-      dest:   'public/dist/css',
-      ext:    '.css',
-      rename: function (base) {
-        return `${ base }/main.css`;
-      }
-    }]
-  }
-};
+/** MAIN **/
 
-const jshint = {
-  all: {
-    src:     watchFiles.clientJS.concat(watchFiles.serverJS),
-    options: {
-      jshintrc: true
-    }
-  }
-};
-
-const uglify = {
-  production: {
-    options: {
-      mangle: false
+const env = {
+    development: {
+        NODE_ENV: 'development'
     },
-    files:   {
-      'public/dist/js/main.min.js': 'public/dist/js/main.js'
+    production: {
+        NODE_ENV: 'production'
+    },
+    test: {
+        NODE_ENV: 'test'
     }
-  }
 };
 
-const cssmin = {
-  combine: {
-    files: {
-      'public/dist/application.min.css': '<%= applicationCSSFiles %>'
+const less = {
+    options: {
+        plugins: [new (require('less-plugin-autoprefix'))({browsers: ["last 3 versions"]})],
+        rootpath: 'public'
+    },
+    dev: {
+        files: {
+            'css/app.main.css': 'less/app.main.less'
+        }
+    },
+    prod: {
+        files: {
+            'build/inspinia/css/lib.min.css': '<%= config.assets.lib.css %>',
+            'build/css/app.min.css': '<%= config.assets.cssFullPath %>'
+        },
+        options: {
+            compress: true
+        }
     }
-  }
 };
 
 const babel = {
-  es6: {
-    files: [
-      {
-        expand: true,
-        src:    watchFiles.allES6,
-        ext:    '.js',
-        extDot: 'last'
-      }
-    ]
-  }
-};
-
-const nodemon = {
-  dev: {
-    script:  'server-app-folder/server.js',
-    options: {
-      nodeArgs: ['--debug'],
-      ext:      'js,html',
-      watch:    watchFiles.serverViews.concat(watchFiles.serverJS)
+    es6: {
+        files: [
+            {
+                expand: true,
+                src: watchFiles.allES6,
+                ext: '.js',
+                extDot: 'last'
+            }
+        ]
     }
-  }
-};
-
-const nodeInspector = {
-  custom: {
-    options: {
-      'web-port':          1337,
-      'web-host':          'localhost',
-      'debug-port':        5858,
-      'save-live-edit':    true,
-      'no-preload':        true,
-      'stack-trace-limit': 50,
-      'hidden':            []
-    }
-  }
-};
-
-const ngAnnotate = {
-  production: {
-    files: {
-      'public/dist/js/main.js': '<%= applicationJavaScriptFiles %>'
-    }
-  }
-};
-
-const concurrent = {
-  server:    ['nodemon', 'watch'],
-  debug:     ['nodemon', 'watch', 'nodeInspector'],
-  buildSrc:  ['build-less', 'build-es6'],
-  minifySrc: ['cssmin', 'uglify'],
-  options:   {
-    logConcurrentOutput: true,
-    limit:               10
-  }
-};
-
-const env = {
-  development: {
-    NODE_ENV: 'development'
-  },
-  production:  {
-    NODE_ENV: 'production'
-  },
-  test:        {
-    NODE_ENV: 'test'
-  },
-};
-
-const karma = {
-  unit: {
-    configFile: 'karma.conf.js'
-  }
 };
 
 const clean = {
-  compiledJs: [
-    'public/modules/**/*.js', 'public/modules/**/*.js.map',
-    'server-app-folder/**/*.js', 'server-app-folder/**/*.js.map', '!server-app-folder/server.js'
-  ]
+    compiledJs: [
+        'modules/**/*.js', 'modules/**/*.js.map'
+    ]
 };
 
 const watch = {
-  serverViews: {
-    files:   watchFiles.serverViews,
-    options: {
-      livereload: true
+    clientViews: {
+        files: watchFiles.clientViews,
+        options: {
+            livereload: true
+        }
+    },
+    allES6: {
+        files: watchFiles.allES6,
+        tasks: ['build-es6', 'jshint'],
+        options: {
+            livereload: true
+        }
+    },
+    clientCSS: {
+        files: watchFiles.clientCSS,
+        tasks: ['csslint'],
+        options: {
+            livereload: true
+        }
+    },
+    clientLESS: {
+        files: watchFiles.clientLESS,
+        tasks: ['less'],
+        options: {
+            livereload: true
+        }
     }
-  },
-  clientViews: {
-    files:   watchFiles.clientViews,
-    options: {
-      livereload: true
+};
+
+/** PRODUCTION **/
+
+const ngAnnotate = {
+    production: {
+        files: {
+            'build/js/lib.min.js': '<%= config.assets.lib.js %>',
+            'build/js/app.min.js': '<%= config.assets.js %>'
+        }
     }
-  },
-  allES6:      {
-    files:   watchFiles.allES6,
-    tasks:   ['build-es6', 'jshint'],
-    options: {
-      livereload: true
+};
+
+const htmlmin = {
+    production: {
+        options: {
+            removeComments: true,
+            collapseWhitespace: true
+        },
+        files: [
+            {
+                expand: true,
+                src: 'modules/**/*.html',
+                rename: function (base, src) {
+                    return 'build/' + src;
+                }
+            }
+        ]
     }
-  },
-  clientCSS:   {
-    files:   watchFiles.clientCSS,
-    tasks:   ['csslint'],
+};
+
+const copy = {
     options: {
-      livereload: true
+        rootpath: 'public'
+    },
+    prodImg: {
+        files: [
+            {
+                expand: true,
+                src: [
+                    'modules/**/*.png',
+                    'modules/**/*.jpg'
+                ],
+                rename: function (base, src) {
+                    return 'build/' + src;
+                }
+            },
+            {
+                expand: true,
+                src: [
+                    'inspinia/**/*.png',
+                    'inspinia/**/*.jpg'
+                ],
+                rename: function (base, src) {
+                    return 'build/css/public/' + src.replace('inspinia/css/', '');
+                }
+            }
+        ]
+    },
+    prodFonts: {
+        files: [
+            {
+                src: 'fonts/*',
+                expand: true,
+                rename: function (base, src) {
+                    return 'build/' + src;
+                }
+            },
+            {
+                src: 'inspinia/css/fonts/*',
+                expand: true,
+                rename: function (base, src) {
+                    return 'build/' + src;
+                }
+            },
+            {
+                src: 'inspinia/font-awesome/fonts/*',
+                expand: true,
+                rename: function (base, src) {
+                    return 'build/inspinia/css/fonts/' + src.split('/').pop();
+                }
+            }
+        ]
     }
-  },
-  clientLESS:  {
-    files:   watchFiles.clientLESS,
-    tasks:   ['build-less'],
-    options: {
-      livereload: true
+};
+
+const uglify = {
+    production: {
+        files: {
+            'build/js/app.min.js': 'build/js/app.min.js',
+            'build/js/lib.min.js': 'build/js/lib.min.js'
+        }
     }
-  }
+};
+
+/** ADDITIONAL **/
+
+const jshint = {
+    all: {
+        src: watchFiles.clientJS,
+        options: {
+            jshintrc: true
+        }
+    }
+};
+
+const karma = {
+    unit: {
+        configFile: 'karma.conf.js'
+    }
 };
 
 const pkg = require('grunt').file.readJSON('package.json');
 
 module.exports = {
-  pkg,
-  watch,
-  less,
-  jshint,
-  uglify,
-  cssmin,
-  babel,
-  nodemon,
-  nodeInspector,
-  ngAnnotate,
-  concurrent,
-  env,
-  karma,
-  clean
+    pkg,
+    watch,
+    less,
+    jshint,
+    uglify,
+    babel,
+    ngAnnotate,
+    env,
+    karma,
+    clean,
+    htmlmin,
+    copy
 };

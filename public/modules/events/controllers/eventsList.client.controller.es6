@@ -1,18 +1,21 @@
-'use strict';
+class EventsListController {
+  /** @ngInject */
+  constructor($scope, Events) {
+    Object.assign(this, { $scope, Events });
 
-// Events controller
-angular.module('events').controller('EventsListController', ['$scope', '$rootScope', '$stateParams', '$location', 'Authentication', 'Events',
-	function($scope, $rootScope, $stateParams, $location, Authentication, Events) {
-		$scope.authentication = Authentication;
+    const attachEvent = this.$scope.$on('NEW_EVENTS_MODIFY', () => {
+      this.find();
+    });
 
-		$rootScope.$on('NEW_EVENTS_MODIFY', function () {
-			$scope.find();
-		});
+    this.events = this.Events.query();
+    attachEvent();
+  }
 
-		// Find a list of Events
-		$scope.find = function() {
-			$scope.events = Events.query();
-		};
+  find() {
+    this.events = this.Events.query();
+  }
+}
 
-	}
-]);
+angular
+  .module('events')
+  .controller(EventsListController);

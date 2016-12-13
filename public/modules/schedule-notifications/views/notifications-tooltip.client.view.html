@@ -1,22 +1,29 @@
-<a class="notifications-info" data-ng-class="{disable: !notifications.overdueSlots.length}" data-toggle="dropdown">
+<a class="notifications-info"
+   data-ng-init="find()"
+   data-ng-class="{disable: !notifications.overdueSlots.length}"
+   data-ng-click="mainCtrl.toggleDropdown('notification')">
     <i class="fa fa-bell" aria-hidden="true"></i>
-    <span class="label" data-ng-class="notifications.overdueSlots.length ? 'label-primary' : 'label-default'"
+    <span class="notifications-info__label"
+          data-ng-class="{'notifications-info__label-label--primary': notifications.overdueSlots.length}"
           data-ng-bind="notifications.overdueSlots.length">
     </span>
 </a>
 
-<ul data-ng-init="find()" data-ng-show="notifications.overdueSlots.length" class="dropdown-menu dropdown-alerts notifications-dropdown">
-    <li data-ng-repeat="slot in notifications.overdueSlots | limitTo: 3 " class="clearfix notification-item">
-		<div class="clearfix">
-			<a data-ui-sref="overdue.edit({ taskId: slot.taskId })" class="notification-link"
-			   data-ng-bind="slot.title"></a>
-			<span class="badge overdue-badge pull-right"
-					data-ng-click="completeSlot(slot, notifications.overdueTasks)">
-				<i class="fa fa-chevron-down" aria-hidden="true"></i>
-			</span>
-		</div>
-	</li>
-	<li>
-		<a ui-sref="overdue" class="notification-control text-center">See all notifications > </a>
-	</li>
+<ul class="notifications__dropdown dropdown-menu-container"
+    data-ng-class="{'dropdown-menu-container--collapse': !mainCtrl.dropdown.notification}"
+    data-ng-show="notifications.overdueSlots.length">
+    <li class="notification-item"
+        data-ng-repeat="slot in notifications.overdueSlots | limitTo: 3 ">
+            <a class="notifications__dropdown-link dropdown-menu-container__link"
+               data-ui-sref="restricted.overdue.edit({ taskId: slot.taskId })"
+               data-ng-bind="slot.title"></a>
+            <span class="overdue-badge"
+                  data-ng-click="completeSlot(slot, notifications.overdueTasks)">
+                <i class="fa fa-chevron-down" aria-hidden="true"></i>
+            </span>
+    </li>
+    <li class="notification-item notification-item--control">
+        <a class="notifications__dropdown-link dropdown-menu-container__link"
+           data-ui-sref="overdue">See all notifications</a>
+    </li>
 </ul>

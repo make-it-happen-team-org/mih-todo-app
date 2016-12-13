@@ -1,5 +1,3 @@
-'use strict';
-
 // Events controller
 angular.module('events').controller('EventsController',
 	['$scope', '$rootScope', '$stateParams', '$location', 'Users', 'Authentication', 'Events', 'Notification',
@@ -22,7 +20,7 @@ angular.module('events').controller('EventsController',
 					validationError: undefined,
 					notes: undefined
 				};
-
+			//TODO: replace with angular.toJson()
 			$scope.eventData = JSON.parse(JSON.stringify(defaultEventData));
 
 			let getPresetTitle = function getPresetTitle(eventPresetParam) {
@@ -138,7 +136,7 @@ angular.module('events').controller('EventsController',
 					classNames.push(defaultTemplateType);
 				}
 
-				$scope.eventData.classNames = classNames;
+				$scope.eventData.className = classNames;
 
 				new Events($scope.eventData).$save(() => {
 					$scope.events = [];
@@ -183,6 +181,7 @@ angular.module('events').controller('EventsController',
 			};
 			$scope.clearFormData = function () {
 				$scope.selectedTemplate = null;
+				//TODO: replace with angular.toJson()
 				$scope.eventData = JSON.parse(JSON.stringify(defaultEventData));
 			};
 		}]);

@@ -1,6 +1,3 @@
-server-app-folder/**/*.js
-!server-app-folder/server.js
-server-app-folder/**/*.map
 server-app-folder/tests/coverage/
 
 public/*.js
@@ -13,6 +10,7 @@ public/modules/users/img/profiles/*
 public/css/
 public/index.html
 
+public/build/*
 
 #=========== THIS IS ORIGINAL FROM ROOT/APP folder
 # iOS / Apple
