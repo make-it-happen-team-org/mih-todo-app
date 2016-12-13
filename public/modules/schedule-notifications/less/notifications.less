@@ -1,34 +1,51 @@
 @import (once) "../../../less/_app.variables.less";
+@import (once) "../../../less/_app.mixins.less";
 
-.notifications-dropdown {
-  .notification-item {
-    padding: 1% 0;
-    margin: 0 4px;
+.header-nav-element {
+  &:last-child {
+    .dropdown-mixin(auto, 0);
   }
+}
 
-  a.notification-control {
-    border-top: 1px solid @notification--brd-top-color;
-    text-align: center;
-    margin-bottom: 0;
+.notifications__dropdown {
+  .dropdown-mixin(auto, 50%);
 
-    &:hover {
-      color: @base-color;
-      background: transparent;
+  .notification-item {
+    position: relative;
+
+    &-control {
+      border-top: 1px solid @dropdown-notification-border;
+    }
+
+    .overdue-badge {
+      position: absolute;
+      top: @dropdown-fa-top;
+      right: @dropdown-fa-right;
+      height: @dropdown-fa-dimention;
+      width: @dropdown-fa-dimention;
+      text-align: center;
+      color: @dropdown-badge-color;
+      line-height: @dropdown-line-height;
+      background-color: @dropdown-badge-bg-color;
+      transition: none;
+      border: none;
+
+      .fa {
+        display: inline;
+        height: @dropdown-fa-dimention;
+
+        &:hover {
+          color: inherit;
+        }
+      }
     }
   }
 
-  i { font-size: inherit; }
-
-  .notification-link {
-    padding-left: 0 !important;
-    padding-right: 5px !important;
-    display: inline-block;
-    max-width: 250px;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    overflow: hidden;
-    color: inherit;
-
-    &:hover { color: @base-color; }
+  &-link {
+    &:hover {
+      &~ .overdue-badge {
+        background-color: @dropdown-badge-bg-color--hover;
+      }
+    }
   }
 }

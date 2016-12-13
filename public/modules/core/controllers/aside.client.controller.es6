@@ -1,37 +1,20 @@
-angular.module('core').controller('SidebarController', ['$scope', '$injector',
-	function ($scope, $injector) {
-		let $state = $injector.get('$state');
+class AsideController {
+  /** @ngInject */
+  constructor($scope, Authentication, $state, TemplatesService) {
+    Object.assign(this, { $scope, Authentication, $state, TemplatesService });
 
-		let Ctrl = this;
-		Ctrl.topStatesInNavDropdown = [
-			$state.get('restricted.todo_state'),
-			$state.get('restricted.overdue'),
-			$state.get('restricted.templates')
-		];
+    this.user = this.Authentication.user;
 
-		Ctrl.goToState = function (newState) {
-			if (!newState) return;
-			$state.go(newState);
-		};
+    $scope.$on('updateUserInfo', (event, user) => {
+      angular.copy(user, this.user);
+    });
+  }
 
-		// $state.current isn't available yet,
-		// but we need to display selectedTopState in the navigation dropdown
-		// that's why we subscribe to $stateChangeSuccess event,
-		// and then investigate which topState is parent to the current $state
-		$scope.$on('$stateChangeSuccess', function (event, currentState, toParams, fromState, fromParams) {
-			// $state.current === currentState;
+  toggleSidebar() {
+    this.$scope.$emit('toggleSidebar');
+  }
+}
 
-			let topStateToDisplayInNavDropdown = _.find(Ctrl.topStatesInNavDropdown, function (oneOfParentNavStates) {
-				// find appropriate top state and attach to the view
-				return $state.includes(oneOfParentNavStates.name);
-			});
-			if (topStateToDisplayInNavDropdown) {
-				// always set TOP STATE to enable site navigation via dropdown
-				// DO _NOT_ DO IT THIS WAY: Ctrl.selectedTopState = currentState;
-				// setting currentState will add an empty option to dropdown
-				Ctrl.selectedTopState = topStateToDisplayInNavDropdown;
-			}
-
-		});
-
-	}]);
+angular
+  .module('core')
+  .controller('AsideController', AsideController);

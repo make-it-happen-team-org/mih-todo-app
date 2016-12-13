@@ -1,10 +1,19 @@
-<section class="page-wrapper"
-         data-ng-controller="HomeController as homeCtrl"
-         data-ng-class="{'page-wrapper--collapsed': homeCtrl.sidebarCollapsed}"
-         data-ng-if="user">
-    <ng-include src="'/modules/core/views/sidebar/sidebar.client.view.html'"></ng-include>
-    <ng-include src="'/modules/core/views/main.client.view.html'"></ng-include>
-</section>
-<section class="page-wrapper" data-ng-if="!user">
-    <ng-include src="'/modules/core/views/login.client.view.html'"></ng-include>
-</section>
+<main class="main-view"
+      data-ng-controller="MainController as mainCtrl"
+      data-ng-class="{'main-view--collapsed': mainCtrl.sidebarCollapsed}"
+      data-ng-if="user">
+
+    <aside class="sidebar"
+            data-ng-include="'/modules/core/views/sidebar/sidebar.client.view.html'"
+            data-ng-controller="AsideController as asideCtrl">
+    </aside>
+
+    <section class="main-view__content"
+             data-ng-include="'/modules/core/views/main/main.client.view.html'">
+    </section>
+</main>
+
+<main class="login-view col-sm-12 col-xs-12 auth-aside animated fadeInLeft"
+      data-ng-if="!user"
+      data-ng-include="'/modules/core/views/login.client.view.html'">
+</main>

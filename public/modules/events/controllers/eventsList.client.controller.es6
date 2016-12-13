@@ -1,16 +1,21 @@
-// Events controller
-angular.module('events').controller('EventsListController', ['$scope', '$rootScope', '$stateParams', '$location', 'Authentication', 'Events',
-	function($scope, $rootScope, $stateParams, $location, Authentication, Events) {
-		$scope.authentication = Authentication;
+class EventsListController {
+  /** @ngInject */
+  constructor($scope, Events) {
+    Object.assign(this, { $scope, Events });
 
-		$rootScope.$on('NEW_EVENTS_MODIFY', function () {
-			$scope.find();
-		});
+    const attachEvent = this.$scope.$on('NEW_EVENTS_MODIFY', () => {
+      this.find();
+    });
 
-		// Find a list of Events
-		$scope.find = function() {
-			$scope.events = Events.query();
-		};
+    this.events = this.Events.query();
+    attachEvent();
+  }
 
-	}
-]);
+  find() {
+    this.events = this.Events.query();
+  }
+}
+
+angular
+  .module('events')
+  .controller(EventsListController);

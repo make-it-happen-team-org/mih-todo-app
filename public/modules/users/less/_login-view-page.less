@@ -1,12 +1,12 @@
 @import (once) "../../../less/_app.variables.less";
-@import "./mixins/_users.popover-mixin.less";
+@import "mixins/_login-view.popover-mixin.less";
 
-.auth-page {
+.login-view {
   position: relative;
   background-image: @login-auth-bg-img;
   background-size: cover;
-  height: 100%;
   overflow: hidden;
+  height: 100%;
 
   &:before {
     content: '';
@@ -20,9 +20,8 @@
     opacity: .83;
   }
 
-  .row { height: 100%; }
-
   &__description {
+    position: relative;
     max-width: @login-description-max-width;
     margin: 9rem auto 15rem auto;
     line-height: 2.4rem;
