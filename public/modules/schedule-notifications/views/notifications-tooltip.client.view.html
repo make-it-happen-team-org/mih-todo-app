@@ -1,7 +1,7 @@
 <a class="notifications-info"
    data-ng-init="find()"
    data-ng-class="{disable: !notifications.overdueSlots.length}"
-   data-ng-click="headerCtrl.toggleDropdown('notification')">
+   data-ng-click="mainCtrl.toggleDropdown('notification')">
     <i class="fa fa-bell" aria-hidden="true"></i>
     <span class="notifications-info__label"
           data-ng-class="{'notifications-info__label-label--primary': notifications.overdueSlots.length}"
@@ -10,7 +10,7 @@
 </a>
 
 <ul class="notifications__dropdown dropdown-menu-container"
-    data-ng-class="{'dropdown-menu-container--collapse': !headerCtrl.dropdown.notification}"
+    data-ng-class="{'dropdown-menu-container--collapse': !mainCtrl.dropdown.notification}"
     data-ng-show="notifications.overdueSlots.length">
     <li class="notification-item"
         data-ng-repeat="slot in notifications.overdueSlots | limitTo: 3 ">
