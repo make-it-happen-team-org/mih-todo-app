@@ -10,15 +10,15 @@ class MainController {
     this.sidebarCollapsed = false;
     this.user = this.Authentication.user;
     this.topStatesInNavDropdown = [
-      $state.get('todo_state'),
-      $state.get('overdue'),
-      $state.get('templates')
+      $state.get('restricted.todo_state'),
+      $state.get('restricted.overdue'),
+      $state.get('restricted.templates')
     ];
     this.dropdown = {
       user: false,
       notification: false
     };
-    this.goToState('todo_state');
+    this.goToState('restricted.todo_state');
 
     this.$scope.$on('toggleSidebar', () => {
       this.sidebarCollapsed = !this.sidebarCollapsed;
