@@ -1,3 +1,5 @@
+@import (once) "../../../less/_app.variables.less";
+
 .mih-modal-theme {
   &.ngdialog {
     & .ngdialog-content {
@@ -27,7 +29,7 @@
     min-height: 15px;
     padding: 14px;
     font-family: @font-open-sans-regular;
-    background-color: @header-color;
+    background-color: @modal-header-color;
     color: #FFF;
     text-transform: uppercase;
   }
@@ -70,18 +72,18 @@
     &__handle-by-leaving {
       letter-spacing: -0.4px;
       &--free-time {
-        color: @leave-as-is;
+        color: @modal-button-leave-as-is;
         font-family: @font-open-sans-bold;
       }
       & .fa-circle {
-        color: @leave-as-is;
+        color: @modal-button-leave-as-is;
       }
     }
     &__handle-by-shifting {
       padding-bottom: 15px;
       letter-spacing: -0.4px;
       & .fa-circle {
-        color: @shift-slots;
+        color: @modal-button-shift-slots;
       }
     }
   }
@@ -90,23 +92,23 @@
     &__button {
       padding: 5px 17px;
       font-family: @font-open-sans-regular;
-      color: @intro-color;
+      color: @modal-button-text-color;
       border-radius: 0;
       &:hover,
       &:focus {
-        color: @intro-color;
+        color: @modal-button-text-color;
       }
       &--leave {
-        background-color: @leave-as-is;
+        background-color: @modal-button-leave-as-is;
         &:hover {
-          background-color: @leave-as-is-hovered;
+          background-color: @modal-button-leave-as-is-hovered;
         }
       }
       &--shift {
         margin-right: 11px;
-        background-color: @shift-slots;
+        background-color: @modal-button-shift-slots;
         &:hover {
-          background-color: @shift-slots-hovered;
+          background-color: @modal-button-shift-slots-hovered;
         }
       }
     }
