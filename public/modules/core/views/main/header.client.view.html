@@ -1,0 +1,58 @@
+<nav class="header-nav-element__container"
+        data-ng-show="mainCtrl.Authentication.user">
+
+    <ul class="header-nav-element header-nav-element__list header-nav-element-tab-holder">
+        <li class="header-nav-element-tab-holder__item" data-ng-repeat="state in mainCtrl.topStatesInNavDropdown">
+            <button class="header-nav-element-tab"
+                    data-ng-click="mainCtrl.goToState(state)">{{ state.data.menuLabel}}</button>
+        </li>
+    </ul>
+
+
+    <ul class="header-nav-element header-nav-element__list header-nav-element-btn-holder">
+        <li class="header-nav-element header-nav-element__item header-nav-element-btn-holder__item">
+            <a class="header-nav-element-link" data-ui-sref="restricted.todo_state.events.create({ eventPresetType: 'sick' })">
+                <i class="fa fa-heartbeat" aria-hidden="true"></i>
+                <span class="from-tablet">Sick today</span>
+            </a>
+        </li>
+        <li class="header-nav-element header-nav-element__item header-nav-element-btn-holder__item">
+            <a class="header-nav-element-link" data-ui-sref="restricted.todo_state.events.create({ eventPresetType: 'vacation' })">
+                <i class="fa fa-plane" aria-hidden="true"></i>
+                <span class="from-tablet">Vacation</span>
+            </a>
+        </li>
+        <li class="header-nav-element header-nav-element__item header-nav-element-btn-holder__item">
+            <a class="header-nav-element-link" data-ui-sref="restricted.todo_state">
+                <i class="fa fa-calendar calendar-btn" aria-hidden="true"></i>
+                <span class="from-tablet">Calendar</span>
+            </a>
+        </li>
+        <li class="header-nav-element header-nav-element__item header-nav-element-btn-holder__item header-nav-element__notifications"
+            data-notification-tooltip></li>
+        <li class="header-nav-element header-nav-element__item header-nav-element-btn-holder__item header-nav-element__user-profile">
+            <button class="header-nav-element-btn-holder__dropdown-toggle"
+                    data-ng-click="mainCtrl.toggleDropdown('user')">
+                <span class="from-tablet header-nav-element-btn-holder__username" data-ng-bind="mainCtrl.user.username"></span>
+                <img class="header-nav-element-btn-holder__profile-image" src="{{mainCtrl.user.profileImageURL}}">
+                <span class="header-nav-element-btn-holder__caret caret"></span>
+            </button>
+
+            <ul class="header-nav-element  header-nav-element__list dropdown-menu-container"
+                data-ng-class="{'dropdown-menu-container--collapse': !mainCtrl.dropdown.user}">
+                <li class="notification-item">
+                    <a class="dropdown-menu-container__link" href="#!/settings/profile">Settings</a
+                    ></li>
+                <li class="notification-item">
+                    <a class="dropdown-menu-container__link" href="#!/templates">My templates</a>
+                </li>
+                <li class="notification-item">
+                    <a class="dropdown-menu-container__link" href="#!/migrate">Import content</a>
+                </li>
+                <li class="notification-item">
+                    <a class="dropdown-menu-container__link" href="/auth/signout">Logout</a>
+                </li>
+            </ul>
+        </li>
+    </ul>
+</nav>

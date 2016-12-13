@@ -21,7 +21,16 @@ const less = {
     },
     dev: {
         files: {
-            'public/css/app.main.css': 'public/less/app.main.less'
+            'css/app.main.css': 'less/app.main.less'
+        }
+    },
+    prod: {
+        files: {
+            'build/inspinia/css/lib.min.css': '<%= config.assets.lib.css %>',
+            'build/css/app.min.css': '<%= config.assets.cssFullPath %>'
+        },
+        options: {
+            compress: true
         }
     }
 };
@@ -41,7 +50,7 @@ const babel = {
 
 const clean = {
     compiledJs: [
-        'public/modules/**/*.js', 'public/modules/**/*.js.map'
+        'modules/**/*.js', 'modules/**/*.js.map'
     ]
 };
 
@@ -80,26 +89,90 @@ const watch = {
 const ngAnnotate = {
     production: {
         files: {
-            'public/dist/js/main.js': '<%= applicationJavaScriptFiles %>'
+            'build/js/lib.min.js': '<%= config.assets.lib.js %>',
+            'build/js/app.min.js': '<%= config.assets.js %>'
         }
+    }
+};
+
+const htmlmin = {
+    production: {
+        options: {
+            removeComments: true,
+            collapseWhitespace: true
+        },
+        files: [
+            {
+                expand: true,
+                src: 'modules/**/*.html',
+                rename: function (base, src) {
+                    return 'build/' + src;
+                }
+            }
+        ]
+    }
+};
+
+const copy = {
+    options: {
+        rootpath: 'public'
+    },
+    prodImg: {
+        files: [
+            {
+                expand: true,
+                src: [
+                    'modules/**/*.png',
+                    'modules/**/*.jpg'
+                ],
+                rename: function (base, src) {
+                    return 'build/' + src;
+                }
+            },
+            {
+                expand: true,
+                src: [
+                    'inspinia/**/*.png',
+                    'inspinia/**/*.jpg'
+                ],
+                rename: function (base, src) {
+                    return 'build/css/public/' + src.replace('inspinia/css/', '');
+                }
+            }
+        ]
+    },
+    prodFonts: {
+        files: [
+            {
+                src: 'fonts/*',
+                expand: true,
+                rename: function (base, src) {
+                    return 'build/' + src;
+                }
+            },
+            {
+                src: 'inspinia/css/fonts/*',
+                expand: true,
+                rename: function (base, src) {
+                    return 'build/' + src;
+                }
+            },
+            {
+                src: 'inspinia/font-awesome/fonts/*',
+                expand: true,
+                rename: function (base, src) {
+                    return 'build/inspinia/css/fonts/' + src.split('/').pop();
+                }
+            }
+        ]
     }
 };
 
 const uglify = {
     production: {
-        options: {
-            mangle: false
-        },
         files: {
-            'public/dist/js/main.min.js': 'public/dist/js/main.js'
-        }
-    }
-};
-
-const cssmin = {
-    combine: {
-        files: {
-            'public/dist/application.min.css': '<%= applicationCSSFiles %>'
+            'build/js/app.min.js': 'build/js/app.min.js',
+            'build/js/lib.min.js': 'build/js/lib.min.js'
         }
     }
 };
@@ -112,15 +185,6 @@ const jshint = {
         options: {
             jshintrc: true
         }
-    }
-};
-
-const concurrent = {
-    buildSrc: ['less', 'build-es6'],
-    minifySrc: ['cssmin', 'uglify'],
-    options: {
-        logConcurrentOutput: true,
-        limit: 10
     }
 };
 
@@ -138,11 +202,11 @@ module.exports = {
     less,
     jshint,
     uglify,
-    cssmin,
     babel,
     ngAnnotate,
-    concurrent,
     env,
     karma,
-    clean
+    clean,
+    htmlmin,
+    copy
 };

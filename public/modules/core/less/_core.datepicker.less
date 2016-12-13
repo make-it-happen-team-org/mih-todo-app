@@ -14,21 +14,21 @@
       thead {
         tr:first-child th {
           border-radius: 0;
-          background: @color-mountain-meadow;
+          background: @color-mountain-meadow-green-s85;
           color: inherit;
 
           &:hover,
           &:active,
           &:hover:active {
-            background-color: darken(@color-mountain-meadow, 3%);
+            background-color: darken(@color-mountain-meadow-green-s85, 3%);
           }
         }
 
         .dow {
-          color: @color-mountain-meadow;
+          color: @color-mountain-meadow-green-s85;
 
           &:nth-child(6),
-          &:nth-child(7) { color: @color-dark-pink; }
+          &:nth-child(7) { color: @color-dark-pink-red-s64; }
         }
       }
 
@@ -43,12 +43,12 @@
 
             &:not(.active) {
               font-weight: 900;
-              color: @color-mountain-meadow;
+              color: @color-mountain-meadow-green-s85;
             }
           }
 
           &.weekend {
-            color: @color-dark-pink;
+            color: @color-dark-pink-red-s64;
 
             &.active { color: inherit; }
           }

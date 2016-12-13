@@ -1,10 +1,11 @@
-@import "../mixins/_users.auth-btn-mixin.less";
-@import "../mixins/_users.popover-mixin.less";
-@import "../mixins/_users.auth-form-control-mixin.less";
-@import "_users.auth-error-msg.less";
+@import "../mixins/_login-view.btn-mixin.less";
+@import "../mixins/_login-view.popover-mixin.less";
+@import "../mixins/_login-view.form-mixin.less";
+@import "_login-view.error-msg.less";
 @import (once) "../../../../less/_app.variables.less";
 
 .auth-form {
+  position: relative;
   max-width: @login-form-max-width;
   min-width: @login-form-min-width;
   margin: 0 auto;
@@ -55,6 +56,6 @@
     margin-bottom: 1.3rem;
   }
 
-  .auth-form-btn-mixin();
-  .auth-form-control-mixin();
+  .login-view-btn-mixin();
+  .login-view-control-mixin();
 }
