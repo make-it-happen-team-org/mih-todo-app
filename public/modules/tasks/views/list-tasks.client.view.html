@@ -1,5 +1,5 @@
 <a class="sidebar-header sidebar__block sidebar__block--group"
-   data-ui-sref="todo_state.tasks.create">
+   data-ui-sref="restricted.todo_state.tasks.create">
     <h3 class="sidebar-header__title">Tasks</h3>
     <span class="sidebar-header__button fa fa-plus-circle add-task"></span>
 </a>
@@ -37,7 +37,7 @@
 <ul class="sidebar__list">
     <li data-ng-repeat="task in taskListCtrl.tasks">
         <a class="sidebar__block sidebar-list-item {{'task-priority-' + task.priority}}"
-           data-ui-sref="todo_state.tasks.edit({ taskId: task._id })">
+           data-ui-sref="restricted.todo_state.tasks.edit({ taskId: task._id })">
             <div class="sidebar-list-item__title">
                 <span data-ng-bind="task.title"></span>
             </div>

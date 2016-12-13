@@ -15,7 +15,7 @@
     <li class="notification-item"
         data-ng-repeat="slot in notifications.overdueSlots | limitTo: 3 ">
             <a class="notifications__dropdown-link dropdown-menu-container__link"
-               data-ui-sref="overdue.edit({ taskId: slot.taskId })"
+               data-ui-sref="restricted.overdue.edit({ taskId: slot.taskId })"
                data-ng-bind="slot.title"></a>
             <span class="overdue-badge"
                   data-ng-click="completeSlot(slot, notifications.overdueTasks)">
