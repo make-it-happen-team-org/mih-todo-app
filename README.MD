@@ -16,23 +16,15 @@
 - Install ```NodeJS ^6.91``` [download](https://nodejs.org/en/download/);
 - Ensure that ```npm ^3``` ;
 - Install ```MongoDB``` and create folder structure ```db/data```, check System Environment for ```mongod``` variable;
-- Install decencies: (npm preinstall script)
+- Execute command: ``` npm install```
 
-    ```bash
-    npm install -g grunt-cli
-    npm install -g karma-cli
-    npm install -g eslint
-    npm install npm@latest -g
-    npm install
-    ```
+#####3. Running Application
+- Command ```npm compile:client``` compile files and watching them;
+- Command ```'npm run:server``` starts server and gets static;
 
--  Start mongo server ```mongod --dbpath [```Disc```:]/db/data``` (npm postinstall script);
+#####4. Open in browser link [http://localhost:3000/](http://localhost:3000/).
 
-###3. Running Application
-- Compile client and watch ```grunt```;
-- Run server ```npm run develop```;
-
-###4. Open in browser link [http://localhost:3000/](http://localhost:3000/).
+#P.S Import ```mih_editorconfig.xml``` to Webstorm config
 
 
 ## GIT flow
