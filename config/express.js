@@ -1,149 +1,159 @@
-'use strict';
+const fs             = require('fs');
+const http           = require('http');
+const https          = require('https');
+const express        = require('express');
+const morgan         = require('morgan');
+const logger         = require('./logger');
+const bodyParser     = require('body-parser');
+const session        = require('express-session');
+const compression    = require('compression');
+const methodOverride = require('method-override');
+const cookieParser   = require('cookie-parser');
+const helmet         = require('helmet');
+const passport       = require('passport');
+const mongoStore     = require('connect-mongo')({
+  session: session
+});
+const flash          = require('connect-flash');
+const config         = require('./config');
+const consolidate    = require('consolidate');
+const path           = require('path');
 
-/**
- * Module dependencies.
- */
-var fs = require('fs'),
-	http = require('http'),
-	https = require('https'),
-	express = require('express'),
-	morgan = require('morgan'),
-	logger = require('./logger'),
-	bodyParser = require('body-parser'),
-	session = require('express-session'),
-	compression = require('compression'),
-	methodOverride = require('method-override'),
-	cookieParser = require('cookie-parser'),
-	helmet = require('helmet'),
-	passport = require('passport'),
-	mongoStore = require('connect-mongo')({
-		session: session
-	}),
-	flash = require('connect-flash'),
-	config = require('./config'),
-	consolidate = require('consolidate'),
-	path = require('path');
+module.exports = function (db) {
+  // Initialize express server-app-folder
+  const app = express();
 
-module.exports = function(db) {
-	// Initialize express server-app-folder
-	var app = express();
+  app.use(function (req, res, next) {
+    res.header('Access-Control-Allow-Credentials', true);
+    res.header('Access-Control-Allow-Origin', req.headers.origin);
+    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
+    res.header('Access-Control-Allow-Headers', 'X-Requested-With, X-HTTP-Method-Override, Content-Type, Accept');
 
-	// Globbing model files
-	config.getGlobbedFiles('./server-app-folder/models/**/*.js').forEach(function(modelPath) {
-		require(path.resolve(modelPath));
-	});
+    // intercept OPTIONS method
+    if ('OPTIONS' == req.method) {
+      res.send(200);
+    }
+    else {
+      next();
+    }
+  });
 
-	// Setting application local variables
-	app.locals.title = config.app.title;
-	app.locals.description = config.app.description;
-	app.locals.keywords = config.app.keywords;
-	app.locals.jsFiles = config.getJavaScriptAssets();
-	app.locals.cssFiles = config.getCSSAssets();
+  // Globbing model files
+  config.getGlobbedFiles('./server-app-folder/models/**/*.js').forEach(function (modelPath) {
+    require(path.resolve(modelPath));
+  });
 
-	// Passing the request url to environment locals
-	app.use(function(req, res, next) {
-		res.locals.url = req.protocol + '://' + req.headers.host + req.url;
-		next();
-	});
+  // Setting application local variables
+  app.locals.title       = config.app.title;
+  app.locals.description = config.app.description;
+  app.locals.keywords    = config.app.keywords;
+  app.locals.jsFiles     = config.getJavaScriptAssets();
+  app.locals.cssFiles    = config.getCSSAssets();
 
-	// Should be placed before express.static
-	app.use(compression({
-		// only compress files for the following content types
-		filter: function(req, res) {
-			return (/json|text|javascript|css/).test(res.getHeader('Content-Type'));
-		},
-		// zlib option for compression level
-		level: 3
-	}));
+  // Passing the request url to environment locals
+  app.use(function (req, res, next) {
+    res.locals.url = req.protocol + '://' + req.headers.host + req.url;
+    next();
+  });
 
-	// Showing stack errors
-	app.set('showStackError', true);
+  // Should be placed before express.static
+  app.use(compression({
+    // only compress files for the following content types
+    filter: function (req, res) {
+      return (/json|text|javascript|css/).test(res.getHeader('Content-Type'));
+    },
+    // zlib option for compression level
+    level: 3
+  }));
 
-	// Set swig as the template engine
-	app.engine('server.view.html', consolidate[config.templateEngine]);
+  // Showing stack errors
+  app.set('showStackError', true);
 
-	// Set views path and view engine
-	app.set('view engine', 'server.view.html');
-	app.set('views', './server-app-folder/views');
+  // Set swig as the template engine
+  app.engine('server.view.html', consolidate[config.templateEngine]);
 
-	// Enable logger (morgan)
-	app.use(morgan(logger.getLogFormat(), logger.getLogOptions()));
+  // Set views path and view engine
+  app.set('view engine', 'server.view.html');
+  app.set('views', './server-app-folder/views');
 
-	// Environment dependent middleware
-	if (process.env.NODE_ENV === 'development') {
-		// Disable views cache
-		app.set('view cache', false);
-	} else if (process.env.NODE_ENV === 'production') {
-		app.locals.cache = 'memory';
-	}
+  // Enable logger (morgan)
+  app.use(morgan(logger.getLogFormat(), logger.getLogOptions()));
 
-	// Request body parsing middleware should be above methodOverride
-	app.use(bodyParser.urlencoded({
-		extended: true
-	}));
-	app.use(bodyParser.json());
-	app.use(methodOverride());
+  // Environment dependent middleware
+  if (process.env.NODE_ENV === 'development') {
+    // Disable views cache
+    app.set('view cache', false);
+  } else if (process.env.NODE_ENV === 'production') {
+    app.locals.cache = 'memory';
+  }
 
-	// Use helmet to secure Express headers
-	app.use(helmet.xframe());
-	app.use(helmet.xssFilter());
-	app.use(helmet.nosniff());
-	app.use(helmet.ienoopen());
-	app.disable('x-powered-by');
+  // Request body parsing middleware should be above methodOverride
+  app.use(bodyParser.urlencoded({
+    extended: true
+  }));
+  app.use(bodyParser.json());
+  app.use(methodOverride());
 
-	// Setting the server-app-folder router and static folder
-	app.use(express.static(path.resolve('./public')));
+  // Use helmet to secure Express headers
+  app.use(helmet.xframe());
+  app.use(helmet.xssFilter());
+  app.use(helmet.nosniff());
+  app.use(helmet.ienoopen());
+  app.disable('x-powered-by');
 
-	// CookieParser should be above session
-	app.use(cookieParser());
+  // Setting the server-app-folder router and static folder
+  app.use(express.static(path.resolve('./public')));
 
-	// Express MongoDB session storage
-	app.use(session({
-		saveUninitialized: true,
-		resave: true,
-		secret: config.sessionSecret,
-		store: new mongoStore({
-			db: db.connection.db,
-			collection: config.sessionCollection
-		}),
-		cookie: config.sessionCookie,
-		name: config.sessionName
-	}));
+  // CookieParser should be above session
+  app.use(cookieParser());
 
-	// use passport session
-	app.use(passport.initialize());
-	app.use(passport.session());
+  // Express MongoDB session storage
+  app.use(session({
+    saveUninitialized: true,
+    resave: true,
+    secret: config.sessionSecret,
+    store: new mongoStore({
+      db: db.connection.db,
+      collection: config.sessionCollection
+    }),
+    cookie: config.sessionCookie,
+    name: config.sessionName
+  }));
 
-	// connect flash for flash messages
-	app.use(flash());
+  // use passport session
+  app.use(passport.initialize());
+  app.use(passport.session());
 
-	// Globbing routing files
-	config.getGlobbedFiles('./server-app-folder/routes/**/*.js').forEach(function(routePath) {
-		require(path.resolve(routePath))(app);
-	});
+  // connect flash for flash messages
+  app.use(flash());
 
-	// Assume 'not found' in the error msgs is a 404. this is somewhat silly, but valid, you can do whatever you like, set properties, use instanceof etc.
-	app.use(function(err, req, res, next) {
-		// If the error object doesn't exists
-		if (!err) return next();
+  // Globbing routing files
+  config.getGlobbedFiles('./server-app-folder/routes/**/*.js').forEach(function (routePath) {
+    require(path.resolve(routePath))(app);
+  });
 
-		// Log it
-		console.error(err.stack);
+  // Assume 'not found' in the error msgs is a 404. this is somewhat silly, but valid, you can do whatever you like, set properties, use instanceof etc.
+  app.use(function (err, req, res, next) {
+    // If the error object doesn't exists
+    if (!err) return next();
 
-		// Error page
-		res.status(500).render('500', {
-			error: err.stack
-		});
-	});
+    // Log it
+    console.error(err.stack);
 
-	// Assume 404 since no middleware responded
-	app.use(function(req, res) {
-		res.status(404).render('404', {
-			url: req.originalUrl,
-			error: 'Not Found'
-		});
-	});
+    // Error page
+    res.status(500).render('500', {
+      error: err.stack
+    });
+  });
 
-	// Return Express server instance
-	return app;
+  // Assume 404 since no middleware responded
+  app.use(function (req, res) {
+    res.status(404).render('404', {
+      url: req.originalUrl,
+      error: 'Not Found'
+    });
+  });
+
+  // Return Express server instance
+  return app;
 };
