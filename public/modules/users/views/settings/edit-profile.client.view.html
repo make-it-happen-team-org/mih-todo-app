@@ -1,224 +1,211 @@
-<div class="settings-wrapper">
-	<div class="settings-background"></div>
-	<div class="container">
-		<div class="row">
-			<h1 class="col-md-12 text-center">Edit your profile</h1>
-			<section class="col-md-3">
-				<form class="signin form-horizontal">
-					<fieldset>
-						<div class="form-group text-center">
-							<img ng-src="{{settings.imageURL}}" alt="{{settings.user.displayName}}" class="img-thumbnail user-profile-picture">
-						</div>
+<div class="container-fluid settings">
+    <div class="row">
 
-						<div class="text-center form-group" ng-hide="settings.uploader.queue.length">
-						  <span class="btn btn-default btn-file">
-							  Select Image <input type="file" nv-file-select uploader="settings.uploader">
-						  </span>
-						</div>
+        <section class="col-lg-4 col-lg-offset-1 col-md-10 col-md-offset-1">
+            <form>
 
-						<div class="text-center form-group" ng-show="settings.uploader.queue.length">
-							<button class="btn btn-primary" ng-click="settings.uploadProfilePicture();">Upload</button>
-							<button class="btn btn-default" ng-click="settings.cancelUpload();">Cancel</button>
-						</div>
-					</fieldset>
-				</form>
-			</section>
+                <fieldset class="row">
+                    <div class="form-group">
+                        <p class="img-circle text-center">
+                            <img data-ng-src="{{settings.imageURL}}" alt="{{settings.user.username}} avatar"
+                                 class="img-circle avatar">
+                        </p>
+                    </div>
+                    <p class="form-group col-xs-6 col-xs-offset-3" data-ng-hide="settings.uploader.queue.length">
+                        <label for="selectImage" class="button button--green">Change photo</label>
+                        <input type="file" id="selectImage" class="form-input--file" nv-file-select
+                               uploader="settings.uploader">
+                    </p>
+                    <p class="form-group col-xs-6 col-xs-offset-3" data-ng-show="settings.uploader.queue.length">
+                        <button class="button button--blue" data-ng-click="settings.uploadProfilePicture();">
+                            Upload
+                        </button>
+                        <button class="button  button--grey" data-ng-click="settings.cancelUpload();">Cancel</button>
+                    </p>
+                </fieldset>
 
-			<section class="col-md-6 col-md-offset-2">
-				<form name="userForm" data-ng-submit="settings.updateUserProfile(userForm.$valid)" class="signin form-horizontal"
-					  autocomplete="off" novalidate
-				>
-					<fieldset>
-						<div class="form-group">
-							<label for="email" class="col-sm-4 control-label">Email</label>
-							<div class="col-sm-8">
-								<input type="email" id="email" name="email" class="form-control" placeholder="Email"
-									   data-ng-model="settings.user.email" ng-model-options="{ debounce: 400}"
-									   required
-								>
-								<div ng-show="userForm.submitted || userForm.email.$dirty" class="error-message">
-									<p ng-show="userForm.email.$error.required" class="help-block error-text">Please enter your email</p>
-									<p ng-show="userForm.email.$error.email" class="help-block error-text">Please enter a valid email</p>
-								</div>
-							</div>
-						</div>
-						<div class="form-group">
-							<label for="username" class="col-sm-4 control-label">Username</label>
-							<div class="col-sm-8">
+            </form>
+        </section>
 
-								<!-- TODO: refactor data-ng-change into a directive -->
-								<input type="text" id="username" name="username" class="form-control" placeholder="Username"
-									   data-ng-model="settings.user.username" ng-model-options="{ debounce: 400}"
-									   data-ng-change="settings.MIHUtils.convertMultipleSpaces(settings.user, 'username')"
-									   required
-								>
-								<div ng-show="userForm.submitted || userForm.username.$dirty" class="error-message">
-									<p ng-show="userForm.username.$error.required" class="help-block error-text">Please enter your username</p>
-								</div>
-							</div>
-						</div>
-					</fieldset>
+        <section class="col-lg-6 col-lg-offset-0 col-md-10 col-md-offset-1">
+            <h1 class="heading">Edit your profile</h1>
+            <form name="userForm" autocomplete="off" novalidate
+                  data-ng-submit="settings.updateUserProfile(userForm.$valid)">
 
-					<fieldset>
-						<div class="form-group">
-							<label for="currentPassword" class="col-sm-4 control-label">Current Password</label>
-							<div class="col-sm-8">
-								<input type="password" id="currentPassword" name="currentPassword" class="form-control"
-									   placeholder="Current Password" data-ng-model="settings.user.currentPassword"
-								>
-							</div>
-						</div>
-						<div class="form-group">
-							<label for="newPassword" class="col-sm-4 control-label">New Password</label>
-							<div class="col-sm-8">
-								<input type="password" id="newPassword" name="newPassword" class="form-control"
-									   placeholder="New Password" data-ng-model="settings.user.newPassword"
-								>
-							</div>
-						</div>
-						<div class="form-group">
-							<label for="verifyPassword" class="col-sm-4 control-label">Verify Password</label>
-							<div class="col-sm-8">
-								<input type="password" id="verifyPassword" name="verifyPassword" class="form-control"
-									   placeholder="Verify Password" data-ng-model="settings.user.verifyPassword"
-								>
-							</div>
-						</div>
-					</fieldset>
+                <fieldset class="row">
+                    <div class="form-group col-md-10 form-box">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" placeholder="Email" required
+                               class="form-input settings__form-input" data-ng-model="settings.user.email"
+                               data-ng-model-options="{ debounce: 400}">
+                        <div class="form-input-error-holder">
+                            <p data-ng-show="(userForm.submitted || userForm.email.$dirty) && userForm.email.$error.required"
+                               class="form-input-error-text">Enter your email</p>
+                            <p data-ng-show="(userForm.submitted || userForm.email.$dirty) && userForm.email.$error.email"
+                               class="form-input-error-text">Enter a valid email</p>
+                        </div>
+                    </div>
+                    <div class="form-group form-box col-lg-10 col-md-12">
+                        <label for="username">Username</label>
+                        <!-- TODO: refactor data-ng-change into a directive -->
+                        <input type="text" id="username" name="username" placeholder="Username" required
+                               class="form-input settings__form-input"
+                               data-ng-model="settings.user.username" data-ng-model-options="{ debounce: 400}"
+                               data-ng-change="settings.MIHUtils.convertMultipleSpaces(settings.user, 'username')">
+                        <div class="form-input-error-holder">
+                            <p data-ng-show="(userForm.submitted || userForm.username.$dirty) && userForm.username.$error.required"
+                               class="form-input-error-text">Enter your username</p>
+                        </div>
+                    </div>
+                    <div class="form-group col-md-10 form-box form-box--without-error">
+                        <label for="currentPassword">Current Password</label>
+                        <input type="password" id="currentPassword" name="currentPassword"
+                               class="form-input settings__form-input"
+                               placeholder="Current Password" data-ng-model="settings.user.currentPassword">
+                    </div>
+                    <div class="form-group col-md-10 form-box form-box--without-error">
+                        <label for="newPassword">New Password</label>
+                        <input type="password" id="newPassword" name="newPassword"
+                               class="form-input settings__form-input"
+                               placeholder="New Password" data-ng-model="settings.user.newPassword">
+                    </div>
+                    <div class="form-group col-md-10 form-box form-box--without-error">
+                        <label for="verifyPassword">Verify Password</label>
+                        <input type="password" id="verifyPassword" name="verifyPassword"
+                               class="form-input settings__form-input"
+                               placeholder="Verify Password" data-ng-model="settings.user.verifyPassword">
+                    </div>
+                </fieldset>
 
-					<fieldset>
-						<div class="form-group">
-							<div class="col-sm-4">
-								<label for="add-new-booked-slot" class="control-label">Don't disturb me</label>
-								<button id="add-new-booked-slot" type="button" class="btn btn-default pull-right"
-										aria-label="Left Align" ng-click="settings.addNewBookedSlot()"
-								>
-									<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-								</button>
-							</div>
+                <fieldset class="row">
+                    <label for="reminder" class="col-xs-12">Reminder</label>
+                    <div class="form-group col-xs-5 form-box--with-time">
+                        <label class="input-label--in">In</label>
+                        <div class="form-input--horizontal">
+                            <input id="reminder" type="number"
+                                   class="form-input settings__form-input" name="reminder" required
+                                   min="1" max="60" data-ng-model="settings.user.predefinedSettings.reminder"
+                                   data-ng-model-options="{ updateOn: 'blur' }">
+                            <div class="form-input-error-holder">
+                                <p data-ng-show="(userForm.submitted || userForm.reminder.$dirty) && !userForm.reminder.$valid"
+                                   class="form-input-error-text">Enter valid time</p>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
 
-							<div class="col-sm-8">
-								<div class="form-group" ng-repeat="(i, booked) in settings.user.predefinedSettings.booked">
-									<ng-form name="bookedTime" class="booked-time">
-										<div class="col-sm-5">
-											<div class="row">
-												<div class="col-sm-12">
-													<label for="booked-start-time-{{$index}}" class="col-sm-12 control-label">From: </label>
-													<input id="booked-start-time-{{$index}}" type="time" class="form-control"
-														   required name="startTime"
-														   data-ng-model="booked.startTime" ng-model-options="{ updateOn: 'blur' }"
-													>
-												</div>
-											</div>
+                <fieldset class="row">
+                    <div class="form-group col-xs-12 clearfix">
+                        <label for="add-new-booked-slot">Don't disturb me</label>
+                        <button id="add-new-booked-slot" type="button" class="button-icon button-icon--add"
+                                data-ng-click="settings.addNewBookedSlot()">
+                            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                        </button>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-xs-12 clearfix"
+                             data-ng-repeat="(i, booked) in settings.user.predefinedSettings.booked">
+                            <ng-form name="bookedTime">
+                                <div class="col-xs-5 form-box--with-time">
+                                    <label for="booked-start-time-{{$index}}" class="input-label--from">From</label>
+                                    <div class="form-input--horizontal">
+                                        <input id="booked-start-time-{{$index}}" type="time"
+                                               class="form-input settings__form-input " required
+                                               name="startTime" data-ng-model="booked.startTime"
+                                               data-ng-model-options="{ updateOn: 'blur' }">
+                                        <div class="form-input-error-holder">
+                                            <p data-ng-show="(userForm.submitted || bookedTime.startTime.$dirty) && bookedTime.startTime.$error.required"
+                                               class="form-input-error-text">Enter start time</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xs-5 form-box--with-time">
+                                    <label for="booked-end-time{{$index}}" class="input-label--to">To</label>
+                                    <div class="form-input--horizontal">
+                                        <input id="booked-end-time{{$index}}" type="time"
+                                               class="form-input settings__form-input " required
+                                               name="endTime"
+                                               data-ng-model="booked.endTime"
+                                               data-ng-model-options="{ updateOn: 'blur' }">
+                                        <div class="form-input-error-holder">
+                                            <p data-ng-show="(userForm.submitted || bookedTime.endTime.$dirty) && bookedTime.endTime.$error.required"
+                                               class="form-input-error-text">Enter end time</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="button-icon-holder">
+                                    <button type="button" class="button-icon button-icon--remove"
+                                            data-ng-click="settings.removeBookedSlot(i)">
+                                        <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                                    </button>
+                                </div>
+                            </ng-form>
+                        </div>
+                    </div>
+                </fieldset>
 
-											<div ng-show="userForm.submitted || bookedTime.startTime.$dirty" class="error-message">
-												<p ng-show="bookedTime.startTime.$error.required" class="help-block error-text">Please enter start time</p>
-											</div>
-										</div>
+                <fieldset class="row">
+                    <div class="form-group col-xs-12">
+                        <label>Working time</label>
+                    </div>
+                    <div data-ng-repeat="dayName in settings.workingDays" class="row"
+                         data-ng-init="dayOpts = settings.user.predefinedSettings.workingHours[dayName]">
+                        <ng-form name="workingDay">
+                            <div class="form-group clearfix col-md-12"
+                                 data-ng-class="dayOpts.isWorkingDay ? 'is-working-day' : 'is-not-working-day'">
+                                <div class="col-xs-5 form-box--with-time">
+                                    <label for="working-day-start-{{$index}}" class="input-label--from">From</label>
+                                    <div class="form-input--horizontal">
+                                        <input id="working-day-start-{{$index}}" type="time"
+                                               class="form-input settings__form-input "
+                                               name="workingDayStart"
+                                               data-ng-model="dayOpts.start" data-ng-disabled="!dayOpts.isWorkingDay"
+                                               data-ng-model-options="{ updateOn: 'blur' }" required>
+                                        <div class="form-input-error-holder">
+                                            <p data-ng-show="(userForm.submitted || workingDay.workingDayStart.$dirty)
+                                        && workingDay.workingDayStart.$error.required"
+                                               class="form-input-error-text">Enter start time</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xs-5 form-box--with-time">
+                                    <label for="working-day-end-{{$index}}" class="input-label--to">To</label>
+                                    <div class="form-input--horizontal">
+                                        <input id="working-day-end-{{$index}}" type="time"
+                                               class="form-input settings__form-input "
+                                               name="workingDayEnd"
+                                               data-ng-model="dayOpts.end" data-ng-disabled="!dayOpts.isWorkingDay"
+                                               ng-model-options="{ updateOn: 'blur' }"
+                                               required>
+                                        <div class="form-input-error-holder">
+                                            <p ng-show="(userForm.submitted || workingDay.workingDayEnd.$dirty)
+                                        && workingDay.workingDayEnd.$error.required"
+                                               class="form-input-error-text">
+                                                Please enter end time</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xs-2 day-checkbox">
+                                    <div class="form-checkbox-holder">
+                                        <input id="working-day-{{$index}}" class="form-checkbox" type="checkbox"
+                                               data-ng-model="dayOpts.isWorkingDay"
+                                               data-ng-checked="dayOpts.isWorkingDay">
+                                        <label for="working-day-{{$index}}" class="text-uppercase form-checkbox-label">{{dayName}}</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </ng-form>
+                    </div>
+                </fieldset>
 
-										<div class="col-sm-5">
-											<div class="row">
-												<div class="col-sm-12">
-													<label for="booked-end-time{{$index}}" class="col-sm-12 control-label">To: </label>
-													<input id="booked-end-time{{$index}}" type="time" class="form-control"
-														   required name="endTime"
-														   data-ng-model="booked.endTime" ng-model-options="{ updateOn: 'blur' }"
-													>
-												</div>
-											</div>
+                <fieldset class="row">
+                    <div class="col-sm-4 pull-right button-submit">
+                        <button type="submit" class="button button--green">Save Profile</button>
+                    </div>
+                </fieldset>
 
-											<div ng-show="userForm.submitted || bookedTime.endTime.$dirty" class="error-message">
-												<p ng-show="bookedTime.endTime.$error.required" class="help-block error-text">Please enter end time</p>
-											</div>
-										</div>
+            </form>
+        </section>
 
-										<div class="col-sm-2 text-right">
-											<button type="button" class="btn btn-default" aria-label="Left Align" data-ng-click="settings.removeBookedSlot(i)">
-												<span class="glyphicon glyphicon-minus" aria-hidden="true"></span>
-											</button>
-										</div>
-									</ng-form>
-								</div>
-							</div>
-						</div>
-					</fieldset>
-
-					<fieldset>
-						<div class="form-group">
-							<label for="reminder" class="col-sm-4 control-label">Reminder: </label>
-							<div class="col-sm-8">
-								<div class="row">
-									<div class="col-sm-3">
-										<input id="reminder" type="number" class="form-control" name="reminder" required
-											   data-ng-model="settings.user.predefinedSettings.reminder" ng-model-options="{ updateOn: 'blur' }"
-										>
-									</div>
-									<div class="col-sm-12">
-										<div ng-show="userForm.submitted || userForm.reminder.$dirty" class="error-message">
-											<p ng-show="userForm.reminder.$error.required" class="help-block error-text">Please enter reminder time</p>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</fieldset>
-
-					<fieldset>
-						<div class="form-group">
-							<label class="col-sm-4 control-label">Working time</label>
-
-							<div class="col-sm-12 working-days">
-								<div class="form-group" ng-repeat="dayName in settings.workingDays" ng-init="dayOpts = settings.user.predefinedSettings.workingHours[dayName]">
-									<ng-form name="workingDay">
-										<div class="col-sm-2 col-sm-offset-2 day-label">
-											<label>
-												<input type="checkbox" data-ng-model="dayOpts.isWorkingDay" data-ng-checked="dayOpts.isWorkingDay">
-												{{dayName}}
-											</label>
-										</div>
-
-										<div class="col-sm-4 working-from-wrapper">
-											<label for="working-day-start-{{$index}}" class="col-sm-12 control-label">From: </label>
-											<input id="working-day-start-{{$index}}" type="time" class="form-control" name="workingDayStart"
-												   data-ng-model="dayOpts.start" data-ng-disabled="!dayOpts.isWorkingDay"
-												   ng-model-options="{ updateOn: 'blur' }"
-												   required
-											>
-
-											<div ng-show="userForm.submitted || workingDay.workingDayStart.$dirty" class="error-message">
-												<p ng-show="workingDay.workingDayStart.$error.required" class="help-block error-text">Please enter start time</p>
-											</div>
-										</div>
-
-										<div class="col-sm-4">
-											<div class="row">
-												<div class="col-sm-12">
-													<label for="working-day-end-{{$index}}" class="col-sm-12 control-label">To: </label>
-													<input id="working-day-end-{{$index}}" type="time" class="form-control" name="workingDayEnd"
-														   data-ng-model="dayOpts.end" data-ng-disabled="!dayOpts.isWorkingDay"
-														   ng-model-options="{ updateOn: 'blur' }"
-														   required
-													>
-												</div>
-											</div>
-
-											<div ng-show="userForm.submitted || workingDay.workingDayEnd.$dirty" class="error-message">
-												<p ng-show="workingDay.workingDayEnd.$error.required" class="help-block error-text">Please enter end time</p>
-											</div>
-										</div>
-									</ng-form>
-								</div>
-							</div>
-						</div>
-					</fieldset>
-
-					<fieldset>
-						<div class="text-right">
-							<button type="submit" class="btn btn-large btn-primary">Save Profile</button>
-						</div>
-					</fieldset>
-				</form>
-			</section>
-		</div>
-	</div>
+    </div>
 </div>
