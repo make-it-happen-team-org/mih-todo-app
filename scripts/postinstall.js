@@ -2,7 +2,6 @@ const exec = require('child_process').exec;
 const scripts = [
   'bower install --config.interactive=false',
   'mongod --dbpath "d:/db/data"',
-  'grunt develop'
 ];
 const execHandler = (error, stdout, stderr) => {
   if (error) {
