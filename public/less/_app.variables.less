@@ -1,153 +1,235 @@
-// ---------------- FONTS ----------------
+// ----------------------------------------------- SCREENS -----------------------------------------------
+// Responsive Breakpoints
+@phone-min: 320px;
+@phone-max: 767px;
+@tablet-portrait-min: 768px;
+@tablet-portrait-max: 980px;
+@tablet-landscape-min: 981px;
+@tablet-landscape-max: 1240px;
+@desktop-min: 1241px;
+
+// ---------------------------------------------  - FONTS ------------------------------------------------
 @font-open-sans-light: 'open_sanslight', Arial, sans-serif;
 @font-open-sans-light-italic: 'open_sanslight_italic', Arial, sans-serif;
+// ---------------------------------------------
 @font-open-sans-regular: 'open_sansregular', Arial, sans-serif;
 @font-open-sans-italic: 'open_sansitalic', Arial, sans-serif;
+// ---------------------------------------------
+@font-open-sans-semibold: 'open_sanssemibold', Arial, sans-serif;
 @font-open-sans-semibold: 'open_sanssemibold', Arial, sans-serif;
 @font-open-sans-semibold-italic: 'open_sanssemibold_italic', Arial, sans-serif;
+// ---------------------------------------------
 @font-open-sans-bold: 'open_sansbold', Arial, sans-serif;
 @font-open-sans-bold-italic: 'open_sansbold_italic', Arial, sans-serif;
+// ---------------------------------------------
 @font-open-sans-extrabold: 'open_sansextrabold', Arial, sans-serif;
 @font-open-sans-extrabold-italic: 'open_sansextrabold_italic', Arial, sans-serif;
 @default-font-size: 10px;
-// ---------------- TYPOGRAPHY COLORS----------------
-@light-text: #FFF;
-@link-color: #1C84C6;
-@controls-link-color: #979FA7;
 
-// ---------------- BASE COLORS ----------------
-@base-color: #1AB394;
-@body-background-color: #F3F3F4;
-@main-bg-color: #F5F5F5;
-@border-color: #D6D6D6;
-@todo-list-controls-color: #253340;
-@task-list-header-brd-btm-color: #212121;
-@task-list-header-bg-color: #333;
-@tasks-list-bg-color: #3D3D3D;
-@tasks-subtitle-wrapper-bg-color: #3D3D3D;
-@nav-iten-hover: #293846;
+// --------------------------------------------- BASE COLORS ---------------------------------------------
+/* naming from http://www.color-blindness.com/color-name-hue/
+  Use @color-[ColorName]-[Hue]-s[SaturationValue]
+*/
+@color-white: #FFF;
+@main-white-smoke-white-s0: #F5F5F5;
+@main-white-lilac-white-s0: #F3F3F4;
+@main-magnolia-white-s11: #F0DFFC;
+@color-10-percent-opacity-white: rgba(255, 255, 255, .1);
+@color-50-percent-opacity-white: rgba(255, 255, 255, .5);
+@color-175-percent-opacity-black: rgba(0, 0, 0, .175);
+@color-mid-grey-s4: #676A6C;
+@color-hit-grey-s0: #AEAFAF;
+@color-light-grey-s0: #D6D6D6;
+@color-roof-terracotta-red-s60: #A94442;
+@color-dark-pink-red-s64: #ED5565;
+@color-sundown-red-s34: #FBA4AE;
+@color-wewak-red-s38: #F1959E;
+@color-carissma-red-s39: #E88C95;
+@color-pale-pink-red-s6: #FDEDEF;
+@color-pale-pink-red-s11: #FBDDE0;
+@color-casablanca-yellow-s70: #F3A747;
+@color-sea-buckthorn-orange-s60: #EA9B5C;
+@color-chsrdonnay-yellows47: #FCC885;
+@color-serenade-orange-s15: #FCE7D6;
+@color-mountain-meadow-green-s85: #1AB394;
+@color-mountain-meadow-green-s84: #1AAA8F;
+@color-mountain-meadow-green-s89: #119B7F;
+@color-downy-green-s44: #75D1BE;
+@color-downy-green-s43: #78D6C5;
+@color-white-ice-green-s5: #E8F6F4;
+@color-biscay-blue-s41: #2F4050;
+@color-blue-whale-blue-s53: #1E3141;
+@color-blue-whale-blue-s58: #172837;
+@color-bali-hai-blue-s25: #879EB4;
+@color-bali-hai-blue-s24: #859CB1;
+@color-pattens-blue-s9: #DEEBF4;
+@color-solitude-blue-s7: #DBE4EC;
+@color-solitude-blue-s2: #F4F7F9;
+@color-mariner-blue-s61: #3B5998;
+@color-san-marino-blue-s47: #507299;
+@color-malibu-blue-s53: #6CB8E8;
+@color-denim-blue-s85: #1C84C6;
+@color-denim-blue-s90: #1176B7;
+@color-mabel-blue-s12: #77B5DD;
+@color-jordy-blue-s46: #C7DEE3;
+@color-conflower-blue-s64: #55ACEE;
+@color-lavender-violet-s6: #E8F2F9;
+@color-biloba-flower-violet-s35: #E8F2F9;
 
-// ---------------- PRIORITY COLORS ----------------
-@priority-1-color: #ED5565;
-@priority-2-color: #F3A747;
-@priority-3-color: #61B394;
-@priority-4-color: #676A6C;
+// ------------------------------------------- TYPOGRAPHY COLORS -----------------------------------------
+@light-text: @color-white;
+@link-color: @color-denim-blue-s85;
+@controls-link-color: @color-bali-hai-blue-s25;
 
-// ---------------- ERROR COLORS ----------------
-@error-text: #FA787E;
-@error-message-color: #A94442;
+// ------------------------------------------- PRIORITY COLORS -------------------------------------------
+@priority-1-color: @color-dark-pink-red-s64;
+@priority-2-color: @color-casablanca-yellow-s70;
+@priority-3-color: @color-downy-green-s44;
+@priority-4-color: @color-denim-blue-s85;
 
-// ---------------- BTN COLORS ----------------
-@btn_white--border-color: #DBDCDD;
+// -------------------------------------------- ERROR COLORS ---------------------------------------------
+@error-text: @color-wewak-red-s38;
+@error-message-color: @color-roof-terracotta-red-s60;
 
-// ---------------- NOTIFICATIONS COLORS ----------------
-@notification--brd-top-color: #DDD;
+// ----------------------------------------------- SIDEBAR -----------------------------------------------
+@aside-background-color: @color-biscay-blue-s41;
 
-// ---------------- COLORS ----------------
-@aside-background-color: #2F4050;
-
-/* naming from http://www.color-blindness.com/color-name-hue/ */
-@color-dark-pink: #E84F5E;
-@color-wewak: #F1959E;
-@color-carissma: #E88C95;
-@color-pale-pink: #FDEDEF;
-@color-sun: #F28832;
-@color-sea-buckthorn: #EA9B5C;
-@color-tacao: #F7B884;
-@color-serenade: #FCE7D6;
-@color-mountain-meadow: #19B293;
-@color-downy: #75D1BE;
-@color-mid-grey: #676A6C;
-@color-light-grey: #AEAFAF;
-@color-jordy-blue: #77B5DD;
-@color-lavender: #E8F2F9;
-
-// ---------------- SCREENS ----------------
-@mobile-display: ~"only screen and (max-width: 667px)";
-
-// ---------------- SOCIALS ----------------
-@socials-facebook-color: #3B5998;
-@socials-twitter-color: #55ACEE;
-@socials-vk-color: #507299;
+// ----------------------------------------------- SOCIALS -----------------------------------------------
+@socials-facebook-color: @color-mariner-blue-s61;
+@socials-twitter-color: @color-conflower-blue-s64;
+@socials-vk-color: @color-san-marino-blue-s47;
 @socials-dimension: 3.8rem;
 
-// ---------------- LOGIN PAGE ----------------
-@login-error-color: #ED5565;
-@login-valid-color: #1AAA8F;
-@login-pristine-color: #859CB1;
+// --------------------------------------------- LOGIN PAGE ----------------------------------------------
 
-@login-input-font-color: #859CB1;
-@login-font-color: #FFF;
-@login-sing-in-btn-color: #1AAA8F;
-@login-sing-in-btn-hover-color: #119B7F;
-@login-create-account-btn-color: #1C84C6;
-@login-create-account-btn-hover-color: #1176B7;
-@login-btn-font-color: #FFF;
-
+@login-valid-value: @color-mountain-meadow-green-s85;
+@login-pristine-color: @color-hit-grey-s0;
+@login-error-color: @color-dark-pink-red-s64;
+@login-input-font-color: @color-bali-hai-blue-s25;
+@login-font-color: @light-text;
+@login-sing-in-btn-color: @color-mountain-meadow-green-s84;
+@login-sing-in-btn-hover-color: @color-mountain-meadow-green-s89;
+@login-create-account-btn-color: @color-denim-blue-s85;
+@login-create-account-btn-hover-color: @color-denim-blue-s90;
+@login-btn-font-color: @light-text;
+// ---------------------------------------------
 @login-auth-bg-img: url('/modules/users/img/backgrounds/bg-1.jpg');
-@login-bg-color: #172837;
-
-@login-input-bg-color: #172837;
-@login-input-border-color: #859CB1;
-@login-input-font-color: #859CB1;
-
+@login-bg-color: @color-blue-whale-blue-s58;
+// ---------------------------------------------
+@login-input-bg-color: @color-blue-whale-blue-s58;
+@login-input-border-color: @color-blue-whale-blue-s58;
+@login-input-font-color: @color-blue-whale-blue-s58;
+// ---------------------------------------------
 @login-form-max-width: 460px;
 @login-form-min-width: 200px;
 @login-description-max-width: 800px;
-
+// ---------------------------------------------
 @login-error-message-font-size: .75rem;
 
-// ---------------- POPOVER ----------------
+// ----------------------------------------------- POPOVER -----------------------------------------------
 @popover-font-size: 1rem;
-@popover-font-color: #2f4050;
+@popover-font-color: @color-biscay-blue-s41;
 
-// ---------------- AUTHORIZATION PAGES ----------------
-@intro-color: #FFF;
-@auth-page--popover-brd-right: #303030;
-
-// ---------------- LOGO ----------------
+// ------------------------------------------------- LOGO ------------------------------------------------
 @logo-lg-light: url('/modules/users/img/logo-lg-light.png');
-@logo-lg-dark: url('/modules/users/img/logo-lg-dark.png');
 
-// ---------------- MAIN CONTENT ----------------
-@main-font-color: #2F4050;
-@main-navbar-default-bg-color: #FFF;
+// -------------------------------------------- MAIN CONTENT ---------------------------------------------
+@main-font-color: @color-biscay-blue-s41;
+@main-navbar-default-bg-color: @light-text;
+@main-width: 100% ~"-" @sidebar-width;
+@main-max-width: 198rem;
 
+// ----------------------------------------------- SIDEBAR -----------------------------------------------
+@sidebar-width: 30rem;
+@sidebar-width-collapsed: 6.8rem;
+@sidebar-block-wrapper-bg: @color-blue-whale-blue-s53;
+@sidebar-wrapper-color: @color-bali-hai-blue-s25;
+@sidebar-brd-b: @color-bali-hai-blue-s25;
+@sidebar-color: @color-bali-hai-blue-s25;
+@sidebar-filter-color: @color-bali-hai-blue-s25;
+@sidebar-filter-color--active: @light-text;
+@sidebar-filter-bg: @color-blue-whale-blue-s58;
+@sidebar-filter-bg--active: @color-mountain-meadow-green-s85;
+@sidebar-color--hover: @light-text;
+@sidebar-outline--hover: @color-10-percent-opacity-white;
+@sidebar-border-caret: @color-10-percent-opacity-white;
+@sidebar-border-caret--in-active: @color-50-percent-opacity-white;
+@sidebar-border-caret--active: @light-text;
+
+// ----------------------------------------------- TOGGLER -----------------------------------------------
+@toggler--outline-color--hover: @color-10-percent-opacity-white;
+@toggler-bg-color: @color-mountain-meadow-green-s85;
+@toggler-indent: 1.5rem;
+@toggler-padding: 1.3rem;
+
+// ------------------------------------------------ HEADER -----------------------------------------------
+@header-height: 6rem;
+@header-color: @color-bali-hai-blue-s25;
+@header-color--hover: @light-text;
+@header-line-height: @header-height;
+@header-btn-bg-color: @color-biscay-blue-s41;
+@header-bg-color: @color-biscay-blue-s41;
+@header-btn-bg-color--hover: @color-blue-whale-blue-s53;
+@header-notification-bg-color--regular: @color-mountain-meadow-green-s85;
+@header-notification-bg-color--default: @color-hit-grey-s0;
+@header-notification-label-dimension: 1.4rem;
+@header-font-size: 1.4rem;
+@header-min-width: 64rem;
+@header-media-tablet: 1100px;
+@header-media-tablet-collapsed: 860px;
+
+// ------------------------------------------------ DROPDOWN -----------------------------------------------
+@dropdown-height: 5rem;
+@dropdown-line-height: 2.2rem;
+@dropdown-min-width: 20rem;
+@dropdown-padding: 0 1em;
+@dropdown-color: @light-text;
+@dropdown-bg-color: @color-blue-whale-blue-s53;
+@dropdown-bg-color--hover: @color-blue-whale-blue-s58;
+@dropdown-box-shadow: 0 .6rem 1.2rem @color-175-percent-opacity-black;
+@dropdown-notification-border: @color-bali-hai-blue-s25;
+@dropdown-fa-dimention: 2rem;
+@dropdown-fa-top: @dropdown-height/2 - @dropdown-fa-dimention/2;
+@dropdown-fa-right: 1em;
+@dropdown-badge-color: @color-blue-whale-blue-s53;
+@dropdown-badge-color--hover: @color-blue-whale-blue-s58;
+@dropdown-badge-bg-color: @color-bali-hai-blue-s25;
+@dropdown-badge-bg-color--hover: @color-white;
 // ---------------- CALENDAR :: SIZES ----------------
 @calendar-wrapper-padding: 15px;
 @calendar-slot-border-width: 10px;
 
 // ---------------- CALENDAR :: COLORS :: BASE ----------------
-@calendar-primary-font-color: #FFF;
-@calendar-secondary-font-color: #859CB1;
-@calendar-header-border-color: #2F4050;
-@calendar-day-header-bg-color: #1E3141;
-@calendar-toolbar-bg-color: #2F4050;
-@calendar-today-btn-bg-color: #1AAA8F;
-@calendar-today-btn-hover-bg-color: #119B7F;
-@calendar-header-divider: #DBE4EC;
+@calendar-primary-font-color: @color-white;
+@calendar-secondary-font-color: @color-bali-hai-blue-s24;
+@calendar-header-border-color: @color-biscay-blue-s41;
+@calendar-day-header-bg-color: @color-blue-whale-blue-s53;
+@calendar-toolbar-bg-color: @color-biscay-blue-s41;
+@calendar-today-btn-bg-color: @color-mountain-meadow-green-s84;
+@calendar-today-btn-hover-bg-color: @color-mountain-meadow-green-s89;
+@calendar-header-divider: @color-solitude-blue-s7;
 
 // ---------------- CALENDAR :: COLORS :: SLOT ----------------
-@calendar-free-slot-border-color: #DBE4EC;
-@calendar-free-slot-minor-border-color: #F4F7F9;
-@calendar-free-slot-bg-color: #FFF;
-@calendar-today-slot-border-color: #C7DEE3;
-@calendar-today-slot-bg-color: #E8F6F4;
-@calendar-non-working-slot-border-color: #DEEBF4;
-@calendar-non-working-slot-bg-color: #E8F2F9;
+@calendar-free-slot-border-color: @color-solitude-blue-s7;
+@calendar-free-slot-minor-border-color: @color-solitude-blue-s2;
+@calendar-free-slot-bg-color: @color-white;
+@calendar-today-slot-border-color: @color-mabel-blue-s12;
+@calendar-today-slot-bg-color: @color-white-ice-green-s5;
+@calendar-non-working-slot-border-color: @color-pattens-blue-s9;
+@calendar-non-working-slot-bg-color: @color-lavender-violet-s6;
 
 // ---------------- CALENDAR :: COLORS :: EVENT ----------------
-@calendar-event-sick-bg-color: #FBDDE0;
-@calendar-event-sick-font-color: #ED5565;
-@calendar-event-vac-bg-color: #F0DFFC;
-@calendar-event-vac-font-color: #AE84CC;
+@calendar-event-sick-bg-color: @color-pale-pink-red-s11;
+@calendar-event-sick-font-color: @color-dark-pink-red-s64;
+@calendar-event-vac-bg-color: @main-magnolia-white-s11;
+@calendar-event-vac-font-color: @color-biloba-flower-violet-s35;
 
 // ---------------- CALENDAR :: COLORS :: TASK ----------------
-@calendar-task-priority-1-bg-color: #FBA4AE;
-@calendar-task-priority-1-border-color: #ED5565;
-@calendar-task-priority-2-bg-color: #FCC885;
-@calendar-task-priority-2-border-color: #F3A747;
-@calendar-task-priority-3-bg-color: #78D6C5;
-@calendar-task-priority-3-border-color: #1AAA8F;
-@calendar-task-priority-4-bg-color: #6CB8E8;
-@calendar-task-priority-4-border-color: #1C84C6;
+@calendar-task-priority-1-bg-color: @color-sundown-red-s34;
+@calendar-task-priority-1-border-color: @color-dark-pink-red-s64;
+@calendar-task-priority-2-bg-color: @color-chsrdonnay-yellows47;
+@calendar-task-priority-2-border-color: @color-casablanca-yellow-s70;
+@calendar-task-priority-3-bg-color: @color-downy-green-s43;
+@calendar-task-priority-3-border-color: @color-mountain-meadow-green-s84;
+@calendar-task-priority-4-bg-color: @color-malibu-blue-s53;
+@calendar-task-priority-4-border-color: @color-denim-blue-s85;
