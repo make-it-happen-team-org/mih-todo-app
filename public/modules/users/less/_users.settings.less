@@ -1,4 +1,5 @@
 @import (once) "../../../less/_app.variables.less";
+@import (once) "../../../less/_app.mixins.less";
 
 .settings {
 
@@ -112,7 +113,7 @@
 
 }
 
-@media (max-width: 1200px) {
+.from-min-width(1200px, {
   .settings {
 
     .form-box {
@@ -122,6 +123,5 @@
     .button-submit {
       margin-right: 0;
     }
-
   }
-}
+});

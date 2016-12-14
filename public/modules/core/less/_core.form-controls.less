@@ -19,7 +19,7 @@ input[type=time] {
   text-align: center;
   color: @button-color;
   cursor: pointer;
-  transition: all .5s;
+  transition: background-color .5s;
 
   &--green {
     background-color: @button-green-color;
@@ -117,7 +117,7 @@ input[type=time] {
         left: 0;
         width: @checkbox-dimension;
         height: @checkbox-dimension;
-        margin-top: -@checkbox-dimension / 2;
+        margin-top: @checkbox-margin-top;
         background: @checkbox-background-color;
       }
 
@@ -125,7 +125,7 @@ input[type=time] {
         left: @checkbox-marker-padding;
         width: @checkbox-marker-width;
         height: @checkbox-marker-height;
-        margin-top: -@checkbox-marker-height / 2;
+        margin-top: @checkbox-marker-margin-top;
         border: @checkbox-marker-thickness solid @marker-green-color;
         border-top: none;
         border-right: none;
