@@ -1,4 +1,4 @@
-<div class="container-fluid settings">
+<div class="container-fluid dashboard-panel settings">
     <div class="row">
 
         <section class="col-lg-4 col-lg-offset-1 col-md-10 col-md-offset-1">
@@ -77,72 +77,73 @@
                     </div>
                 </fieldset>
 
-                <fieldset class="row">
-                    <label for="reminder" class="col-xs-12">Reminder</label>
-                    <div class="form-group col-xs-5 form-box--with-time">
-                        <label class="input-label--in">In</label>
-                        <div class="form-input--horizontal">
-                            <input id="reminder" type="number"
-                                   class="form-input settings__form-input" name="reminder" required
-                                   min="1" max="60" data-ng-model="settings.user.predefinedSettings.reminder"
-                                   data-ng-model-options="{ updateOn: 'blur' }">
-                            <div class="form-input-error-holder">
-                                <p data-ng-show="(userForm.submitted || userForm.reminder.$dirty) && !userForm.reminder.$valid"
-                                   class="form-input-error-text">Enter valid time</p>
-                            </div>
-                        </div>
-                    </div>
-                </fieldset>
 
-                <fieldset class="row">
-                    <div class="form-group col-xs-12 clearfix">
-                        <label for="add-new-booked-slot">Don't disturb me</label>
-                        <button id="add-new-booked-slot" type="button" class="button-icon button-icon--add"
-                                data-ng-click="settings.addNewBookedSlot()">
-                            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-                        </button>
-                    </div>
-                    <div class="row">
-                        <div class="form-group col-xs-12 clearfix"
-                             data-ng-repeat="(i, booked) in settings.user.predefinedSettings.booked">
-                            <ng-form name="bookedTime">
-                                <div class="col-xs-5 form-box--with-time">
-                                    <label for="booked-start-time-{{$index}}" class="input-label--from">From</label>
-                                    <div class="form-input--horizontal">
-                                        <input id="booked-start-time-{{$index}}" type="time"
-                                               class="form-input settings__form-input " required
-                                               name="startTime" data-ng-model="booked.startTime"
-                                               data-ng-model-options="{ updateOn: 'blur' }">
-                                        <div class="form-input-error-holder">
-                                            <p data-ng-show="(userForm.submitted || bookedTime.startTime.$dirty) && bookedTime.startTime.$error.required"
-                                               class="form-input-error-text">Enter start time</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-xs-5 form-box--with-time">
-                                    <label for="booked-end-time{{$index}}" class="input-label--to">To</label>
-                                    <div class="form-input--horizontal">
-                                        <input id="booked-end-time{{$index}}" type="time"
-                                               class="form-input settings__form-input " required
-                                               name="endTime"
-                                               data-ng-model="booked.endTime"
-                                               data-ng-model-options="{ updateOn: 'blur' }">
-                                        <div class="form-input-error-holder">
-                                            <p data-ng-show="(userForm.submitted || bookedTime.endTime.$dirty) && bookedTime.endTime.$error.required"
-                                               class="form-input-error-text">Enter end time</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="button-icon-holder">
-                                    <button type="button" class="button-icon button-icon--remove"
-                                            data-ng-click="settings.removeBookedSlot(i)">
-                                        <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-                                    </button>
-                                </div>
-                            </ng-form>
-                        </div>
-                    </div>
-                </fieldset>
+                <!--<fieldset class="row">-->
+                    <!--<label for="reminder" class="col-xs-12">Reminder</label>-->
+                    <!--<div class="form-group col-xs-5 form-box&#45;&#45;with-time">-->
+                        <!--<label class="form-label form-label&#45;&#45;in">In</label>-->
+                        <!--<div class="form-input&#45;&#45;horizontal">-->
+                            <!--<input id="reminder" type="number"-->
+                                   <!--class="form-input settings__form-input" name="reminder" required-->
+                                   <!--min="1" max="60" data-ng-model="settings.user.predefinedSettings.reminder"-->
+                                   <!--data-ng-model-options="{ updateOn: 'blur' }">-->
+                            <!--<div class="form-input-error-holder">-->
+                                <!--<p data-ng-show="(userForm.submitted || userForm.reminder.$dirty) && !userForm.reminder.$valid"-->
+                                   <!--class="form-input-error-text">Enter valid time</p>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                <!--</fieldset>-->
+
+                <!--<fieldset class="row">-->
+                    <!--<div class="form-group col-xs-12 clearfix">-->
+                        <!--<label for="add-new-booked-slot">Don't disturb me</label>-->
+                        <!--<button id="add-new-booked-slot" type="button" class="button-icon button-icon&#45;&#45;add"-->
+                                <!--data-ng-click="settings.addNewBookedSlot()">-->
+                            <!--<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>-->
+                        <!--</button>-->
+                    <!--</div>-->
+                    <!--<div class="row">-->
+                        <!--<div class="form-group col-xs-12 clearfix"-->
+                             <!--data-ng-repeat="(i, booked) in settings.user.predefinedSettings.booked">-->
+                            <!--<ng-form name="bookedTime">-->
+                                <!--<div class="col-xs-5 form-box&#45;&#45;with-time">-->
+                                    <!--<label for="booked-start-time-{{$index}}" class="form-label form-label&#45;&#45;from">From</label>-->
+                                    <!--<div class="form-input&#45;&#45;horizontal">-->
+                                        <!--<input id="booked-start-time-{{$index}}" type="time"-->
+                                               <!--class="form-input settings__form-input " required-->
+                                               <!--name="startTime" data-ng-model="booked.startTime"-->
+                                               <!--data-ng-model-options="{ updateOn: 'blur' }">-->
+                                        <!--<div class="form-input-error-holder">-->
+                                            <!--<p data-ng-show="(userForm.submitted || bookedTime.startTime.$dirty) && bookedTime.startTime.$error.required"-->
+                                               <!--class="form-input-error-text">Enter start time</p>-->
+                                        <!--</div>-->
+                                    <!--</div>-->
+                                <!--</div>-->
+                                <!--<div class="col-xs-5 form-box&#45;&#45;with-time">-->
+                                    <!--<label for="booked-end-time{{$index}}" class="form-label form-label&#45;&#45;to">To</label>-->
+                                    <!--<div class="form-input&#45;&#45;horizontal">-->
+                                        <!--<input id="booked-end-time{{$index}}" type="time"-->
+                                               <!--class="form-input settings__form-input " required-->
+                                               <!--name="endTime"-->
+                                               <!--data-ng-model="booked.endTime"-->
+                                               <!--data-ng-model-options="{ updateOn: 'blur' }">-->
+                                        <!--<div class="form-input-error-holder">-->
+                                            <!--<p data-ng-show="(userForm.submitted || bookedTime.endTime.$dirty) && bookedTime.endTime.$error.required"-->
+                                               <!--class="form-input-error-text">Enter end time</p>-->
+                                        <!--</div>-->
+                                    <!--</div>-->
+                                <!--</div>-->
+                                <!--<div class="button-icon-holder">-->
+                                    <!--<button type="button" class="button-icon button-icon&#45;&#45;remove"-->
+                                            <!--data-ng-click="settings.removeBookedSlot(i)">-->
+                                        <!--<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>-->
+                                    <!--</button>-->
+                                <!--</div>-->
+                            <!--</ng-form>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                <!--</fieldset>-->
 
                 <fieldset class="row">
                     <div class="form-group col-xs-12">
@@ -154,7 +155,7 @@
                             <div class="form-group clearfix col-md-12"
                                  data-ng-class="dayOpts.isWorkingDay ? 'is-working-day' : 'is-not-working-day'">
                                 <div class="col-xs-5 form-box--with-time">
-                                    <label for="working-day-start-{{$index}}" class="input-label--from">From</label>
+                                    <label for="working-day-start-{{$index}}" class="form-label form-label--from">From</label>
                                     <div class="form-input--horizontal">
                                         <input id="working-day-start-{{$index}}" type="time"
                                                class="form-input settings__form-input "
@@ -169,7 +170,7 @@
                                     </div>
                                 </div>
                                 <div class="col-xs-5 form-box--with-time">
-                                    <label for="working-day-end-{{$index}}" class="input-label--to">To</label>
+                                    <label for="working-day-end-{{$index}}" class="form-label form-label--to">To</label>
                                     <div class="form-input--horizontal">
                                         <input id="working-day-end-{{$index}}" type="time"
                                                class="form-input settings__form-input "

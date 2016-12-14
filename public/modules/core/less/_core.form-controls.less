@@ -1,0 +1,147 @@
+@import (once) "../../../less/_app.variables.less";
+
+::-webkit-inner-spin-button {
+  height: 100%;
+}
+
+input[type=time] {
+  line-height: inherit;
+}
+
+.button {
+  display: inline-block;
+  padding: 0;
+  height: @form-control-height;
+  width: 100%;
+  border: none;
+  border-radius: 0;
+  line-height: @form-control-height;
+  text-align: center;
+  color: @button-color;
+  cursor: pointer;
+  transition: all .5s;
+
+  &--green {
+    background-color: @button-green-color;
+
+    &:hover {
+      background-color: @button-green-color-active;
+    }
+
+  }
+
+  &--blue {
+    background-color: @button-blue-color;
+
+    &:hover {
+      background-color: @button-blue-color-active;
+    }
+
+  }
+
+  &--grey {
+    background-color: @button-grey-color;
+
+    &:hover {
+      background-color: @button-grey-color-active;
+    }
+
+  }
+}
+
+.form {
+
+  &-box {
+
+    &--without-error {
+      padding-bottom: @input-error-text-height;
+    }
+
+  }
+
+  &-input {
+    box-sizing: border-box;
+    height: @form-control-height;
+    border: 1px solid @input-border-color;
+    border-radius: 0;
+    font-size: @input-font-size;
+    line-height: @form-control-height;
+
+    &.ng-invalid {
+      border: 1px solid @error-color;
+    }
+
+    &.ng-valid {
+      border: 1px solid @valid-color;
+    }
+
+    &.ng-pristine {
+      border: 1px solid @pristine-color;
+    }
+
+    &-error {
+
+      &-holder {
+        height: @input-error-text-height;
+      }
+
+      &-text {
+        margin: 0;
+        padding: 0 @input-error-text-size;
+        font-size: @input-error-text-size;
+        line-height: @input-error-text-height;
+        background-color: @error-color;
+        color: @input-error-text-color;
+      }
+
+    }
+  }
+
+  &-checkbox {
+    display: none;
+
+    &-label {
+      margin: 0;
+      padding-left: @checkbox-label-padding;
+      line-height: @form-control-height;
+      cursor: pointer;
+
+      &::before,
+      &::after {
+        content: '';
+        position: absolute;
+        top: 50%;
+      }
+
+      &::before {
+        left: 0;
+        width: @checkbox-dimension;
+        height: @checkbox-dimension;
+        margin-top: -@checkbox-dimension / 2;
+        background: @checkbox-background-color;
+      }
+
+      &::after {
+        left: @checkbox-marker-padding;
+        width: @checkbox-marker-width;
+        height: @checkbox-marker-height;
+        margin-top: -@checkbox-marker-height / 2;
+        border: @checkbox-marker-thickness solid @marker-green-color;
+        border-top: none;
+        border-right: none;
+        opacity: 0;
+        transform: rotate(-45deg);
+      }
+
+      &:hover::after {
+        opacity: .3;
+      }
+
+    }
+
+    &:checked + &-label::after {
+      opacity: 1;
+    }
+
+  }
+}

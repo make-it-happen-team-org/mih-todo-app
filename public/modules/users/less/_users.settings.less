@@ -1,232 +1,67 @@
 @import (once) "../../../less/_app.variables.less";
 
-// ---------------- form common elements ----------------
-@btn-green-color: #1aaa8f;
-@btn-green-color-active: #119b7f;
-
-@btn-blue-color: #1C84C6;
-@btn-blue-color-active: #1176B7;
-
-@btn-grey-color: #859cb1;
-@btn-grey-color-active: #2f4050;
-
-@input-border-color: #dbe4ec;
-@input-bg-color: #fff;
-
-@form-control-height: 3.8rem;
-
-@checkbox-dimension: 1.5rem;
-@checkbox-marker-width: 1.1rem;
-@checkbox-marker-height: .8rem;
-@checkbox-marker-thickness: .3rem;
-
-@marker-green-color: #119b7f;
-@marker-red-color: #ed5565;
-
-@error-color: #ed5565;
-@valid-color: #1aaa8f;
-@pristine-color: #dbe4ec;
-
-// ---------------- setting ----------------
-@settings-main-font-color: #2f4050;
-@settings-sub-font-color: #859cb1;
-
-@settings-avatar-dimension: 244px;
-
-
-::-webkit-inner-spin-button {
-  height: 100%;
-}
-
-input[type=time] {
-  line-height: inherit;
-}
-
-// common
-.button {
-  display: inline-block;
-  padding: 0;
-  margin-top: 1.3rem;
-  height: @form-control-height;
-  width: 100%;
-  border: none;
-  border-radius: 0;
-  line-height: @form-control-height;
-  text-align: center;
-  color: #fff;
-  cursor: pointer;
-  transition: all .5s;
-
-  &--green {
-    background-color: @btn-green-color;
-
-    &:hover {
-      background-color: @btn-green-color-active;
-    }
-  }
-
-  &--blue {
-    background-color: @btn-blue-color;
-
-    &:hover {
-      background-color: @btn-blue-color-active;
-    }
-  }
-
-  &--grey {
-    background-color: @btn-grey-color;
-
-    &:hover {
-      background-color: @btn-grey-color-active;
-    }
-  }
-}
-
-.form {
-
-  &-box {
-    width: 80%;
-
-    &--without-error {
-      padding-bottom: 1.6rem;
-    }
-  }
-
-  &-input {
-    height: @form-control-height;
-    box-sizing: border-box;
-    border: 1px solid @input-border-color;
-    border-radius: 0;
-    font-size: 1.4rem;
-    line-height: @form-control-height;
-
-    &.ng-invalid {
-      border: 1px solid @error-color;
-    }
-    &.ng-valid {
-      border: 1px solid @valid-color;
-    }
-    &.ng-pristine {
-      border: 1px solid @pristine-color;
-    }
-
-    &-error {
-      &-holder {
-        height: 1.6rem;
-      }
-      // todo refactor
-      &-text {
-        margin: 0;
-        padding: 0 1.2rem;
-        font-size: 1.2rem;
-        line-height: 1.6rem;
-        background-color: @error-color;
-        color: #fff;
-      }
-    }
-  }
-
-  &-checkbox {
-    display: none;
-
-    &-label {
-      @checkbox-marker-padding: (@checkbox-dimension - @checkbox-marker-width) / 2;
-      @checkbox-label-padding: @checkbox-dimension * 2;
-
-      padding-left: @checkbox-label-padding;
-      margin: 0;
-      line-height: @form-control-height;
-      cursor: pointer;
-
-      &::before,
-      &::after {
-        content: '';
-        position: absolute;
-        top: 50%;
-      }
-
-      &::before {
-        width: @checkbox-dimension;
-        height: @checkbox-dimension;
-        left: 0;
-        margin-top: -@checkbox-dimension / 2;
-        background: #fff;
-      }
-
-      &::after {
-        opacity: 0;
-        width: @checkbox-marker-width;
-        height: @checkbox-marker-height;
-        left: @checkbox-marker-padding;
-        margin-top: -@checkbox-marker-height / 2;
-        border: @checkbox-marker-thickness solid @marker-green-color;
-        border-top: none;
-        border-right: none;
-        transform: rotate(-45deg);
-      }
-
-      &:hover::after {
-        opacity: .3;
-      }
-    }
-
-    &:checked + &-label::after {
-      opacity: 1;
-    }
-  }
-}
-
 .settings {
-  padding-bottom: 2px;
 
   .avatar {
-    border: 5px solid #fff;
+    border: @settings-avatar-border-width solid @settings-avatar-border-color;
     width: @settings-avatar-dimension;
     height: @settings-avatar-dimension;
   }
 
   .heading {
-    font-size: 2.5rem;
+    margin-top: 0;
+    font-size: @settings-heading-font-size;
     font-family: @font-open-sans-light;
     color: @settings-main-font-color;
-    line-height: 1.76;
-    margin-top: 0;
+    line-height: @settings-heading-line-height;
+  }
+
+  .button {
+    margin-top: 10px;
   }
 
   .button-icon {
     background: none;
     border: none;
-    color: @settings-sub-font-color;
     vertical-align: middle;
-    font-size: 1.8rem;
+    font-size: @settings-button-icon-font-size;
+    color: @settings-sub-font-color;
 
     &-holder {
-      float: left;
       line-height: @form-control-height;
     }
 
     &--add {
+
       &:hover {
         color: @marker-green-color;
       }
+
     }
 
     &--remove {
       padding: 0;
+
       &:hover {
-        color: #ed5565;
+        color: @marker-red-color;
       }
+
     }
   }
 
   .form {
+
     &-box {
+      width: 80%;
+
       &--with-time {
         display: flex;
         align-items: baseline;
         width: 40%;
       }
+
     }
+
     &-input {
       border-color: @input-border-color;
       background-color: @input-bg-color;
@@ -234,46 +69,52 @@ input[type=time] {
       display: block;
       width: 100%;
 
-      padding-right: 15px;
-      padding-left: 15px;
+      padding-right: @settings-input-padding;
+      padding-left: @settings-input-padding;
 
       &--horizontal {
-        display: inline-block;
         width: 100%;
-        margin-left: 10px;
       }
 
       &--file {
         display: none;
       }
+
     }
 
-    &-input-lable {
+    &-label {
+      padding-right: 10px;
+
       &--in,
       &--from {
         width: 40px;
       }
+
       &--to {
         width: 20px;
       }
+
     }
   }
 
   .button-submit {
     margin-right: 20%;
   }
+
   .is-not-working-day {
     opacity: .5;
   }
+
   .day-checkbox {
     padding: 0;
     width: 14%;
   }
-}
 
+}
 
 @media (max-width: 1200px) {
   .settings {
+
     .form-box {
       width: 100%;
     }
@@ -281,5 +122,6 @@ input[type=time] {
     .button-submit {
       margin-right: 0;
     }
+
   }
 }
