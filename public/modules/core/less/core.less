@@ -5,6 +5,7 @@
 @import "core.main-view.sidebar/core.main-view.sidebar.less";
 @import "_core.socials.less";
 @import "_core.main-content.less";
+@import "_core.form-controls.less";
 
 .text-uppercase {
   text-transform: uppercase;
@@ -96,4 +97,8 @@ div.ui-notification {
 
     .item-priority:focus { border-color: @priority-4-color; }
   }
+}
+
+.dashboard-panel {
+  padding: @dashboard-panel-padding-left-right @dashboard-panel-padding-top-bottom;
 }
