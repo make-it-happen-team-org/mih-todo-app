@@ -102,7 +102,7 @@ module.exports = {
     profilesFolder: './modules/users/img/profiles/',
     uploads: {
         profileUpload: {
-            dest: './modules/users/img/profiles/', // Profile upload destination path
+            dest: './public/modules/users/img/profiles/', // Profile upload destination path
             limits: {
                 fileSize: 3 * 1024 * 1024 // Max file size in bytes (3 MB)
             }
