@@ -1,7 +1,6 @@
 const watchFiles = require('./watch-files');
 
 /** MAIN **/
-
 const env = {
     development: {
         NODE_ENV: 'development'
@@ -13,7 +12,6 @@ const env = {
         NODE_ENV: 'test'
     }
 };
-
 const less = {
     options: {
         plugins: [new (require('less-plugin-autoprefix'))({browsers: ["last 3 versions"]})],
@@ -34,7 +32,6 @@ const less = {
         }
     }
 };
-
 const babel = {
     es6: {
         files: [
@@ -47,13 +44,11 @@ const babel = {
         ]
     }
 };
-
 const clean = {
     compiledJs: [
         'modules/**/*.js', 'modules/**/*.js.map'
     ]
 };
-
 const watch = {
     clientViews: {
         files: watchFiles.clientViews,
@@ -85,7 +80,6 @@ const watch = {
 };
 
 /** PRODUCTION **/
-
 const ngAnnotate = {
     production: {
         files: {
@@ -94,7 +88,6 @@ const ngAnnotate = {
         }
     }
 };
-
 const htmlmin = {
     production: {
         options: {
@@ -112,7 +105,6 @@ const htmlmin = {
         ]
     }
 };
-
 const copy = {
     options: {
         rootpath: 'public'
@@ -167,7 +159,6 @@ const copy = {
         ]
     }
 };
-
 const uglify = {
     production: {
         files: {
@@ -178,7 +169,6 @@ const uglify = {
 };
 
 /** ADDITIONAL **/
-
 const jshint = {
     all: {
         src: watchFiles.clientJS,
@@ -187,13 +177,11 @@ const jshint = {
         }
     }
 };
-
 const karma = {
     unit: {
         configFile: 'karma.conf.js'
     }
 };
-
 const pkg = require('grunt').file.readJSON('package.json');
 
 module.exports = {

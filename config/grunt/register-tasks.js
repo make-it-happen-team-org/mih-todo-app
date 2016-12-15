@@ -8,6 +8,7 @@ module.exports = (grunt) => {
         'babel',
         'buildDevIndex'
     ]);
+    grunt.registerTask('default', [ 'develop', 'watch' ]);
 
     // Build task(s).
     grunt.registerTask('prebuild', [
@@ -20,13 +21,11 @@ module.exports = (grunt) => {
         'copy:prodFonts',
         'uglify'
     ]);
-
     grunt.registerTask('build', [
         'env:production',
         'loadConfig',
         'buildProdIndex'
     ]);
-
     grunt.task.registerTask('buildProdIndex', () => {
         grunt.file.write(
             'build/index.html',
@@ -36,7 +35,6 @@ module.exports = (grunt) => {
             )
         )
     });
-
     grunt.task.registerTask('buildDevIndex', () => {
         grunt.file.write(
             'index.html',
@@ -49,10 +47,10 @@ module.exports = (grunt) => {
 
     // A Task for loading the configuration object
     grunt.task.registerTask('loadConfig', 'Task that loads the config into a grunt option.', () => {
-        require('../init')();
-
+        const init = require('../init');
         const config = require('../config');
 
+        init();
         grunt.file.setBase('public/');
 
         config.assets.cssFullPath = [];

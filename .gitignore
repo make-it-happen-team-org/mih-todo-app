@@ -1,20 +1,16 @@
-server-app-folder/tests/coverage/
-
+!scripts
 public/*.js
-public/*.map
 public/dist
-public/modules/**/*.map
+/**/*.map
 public/modules/**/*.js
 public/modules/**/*.css
+/**/*min.css
 public/modules/users/img/profiles/*
 public/css/
 public/index.html
 
-public/build/*
-
 #=========== THIS IS ORIGINAL FROM ROOT/APP folder
 # iOS / Apple
-# ===========
 .DS_Store
 ehthumbs.db
 Icon?
