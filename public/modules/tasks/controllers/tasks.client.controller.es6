@@ -140,6 +140,7 @@ angular.module('tasks').controller('TasksController',
                     $scope.user.predefinedSettings.workingHours
                 ).then(slotsRange => {
                     if (!slotsRange.length) {
+                        Notification.warning('Sorry but we can\'t move existing tasks. You should better choose first option');
                         return;
                     }
                     $scope.slotsRange = slotsRange;
