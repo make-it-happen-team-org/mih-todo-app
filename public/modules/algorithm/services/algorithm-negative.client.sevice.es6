@@ -17,8 +17,9 @@ class AlgorithmNegative {
     }
 
     initialize(slotType, totalAvailTime) {
-        this.openModalForDecision(slotType, `(you need to free up ${this.estimation - totalAvailTime} h)`);
+        this.slotType = slotType;
         this.totalAvailHours = totalAvailTime;
+        this.getOccupiedSlots(this.startDate, this.endDate);
     }
 
     getOccupiedSlots(startDate, endDate) {
@@ -202,8 +203,13 @@ class AlgorithmNegative {
                 for (var i = indexes.length - 1; i >= 0; i--) {
                     freeSlots.splice(indexes[i], 1);
                 }
-
-                this.findAppropriateSlotsToShift(filteredTasks, freeSlots);
+                
+                this.filteredTasks = filteredTasks;
+                this.freeSlots = freeSlots;
+                
+                this.$rootScope.isShiftable = _.isEmpty(freeSlots[0]);
+                
+                this.openModalForDecision(this.slotType, `(you need to free up ${this.estimation - this.totalAvailHours} h)`);
             });
     }
 

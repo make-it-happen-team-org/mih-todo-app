@@ -25,7 +25,7 @@ class ModalsController {
     }
 
     shiftHandler() {
-        this.Algorithm.AlgorithmNegative.getOccupiedSlots(this.Algorithm.AlgorithmNegative.startDate, this.Algorithm.AlgorithmNegative.endDate);
+        this.Algorithm.AlgorithmNegative.findAppropriateSlotsToShift(this.Algorithm.AlgorithmNegative.filteredTasks, this.Algorithm.AlgorithmNegative.freeSlots);
     }
 }
 
