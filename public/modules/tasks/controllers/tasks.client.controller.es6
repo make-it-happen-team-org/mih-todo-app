@@ -38,9 +38,10 @@ class TasksController {
 }
 
 angular.module('tasks').controller('TasksController',
-    ['$scope', '$rootScope', '$stateParams', '$location', 'Authentication', 'Tasks', 'Users', '$timeout', 'Algorithm',
-        'Slots', 'Notification',
-        function ($scope, $rootScope, $stateParams, $location, Authentication, Tasks, Users, $timeout, Algorithm,
+    ['$scope', '$rootScope', '$stateParams', '$location', 'Authentication',
+      'Tasks', 'Users', '$timeout', 'Algorithm', 'Slots', 'Notification',
+        function ($scope, $rootScope, $stateParams, $location,
+                  Authentication, Tasks, Users, $timeout, Algorithm,
                   Slots, Notification) {
             $scope.authentication = Authentication;
             $scope.isATemplate = false;
@@ -444,17 +445,28 @@ angular.module('tasks').controller('TasksController',
             };
 
             $scope.update = (task) => {
-                if (task) {
-                    task.$update(() => {
-                        $location.path('tasks/' + task._id);
-                        $rootScope.$broadcast('NEW_TASK_MODIFY');
-                        Notification.success(`Task '${task.title}' was successfully updated`);
-                    }, (errorResponse) => {
-                        $scope.error = errorResponse.data.message;
-                    });
-                } else {
-                    console.error('Error. Task is not defined');
-                }
+              Tasks.getSlotsByTask({
+                taskId: $stateParams.taskId
+              }).$promise.then(function (slots) {
+                slots.forEach((slot) => {
+
+                  slot.title = task.title;
+                  slot.className = ['task', `task-priority-${task.priority}`];
+
+                  Slots.update({_id: slot._id}, slot);
+                });
+              });
+              if (task) {
+                task.$update(() => {
+                  $location.path('tasks/' + task._id);
+                  $rootScope.$broadcast('NEW_TASK_MODIFY');
+                  Notification.success(`Task '${task.title}' was successfully updated`);
+                }, (errorResponse) => {
+                  $scope.error = errorResponse.data.message;
+                });
+              } else {
+                console.error('Error. Task is not defined');
+              }
             };
 
             $scope.initCreateSlots = () => {
