@@ -7,46 +7,19 @@ class TasksController {
     $scope.user = Authentication.user;
     $scope.selectedTemplate = false;
 
-    $scope.$on('COMPLETED_SLOT_FROM_OVERDUE', function () {
-      $timeout(() => {
-        $scope.task = getTask();
-        $scope.slotsRange = getSlotsByTask();
-      });
-    });
+    this.$scope = $scope;
+    this.$rootScope = $rootScope;
+    this.$stateParams = $stateParams;
+    this.$location = $location;
+    this.Authentication = Authentication;
+    this.Tasks = Tasks;
+    this.Users = Users;
+    this.$timeout = $timeout;
+    this.Algorithm = Algorithm;
+    this.Slots = Slots;
+    this.Notification = Notification;
 
-    $scope.$on('slideEnded', function () {
-      clearSlotsList();
-      $scope.$apply();
-    });
-
-    $scope.$on('slotShiftedFromNegative', () => {
-      let model = $scope.newTask;
-
-      Algorithm.generateSlots(
-        new Date(model.days.startTime),
-        new Date(model.days.endTime),
-        model.priority,
-        model.estimation,
-        $scope.user.predefinedSettings.workingHours
-      ).then(slotsRange => {
-        if (!slotsRange.length) {
-          return;
-        }
-        $scope.slotsRange = slotsRange;
-
-        let queries = [saveTask(model)];
-
-        if (model.isATemplate || $scope.selectedTemplate) {
-          queries.push(updateTaskTemplates(model));
-        }
-
-        Promise.all(queries).then(() => {
-          $location.path('/');
-          $rootScope.$broadcast('NEW_TASK_MODIFY');
-          Notification.success(`Task '${model.title}' was successfully created`);
-        });
-      });
-    });
+    this.listen();
 
     let date = new Date(),
         dateMax = new Date(Date.now() + (365 * 24 * 60 * 60 * 1000));
@@ -115,13 +88,13 @@ class TasksController {
     };
 
     $scope.clearSlotsList = () => {
-      clearSlotsList()
+      this.clearSlotsList()
     };
 
     $scope.createMode = () => {
       let newTask;
 
-      clearSlotsList();
+      this.clearSlotsList();
 
       newTask = {
         type: 'task',
@@ -141,7 +114,7 @@ class TasksController {
 
       $scope.changeEstimation = (updatedTask) => {
         updateEstimation(updatedTask);
-        clearSlotsList();
+        this.clearSlotsList();
       };
 
       $scope.loadTaskTemplate = (selectedTemplate) => {
@@ -168,12 +141,12 @@ class TasksController {
     };
 
     $scope.editMode = () => {
-      $scope.task = getTask(() => {
+      $scope.task = this.getTask(() => {
         $scope.slider = setEstimationExtremes($scope.task);
       });
 
       $scope.getSlotsByTask = () => {
-        $scope.slotsRange = getSlotsByTask();
+        $scope.slotsRange = this.getSlotsByTask();
       };
 
       $scope.generateSlots = () => {
@@ -181,22 +154,9 @@ class TasksController {
       };
       $scope.changeEstimation = (updatedTask) => {
         updateEstimation(updatedTask);
-        clearSlotsList();
+        this.clearSlotsList();
       };
     };
-    function daysMap() {
-      return {0: 'sun', 1: 'mon', 2: 'tue', 3: 'wed', 4: 'thu', 5: 'fri', 6: 'sat'};
-    }
-
-    function timeToMinutes(time) {
-      let timeMap = time.split(':'),
-          minutes = 0;
-
-      minutes += parseInt(timeMap[0], 10) * 60;
-      minutes += parseInt(timeMap[1], 10);
-
-      return minutes;
-    }
 
     function getEstimationDaysRange(startDate, endDate) {
       let weekDay = new Date(startDate),
@@ -247,55 +207,6 @@ class TasksController {
       };
     };
 
-    let updateTaskTemplates = (model) => {
-      return new Promise(resolve => {
-        let user = new Users($scope.user);
-
-        if ($scope.selectedTemplate) {
-          user.taskTemplates.forEach(template => {
-            if (template === $scope.selectedTemplate) {
-              template.lastUsingDate = new Date();
-            }
-          });
-        }
-
-        if (model.isATemplate) {
-          model.lastUsingDate = new Date();
-          user.taskTemplates.push(model);
-        }
-
-        user.$update(response => {
-          Authentication.user = response;
-          resolve();
-        }, err => console.error(err));
-      });
-    };
-
-    let saveTask = (model) => {
-      return new Promise(resolve => {
-        let task = new Tasks(model);
-
-        if (model.withoutDates) {
-          task.days.startTime = task.days.endTime = '';
-        }
-
-        task.$save((response) => {
-          let slots;
-
-          $scope.slotsRange.map(slot => {
-            slot.taskId = response._id;
-            slot.userId = Authentication.user._id;
-            slot.title = response.title;
-            slot.className = ['task', `task-priority-${model.priority}`];
-          });
-          slots = new Slots($scope.slotsRange);
-          slots.$save(resolve);
-        }, (errorResponse) => {
-          $scope.validationError = errorResponse.data.message.errors;
-        });
-      });
-    };
-
     let getNewSlots = (model) => {
 
       Algorithm.generateSlots(
@@ -315,58 +226,11 @@ class TasksController {
       });
     };
 
-    let recalcChart = () => {
-      let progress = getFormattedProgress();
-
-      $scope.progress = angular.extend(progress, {
-        progressChart: {
-          data: [{value: progress.percent, label: 'Done'},
-            {value: 100 - progress.percent, label: 'Left'}],
-          colors: ['#1ab394', '#f8ac59'],
-          formatter: function formatter(input) {
-            return input + '%';
-          }
-        }
-      });
-    };
-
-    let getSlotsByTask = ()=> {
-      return Tasks.getSlotsByTask({
-          taskId: $stateParams.taskId
-        }, (slots) => {
-          if (!slots.length) {
-            $scope.progress = false;
-            return;
-          }
-          $timeout(() => {
-            recalcChart();
-          }, 100);
-        }
-      );
-    };
-
-    let getTask = (cb) => {
-      return Tasks.get({
-        taskId: $stateParams.taskId
-      }, ()=> {
-        if(cb) {
-          cb();
-        }
-      });
-    };
-
     let removeSlotsByTask = () => {
       Tasks.deleteSlotsByTask({
           taskId: $stateParams.taskId
         }
       );
-    };
-
-    let clearSlotsList = () => {
-      if ($scope.slotsRange && $scope.slotsRange.length) {
-        $scope.slotsRange = [];
-        Notification.info('Don\'t forget to generate slots');
-      }
     };
 
     let updateProgress = (slot, task) => {
@@ -385,23 +249,12 @@ class TasksController {
         }
 
         task.$update(() => {
-          recalcChart();
+          this.recalcChart();
           $rootScope.$broadcast('NEW_TASK_MODIFY');
         }, (errorResponse) => {
           $scope.error = errorResponse.data.message;
         });
       });
-    };
-
-    let getFormattedProgress = () => {
-      let complete = $scope.task.progress;
-      let estimation = $scope.task.estimation;
-
-      return {
-        percent: +(complete / estimation * 100).toFixed(2),
-        left: estimation - complete,
-        done: complete
-      };
     };
 
     $scope.create = (task) => {
@@ -475,6 +328,161 @@ class TasksController {
     $scope.completeSlot = (slot) => {
       updateProgress(slot, $scope.task);
     };
+  }
+
+  clearSlotsList () {
+    if (this.$scope.slotsRange && this.$scope.slotsRange.length) {
+      this.$scope.slotsRange = [];
+      this.Notification.info('Don\'t forget to generate slots');
+    }
+  };
+
+  getFormattedProgress () {
+    let complete   = this.$scope.task.progress;
+    let estimation = this.$scope.task.estimation;
+
+    return {
+      percent: +(complete / estimation * 100).toFixed(2),
+      left:    estimation - complete,
+      done:    complete
+    };
+  };
+
+  recalcChart () {
+    let progress = this.getFormattedProgress();
+
+    this.$scope.progress = angular.extend(progress, {
+      progressChart: {
+        data:      [{
+          value: progress.percent,
+          label: 'Done'
+        }, {
+          value: 100 - progress.percent,
+          label: 'Left'
+        }],
+        colors:    ['#1ab394', '#f8ac59'],
+        formatter: function formatter(input) {
+          return input + '%';
+        }
+      }
+    });
+  };
+
+  getSlotsByTask () {
+    return this.Tasks.getSlotsByTask({
+        taskId: this.$stateParams.taskId
+      }, (slots) => {
+        if (!slots.length) {
+          this.$scope.progress = false;
+          return;
+        }
+        this.$timeout(() => {
+          this.recalcChart();
+        }, 100);
+      }
+    );
+  };
+
+  getTask(cb) {
+    return this.Tasks.get({
+      taskId: this.$stateParams.taskId
+    }, () => {
+      if (cb) {
+        cb();
+      }
+    });
+  };
+
+  saveTask (model) {
+    return new Promise(resolve => {
+      let task = new this.Tasks(model);
+
+      if (model.withoutDates) {
+        task.days.startTime = task.days.endTime = '';
+      }
+
+      task.$save((response) => {
+        let slots;
+
+        this.$scope.slotsRange.map(slot => {
+          slot.taskId    = response._id;
+          slot.userId    = this.Authentication.user._id;
+          slot.title     = response.title;
+          slot.className = ['task', `task-priority-${model.priority}`];
+        });
+        slots = new Slots($scope.slotsRange);
+        slots.$save(resolve);
+      }, (errorResponse) => {
+        this.$scope.validationError = errorResponse.data.message.errors;
+      });
+    });
+  };
+
+  updateTaskTemplates (model) {
+    return new Promise(resolve => {
+      let user = new Users(this.$scope.user);
+
+      if (this.$scope.selectedTemplate) {
+        user.taskTemplates.forEach(template => {
+          if (template === this.$scope.selectedTemplate) {
+            template.lastUsingDate = new Date();
+          }
+        });
+      }
+
+      if (model.isATemplate) {
+        model.lastUsingDate = new Date();
+        user.taskTemplates.push(model);
+      }
+
+      user.$update(response => {
+        this.Authentication.user = response;
+        resolve();
+      }, err => console.error(err));
+    });
+  };
+
+  listen() {
+    this.$scope.$on('COMPLETED_SLOT_FROM_OVERDUE', function () {
+      this.$timeout(() => {
+        this.$scope.task = this.getTask();
+        this.$scope.slotsRange = this.getSlotsByTask();
+      });
+    });
+
+    this.$scope.$on('slideEnded', function () {
+      this.clearSlotsList();
+      this.$scope.$apply();
+    });
+
+    this.$scope.$on('slotShiftedFromNegative', () => {
+      let model = this.$scope.newTask;
+
+      this.Algorithm.generateSlots(
+        new Date(model.days.startTime),
+        new Date(model.days.endTime),
+        model.priority,
+        model.estimation,
+        this.$scope.user.predefinedSettings.workingHours
+      ).then(slotsRange => {
+        if (!slotsRange.length) {
+          return;
+        }
+        this.$scope.slotsRange = slotsRange;
+
+        let queries = [this.saveTask(model)];
+
+        if (model.isATemplate || this.$scope.selectedTemplate) {
+          queries.push(this.updateTaskTemplates(model));
+        }
+
+        Promise.all(queries).then(() => {
+          this.$location.path('/');
+          this.$rootScope.$broadcast('NEW_TASK_MODIFY');
+          this.Notification.success(`Task '${model.title}' was successfully created`);
+        });
+      });
+    });
   }
 }
 
