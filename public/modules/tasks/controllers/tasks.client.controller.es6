@@ -100,7 +100,7 @@ class TasksController {
         type: 'task',
         title: '',
         priority: 1,
-        estimation: getOptimalEstimation($scope.dt.startDate, $scope.dt.endDate),
+        estimation: TasksController.getOptimalEstimation($scope.dt.startDate, $scope.dt.endDate),
         notes: '',
         days: {
           startTime: $scope.dt.startDate,
@@ -110,10 +110,10 @@ class TasksController {
       };
       $scope.newTask = angular.copy(newTask);
 
-      $scope.slider = setEstimationExtremes($scope.newTask);
+      $scope.slider = TasksController.setEstimationExtremes($scope.newTask);
 
       $scope.changeEstimation = (updatedTask) => {
-        updateEstimation(updatedTask);
+        this.updateEstimation(updatedTask);
         this.clearSlotsList();
       };
 
@@ -130,7 +130,7 @@ class TasksController {
       };
 
       $scope.generateSlots = () => {
-        getNewSlots($scope.newTask)
+        this.getNewSlots($scope.newTask)
       };
 
       $scope.$watch('newTask.estimation', (newVal, oldVal) => {
@@ -142,7 +142,7 @@ class TasksController {
 
     $scope.editMode = () => {
       $scope.task = this.getTask(() => {
-        $scope.slider = setEstimationExtremes($scope.task);
+        $scope.slider = TasksController.setEstimationExtremes($scope.task);
       });
 
       $scope.getSlotsByTask = () => {
@@ -150,116 +150,17 @@ class TasksController {
       };
 
       $scope.generateSlots = () => {
-        getNewSlots($scope.task);
+        this.getNewSlots($scope.task);
       };
       $scope.changeEstimation = (updatedTask) => {
-        updateEstimation(updatedTask);
+        this.updateEstimation(updatedTask);
         this.clearSlotsList();
       };
     };
 
-    function getEstimationDaysRange(startDate, endDate) {
-      let weekDay = new Date(startDate),
-          estimationDaysRange = [weekDay];
-      endDate = new Date(endDate);
-
-      while (weekDay < endDate) { //Get all days for this period
-        estimationDaysRange.push(weekDay);
-        weekDay = new Date(weekDay.setDate(weekDay.getDate() + 1));
-      }
-
-      return estimationDaysRange;
-    }
-
-    function getMaxEstimation(startDate, endDate) {
-      return getEstimationDaysRange(startDate, endDate).length * 12;
-    }
-
-    function getOptimalEstimation(startDate, endDate) {
-      // TODO: what is considered optimal?
-      let optimalEstimation = 1 /* hour */;
-      return optimalEstimation;
-    }
-
-    function removeAvailHoursInfo() {
-      delete $scope.timeAvailability;
-    }
-
-    let updateEstimation = (model) => {
-      let maxEstimation = getMaxEstimation(model.days.startTime, model.days.endTime);
-      $scope.slider.options.ceil = maxEstimation;
-      if (model.estimation > maxEstimation) {
-        model.estimation = maxEstimation;
-      }
-      removeAvailHoursInfo();
-    };
-
-    let setEstimationExtremes = (model) => {
-      return {
-        options: {
-          floor: 1,
-          hideLimitLabels: true,
-          ceil: getMaxEstimation(new Date(model.days.startTime), new Date(model.days.endTime)),
-          translate: function translate(unit) {
-            return unit + 'h';
-          }
-        }
-      };
-    };
-
-    let getNewSlots = (model) => {
-
-      Algorithm.generateSlots(
-        new Date(model.days.startTime),
-        new Date(model.days.endTime),
-        model.priority,
-        model.estimation,
-        $scope.user.predefinedSettings.workingHours
-      ).then(slotsRange => {
-        $timeout(() => {
-          $scope.timeAvailability = Algorithm.getTimeAvailabilityFromSlotsGroupedByDays();
-          if (!slotsRange.length) {
-            Algorithm.AlgorithmNegative.initialize('task', $scope.timeAvailability.totalAvailHours);
-          }
-          return $scope.slotsRange = slotsRange;
-        });
-      });
-    };
-
-    let removeSlotsByTask = () => {
-      Tasks.deleteSlotsByTask({
-          taskId: $stateParams.taskId
-        }
-      );
-    };
-
-    let updateProgress = (slot, task) => {
-      slot.isComplete = true;
-
-      Slots.update(slot, () => {
-        let slotsQty = $scope.slotsRange.map(function (slot) {
-          return !!slot.isComplete;
-        });
-        let completeSlotsQty = slotsQty.filter(Boolean);
-
-        task.progress += slot.duration;
-
-        if (slotsQty.length === completeSlotsQty.length) {
-          task.isComplete = true;
-        }
-
-        task.$update(() => {
-          this.recalcChart();
-          $rootScope.$broadcast('NEW_TASK_MODIFY');
-        }, (errorResponse) => {
-          $scope.error = errorResponse.data.message;
-        });
-      });
-    };
-
     $scope.create = (task) => {
       if (task) {
-        let queries = [saveTask(task)];
+        let queries = [this.saveTask(task)];
 
         if (task.isATemplate || $scope.selectedTemplate) {
           queries.push(updateTaskTemplates(task));
@@ -284,7 +185,7 @@ class TasksController {
         task.$remove(() => {
           $location.path('/');
           $rootScope.$broadcast('NEW_TASK_MODIFY');
-          removeSlotsByTask();
+          this.removeSlotsByTask();
           Notification.success(`Task '${task.title}' was successfully removed`);
         });
       } else {
@@ -326,9 +227,108 @@ class TasksController {
     };
 
     $scope.completeSlot = (slot) => {
-      updateProgress(slot, $scope.task);
+      this.updateProgress(slot, $scope.task);
     };
   }
+
+  static getEstimationDaysRange (startDate, endDate) {
+    let weekDay             = new Date(startDate),
+        estimationDaysRange = [weekDay];
+
+    endDate                 = new Date(endDate);
+
+    while (weekDay < endDate) { //Get all days for this period
+      estimationDaysRange.push(weekDay);
+      weekDay = new Date(weekDay.setDate(weekDay.getDate() + 1));
+    }
+
+    return estimationDaysRange;
+  }
+
+  static getMaxEstimation (startDate, endDate) {
+    return TasksController.getEstimationDaysRange(startDate, endDate).length * 12;
+  }
+
+  static getOptimalEstimation (startDate, endDate) {
+    // TODO: what is considered optimal?
+    let optimalEstimation = 1 /* hour */;
+    return optimalEstimation;
+  }
+
+  removeAvailHoursInfo () {
+    delete this.$scope.timeAvailability;
+  }
+
+  updateEstimation (model) {
+    let maxEstimation = TasksController.getMaxEstimation(model.days.startTime, model.days.endTime);
+    this.$scope.slider.options.ceil = maxEstimation;
+    if (model.estimation > maxEstimation) {
+      model.estimation = maxEstimation;
+    }
+    this.removeAvailHoursInfo();
+  };
+
+  static setEstimationExtremes (model) {
+    return {
+      options: {
+        floor: 1,
+        hideLimitLabels: true,
+        ceil: TasksController.getMaxEstimation(new Date(model.days.startTime), new Date(model.days.endTime)),
+        translate: function translate(unit) {
+          return unit + 'h';
+        }
+      }
+    };
+  };
+
+  getNewSlots (model) {
+    this.Algorithm.generateSlots(
+      new Date(model.days.startTime),
+      new Date(model.days.endTime),
+      model.priority,
+      model.estimation,
+      this.$scope.user.predefinedSettings.workingHours
+    ).then(slotsRange => {
+      this.$timeout(() => {
+        this.$scope.timeAvailability = this.Algorithm.getTimeAvailabilityFromSlotsGroupedByDays();
+        if (!slotsRange.length) {
+          this.Algorithm.AlgorithmNegative.initialize('task', this.$scope.timeAvailability.totalAvailHours);
+        }
+        return this.$scope.slotsRange = slotsRange;
+      });
+    });
+  };
+
+  removeSlotsByTask () {
+    this.Tasks.deleteSlotsByTask({
+        taskId: this.$stateParams.taskId
+      }
+    );
+  };
+
+  updateProgress (slot, task) {
+    slot.isComplete = true;
+
+    this.Slots.update(slot, () => {
+      let slotsQty = this.$scope.slotsRange.map(function (slot) {
+        return slot.isComplete;
+      });
+      let completeSlotsQty = slotsQty.filter(Boolean);
+
+      task.progress += slot.duration;
+
+      if (slotsQty.length === completeSlotsQty.length) {
+        task.isComplete = true;
+      }
+
+      task.$update(() => {
+        this.recalcChart();
+        this.$rootScope.$broadcast('NEW_TASK_MODIFY');
+      }, (errorResponse) => {
+        this.$scope.error = errorResponse.data.message;
+      });
+    });
+  };
 
   clearSlotsList () {
     if (this.$scope.slotsRange && this.$scope.slotsRange.length) {
@@ -410,7 +410,7 @@ class TasksController {
           slot.title     = response.title;
           slot.className = ['task', `task-priority-${model.priority}`];
         });
-        slots = new Slots($scope.slotsRange);
+        slots = new this.Slots(this.$scope.slotsRange);
         slots.$save(resolve);
       }, (errorResponse) => {
         this.$scope.validationError = errorResponse.data.message.errors;
@@ -443,14 +443,14 @@ class TasksController {
   };
 
   listen() {
-    this.$scope.$on('COMPLETED_SLOT_FROM_OVERDUE', function () {
+    this.$scope.$on('COMPLETED_SLOT_FROM_OVERDUE', () => {
       this.$timeout(() => {
         this.$scope.task = this.getTask();
         this.$scope.slotsRange = this.getSlotsByTask();
       });
     });
 
-    this.$scope.$on('slideEnded', function () {
+    this.$scope.$on('slideEnded', () => {
       this.clearSlotsList();
       this.$scope.$apply();
     });
