@@ -8,8 +8,8 @@
   "scripts": {
     "preinstall": "node  scripts/preinstall.js",
     "postinstall": "node  scripts/postinstall.js",
-    "run:server": "set NODE_ENV=development&&nodemon ./server-app-folder/server.js --debug",
-    "compile:client": "grunt"
+    "server": "set NODE_ENV=development&&nodemon ./server-app-folder/server.js --debug",
+    "client": "grunt"
   },
   "dependencies": {
     "angular-bootstrap-datetimepicker": "^1.0.1",

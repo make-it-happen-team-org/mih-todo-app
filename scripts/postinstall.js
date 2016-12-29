@@ -1,7 +1,6 @@
 const exec = require('child_process').exec;
 const scripts = [
-  'bower install --config.interactive=false',
-  'mongod --dbpath "d:/db/data"',
+  'bower install --config.interactive=false'
 ];
 const execHandler = (error, stdout, stderr) => {
   if (error) {
