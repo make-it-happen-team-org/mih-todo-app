@@ -19,6 +19,7 @@
     </div>
     <div class="mih-modal-theme__footer mih-modal-theme-footer">
         <button id="foo" class="btn mih-modal-theme-footer__button mih-modal-theme-footer__button--shift" type="button"
+                data-ng-disabled="{{$root.isShiftable}}"
                 data-ng-click="modal.shiftHandler()">
             {{modal.shiftMsg}}
         </button>
