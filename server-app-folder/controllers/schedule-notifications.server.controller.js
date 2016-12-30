@@ -32,7 +32,7 @@ exports.list = (req, res) => {
 				"taskId": {$exists: true},
 				'isComplete': false,
 				'end': {
-					$lt: new Date(req.query.time)
+					$lt: Date.now()
 				},
 				userId: req.user._id,
 			}).exec((err, overdueSlots) => {
