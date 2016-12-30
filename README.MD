@@ -17,10 +17,15 @@
 - Ensure that ```npm ^3``` ;
 - Install ```MongoDB``` and create folder structure ```db/data```, check System Environment for ```mongod``` variable;
 - Execute command: ``` npm install```
+- Command ```mongod --dbpath "d:/db/data"``` to run mongo server;
+- Command ```npm install -g eslint``` to install eslint;
+- ```[optional]``` Command ```npm install -g karma-cli``` to install karma CLI for windows;
+- ```[optional]``` Command ```npm install -g grunt-cli``` to install grunt CLI for windows;
 
 #####3. Running Application
-- Command ```npm compile:client``` compile files and watching them;
-- Command ```'npm run:server``` starts server and gets static;
+- Command ```mongod --dbpath "d:/db/data"``` to run mongo server;
+- Command ```npm run client``` compile files and watching them;
+- Command ```npm run server``` starts server and gets static;
 
 #####4. Open in browser link [http://localhost:3000/](http://localhost:3000/).
 
