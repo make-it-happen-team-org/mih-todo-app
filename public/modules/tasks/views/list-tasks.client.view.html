@@ -36,7 +36,7 @@
 
 <ul class="sidebar__list">
     <li data-ng-repeat="task in taskListCtrl.tasks">
-        <a class="sidebar__block sidebar-list-item {{'task-priority-' + task.priority}}"
+        <a class="sidebar__block sidebar-list-item sidebar-list-item__common-list {{'task-priority-' + task.priority}}"
            data-ui-sref="restricted.todo_state.tasks.edit({ taskId: task._id })">
             <div class="sidebar-list-item__title">
                 <span data-ng-bind="task.title"></span>

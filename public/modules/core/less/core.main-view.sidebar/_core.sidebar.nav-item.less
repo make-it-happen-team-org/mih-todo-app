@@ -53,7 +53,8 @@
     }
 
     &-priority {
-      &.sort-reverse-up {
+      &.sort-reverse-up,
+      &.sort-reverse-down {
         background-color: @sidebar-filter-bg--active;
         color: @sidebar-filter-color--active;
 
@@ -71,13 +72,6 @@
       }
 
       &.sort-reverse-down {
-        background-color: @sidebar-filter-bg--active;
-        color: @sidebar-filter-color--active;
-
-        &:hover {
-          background-color: darken(@sidebar-filter-bg--active, 10%);
-        }
-
         &::before {
           border-color: transparent transparent @sidebar-border-caret--active transparent;
         }
@@ -101,6 +95,22 @@
         margin-bottom: -.75rem;
         border-width: 5px 5px 0 5px;
         border-color: @sidebar-border-caret transparent transparent transparent;
+      }
+    }
+
+    &__templates {
+      background-color: transparent;
+      padding-right: 12rem;
+      top: .4rem;
+      &:hover {
+        background-color: transparent;
+      }
+      &.sort-reverse-up,
+      &.sort-reverse-down {
+        background-color: transparent;
+        &:hover {
+          background-color: transparent;
+        }
       }
     }
 

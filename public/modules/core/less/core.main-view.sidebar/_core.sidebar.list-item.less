@@ -5,12 +5,16 @@
   background-color: @color-blue-whale-blue-s53;
   color: inherit;
   transition: background-color .5s;
-  &--templates {
-    background-color: @color-blue-whale-blue-s53;
-    color: inherit;
-    transition: background-color .5s;
-    padding-left: 2.8rem;
+
+  &__common-list {
+    &::before {
+      .sidebar-list-circle(@color-mountain-meadow-green-s85)
+    }
+    &.sidebar__block {
+      padding-left: 3.8rem;
+    }
   }
+
   &:focus {
     outline: none;
     color: inherit;
@@ -19,10 +23,6 @@
   &:hover {
     color: inherit;
     background-color: @color-blue-whale-blue-s58;
-  }
-
-  &::before {
-    .sidebar-list-circle(@color-mountain-meadow-green-s85)
   }
 
   &__title {
