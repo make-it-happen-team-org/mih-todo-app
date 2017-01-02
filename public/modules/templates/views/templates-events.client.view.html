@@ -6,23 +6,25 @@
                     <h3 class=" presets__title">Event template</h3>
                 </header>
                 <ul class="col-xs-12 presets__body">
-                    <li class="presets-item" data-ng-hide="templates.list.length">
+                    <li class="presets-item presets-template-item" data-ng-hide="templates.list.length">
                         <p class="presets-item__default-message">No Event templates yet.</p>
                     </li>
-                    <li class="presets-item" data-ng-repeat="template in templates.list">
+                    <li class="presets-item presets-template-item" data-ng-repeat="template in templates.list">
                         <form class="form-horizontal col-xs-12 presets-item__form" name="templateForm" novalidate>
-                            <fieldset class="row">
+                            <fieldset class="presets-template-item__fieldset">
                                 <div class="col-xs-6">
-                                    <div class="form-group">
-                                        <label class="control-label label-padding" for="title">Title*</label>
+                                    <div class="field-group presets-template-item__field-group">
+                                        <label class="control-label presets-template-item__label" for="title">Title*</label>
                                         <input type="text" data-ng-model="template.title" name="title" id="title"
-                                               class="form-control input-round-borders" placeholder="Title" required>
-                                        <div ng-show="templateForm.title.$error.required" class="error-message">
+                                               class="form-control"
+                                               data-ng-class="{'error-message-border': templateForm.title.$error.required}"
+                                               placeholder="Title" required>
+                                        <div data-ng-show="templateForm.title.$error.required" class="error-message">
                                             <p class="help-block error-text">Please fill Task title</p>
                                         </div>
                                     </div>
-                                    <div class="field-group">
-                                        <label class="field-label" for="title">Type</label>
+                                    <div class="field-group presets-template-item__field-group">
+                                        <label class="field-label presets-template-item__label" for="title">Type</label>
                                         <select class="form-control" data-ng-model="template.type">
                                             <option value="sick">Sick</option>
                                             <option value="vacation">Vacation</option>
@@ -32,9 +34,9 @@
                                 </div>
 
                                 <div class="col-xs-6">
-                                    <div class="form-group">
-                                        <label class="control-label label-padding" for="notes">Notes</label>
-                                        <textarea class="form-control notes-area" id="notes"
+                                    <div class="field-group presets-template-item__field-group">
+                                        <label class="control-label presets-template-item__label" for="notes">Notes</label>
+                                        <textarea class="form-control presets-template-item__notes-area" id="notes"
                                                   data-ng-model="template.notes"></textarea>
                                         <div ng-show="validationError.notes" class="error">
                                             {{validationError.notes.message}}
@@ -43,10 +45,10 @@
                                 </div>
                             </fieldset>
                             <div class="col-xs-12 presets__footer">
-                                <button class="btn presets__btn presets__btn--delete" ng-click="templates.remove(template, 'eventTemplates')">
+                                <button class="btn presets__btn presets__btn--delete" data-ng-click="templates.remove(template, 'eventTemplates')">
                                     Delete
                                 </button>
-                                <button class="btn presets__btn presets__btn--save" ng-click="templates.update(template)" ng-disabled="!templateForm.$valid">
+                                <button class="btn presets__btn presets__btn--save" data-ng-click="templates.update(template)" data-ng-disabled="!templateForm.$valid">
                                     Save
                                 </button>
                             </div>
