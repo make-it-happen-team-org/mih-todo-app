@@ -1,61 +1,60 @@
-<div class="tasks-templates col-xs-12">
-	<header class="row" data-ng-show="templates.list">
-		<div class="col-xs-12">
-			<h3 class="col-xs-8">Event template</h3>
+<div class="wrapper dashboard-panel presets presets-template">
+    <div class="row">
+        <div class="col-xs-12 presets-template__event">
+            <div class="presets__wrapper">
+                <header class="col-xs-12 presets__header">
+                    <h3 class=" presets__title">Event template</h3>
+                </header>
+                <ul class="col-xs-12 presets__body">
+                    <li class="presets-item" data-ng-hide="templates.list.length">
+                        <p class="presets-item__default-message">No Event templates yet.</p>
+                    </li>
+                    <li class="presets-item" data-ng-repeat="template in templates.list">
+                        <form class="form-horizontal col-xs-12 presets-item__form" name="templateForm" novalidate>
+                            <fieldset class="row">
+                                <div class="col-xs-6">
+                                    <div class="form-group">
+                                        <label class="control-label label-padding" for="title">Title*</label>
+                                        <input type="text" data-ng-model="template.title" name="title" id="title"
+                                               class="form-control input-round-borders" placeholder="Title" required>
+                                        <div ng-show="templateForm.title.$error.required" class="error-message">
+                                            <p class="help-block error-text">Please fill Task title</p>
+                                        </div>
+                                    </div>
+                                    <div class="field-group">
+                                        <label class="field-label" for="title">Type</label>
+                                        <select class="form-control" data-ng-model="template.type">
+                                            <option value="sick">Sick</option>
+                                            <option value="vacation">Vacation</option>
+                                            <option value="event">Event</option>
+                                        </select>
+                                    </div>
+                                </div>
 
-			<!-- TODO: future functionality. Now hidden: demo coming soon -->
-			<!--<h3 class="col-xs-4">Usage</h3>-->
-		</div>
-	</header>
-	<ul>
-		<li data-ng-repeat="template in templates.list">
-			<form class="form-horizontal col-xs-8" name="templateForm" novalidate>
-				<fieldset class="row">
-					<div class="col-xs-6">
-						<div class="form-group">
-							<label class="control-label label-padding" for="title">Title*</label>
-							<input type="text" data-ng-model="template.title" name="title" id="title"
-								   class="form-control input-round-borders" placeholder="Title" required >
-							<div ng-show="templateForm.title.$error.required" class="error-message">
-								<p class="help-block error-text">Please fill Task title</p>
-							</div>
-						</div>
-						<div class="field-group">
-							<label class="field-label" for="title">Type</label>
-							<select class="form-control" data-ng-model="template.type">
-								<option value="sick">Sick</option>
-								<option value="vacation">Vacation</option>
-								<option value="event">Event</option>
-							</select>
-						</div>
-					</div>
-
-					<div class="col-xs-6">
-						<div class="form-group">
-							<label class="control-label label-padding" for="notes">Notes</label>
-							<textarea class="form-control notes-area" id="notes" data-ng-model="template.notes"></textarea>
-							<div ng-show="validationError.notes" class="error">
-								{{validationError.notes.message}}
-							</div>
-						</div>
-						<div class="form-group">
-							<button class="btn btn-danger template-action pull-left"
-									ng-click="templates.remove(template, 'eventTemplates')"
-							>Delete</button>
-							<button class="btn btn-success template-action pull-right"
-									ng-click="templates.update(template)"
-									ng-disabled="!templateForm.$valid"
-							>Save</button>
-						</div>
-					</div>
-				</fieldset>
-			</form>
-
-			<!-- TODO: future functionality. Now hidden: demo coming soon -->
-			<!--<div class=" col-xs-4 usage">-->
-				<!--<h2>Usage</h2>-->
-			<!--</div>-->
-		</li>
-	</ul>
-	<div class="text-center text-muted p-y-1" data-ng-hide="templates.list.length">No event templates yet.</div>
+                                <div class="col-xs-6">
+                                    <div class="form-group">
+                                        <label class="control-label label-padding" for="notes">Notes</label>
+                                        <textarea class="form-control notes-area" id="notes"
+                                                  data-ng-model="template.notes"></textarea>
+                                        <div ng-show="validationError.notes" class="error">
+                                            {{validationError.notes.message}}
+                                        </div>
+                                    </div>
+                                </div>
+                            </fieldset>
+                            <div class="col-xs-12 presets__footer">
+                                <button class="btn presets__btn presets__btn--delete" ng-click="templates.remove(template, 'eventTemplates')">
+                                    Delete
+                                </button>
+                                <button class="btn presets__btn presets__btn--save" ng-click="templates.update(template)" ng-disabled="!templateForm.$valid">
+                                    Save
+                                </button>
+                            </div>
+                        </form>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
 </div>
+
