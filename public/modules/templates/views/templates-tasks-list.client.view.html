@@ -21,7 +21,7 @@
         <li data-ng-repeat="taskTemplate in templatesTasksListCtrl.templatesList | orderBy:'lastUsingDate':templatesTasksListCtrl.sortReverse">
             <a class="sidebar__block sidebar-list-item"
                 ng-click="templatesTasksListCtrl.viewTemplate(taskTemplate._id)">
-                <div class="sidebar-list-item__title">
+                <div class="sidebar-list-item__title sidebar-list-item__title--templates">
                     <span data-ng-bind="taskTemplate.title"></span>
                 </div>
             </a>
