@@ -16,18 +16,19 @@ class TemplatesController {
 		var updatedUser = new this.Users(this.user);
 
 		updatedUser.$update(updatedUser => {
-			this.Notification.success(`"Template ${template.title}" was successfully updated`);
+			this.Notification.success(`'Template ${template.title}' was successfully updated`);
 			this.user = this.Authentication.user = updatedUser;
 		}, err => console.error(err));
 	}
 
 	remove(templateToRemove, templateType) {
+		debugger;
 		var updatedUser = new this.Users(this.user);
 
 		updatedUser[templateType] = updatedUser[templateType].filter(template => template._id !== templateToRemove._id);
 
 		updatedUser.$update(updatedUser => {
-			this.Notification.success(`"Template ${templateToRemove.title}" was successfully removed`);
+			this.Notification.success(`'Template ${templateToRemove.title}' was successfully removed`);
 			this.user = this.Authentication.user = updatedUser;
 
 			const lastUsedTemplate = this.TemplatesService.getLastUsed(templateType, updatedUser);
