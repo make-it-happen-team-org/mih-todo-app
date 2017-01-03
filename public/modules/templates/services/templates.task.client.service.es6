@@ -4,7 +4,6 @@ class TemplatesService {
     }
 
     getLastUsed(templateType, user) {
-        console.log('template get last used', user['eventTemplates']);
         return user[templateType]
                 .filter((value) => { return value.type !== 'vacation' && value.type !== 'sick'})
                 .sort((current, next) => current.lastUsingDate < next.lastUsingDate)[0] || {};
