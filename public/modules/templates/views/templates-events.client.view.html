@@ -1,16 +1,16 @@
-<div class="wrapper dashboard-panel presets presets-template">
+<div class="wrapper dashboard-panel tile presets-template">
     <div class="row">
         <div class="col-xs-12 presets-template__event">
-            <div class="presets__wrapper">
-                <header class="col-xs-12 presets__header">
-                    <h3 class=" presets__title">Event template</h3>
+            <div class="tile__wrapper">
+                <header class="col-xs-12 tile__header">
+                    <h3 class="tile__title">Event template</h3>
                 </header>
-                <ul class="col-xs-12 presets__body">
-                    <li class="presets-item presets-template-item presets-template-item__no-items" data-ng-hide="templates.list.length">
-                        <p class="presets-item__default-message">No Event templates yet.</p>
+                <ul class="col-xs-12 tile__body">
+                    <li class="tile-item presets-template-item presets-template-item__no-items" data-ng-hide="templates.list.length">
+                        <p class="tile-item__default-message">No Event templates yet.</p>
                     </li>
-                    <li class="presets-item presets-template-item" data-ng-repeat="template in templates.list">
-                        <form class="form-horizontal col-xs-12 presets-item__form" name="templateForm" novalidate>
+                    <li class="tile-item presets-template-item" data-ng-repeat="template in templates.list">
+                        <form class="form-horizontal col-xs-12 tile-item__form" name="templateForm" novalidate>
                             <fieldset class="presets-template-item__fieldset">
                                 <div class="col-xs-6">
                                     <div class="field-group presets-template-item__field-group">
@@ -44,11 +44,11 @@
                                     </div>
                                 </div>
                             </fieldset>
-                            <div class="col-xs-12 presets__footer">
-                                <button class="btn presets__btn presets__btn--delete" data-ng-click="templates.remove(template, 'eventTemplates')">
+                            <div class="col-xs-12 tile__footer">
+                                <button class="btn tile__btn tile__btn--delete" data-ng-click="templates.remove(template, 'eventTemplates')">
                                     Delete
                                 </button>
-                                <button class="btn presets__btn presets__btn--save" data-ng-click="templates.update(template)" data-ng-disabled="!templateForm.$valid">
+                                <button class="btn tile__btn tile__btn--save" data-ng-click="templates.update(template)" data-ng-disabled="!templateForm.$valid">
                                     Save
                                 </button>
                             </div>
