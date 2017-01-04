@@ -1,25 +1,14 @@
 angular.module('templates').config(['$stateProvider', function ($stateProvider) {
 
-    let templateView = function (isEmpty, type) {
+    let mainViewRoute = function (stateParams) {
         let tasksRoute  = 'modules/templates/views/templates-tasks.client.view.html',
             eventsRoute = 'modules/templates/views/templates-events.client.view.html';
 
-        if (_.isNil(isEmpty)) {
-            return (tasksRoute.indexOf(type.split('Templates')[0]) !== -1) ? tasksRoute : eventsRoute;
+        if (_.isNil(stateParams.isTaskTemplatesEmpty)) {
+            return (tasksRoute.indexOf(stateParams.templateType.split('Templates')[0]) !== -1) ? tasksRoute : eventsRoute;
         }
 
-        return isEmpty ? eventsRoute : tasksRoute;
-    };
-
-    let mainViewRoute = function (stateParams) {
-        switch (stateParams.templateType) {
-            case 'eventTemplates':
-                return templateView(stateParams.isTaskTemplatesEmpty, 'eventTemplates');
-            case 'taskTemplates':
-                return templateView(stateParams.isTaskTemplatesEmpty, 'taskTemplates');
-            default:
-                return templateView(stateParams.isTaskTemplatesEmpty);
-            }
+        return stateParams.isTaskTemplatesEmpty ? eventsRoute : tasksRoute;
     };
 
     $stateProvider.state('restricted.templates', {
