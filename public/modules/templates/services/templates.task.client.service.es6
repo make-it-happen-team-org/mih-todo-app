@@ -1,6 +1,6 @@
 class TemplatesService {
     getById(user, id, type) {
-        return user[type].find(template => template._id == id);
+        return user[type].find(template => template._id === id);
     }
 
     getLastUsed(templateType, user) {
