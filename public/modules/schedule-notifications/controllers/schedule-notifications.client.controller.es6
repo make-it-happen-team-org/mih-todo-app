@@ -4,7 +4,11 @@ angular.module('schedule-notifications').controller('ScheduleNotificationsContro
   ['$scope', '$rootScope', '$stateParams', 'Authentication', 'ScheduleNotifications', '$interval', '$location', '$state', 'Slots', 'Tasks', 'Notification',
     function ($scope, $rootScope, $stateParams, Authentication, ScheduleNotifications, $interval, $location, $state, Slots, Tasks, Notification) {
       // TODO: move to common app config
-      var notificationsInterval = 1800000; // 30 min
+      const NOTIFICATIONS_INTERVAL = 30 * 60 * 1000;
+      const CALENDAR_TIME_UNIT = 30 * 60 * 1000; // Calendar works only with time that is multiple of 30 minutes
+      let currentTime = moment(),
+          closestTimeUnitEnd = moment(Math.ceil(currentTime / CALENDAR_TIME_UNIT) * CALENDAR_TIME_UNIT),
+          initialInterval = closestTimeUnitEnd - currentTime;
 
       var getOverdueTaskProgress = (task) => {
         return {
@@ -94,7 +98,12 @@ angular.module('schedule-notifications').controller('ScheduleNotificationsContro
 
         $interval(() => {
           $scope.notifications = ScheduleNotifications.query();
-        }, notificationsInterval);
+          
+          $interval(() => {
+            $scope.notifications = ScheduleNotifications.query();
+          }, NOTIFICATIONS_INTERVAL);
+          
+        }, initialInterval, 1);
       };
 
       $scope.completeSlot = (slot) => {
