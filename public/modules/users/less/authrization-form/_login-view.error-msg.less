@@ -3,11 +3,14 @@
 .error-message {
   height: 1.6rem;
   overflow: hidden;
+  &-border {
+    border-color: @login-error-color;
+  }
 
   .error-text {
     margin: 0;
     padding: 0 1.2rem;
-    color: inherit;
+    color: @color-white;
     font-size: 1.2rem;
     line-height: 1.6rem;
     background-color: @login-error-color;

@@ -6,7 +6,7 @@
 
 <ul class="sidebar__list">
     <li data-ng-repeat="event in eventCtrl.events | orderBy:'days.startTime'">
-        <a class="sidebar__block sidebar-list-item"
+        <a class="sidebar__block sidebar-list-item sidebar-list-item__common-list"
            data-ui-sref="restricted.todo_state.events.edit({ eventId: event._id })">
             <div class="sidebar-list-item__title"
                  data-ng-bind="event.title"></div>

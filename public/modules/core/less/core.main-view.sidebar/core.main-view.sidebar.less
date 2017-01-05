@@ -18,7 +18,7 @@
   &__block {
     position: relative;
     display: block;
-    padding: 0 2rem 0 3.8rem;
+    padding: 0 2rem 0 2.8rem;
     height:5rem;
 
     &--group {
@@ -26,8 +26,11 @@
       background-color: @aside-background-color;
 
       &-nav {
-        border-bottom: 1px solid @color-bali-hai-blue-s25;
+        border-bottom: 1px solid fade(@color-bali-hai-blue-s25, 10%);
         background-color: @color-blue-whale-blue-s53;
+        &__templates {
+          cursor: pointer;
+        }
       }
     }
   }

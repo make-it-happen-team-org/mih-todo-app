@@ -63,3 +63,28 @@ li {
     }
   }
 }
+
+rzslider {
+  margin-top: 2rem;
+  & .rz-pointer {
+    top: -6px;
+    width: 15px;
+    height: 15px;
+    background-color: @color-mountain-meadow-green-s84;
+    outline: none;
+    &::after {
+      display: none;
+    }
+    &:hover {
+      background-color: @color-mountain-meadow-green-s89;
+    }
+  }
+  & .rz-bubble.rz-limit,
+  & .rz-bubble {
+    display: none;
+  }
+}
+
+.rzslider-manual-input {
+  margin-top: 1.4rem;
+}
