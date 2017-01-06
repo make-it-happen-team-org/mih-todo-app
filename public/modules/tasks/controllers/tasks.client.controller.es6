@@ -163,7 +163,7 @@ class TasksController {
         let queries = [this.saveTask(task)];
 
         if (task.isATemplate || $scope.selectedTemplate) {
-          queries.push(updateTaskTemplates(task));
+          queries.push(this.updateTaskTemplates(task));
         }
 
         Promise.all(queries).then(() => {
@@ -420,7 +420,7 @@ class TasksController {
 
   updateTaskTemplates (model) {
     return new Promise(resolve => {
-      let user = new Users(this.$scope.user);
+      let user = new this.Users(this.$scope.user);
 
       if (this.$scope.selectedTemplate) {
         user.taskTemplates.forEach(template => {
