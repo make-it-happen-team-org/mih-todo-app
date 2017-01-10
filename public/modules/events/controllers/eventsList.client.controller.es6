@@ -18,4 +18,4 @@ class EventsListController {
 
 angular
   .module('events')
-  .controller(EventsListController);
+  .controller('EventsListController', EventsListController);
