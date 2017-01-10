@@ -8,7 +8,7 @@ module.exports = (grunt) => {
         'babel',
         'buildDevIndex'
     ]);
-    grunt.registerTask('default', [ 'develop', 'watch' ]);
+    grunt.registerTask('default', [ 'develop' ]);
 
     // Build task(s).
     grunt.registerTask('prebuild', [

@@ -19,7 +19,6 @@ class MainController {
       notification: false
     };
     this.goToState('restricted.todo_state');
-
     this.$scope.$on('toggleSidebar', () => {
       this.sidebarCollapsed = !this.sidebarCollapsed;
     });

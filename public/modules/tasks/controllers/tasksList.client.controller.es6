@@ -15,8 +15,6 @@ class TasksListController {
     this.authentication = Authentication;
     this.tasks          = this.find();
     this.filter         = {};
-    this.getFiltersFromLocalStorage();
-    this.renderSortOption();
 
     attachEvents();
   }
@@ -49,6 +47,7 @@ class TasksListController {
       this.setFiltersToLocalStorage('sidebarSortByTime');
       this.filter.name     = 'sidebarSortByTime';
       this.filter.timeSort = !this.filter.timeSort;
+
       if (this.filter.timeSort) {
         this.tasks = TasksListController.bulbSortForEndTime(this.tasks);
       } else {
@@ -59,7 +58,7 @@ class TasksListController {
     case 'isComplete': {
       this.setFiltersToLocalStorage('sidebarSortByComplete');
       this.filter.name  = 'sidebarSortByComplete';
-      this.$scope.query = {};
+
       if (!this.filter.isComplete) {
         this.tasks = this.tasks.filter(el => el.isComplete);
       } else {
@@ -69,12 +68,19 @@ class TasksListController {
     }
     }
   }
+  init() {
+    this.getFiltersFromLocalStorage();
+    this.sortListBy('priority');
+    this.sortListBy('time');
+    this.sortListBy('isComplete');
+  }
 
   find() {
     this.Tasks.query().$promise
         .then((resolved) => {
           this.tasks     = resolved;
           this.tasksCopy = resolved.slice();
+          this.init();
         }, (rejected) => {
           console.log(rejected);
         });
@@ -94,6 +100,7 @@ class TasksListController {
   }
 
   setFiltersToLocalStorage(filterType) {
+    localStorage.setItem('sidebarFilter', JSON.stringify(this.filter));
     switch (filterType) {
     case 'sidebarSortByPriority': {
       localStorage.setItem('sidebarSortByPriority', JSON.stringify(!this.filter.prioritySort));
@@ -107,7 +114,6 @@ class TasksListController {
     }
     case 'sidebarSortByComplete': {
       localStorage.setItem('sidebarSortByComplete', JSON.stringify(!this.filter.isComplete));
-      localStorage.setItem('sidebarFilterType', 'sidebarSortByComplete');
       break;
     }
     }
