@@ -13,14 +13,12 @@
                'sort-reverse-up': taskListCtrl.renderSortOption() === 'ascPriority',
                'sort-reverse-down': taskListCtrl.renderSortOption() === 'descPriority'
                }"
-           data-sorttype="priority"
            data-ng-click="taskListCtrl.sortListBy('priority')">Priority</a>
         <a class="sidebar__nav-item sidebar__nav-item--sort sidebar__nav-item--sort-time"
            data-ng-class="{
                'sort-reverse-up': taskListCtrl.renderSortOption() === 'ascTime',
                'sort-reverse-down': taskListCtrl.renderSortOption() === 'descTime'
                }"
-           data-sorttype="time"
            data-ng-click="taskListCtrl.sortListBy('time')">Time</a>
     </div>
     <div class="sidebar__nav-item-wrapper sidebar__nav-item-wrapper--right">
@@ -28,11 +26,10 @@
             <input class="sidebar__nav-item--task-checkbox"
                    id="sidebar__nav-item--task-checkbox"
                    type="checkbox"
-                   data-ng-model="taskListCtrl.filter.isComplete"/>
+                   data-ng-model="taskListCtrl.filter.isComplete"
+                   data-ng-change="taskListCtrl.sortListBy('isComplete')"/>
             <label class="sidebar__nav-item--task-checkbox-label"
-                   for="sidebar__nav-item--task-checkbox"
-                   data-ng-click="taskListCtrl.sortListBy('isComplete')"
-                   data-sorttype="isComplete"></label>
+                   for="sidebar__nav-item--task-checkbox"></label>
         </div>
     </div>
 </div>

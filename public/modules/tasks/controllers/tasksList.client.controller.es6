@@ -20,14 +20,14 @@ class TasksListController {
   }
 
   renderSortOption() {
-    if (this.filter.name === 'sidebarSortByTime') {
-      if(this.filter.timeSort) {
+    if (this.filter.name === 'time') {
+      if(this.filter.timeAsc) {
         return 'ascTime'
       }
       return 'descTime'
     }
-    if (this.filter.name === 'sidebarSortByPriority') {
-      if(this.filter.prioritySort) {
+    if (this.filter.name === 'priority') {
+      if(this.filter.priorityAsc) {
         return 'ascPriority'
       }
       return 'descPriority'
@@ -37,50 +37,46 @@ class TasksListController {
   sortListBy(type) {
     switch (type) {
     case 'priority': {
-      this.setFiltersToLocalStorage('sidebarSortByPriority');
-      this.filter.name         = 'sidebarSortByPriority';
-      this.filter.prioritySort = !this.filter.prioritySort;
-      this.tasks               = this.$filter('orderBy')(this.tasks, this.filter.prioritySort ? 'priority' : '-priority');
+      this.filter.name         = 'priority';
+      this.filter.priorityAsc = !this.filter.priorityAsc;
+      this.tasks               = this.$filter('orderBy')(this.tasks, this.filter.priorityAsc ? 'priority' : '-priority');
+      this.setFiltersToLocalStorage();
       break;
     }
     case 'time': {
-      this.setFiltersToLocalStorage('sidebarSortByTime');
-      this.filter.name     = 'sidebarSortByTime';
-      this.filter.timeSort = !this.filter.timeSort;
+      this.filter.name     = 'time';
+      this.filter.timeAsc = !this.filter.timeAsc;
 
-      if (this.filter.timeSort) {
+      if (this.filter.timeAsc) {
         this.tasks = TasksListController.bulbSortForEndTime(this.tasks);
       } else {
         this.tasks = TasksListController.bulbSortForEndTime(this.tasks).reverse();
       }
+      this.setFiltersToLocalStorage();
       break;
     }
     case 'isComplete': {
-      this.setFiltersToLocalStorage('sidebarSortByComplete');
-      this.filter.name  = 'sidebarSortByComplete';
-
-      if (!this.filter.isComplete) {
+      if (this.filter.isComplete) {
         this.tasks = this.tasks.filter(el => el.isComplete);
       } else {
         this.tasks = this.tasksCopy.slice()
       }
+      this.setFiltersToLocalStorage();
       break;
     }
     }
   }
-  init() {
-    this.getFiltersFromLocalStorage();
-    this.sortListBy('priority');
-    this.sortListBy('time');
-    this.sortListBy('isComplete');
-  }
+
 
   find() {
     this.Tasks.query().$promise
         .then((resolved) => {
           this.tasks     = resolved;
           this.tasksCopy = resolved.slice();
-          this.init();
+          this.getFiltersFromLocalStorage();
+          this.sortListBy('isComplete');
+          this.sortListBy(this.filter.name);
+          this.setFiltersToLocalStorage();
         }, (rejected) => {
           console.log(rejected);
         });
@@ -93,30 +89,16 @@ class TasksListController {
   }
 
   getFiltersFromLocalStorage() {
-    this.filter.name = localStorage.getItem('sidebarFilterType') || 'sidebarSortByPriority';
-    this.filter.prioritySort = JSON.parse(localStorage.getItem('sidebarSortByPriority')) || true;
-    this.filter.timeSort     = JSON.parse(localStorage.getItem('sidebarSortByTime')) || true;
-    this.filter.isComplete   = JSON.parse(localStorage.getItem('sidebarSortByComplete')) || false;
+    this.filter = JSON.parse(localStorage.getItem('sidebarFilter')) || {
+        name:         'time',
+        priorityAsc: true,
+        timeAsc:     true,
+        isComplete:   false
+      };
   }
 
-  setFiltersToLocalStorage(filterType) {
+  setFiltersToLocalStorage() {
     localStorage.setItem('sidebarFilter', JSON.stringify(this.filter));
-    switch (filterType) {
-    case 'sidebarSortByPriority': {
-      localStorage.setItem('sidebarSortByPriority', JSON.stringify(!this.filter.prioritySort));
-      localStorage.setItem('sidebarFilterType', 'sidebarSortByPriority');
-      break;
-    }
-    case 'sidebarSortByTime': {
-      localStorage.setItem('sidebarSortByTime', JSON.stringify(!this.filter.timeSort));
-      localStorage.setItem('sidebarFilterType', 'sidebarSortByTime');
-      break;
-    }
-    case 'sidebarSortByComplete': {
-      localStorage.setItem('sidebarSortByComplete', JSON.stringify(!this.filter.isComplete));
-      break;
-    }
-    }
   }
 
   static bulbSortForEndTime(arr){
