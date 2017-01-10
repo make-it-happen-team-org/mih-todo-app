@@ -58,7 +58,7 @@ const watch = {
     },
     allES6: {
         files: watchFiles.allES6,
-        tasks: ['build-es6', 'jshint'],
+        tasks: ['build-es6'/*, 'jshint'*/],
         options: {
             livereload: true
         }
