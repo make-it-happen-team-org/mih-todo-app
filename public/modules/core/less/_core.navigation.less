@@ -54,7 +54,22 @@
   }
 
   &__user-profile {
-    width: 12rem;
+    width: 15rem;
+  }
+
+  &__username-wrapper {
+    display: inline-block;
+    max-width: 8rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  &__image-wrapper {
+    display: inline-block;
+    position: relative;
+    max-width: 6rem;
+    vertical-align: top;
   }
 
   &-link {
@@ -109,6 +124,7 @@
       line-height: @header-height;
       background-color: @header-btn-bg-color;
       border: none;
+      outline: none;
 
       &:hover {
         .caret {
@@ -119,6 +135,7 @@
 
     &__profile-image {
       height: @header-height - 2.5rem;
+      width: @header-height - 2.5rem;
       border-radius: 50%;
     }
   }
