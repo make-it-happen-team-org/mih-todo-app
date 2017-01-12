@@ -33,9 +33,13 @@
         <li class="header-nav-element header-nav-element__item header-nav-element-btn-holder__item header-nav-element__user-profile">
             <button class="header-nav-element-btn-holder__dropdown-toggle"
                     data-ng-click="mainCtrl.toggleDropdown('user')">
-                <span class="from-tablet header-nav-element-btn-holder__username" data-ng-bind="mainCtrl.user.username"></span>
-                <img class="header-nav-element-btn-holder__profile-image" src="{{mainCtrl.user.profileImageURL}}">
+                <div class="header-nav-element__username-wrapper">
+                    <span class="from-tablet header-nav-element-btn-holder__username" data-ng-bind="mainCtrl.user.username"></span>
+                </div>
+                <span class="header-nav-element__image-wrapper">
+                    <img class="header-nav-element-btn-holder__profile-image" src="{{mainCtrl.user.profileImageURL}}">
                 <span class="header-nav-element-btn-holder__caret caret"></span>
+                </span>
             </button>
 
             <ul class="header-nav-element  header-nav-element__list dropdown-menu-container"
