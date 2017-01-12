@@ -50,6 +50,10 @@ class TasksController {
       maxDate: dateMax
     };
 
+    $scope.calendar = {
+      isShown : false
+    };
+
     $scope.clear = () => {
       return $scope.dt = null;
     };
@@ -143,6 +147,7 @@ class TasksController {
     $scope.editMode = () => {
       $scope.task = this.getTask(() => {
         $scope.slider = TasksController.setEstimationExtremes($scope.task);
+        $scope.slider.options.readOnly = true;
       });
 
       $scope.getSlotsByTask = () => {
@@ -283,11 +288,11 @@ class TasksController {
 
   getNewSlots (model) {
     this.Algorithm.generateSlots(
-      new Date(model.days.startTime),
-      new Date(model.days.endTime),
-      model.priority,
-      model.estimation,
-      this.$scope.user.predefinedSettings.workingHours
+        new Date(model.days.startTime),
+        new Date(model.days.endTime),
+        model.priority,
+        model.estimation,
+        this.$scope.user.predefinedSettings.workingHours
     ).then(slotsRange => {
       this.$timeout(() => {
         this.$scope.timeAvailability = this.Algorithm.getTimeAvailabilityFromSlotsGroupedByDays();
@@ -301,8 +306,8 @@ class TasksController {
 
   removeSlotsByTask () {
     this.Tasks.deleteSlotsByTask({
-        taskId: this.$stateParams.taskId
-      }
+          taskId: this.$stateParams.taskId
+        }
     );
   };
 
@@ -370,16 +375,16 @@ class TasksController {
 
   getSlotsByTask () {
     return this.Tasks.getSlotsByTask({
-        taskId: this.$stateParams.taskId
-      }, (slots) => {
-        if (!slots.length) {
-          this.$scope.progress = false;
-          return;
+          taskId: this.$stateParams.taskId
+        }, (slots) => {
+          if (!slots.length) {
+            this.$scope.progress = false;
+            return;
+          }
+          this.$timeout(() => {
+            this.recalcChart();
+          }, 100);
         }
-        this.$timeout(() => {
-          this.recalcChart();
-        }, 100);
-      }
     );
   };
 
@@ -459,11 +464,11 @@ class TasksController {
       let model = this.$scope.newTask;
 
       this.Algorithm.generateSlots(
-        new Date(model.days.startTime),
-        new Date(model.days.endTime),
-        model.priority,
-        model.estimation,
-        this.$scope.user.predefinedSettings.workingHours
+          new Date(model.days.startTime),
+          new Date(model.days.endTime),
+          model.priority,
+          model.estimation,
+          this.$scope.user.predefinedSettings.workingHours
       ).then(slotsRange => {
         if (!slotsRange.length) {
           return;

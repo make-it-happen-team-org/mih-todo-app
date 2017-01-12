@@ -7,6 +7,11 @@ angular.module('events').controller('EventsController',
 			$scope.authentication = Authentication;
 
 			$scope.user = Authentication.user;
+
+			$scope.calendar = {
+				isShown : false
+			};
+			
 			var currentDate = new Date(),
 				defaultEventData = {
 					days: {
@@ -178,10 +183,5 @@ angular.module('events').controller('EventsController',
 			$scope.closeEventForm = function () {
 				$location.search('');
 				$location.path('/');
-			};
-			$scope.clearFormData = function () {
-				$scope.selectedTemplate = null;
-				//TODO: replace with angular.toJson()
-				$scope.eventData = JSON.parse(JSON.stringify(defaultEventData));
-			};
+			};			
 		}]);

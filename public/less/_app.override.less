@@ -29,6 +29,23 @@ li {
   padding: 0;
 }
 
+label {
+  font-family: @font-open-sans-bold;
+}
+
+select[disabled],
+input[disabled]{
+  background: @disabled-background-color;
+}
+
+::-webkit-inner-spin-button {
+  height: 100%;
+}
+
+input[type=time] {
+  line-height: inherit;
+}
+
 // ------------------------ Angular ------------------------
 [ng\:cloak],
 [ng-cloak],
