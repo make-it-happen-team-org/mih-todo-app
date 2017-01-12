@@ -36,7 +36,7 @@
                     <div class="form-group col-md-10 form-box">
                         <label for="email">Email</label>
                         <input type="email" id="email" name="email" placeholder="Email" required
-                               class="form-input settings__form-input" data-ng-model="settings.user.email"
+                               class="form-input form-input--required settings__form-input" data-ng-model="settings.user.email"
                                data-ng-model-options="{ debounce: 400}">
                         <div class="form-input-error-holder">
                             <p data-ng-show="(userForm.submitted || userForm.email.$dirty) && userForm.email.$error.required"
@@ -49,7 +49,7 @@
                         <label for="username">Username</label>
                         <!-- TODO: refactor data-ng-change into a directive -->
                         <input type="text" id="username" name="username" placeholder="Username" required
-                               class="form-input settings__form-input"
+                               class="form-input form-input--required settings__form-input"
                                data-ng-model="settings.user.username" data-ng-model-options="{ debounce: 400}"
                                data-ng-change="settings.MIHUtils.convertMultipleSpaces(settings.user, 'username')">
                         <div class="form-input-error-holder">
@@ -84,7 +84,7 @@
                         <!--<label class="form-label form-label&#45;&#45;in">In</label>-->
                         <!--<div class="form-input&#45;&#45;horizontal">-->
                             <!--<input id="reminder" type="number"-->
-                                   <!--class="form-input settings__form-input" name="reminder" required-->
+                                   <!--class="form-input form-input&#45;&#45;required settings__form-input" name="reminder" required-->
                                    <!--min="1" max="60" data-ng-model="settings.user.predefinedSettings.reminder"-->
                                    <!--data-ng-model-options="{ updateOn: 'blur' }">-->
                             <!--<div class="form-input-error-holder">-->
@@ -111,7 +111,7 @@
                                     <!--<label for="booked-start-time-{{$index}}" class="form-label form-label&#45;&#45;from">From</label>-->
                                     <!--<div class="form-input&#45;&#45;horizontal">-->
                                         <!--<input id="booked-start-time-{{$index}}" type="time"-->
-                                               <!--class="form-input settings__form-input " required-->
+                                               <!--class="form-input form-input&#45;&#45;required settings__form-input " required-->
                                                <!--name="startTime" data-ng-model="booked.startTime"-->
                                                <!--data-ng-model-options="{ updateOn: 'blur' }">-->
                                         <!--<div class="form-input-error-holder">-->
@@ -124,7 +124,7 @@
                                     <!--<label for="booked-end-time{{$index}}" class="form-label form-label&#45;&#45;to">To</label>-->
                                     <!--<div class="form-input&#45;&#45;horizontal">-->
                                         <!--<input id="booked-end-time{{$index}}" type="time"-->
-                                               <!--class="form-input settings__form-input " required-->
+                                               <!--class="form-input form-input&#45;&#45;required settings__form-input " required-->
                                                <!--name="endTime"-->
                                                <!--data-ng-model="booked.endTime"-->
                                                <!--data-ng-model-options="{ updateOn: 'blur' }">-->
@@ -158,7 +158,7 @@
                                     <label for="working-day-start-{{$index}}" class="form-label form-label--from">From</label>
                                     <div class="form-input--horizontal">
                                         <input id="working-day-start-{{$index}}" type="time"
-                                               class="form-input settings__form-input "
+                                               class="form-input form-input--required settings__form-input "
                                                name="workingDayStart"
                                                data-ng-model="dayOpts.start" data-ng-disabled="!dayOpts.isWorkingDay"
                                                data-ng-model-options="{ updateOn: 'blur' }" required>
@@ -173,7 +173,7 @@
                                     <label for="working-day-end-{{$index}}" class="form-label form-label--to">To</label>
                                     <div class="form-input--horizontal">
                                         <input id="working-day-end-{{$index}}" type="time"
-                                               class="form-input settings__form-input "
+                                               class="form-input form-input--required settings__form-input "
                                                name="workingDayEnd"
                                                data-ng-model="dayOpts.end" data-ng-disabled="!dayOpts.isWorkingDay"
                                                ng-model-options="{ updateOn: 'blur' }"
@@ -191,7 +191,10 @@
                                         <input id="working-day-{{$index}}" class="form-checkbox" type="checkbox"
                                                data-ng-model="dayOpts.isWorkingDay"
                                                data-ng-checked="dayOpts.isWorkingDay">
-                                        <label for="working-day-{{$index}}" class="text-uppercase form-checkbox-label">{{dayName}}</label>
+                                        <label for="working-day-{{$index}}"
+                                               class="text-uppercase form-checkbox-label form-checkbox-label--right">
+                                            {{dayName}}
+                                        </label>
                                     </div>
                                 </div>
                             </div>

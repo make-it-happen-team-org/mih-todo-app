@@ -73,33 +73,43 @@ div.ui-notification {
 
   &-priority-1 {
     border-left: 10px solid @priority-1-color;
-    background-color: @priority-1-color;
-
-    .item-priority:focus { border-color: @priority-1-color; }
+    color: @priority-1-color;
   }
 
   &-priority-2 {
     border-left: 10px solid @priority-2-color;
-    background-color: @priority-2-color;
-
-    .item-priority:focus { border-color: @priority-2-color; }
+    color: @priority-2-color;
   }
 
   &-priority-3 {
     border-left: 10px solid @priority-3-color;
-    background-color: @priority-3-color;
-
-    .item-priority:focus { border-color: @priority-3-color; }
+    color: @priority-3-color;
   }
 
   &-priority-4 {
     border-left: 10px solid @priority-4-color;
-    background-color: @priority-4-color;
-
-    .item-priority:focus { border-color: @priority-4-color; }
+    color: @priority-4-color;
   }
 }
 
 .dashboard-panel {
   padding: @dashboard-panel-padding-left-right @dashboard-panel-padding-top-bottom;
+}
+
+.fade-element-in.ng-enter {
+  transition: 1s linear all;
+  opacity: 0;
+}
+
+.fade-element-in-init .fade-element-in.ng-enter,
+.fade-element-in.ng-enter.ng-enter-active {
+  opacity: 1;
+}
+
+.fade-element-in.ng-leave {
+  transition: .5s linear all;
+  opacity: 1;
+}
+.fade-element-in.ng-leave.ng-leave-active {
+  opacity: 0;
 }

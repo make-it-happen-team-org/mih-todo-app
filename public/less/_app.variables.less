@@ -40,6 +40,7 @@
 @color-hit-grey-s0: #AEAFAF;
 @color-light-grey-s0: #D6D6D6;
 @color-roof-terracotta-red-s60: #A94442;
+@color-brick-red-s72: #D43A4A;
 @color-dark-pink-red-s64: #ED5565;
 @color-sundown-red-s34: #FBA4AE;
 @color-wewak-red-s38: #F1959E;
@@ -76,6 +77,7 @@
 @color-biloba-flower-violet-s35: #E8F2F9;
 @color-suva-grey-s0: #888888;
 @color-gainsboro-white-s0: #E5E5E5;
+@color-black-squeeze-grey-s2: #EBEBE4;
 
 // ------------------------------------------- TYPOGRAPHY COLORS -----------------------------------------
 @light-text: @color-white;
@@ -260,6 +262,7 @@
 @checkbox-marker-margin-top: -@checkbox-marker-height / 2;
 @checkbox-label-padding: @checkbox-dimension * 2;
 
+@marker-dimension: 1.5rem;
 
 @input-font-size: 1.4rem;
 @input-error-text-height: 1.6rem;
@@ -273,18 +276,27 @@
 @button-blue-color-active: @color-denim-blue-s90;
 @button-grey-color: @color-bali-hai-blue-s24;
 @button-grey-color-active: @color-biscay-blue-s41;
+@button-red-color: @color-dark-pink-red-s64;
+@button-red-color-active: @color-brick-red-s72;
 
 @input-border-color: @color-solitude-blue-s7;
 @input-bg-color: @color-white;
 @input-error-text-color: @color-white;
 
 @checkbox-background-color: @color-white;
+
 @marker-green-color: @color-mountain-meadow-green-s89;
 @marker-red-color: @color-dark-pink-red-s64;
+@marker-left-color: @color-casablanca-yellow-s70;
+@marker-done-color: @color-mountain-meadow-green-s84;
 
+@disabled-background-color: @color-black-squeeze-grey-s2;
 @error-color: @color-dark-pink-red-s64;
 @valid-color: @color-mountain-meadow-green-s84;
 @pristine-color: @color-solitude-blue-s7;
+
+@datetimepicker-button-color: @color-white;
+@datetimepicker-button-bg-color: @color-mountain-meadow-green-s84;
 
 // ---------------- SETTINGS :: SIZES ----------------
 @settings-avatar-dimension: 24.4rem;
@@ -313,3 +325,53 @@
 
 // ---------------- TILES :: SIZES ----------------
 @tile-heading-font-size: 1.4rem;
+
+// ---------------- TASK-EVENT FORM :: SIZES ----------------
+@task-event-tile-margin-bottom: 2rem;
+
+@task-event-form-input-right-padding: 1.5rem;
+@task-event-form-input-left-padding: 1.5rem;
+
+@task-event-button-width: 10%;
+@task-event-button-calendar-width: 20%;
+@task-event-button-width-md: 15%;
+@task-event-button-calendar-width-md: 30%;
+@task-event-button-margin-left: 1rem;
+
+// ---------------- TASK-EVENT FORM :: COLORS ----------------
+@task-event-form-tile-color: @tile-main-color;
+@task-event-form-checkbox-bg-color: @color-solitude-blue-s7;
+
+// ---------------- TASK COMMON :: SIZES ----------------
+@task-tile-slots-height-md: 20rem;
+
+@task-rzslider-margin-bottom: 3.8rem;
+@task-rzslider-max-value-font-size: 1.2rem;
+@task-rzslider-input-margin-top: 1.4rem;
+@task-rzslider-input-label-padding-left: 1.5rem;
+
+// ---------------- TASK CREATE :: SIZES ----------------
+@task-create-tile-slots-height: 43.7rem;
+@task-create-input-notes-height: 29.5rem;
+@task-create-input-notes-height-lg: @task-edit-input-notes-height;
+
+// ---------------- TASK EDIT :: SIZES ----------------
+@task-edit-tile-slots-height: 20.4rem;
+@task-edit-tile-slots-height-lg: 89.4rem;
+@task-edit-input-notes-height: 6rem;
+
+// ---------------- TASK SLOTS :: SIZES ----------------
+@task-slots-info-font-size: 2rem;
+@task-slots-info-line-height: 4rem;
+@task-slots-info-left-right-padding: 6rem;
+
+@task-slots-info-icon-font-size: 8rem;
+@task-slots-info-icon-bottom-padding: 2rem;
+
+// ---------------- TASK SLOTS :: COLORS ---------------
+@task-slots-info-color: @color-hit-grey-s0;
+@task-slots-marker-bg-color: @color-white;
+@task-slots-marker-border-color: @color-solitude-blue-s7;
+
+// ---------------- EVENT :: SIZES ----------------
+@event-input-notes-height: 13rem;
