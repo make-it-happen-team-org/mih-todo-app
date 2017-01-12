@@ -18,12 +18,14 @@
                data-ui-sref="restricted.overdue.edit({ taskId: slot.taskId })"
                data-ng-bind="slot.title"></a>
             <span class="overdue-badge"
+                  data-ng-if="!slot.isComplete"
                   data-ng-click="completeSlot(slot, notifications.overdueTasks)">
                 <i class="fa fa-chevron-down" aria-hidden="true"></i>
             </span>
+            <span data-ng-if="slot.isComplete" class="label label-primary">done</span>
     </li>
     <li class="notification-item notification-item--control">
         <a class="notifications__dropdown-link dropdown-menu-container__link"
-           data-ui-sref="overdue">See all notifications</a>
+           data-ui-sref="restricted.overdue">See all notifications</a>
     </li>
 </ul>
