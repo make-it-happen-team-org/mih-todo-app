@@ -159,7 +159,6 @@
       }
 
       &::after {
-        left: @checkbox-marker-padding;
         width: @checkbox-marker-width;
         height: @checkbox-marker-height;
         margin-top: @checkbox-marker-margin-top;
@@ -179,6 +178,10 @@
 
         &::before {
           left: 0;
+        }
+
+        &::after {
+          left: @checkbox-marker-padding;
         }
       }
 
