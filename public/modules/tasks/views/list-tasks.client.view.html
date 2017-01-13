@@ -26,10 +26,10 @@
             <input class="sidebar__nav-item--task-checkbox"
                    id="sidebar__nav-item--task-checkbox"
                    type="checkbox"
-                   data-ng-model="taskListCtrl.filter.isComplete"/>
+                   data-ng-model="taskListCtrl.filter.isComplete"
+                   data-ng-change="taskListCtrl.sortListBy('isComplete')"/>
             <label class="sidebar__nav-item--task-checkbox-label"
-                   for="sidebar__nav-item--task-checkbox"
-                   data-ng-click="taskListCtrl.sortListBy('isComplete')"></label>
+                   for="sidebar__nav-item--task-checkbox"></label>
         </div>
     </div>
 </div>
