@@ -107,12 +107,12 @@ angular.module('schedule-notifications').controller('ScheduleNotificationsContro
       };
 
       $scope.completeSlot = (slot) => {
-        var cfg = getFormattedDataForCompleteSlot(slot);
+          let cfg = getFormattedDataForCompleteSlot(slot);
 
-        if ($stateParams.taskId === cfg.overdueTask._id) {
-          cfg.isCurrentTaskPage = true;
-        }
-        updateActivity(cfg);
+          if ($stateParams.taskId === cfg.overdueTask._id) {
+            cfg.isCurrentTaskPage = true;
+          }
+          updateActivity(cfg);
       };
     }
   ]);
