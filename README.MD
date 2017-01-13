@@ -8,29 +8,27 @@
 - Set git config:
 
     ```bash
-    git remote add upstream https://git.epam.com/anna_pavlova/epmkhrdmh.git
+    git remote add upstream https://github.com/make-it-happen-team-org/mih-todo-app.git
     git config --global user.name "John Doe"
     git config --global user.email johndoe@example.com
     ```
+
 #####2. System Configuration
 - Install ```NodeJS ^6.91``` [download](https://nodejs.org/en/download/);
 - Ensure that ```npm ^3``` ;
 - Install ```MongoDB``` and create folder structure ```db/data```, check System Environment for ```mongod``` variable;
 - Execute command: ``` npm install```
-- Command ```mongod --dbpath "d:/db/data"``` to run mongo server;
 - Command ```npm install -g eslint``` to install eslint;
 - ```[optional]``` Command ```npm install -g karma-cli``` to install karma CLI for windows;
 - ```[optional]``` Command ```npm install -g grunt-cli``` to install grunt CLI for windows;
+- P.S. EditorConfig ```mih_editorconfig.xml``` (import to IDE config)
 
 #####3. Running Application
 - Command ```mongod --dbpath "d:/db/data"``` to run mongo server;
-- Command ```npm run client``` compile files and watching them;
+- Command ```npm run client``` compile files;
 - Command ```npm run server``` starts server and gets static;
 
 #####4. Open in browser link [http://localhost:3000/](http://localhost:3000/).
-
-#P.S Import ```mih_editorconfig.xml``` to Webstorm config
-
 
 ## GIT flow
 
