@@ -5,7 +5,7 @@
                 <header class="col-xs-12 tile__header">
                     <h3 class="tile__title">Synchronization</h3>
                 </header>
-                <ul class="col-xs-12 tile__body migrate-sync-list">
+                <ul class="col-xs-12 tile__body migrate-sync-list migrate-sync-list__main">
                     <li class="tile-item migrate-sync-item--heading">Select service for synchronization</li>
                     <li class="tile-item migrate-sync-item">
                         <span class="icon-outlook migrate-sync-item__icon"
@@ -21,12 +21,12 @@
                     </li>
                 </ul>
                 <div class="col-xs-12 tile__footer migrate__footer">
-                    <a class="btn tile__btn tile__btn--login"
+                    <a class="btn tile__btn tile__btn--login icon-arrow"
                         data-ng-show="migrate.setRestrictedUrlPath()"
-                        data-ui-sref="restricted.migrate.outlook">Login</a>
-                    <a class="btn tile__btn tile__btn--login"
+                        data-ui-sref="restricted.migrate.outlook">Next</a>
+                    <a class="btn tile__btn tile__btn--login icon-arrow"
                         data-ng-hide="migrate.setRestrictedUrlPath()"
-                        data-ui-sref="restricted.migrate.googleCalendar">Login</a>
+                        data-ui-sref="restricted.migrate.googleCalendar">Next</a>
                 </div>
             </div>
         </div>

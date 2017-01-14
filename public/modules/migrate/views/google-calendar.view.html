@@ -7,22 +7,21 @@
                 </header>
                 <ul class="col-xs-12 tile__body migrate-sync-list">
                     <li class="tile-item" data-ng-show="ctrl.authUrl">
-                        <a class="btn btn-large btn-primary"
-                           href="{{ctrl.authUrl}}">Log In</a>
+                        <a class="btn tile__btn tile__btn--login"
+                           href="{{ctrl.authUrl}}">Login</a>
                     </li>
                     <li class="tile-item" data-ng-show="ctrl.authorized">
                         <div class="col-xs-12 tile-item__form">
-                            <fieldset class="presets-template-item__fieldset">
-                                <div class="col-xs-3">
-                                    <label for="syncDateFrom" class="control-label">Start date: </label>
+                            <fieldset class="migrate__fieldset">
+                                <div class="col-xs-5 mw-410">
+                                    <label for="syncDateFrom" class="control-label migrate__fieldset-item">Start date</label>
                                     <input id="syncDateFrom" type="date" class="form-control"
                                            data-ng-model="ctrl.params.startDate">
                                 </div>
-                                <div class="col-xs-3">
-                                    <label for="eventsLimit" class="control-label">Events limit: </label>
+                                <div class="col-xs-5 mw-410">
+                                    <label for="eventsLimit" class="control-label migrate__fieldset-item">Events limit</label>
                                     <input id="eventsLimit" type="number" class="form-control"
-                                           min="1"
-                                           max="30"
+                                           min="1" max="30"
                                            data-ng-model="ctrl.params.maxResults">
                                 </div>
                             </fieldset>
@@ -30,42 +29,43 @@
                     </li>
                 </ul>
                 <div class="col-xs-12 tile__footer migrate__footer">
-                    <button type="button" class="btn tile__btn tile__btn--delete"
+                    <button type="button" class="btn tile__btn tile__btn--import icon-arrow icon-arrow--down"
+                            data-ng-disabled="!ctrl.authorized"
                             data-ng-click="ctrl.getEvents()">Get events</button>
                 </div>
             </div>
         </div>
     </div>
 
-    <div class="row p-t20" data-ng-show="ctrl.authorized">
+    <div class="row p-t15" data-ng-show="ctrl.authorized">
         <div class="col-xs-12">
             <div class="tile__wrapper">
                 <header class="col-xs-12 tile__header">
                     <h3 class="tile__title">Events</h3>
                 </header>
                 <ul class="col-xs-12 tile__body migrate-sync-list">
-                    <li class="tile-item" data-ng-show="!ctrl.events.length">
-                        No events
+                    <li class="tile-item tile-item__empty-msg" data-ng-show="!ctrl.events.length">
+                        No events yet
                     </li>
-                    <li class="tile-item">
-                        <table class="col-xs-12 events-list" data-ng-show="ctrl.events.length">
-                            <thead>
-                            <tr>
-                                <th>Title</th>
-                                <th>Notes</th>
-                                <th>Start date</th>
-                                <th>End date</th>
-                                <th>Status</th>
-                            </tr>
+                    <li class="tile-item migrate__table-wrapper">
+                        <table class="col-xs-12 migrate__table-events-list" data-ng-show="ctrl.events.length">
+                            <thead class="migrate__table-head">
+                                <tr>
+                                    <th class="col-xs-3">Title</th>
+                                    <th class="col-xs-3">Notes</th>
+                                    <th class="col-xs-2">Start date</th>
+                                    <th class="col-xs-2">End date</th>
+                                    <th class="col-xs-2">Status</th>
+                                </tr>
                             </thead>
                             <tbody>
-                            <tr data-ng-repeat="event in ctrl.events">
-                                <td>{{event.title}}</td>
-                                <td>{{event.notes}}</td>
-                                <td>{{event.days.startTime | date:ctrl.dateFormat}}</td>
-                                <td>{{event.days.endTime | date:ctrl.dateFormat}}</td>
-                                <td>{{event.status}}</td>
-                            </tr>
+                                <tr data-ng-repeat="event in ctrl.events">
+                                    <td>{{event.title}}</td>
+                                    <td>{{event.notes}}</td>
+                                    <td>{{event.days.startTime | date:ctrl.dateFormat}}</td>
+                                    <td>{{event.days.endTime | date:ctrl.dateFormat}}</td>
+                                    <td>{{event.status}}</td>
+                                </tr>
                             </tbody>
                         </table>
                     </li>

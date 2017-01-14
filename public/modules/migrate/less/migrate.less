@@ -2,9 +2,10 @@
 .migrate {
   &-sync {
     &-list {
-      padding: 5.5rem 0 1.2rem;
+      padding: 1.2rem 0;
       background-color: @color-white;
       text-align: center;
+      &__main { padding-top: 5.5rem; }
     }
     &-item {
       display: inline-block;
@@ -20,9 +21,8 @@
         font-family: @font-open-sans-light;
         font-size: 2.6rem;
       }
-      & a {
-        display: block;
-      }
+      & a { display: block; }
+
       &__icon {
         font-size: 7.2rem;
         color: @migrate-sync-icon-inactive-color;
@@ -36,31 +36,69 @@
       }
     }
   }
-
-  &__footer {
-    background-color: @color-white;
+  &__fieldset {
+    padding: 2.5rem 0 2.6rem;
+    &-item {
+      display: block;
+      text-align: left;
+    }
   }
-
-}
-
-.p-t20 {
-  padding-top: 20px;
-}
-
-.migrate {
-
-  &-table {
-
-    .events-list {
-      font-size: 14px;
-      margin: 10px;
+  &__table {
+    &-wrapper {
+      padding: 0 1rem;
+      width: 98%;
+    }
+    &-events-list {
+      font-size: 1.4rem;
+      margin: 1rem;
       table-layout: fixed;
 
-      td, th {
-        padding: 10px;
+      td {
+        padding: 1rem;
+        word-break: break-all;
+        overflow-x: hidden;
+      }
+
+      tbody tr {
+        text-align: left;
+        font-family: @font-open-sans-regular;
+        &:nth-child(even) {
+          background-color: @migrate-sync-table-row-even-color;
+        }
+      }
+    }
+    &-head {
+      background-color: @migrate-sync-table-head-color;
+      font-family: @font-open-sans-bold;
+      & th {
+        padding: 1rem;
         word-break: break-all;
       }
     }
   }
 
+  &__footer { background-color: @color-white; }
+}
+
+.p-t15 { padding-top: 1.5rem; }
+
+.mw-410 { max-width: 41rem; }
+
+.icon-arrow {
+  &::after {
+    content: "";
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    margin-left: 10px;
+    border-style: solid;
+    border-width: 2px 2px 0 0;
+    transform: rotate(45deg);
+    color: @color-white;
+  }
+  &--down::after {
+    position: relative;
+    bottom: 3px;
+    transform: rotate(135deg);
+  }
 }
