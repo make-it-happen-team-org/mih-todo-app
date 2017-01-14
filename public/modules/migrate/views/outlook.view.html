@@ -1,16 +1,18 @@
-<div class="ibox migration">
-    <div data-ng-controller="OutlookMigrateController as ctrl" class="ibox-content">
-        <section class="row migrate-table">
-            <div class="col-xs-12">
-                <h2>Outlook calendar synchronization</h2>
-
-                <a data-ng-show="ctrl.authUrl" class="btn btn-large btn-primary"
-                   href="{{ctrl.authUrl}}">Log In</a>
-
-                <div data-ng-show="ctrl.authorized">
-                    <div class="row">
-                        <div class="col-xs-12">
-                            <div class="row">
+<div class="wrapper dashboard-panel tile" data-ng-controller="OutlookMigrateController as ctrl">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="tile__wrapper">
+                <header class="col-xs-12 tile__header">
+                    <h3 class="tile__title">Outlook synchronization</h3>
+                </header>
+                <ul class="col-xs-12 tile__body migrate-sync-list">
+                    <li class="tile-item" data-ng-show="ctrl.authUrl">
+                        <a class="btn btn-large btn-primary"
+                           href="{{ctrl.authUrl}}">Log In</a>
+                    </li>
+                    <li class="tile-item" data-ng-show="ctrl.authorized">
+                        <div class="col-xs-12 tile-item__form">
+                            <fieldset class="presets-template-item__fieldset">
                                 <div class="col-xs-3">
                                     <label for="syncDateFrom" class="control-label">Start date: </label>
                                     <input id="syncDateFrom" type="date" class="form-control"
@@ -21,22 +23,29 @@
                                     <input id="syncDateTo" type="date" class="form-control"
                                            data-ng-model="ctrl.params.endDateTime">
                                 </div>
-                                <div class="col-xs-4">
-                                    <button type="button" class="btn btn-large btn-primary api-call-btn"
-                                            data-ng-click="ctrl.getOutlookCalendarEvents()">
-                                        Get events
-                                    </button>
-                                    <button type="button" class="btn btn-large btn-primary api-call-btn"
-                                            data-ng-click="ctrl.importEvents()"
-                                            data-ng-disabled="!ctrl.events.length">
-                                        Import events
-                                    </button>
-                                </div>
-                            </div>
+                            </fieldset>
                         </div>
-                    </div>
+                    </li>
+                </ul>
+                <div class="col-xs-12 tile__footer migrate__footer">
+                    <button type="button" class="btn tile__btn tile__btn--delete"
+                            data-ng-click="ctrl.getOutlookCalendarEvents()">Get events</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
-                    <div class="row">
+    <div class="row p-t20" data-ng-show="ctrl.authorized">
+        <div class="col-xs-12">
+            <div class="tile__wrapper">
+                <header class="col-xs-12 tile__header">
+                    <h3 class="tile__title">Events</h3>
+                </header>
+                <ul class="col-xs-12 tile__body migrate-sync-list">
+                    <li class="tile-item" data-ng-show="!ctrl.events.length">
+                        No events
+                    </li>
+                    <li class="tile-item">
                         <table class="col-xs-12 events-list" data-ng-show="ctrl.events.length">
                             <thead>
                             <tr>
@@ -57,13 +66,15 @@
                             </tr>
                             </tbody>
                         </table>
-                    </div>
-
-                    <div data-ng-show="!ctrl.events.length" class="no-events">
-                        No events
-                    </div>
+                    </li>
+                </ul>
+                <div class="col-xs-12 tile__footer migrate__footer">
+                    <button type="button" class="btn tile__btn tile__btn--save"
+                            data-ng-click="ctrl.importEvents()"
+                            data-ng-disabled="!ctrl.events.length">Import events
+                    </button>
                 </div>
             </div>
-        </section>
+        </div>
     </div>
 </div>

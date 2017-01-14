@@ -116,3 +116,33 @@
   font-weight: normal;
   font-style: normal;
 }
+@font-face {
+  font-family: 'migrate-icons';
+  src:  url('/fonts/migrate-icons.eot');
+  src:  url('/fonts/migrate-icons.eot#iefix') format('embedded-opentype'),
+  url('/fonts/migrate-icons.ttf') format('truetype'),
+  url('/fonts/migrate-icons.woff') format('woff'),
+  url('/fonts/migrate-icons.svg#migrate-icons') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+.icon-gmail, .icon-outlook {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'migrate-icons' !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-gmail:before {
+  content: "\e900";
+}
+.icon-outlook:before {
+  content: "\e901";
+}

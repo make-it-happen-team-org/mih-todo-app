@@ -1,18 +1,55 @@
+@import (once) "../../../less/_app.variables.less";
 .migrate {
-  &-table {
-    .api-call-btn {
-      margin-top: 22px;
-    }
-
-    .no-events {
-      padding: 20px;
-      font-size: 16px;
+  &-sync {
+    &-list {
+      padding: 5.5rem 0 1.2rem;
+      background-color: @color-white;
       text-align: center;
     }
-
-    .event-date {
-      margin-top: 14px;
+    &-item {
+      display: inline-block;
+      padding: 4.5rem 8rem 5rem;
+      & .sync-item-outlook,
+      & .sync-item-gmail {
+        color: @migrate-sync-icon-active-color;
+      }
+      &--heading {
+        display: block;
+        width: 100%;
+        color: @migrate-sync-heading-color;
+        font-family: @font-open-sans-light;
+        font-size: 2.6rem;
+      }
+      & a {
+        display: block;
+      }
+      &__icon {
+        font-size: 7.2rem;
+        color: @migrate-sync-icon-inactive-color;
+      }
+      &__title {
+        display: block;
+        color: @migrate-sync-text-color;
+        font-family: @font-open-sans-semibold;
+        font-size: 1.4rem;
+        padding: 15px 0;
+      }
     }
+  }
+
+  &__footer {
+    background-color: @color-white;
+  }
+
+}
+
+.p-t20 {
+  padding-top: 20px;
+}
+
+.migrate {
+
+  &-table {
 
     .events-list {
       font-size: 14px;
@@ -26,22 +63,4 @@
     }
   }
 
-  &-services {
-    text-align: center;
-
-    li {
-      display: inline-block;
-
-      a {
-        display: block;
-        height: 50px;
-        margin: 20px;
-
-        img {
-          display: block;
-          max-height: 100%;
-        }
-      }
-    }
-  }
 }
