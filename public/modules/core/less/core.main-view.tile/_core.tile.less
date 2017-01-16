@@ -49,6 +49,18 @@
         background-color: @tile-footer-button-save-color-hover;
       }
     }
+    &--login {
+      background-color: @tile-footer-button-login-color;
+      &:hover {
+        background-color: @tile-footer-button-login-color-hover;
+      }
+    }
+    &--import {
+      background-color: @tile-footer-button-import-color;
+      &:hover {
+        background-color: @tile-footer-button-import-color-hover;
+      }
+    }
 
     &--blue {
       background-color: @button-blue-color;
@@ -63,6 +75,15 @@
   &-item {
     &__form {
       padding: 0;
+    }
+    &__default-message,
+    &__empty-msg {
+      display: block;
+      width: 100%;
+      color: @tile-empty-msg-color;
+      font-family: @font-open-sans-light;
+      padding: 2.7rem 8rem 3.8rem;
+      font-size: 2.6rem;
     }
   }
 }

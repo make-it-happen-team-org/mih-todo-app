@@ -19,7 +19,7 @@ class OutlookService {
             return {
                 id: event.Id,
                 type: 'event',
-                title: event.Subject,
+                title: event.Subject || 'No name',
                 notes: event.BodyPreview,
                 days: {
                     startTime: event.Start.DateTime,
