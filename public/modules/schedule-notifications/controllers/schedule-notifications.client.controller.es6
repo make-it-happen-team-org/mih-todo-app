@@ -87,6 +87,12 @@ angular.module('schedule-notifications').controller('ScheduleNotificationsContro
         $rootScope.$broadcast('NEW_TASK_MODIFY');
       };
 
+      let getNotifications = () => {
+        $scope.notifications = ScheduleNotifications.query();
+      };
+
+      $scope.getNotifications = getNotifications;
+
       $scope.authentication = Authentication;
 
       $scope.getTaskDonePercentage = (task) => {
@@ -94,16 +100,25 @@ angular.module('schedule-notifications').controller('ScheduleNotificationsContro
       };
 
       $scope.find = () => {
-        $scope.notifications = ScheduleNotifications.query();
+        getNotifications();
 
         $interval(() => {
-          $scope.notifications = ScheduleNotifications.query();
+          getNotifications();
           
           $interval(() => {
-            $scope.notifications = ScheduleNotifications.query();
+            getNotifications();
           }, NOTIFICATIONS_INTERVAL);
           
         }, initialInterval, 1);
+      };
+
+      $scope.getNonCompletedSlotsLength = () => {
+        if(!$scope.notifications.overdueSlots) {
+          return 0;
+        }
+        return $scope.notifications.overdueSlots.filter((slot)=> {
+          return !slot.isComplete;
+        }).length;
       };
 
       $scope.completeSlot = (slot) => {

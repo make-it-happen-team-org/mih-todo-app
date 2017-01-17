@@ -1,11 +1,11 @@
 <a class="notifications-info"
    data-ng-init="find()"
    data-ng-class="{disable: !notifications.overdueSlots.length}"
-   data-ng-click="mainCtrl.toggleDropdown('notification')">
+   data-ng-click="mainCtrl.toggleDropdown('notification'); getNotifications()">
     <i class="fa fa-bell" aria-hidden="true"></i>
     <span class="notifications-info__label"
-          data-ng-class="{'notifications-info__label-label--primary': notifications.overdueSlots.length}"
-          data-ng-bind="notifications.overdueSlots.length">
+          data-ng-class="{'notifications-info__label--primary': getNonCompletedSlotsLength()}">
+        {{ getNonCompletedSlotsLength() }}
     </span>
 </a>
 
