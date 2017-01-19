@@ -1,11 +1,11 @@
 <a class="notifications-info"
    data-ng-init="find()"
    data-ng-class="{disable: !notifications.overdueSlots.length}"
-   data-ng-click="mainCtrl.toggleDropdown('notification')">
+   data-ng-click="mainCtrl.toggleDropdown('notification'); getNotifications()">
     <i class="fa fa-bell" aria-hidden="true"></i>
     <span class="notifications-info__label"
-          data-ng-class="{'notifications-info__label-label--primary': notifications.overdueSlots.length}"
-          data-ng-bind="notifications.overdueSlots.length">
+          data-ng-class="{'notifications-info__label--primary': getNonCompletedSlotsLength()}">
+        {{ getNonCompletedSlotsLength() }}
     </span>
 </a>
 
@@ -15,15 +15,21 @@
     <li class="notification-item"
         data-ng-repeat="slot in notifications.overdueSlots | limitTo: 3 ">
             <a class="notifications__dropdown-link dropdown-menu-container__link"
-               data-ui-sref="restricted.overdue.edit({ taskId: slot.taskId })"
-               data-ng-bind="slot.title"></a>
-            <span class="overdue-badge"
-                  data-ng-click="completeSlot(slot, notifications.overdueTasks)">
-                <i class="fa fa-chevron-down" aria-hidden="true"></i>
+               data-ui-sref="restricted.overdue.edit({ taskId: slot.taskId })">
+                <span class="dropdown-item-title" data-ng-class="'task-priority--' + slot.priority" data-ng-bind="slot.title"></span>
+            </a>
+            <span class="overdue-checkbox" data-ng-if="!slot.isComplete">
+                DONE
+                <label class="dropdown-checkbox">
+                    <input type="checkbox" ng-model="slot.isComplete" ng-change="completeSlot(slot)">
+                    <span class="dropdown-checkbox--square"></span>
+                </label>
             </span>
+            <span data-ng-if="slot.isComplete" class="label label-primary">done</span>
     </li>
-    <li class="notification-item notification-item--control">
-        <a class="notifications__dropdown-link dropdown-menu-container__link"
-           data-ui-sref="overdue">See all notifications</a>
+    <li class="notification-item notification-item--control clearfix">
+        <a class="notification-item__view-all pull-right" data-ui-sref="restricted.overdue">
+            <button class="button button--green"> View all notifications</button>
+        </a>
     </li>
 </ul>
