@@ -56,3 +56,10 @@ public/build
 *.tmp
 *.bak
 *.swp
+
+# Mobile
+mobile/platforms
+mobile/plugins
+!mobile/plugins/browser.json
+!mobile/plugins/fetch.json
+mobile/www

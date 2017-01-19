@@ -157,6 +157,16 @@ const copy = {
                 }
             }
         ]
+    },
+    mobile: {
+        files: [
+            {
+                cwd: 'public/build/',
+                src: '**/*',
+                dest: 'mobile/www/',
+                expand: true                
+            }
+        ]
     }
 };
 const uglify = {
