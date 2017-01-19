@@ -33,6 +33,7 @@ tests/coverage/
 config/sslcerts/*.pem
 access.log
 public/dist/
+public/build
 
 # Sublime editor
 # ==============
