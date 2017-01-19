@@ -21,11 +21,17 @@ module.exports = (grunt) => {
         'copy:prodFonts',
         'uglify'
     ]);
+    
     grunt.registerTask('build', [
         'env:production',
         'loadConfig',
         'buildProdIndex'
     ]);
+    
+    grunt.registerTask('prepareMobile', [
+        'copy:mobile'
+    ]);
+    
     grunt.task.registerTask('buildProdIndex', () => {
         grunt.file.write(
             'build/index.html',
@@ -35,6 +41,7 @@ module.exports = (grunt) => {
             )
         )
     });
+    
     grunt.task.registerTask('buildDevIndex', () => {
         grunt.file.write(
             'index.html',
