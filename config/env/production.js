@@ -7,7 +7,7 @@ module.exports = {
         keywords: 'Make It Happen'
     },
     appFolder: './public/build',
-    endpointUrl: 'https://mih-todo-app-2016.herokuapp.com',
+    endpointUrl: 'https://mih-todo-app.herokuapp.com',
     db: {
         uri: 'mongodb://devuser:devuser2day@ds031167.mlab.com:31167/mih'
     },
@@ -80,7 +80,7 @@ module.exports = {
         }
     },
     migrateRedirectUrls: {
-        outlook: 'https://make-it-happen-app.herokuapp.com/migrate/outlook/authorize',
-        google: 'https://make-it-happen-app.herokuapp.com/migrate/google-calendar/authorize'
+        outlook: 'https://mih-todo-app.herokuapp.com/migrate/outlook/authorize',
+        google: 'https://mih-todo-app.herokuapp.com/migrate/google-calendar/authorize'
     }
 };
