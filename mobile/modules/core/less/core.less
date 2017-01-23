@@ -1,0 +1,123 @@
+@import (once) "../../../less/_app.mixins.less";
+@import "_core.logo.less";
+@import "_core.datepicker.less";
+@import "_core.navigation.less";
+@import "core.main-view.sidebar/core.main-view.sidebar.less";
+@import "_core.socials.less";
+@import "_core.main-content.less";
+@import "_core.form-controls.less";
+@import "core.main-view.tile/_core.tile.less";
+
+.text-uppercase {
+  text-transform: uppercase;
+}
+
+.main-view-container {
+  height: 100%;
+
+  & > div {
+    height: 100%;
+  }
+}
+
+.undecorated-link:hover { text-decoration: none; }
+
+.phone ({
+  .only-mobile {
+    display: none;
+  }
+});
+
+.ui-sref.back { margin-bottom: 20px; }
+
+.rzslider-manual-input { margin-top: .5em; }
+
+// ---------------- IBOX ----------------
+.ibox {
+  .ibox-content {
+    padding: 15px 20px 20px;
+    min-height: 330px;
+  }
+}
+
+.btn-ibox-title { margin-top: -10px; }
+
+// ---------------- NOTIFICATION ----------------
+div.ui-notification {
+  :before {
+    content: '×';
+    right: 5px;
+    top: 0;
+    position: absolute;
+    display: block;
+    font-size: 20px;
+    line-height: 1;
+  }
+
+  &.success { background: @color-mountain-meadow-green-s85; }
+
+  .message {
+    background-color: transparent;
+    border: none;
+    text-align: left;
+    display: block;
+    padding: 0;
+    position: relative;
+    border-radius: 0;
+  }
+}
+
+.notifications-info .label {
+  line-height: 12px;
+  padding: 2px 5px;
+  position: absolute;
+  right: 6px;
+  top: 12px;
+}
+
+// ---------------- PRIORITY ----------------
+.item {
+  &-priority { color: @color-mid-grey-s4; }
+
+  &-priority-1 {
+    border-left: 10px solid @priority-1-color;
+    color: @priority-1-color;
+  }
+
+  &-priority-2 {
+    border-left: 10px solid @priority-2-color;
+    color: @priority-2-color;
+  }
+
+  &-priority-3 {
+    border-left: 10px solid @priority-3-color;
+    color: @priority-3-color;
+  }
+
+  &-priority-4 {
+    border-left: 10px solid @priority-4-color;
+    color: @priority-4-color;
+  }
+}
+
+.dashboard-panel {
+  padding: @dashboard-panel-padding-left-right @dashboard-panel-padding-top-bottom;
+}
+
+.fade-element-in.ng-enter {
+  transition: 1s linear all;
+  opacity: 0;
+}
+
+.fade-element-in-init .fade-element-in.ng-enter,
+.fade-element-in.ng-enter.ng-enter-active {
+  opacity: 1;
+}
+
+.fade-element-in.ng-leave {
+  transition: .5s linear all;
+  opacity: 1;
+}
+.fade-element-in.ng-leave.ng-leave-active {
+  opacity: 0;
+}

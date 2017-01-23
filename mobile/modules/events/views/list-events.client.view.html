@@ -1,0 +1,26 @@
+<a class="sidebar-header sidebar__block sidebar__block--group"
+   data-ui-sref="restricted.todo_state.events.create">
+    <h3 class="sidebar-header__title">Events</h3>
+    <span class="sidebar-header__button fa fa-plus-circle add-task"></span>
+</a>
+
+<ul class="sidebar__list">
+    <li data-ng-repeat="event in eventCtrl.events | orderBy:'days.startTime'">
+        <a class="sidebar__block sidebar-list-item sidebar-list-item__common-list"
+           data-ui-sref="restricted.todo_state.events.edit({ eventId: event._id })">
+            <div class="sidebar-list-item__title"
+                 data-ng-bind="event.title"></div>
+            <div class="sidebar-list-item__description">
+                <div class="sidebar-list-item__description--event-day">{{ event.days.startTime | date:'EEEE' }}
+                </div>
+                <div class="sidebar-list-item__description--event-time">{{ event.days.startTime | date:'HH:mm' }}
+                </div>
+            </div>
+        </a>
+    </li>
+</ul>
+
+<p class="sidebar-default-message__no-items"
+   data-ng-hide="eventCtrl.events.length">
+    No events yet.<br/>Please, click on <span class="fa fa-plus-circle"></span> to add new one.
+</p>

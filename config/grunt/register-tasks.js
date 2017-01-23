@@ -10,6 +10,15 @@ module.exports = (grunt) => {
     ]);
     grunt.registerTask('default', [ 'develop' ]);
 
+    grunt.registerTask('mobile', [
+        'env:mobile',
+        'loadConfig:mobile',
+        'clean',
+        'less',
+        'babel',
+        'buildDevIndex'
+    ]);
+
     // Build task(s).
     grunt.registerTask('prebuild', [
         'env:development',
@@ -46,12 +55,12 @@ module.exports = (grunt) => {
     });
 
     // A Task for loading the configuration object
-    grunt.task.registerTask('loadConfig', 'Task that loads the config into a grunt option.', () => {
+    grunt.task.registerTask('loadConfig', 'Task that loads the config into a grunt option.', folderPath => {
         const init = require('../init');
         const config = require('../config');
 
         init();
-        grunt.file.setBase('public/');
+        grunt.file.setBase(folderPath || 'public/');
 
         config.assets.cssFullPath = [];
         config.assets.css.forEach((path) => {

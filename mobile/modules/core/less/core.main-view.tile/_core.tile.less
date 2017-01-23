@@ -1,0 +1,89 @@
+@import (once) "../../../../less/_app.variables.less";
+
+.tile {
+  &__wrapper form {
+    background: @tile-main-color;
+    margin-bottom: 2rem;
+  }
+  &__header {
+    min-height: 1.5rem;
+    padding: 1.4rem;
+    font-family: @font-open-sans-regular;
+    background-color: @tile-heading-bg-color;
+    color: @tile-main-color;
+    text-transform: uppercase;
+  }
+  &__title {
+    margin-bottom: .5rem;
+    font-size: @tile-heading-font-size;
+    letter-spacing: 0.4px;
+  }
+  &__body {
+    padding-left: 0;
+    padding-right: 0;
+  }
+  &__footer {
+    padding: .8rem 1.5rem;
+    border-top: 1px solid @tile-footer-border-color;
+    text-align: right;
+  }
+  &__btn {
+    padding: .4rem 1.7rem;
+    font-family: @font-open-sans-regular;
+    color: @tile-main-color;
+    border-radius: 0;
+    &:hover,
+    &:focus {
+      color: @tile-main-color;
+    }
+    &--delete {
+      margin-right: 1.5rem;
+      background-color: @tile-footer-button-delete-color;
+      &:hover {
+        background-color: @tile-footer-button-delete-color-hover;
+      }
+    }
+    &--save {
+      background-color: @tile-footer-button-save-color;
+      &:hover {
+        background-color: @tile-footer-button-save-color-hover;
+      }
+    }
+    &--login {
+      background-color: @tile-footer-button-login-color;
+      &:hover {
+        background-color: @tile-footer-button-login-color-hover;
+      }
+    }
+    &--import {
+      background-color: @tile-footer-button-import-color;
+      &:hover {
+        background-color: @tile-footer-button-import-color-hover;
+      }
+    }
+
+    &--blue {
+      background-color: @button-blue-color;
+
+      &:hover {
+        background-color: @button-blue-color-active;
+      }
+
+    }
+
+  }
+  &-item {
+    &__form {
+      padding: 0;
+    }
+    &__default-message,
+    &__empty-msg {
+      display: block;
+      width: 100%;
+      color: @tile-empty-msg-color;
+      font-family: @font-open-sans-light;
+      padding: 2.7rem 8rem 3.8rem;
+      font-size: 2.6rem;
+    }
+  }
+}

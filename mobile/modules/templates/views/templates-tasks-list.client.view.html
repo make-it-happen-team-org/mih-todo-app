@@ -1,0 +1,34 @@
+<div class="sidebar-header sidebar__block sidebar__block--group">
+    <h3 class="sidebar-header__title">Tasks templates</h3>
+    <!-- not creating template logic but create task logic -->
+    <!--<a data-ui-sref="todo_state.tasks.create" class="fa fa-plus-circle add-task"></a>-->
+</div>
+<div data-ng-controller="templatesTasksListController as templatesTasksListCtrl">
+    <div class="sidebar__block sidebar__block--group sidebar__block--group-nav sidebar__block--group-nav__templates"
+         data-ng-click="templatesTasksListCtrl.sortReverse = !templatesTasksListCtrl.sortReverse"
+         data-ng-show="templatesTasksListCtrl.templatesList.length > 1">
+        <div class="sidebar__nav-item-wrapper sidebar__nav-item-wrapper--left">
+            <div class="sidebar__nav-item">Sort by last date of use</div>
+            <a class="sidebar__nav-item sidebar__nav-item--sort sidebar__nav-item--sort-priority sidebar__nav-item--sort__templates"
+                data-ng-class="{
+                    'sort-reverse-up': templatesTasksListCtrl.sortReverse,
+                    'sort-reverse-down': !templatesTasksListCtrl.sortReverse
+                }">
+            </a>
+        </div>
+    </div>
+    <ul class="sidebar__list">
+        <li data-ng-repeat="taskTemplate in templatesTasksListCtrl.templatesList | orderBy:'lastUsingDate':templatesTasksListCtrl.sortReverse">
+            <a class="sidebar__block sidebar-list-item"
+                ng-click="templatesTasksListCtrl.viewTemplate(taskTemplate._id)">
+                <div class="sidebar-list-item__title sidebar-list-item__title--templates">
+                    <span data-ng-bind="taskTemplate.title"></span>
+                </div>
+            </a>
+        </li>
+    </ul>
+
+    <p class="sidebar-default-message__no-items"
+       data-ng-hide="templatesTasksListCtrl.templatesList.length">No task templates yet.
+    </p>
+</div>

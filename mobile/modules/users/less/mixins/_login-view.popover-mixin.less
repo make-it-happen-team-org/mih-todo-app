@@ -1,0 +1,45 @@
+@import (once) "../../../../less/_app.variables.less";
+
+.popover-mixin {
+  .popover {
+    white-space: nowrap;
+    max-width: none;
+    margin-left: 25px;
+    border-radius: 0;
+    font-size: @popover-font-size;
+    color: @popover-font-color;
+    outline: none;
+
+    &-content {
+      p + p { margin-top: 0; }
+    }
+
+    .arrow {
+      // override bootstrap line-style
+      left: -6px!important;
+      top: -8px;
+      transform: scaleX(.75);
+
+      &:after {
+        position: absolute;
+        right: 0;
+        top: 0;
+        height: 0;
+        width: 0;
+        border: solid transparent;
+        border-right-color: #FFF;
+        border-width: 16px;
+        pointer-events: none;
+        content: " ";
+      }
+    }
+
+    .error-popover-title {
+      text-transform: uppercase;
+
+      .text-navy {
+        margin: 0;
+      }
+    }
+  }
+}

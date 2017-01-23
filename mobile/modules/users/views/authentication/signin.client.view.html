@@ -1,0 +1,75 @@
+<form class="signin form-horizontal"
+      name="signinForm"
+      data-ng-controller="AuthenticationController"
+      data-ng-submit="signin(signinForm.$valid)"
+      autocomplete="off"
+      novalidate>
+    <div class="app-logo">
+        <img class="app-logo__img"
+             src="/modules/users/img/logo-lg-light.png"
+             alt="Make It Happen">
+        <h1 class="app-logo__description">Make It Happen</h1>
+    </div>
+    <fieldset>
+        <div class="auth-form__form-group"
+             data-ng-class="{'has-error': signinForm.submitted && signinForm.email.$invalid || signinForm.email.$dirty && signinForm.email.$invalid}">
+            <label class="control-label text-uppercase auth-form__label" for="email">Email</label>
+            <input class="login-view__form-control form-control"
+                   id="email"
+                   type="email"
+                   name="email"
+                   data-ng-model="credentials.email"
+                   placeholder="Email" 
+                   required>
+            <div class="error-message">
+                <p class="help-block error-text"
+                   data-ng-show="(signinForm.email.$dirty && signinForm.email.$invalid && signinForm.email.$error.email) || (signinForm.submitted && signinForm.email.$error.email)">
+                    Please enter a valid email</p>
+                <p class="help-block error-text"
+                   data-ng-show="(signinForm.email.$dirty && signinForm.email.$invalid) || (signinForm.submitted && signinForm.email.$error.required)">
+                    Please enter your email</p>
+            </div>
+        </div>
+        <div class="auth-form__form-group"
+             data-ng-class="{'has-error': signinForm.submitted && signinForm.password.$invalid}">
+            <label class="control-label text-uppercase auth-form__label" for="password">Password</label>
+            <input class="login-view__form-control form-control"
+                   id="password"
+                   type="password"
+                   name="password"
+                   data-ng-model="credentials.password"
+                   placeholder="Password"
+                   required>
+            <div class="error-message">
+                <p class="help-block error-text"
+                   data-ng-show="(signinForm.password.$dirty && signinForm.password.$invalid) || (signinForm.submitted && signinForm.password.$error.required)">
+                    Please enter a password</p>
+            </div>
+            <div class="auth-form-wrapper login-form-container--singin">
+                <a class="auth-form-wrapper__link" href="/#!/password/forgot">
+                    Forgot your password?</a>
+            </div>
+        </div>
+        <div class="auth-form__form-group">
+            <button class="login-view__btn login-view__btn--green"
+                    type="submit"> Sign in</button>
+            <a class="login-view__btn login-view__btn--blue"
+               href="/#!/signup">Create an account</a>
+        </div>
+        <div class="text-center text-danger" data-ng-show="error">
+            <strong data-ng-bind="error"></strong>
+        </div>
+        <div class="auth-form__form-group text-center">
+            <p class="auth-form__sing-in-separator"> Or sing in with</p>
+            <a class="auth-form-group__link socials socials--facebook" href="/auth/facebook">
+                <i class="fa fa-facebook" aria-hidden="true"></i>
+            </a>
+            <a class="auth-form-group__link socials socials--vk" href="/auth/vkontakte">
+                <i class="fa fa-vk" aria-hidden="true"></i>
+            </a>
+            <a class="auth-form-group__link socials socials--twitter" href="/auth/twitter">
+                <i class="fa fa-twitter" aria-hidden="true"></i>
+            </a>
+        </div>
+    </fieldset>
+</form>
