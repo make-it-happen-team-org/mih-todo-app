@@ -9,34 +9,90 @@
 
 .notifications__dropdown {
   .dropdown-mixin(auto, 50%);
+  min-width: 310px;
 
   .notification-item {
     position: relative;
 
-    &-control {
-      border-top: 1px solid @dropdown-notification-border;
+    &__view-all {
+      font-size: 1.4rem;
+      line-height: 1.5rem;
+    }
+    &--control {
+      padding: 7px 15px 11px;
+      .button {
+        height: auto;
+        padding: 8px 19px 9px 20px;
+
+        font-size: inherit;
+        line-height: inherit;
+      }
     }
 
-    .overdue-badge {
+    .overdue-checkbox, .label {
       position: absolute;
-      top: @dropdown-fa-top;
-      right: @dropdown-fa-right;
-      height: @dropdown-fa-dimention;
-      width: @dropdown-fa-dimention;
-      text-align: center;
-      color: @dropdown-badge-color;
-      line-height: @dropdown-line-height;
-      background-color: @dropdown-badge-bg-color;
-      transition: none;
-      border: none;
+      top: 50%;
+      right: 15px;
+      transform: translateY(-50%);
 
-      .fa {
-        display: inline;
-        height: @dropdown-fa-dimention;
+      font-size: 1rem;
+      line-height: 1.1rem;
+    }
 
-        &:hover {
-          color: inherit;
+    .dropdown-item-title {
+      &:before {
+        @bullet-size: 8px;
+        content: '';
+        display: inline-block;
+        width: @bullet-size;
+        height: @bullet-size;
+        border-radius: 50%;
+
+        margin-right: 9px;
+      }
+      &.task-priority {
+        &--1 {
+          &:before {
+            background: @priority-1-color;
+          }
         }
+        &--2 {
+          &:before {
+            background: @priority-2-color;
+          }
+        }
+        &--3 {
+          &:before {
+            background: @priority-3-color;
+          }
+        }
+        &--4 {
+          &:before {
+            background: @priority-4-color;
+          }
+        }
+      }
+    }
+    .dropdown-checkbox {
+      &--square {
+        display: inline-block;
+
+        width: 12px;
+        height: 12px;
+
+        margin:0 0 0 5px;
+
+        border: 1px solid @dropdown-item-border;
+
+        vertical-align: middle;
+        &:hover {
+          cursor: pointer;
+        }
+      }
+
+      & input[type="checkbox"] {
+        position: absolute;
+        left: -99999px;
       }
     }
   }

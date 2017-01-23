@@ -1,5 +1,5 @@
 <label>{{label}}</label>
 <div class="input-group date datetime-picker" id="{{pickerId}}">
-	<span class="input-group-addon datetimepicker-button"><i class="fa fa-calendar"></i></span>
-    <input type="text" class="form-input" required/>
+	<span class="input-group-addon datetimepicker-button" data-ng-class="{'disabled': isReadonly}"><i class="fa fa-calendar"></i></span>
+    <input type="text" class="form-input" required data-ng-disabled="isReadonly"/>
 </div>

@@ -1,4 +1,4 @@
-'use strict';
+let socialConfig = require('../social.config.js');
 
 module.exports = {
     app: {
@@ -6,7 +6,8 @@ module.exports = {
         description: 'Application for self organization',
         keywords: 'Make It Happen'
     },
-    endpointUrl: 'https://make-it-happen-app.herokuapp.com/',
+    appFolder: './public/build',
+    endpointUrl: 'https://mih-todo-app-2016.herokuapp.com',
     db: {
         uri: 'mongodb://devuser:devuser2day@ds031167.mlab.com:31167/mih'
     },
@@ -33,23 +34,28 @@ module.exports = {
         ]
     },
     facebook: {
-        clientID: process.env.FACEBOOK_ID || 'APP_ID',
-        clientSecret: process.env.FACEBOOK_SECRET || 'APP_SECRET',
+        clientID: socialConfig.facebook.clientID,
+        clientSecret: socialConfig.facebook.clientSecret,
         callbackURL: '/auth/facebook/callback',
         profileFields: ['email']
     },
     twitter: {
-        clientID: process.env.TWITTER_KEY || 'CONSUMER_KEY',
-        clientSecret: process.env.TWITTER_SECRET || 'CONSUMER_SECRET',
+        clientID: socialConfig.twitter.clientID,
+        clientSecret: socialConfig.twitter.clientSecret,
         callbackURL: '/auth/twitter/callback',
+        profileFields: ['email']
+    },
+    vkontakte: {
+        clientID: socialConfig.vkontakte.clientID,
+        clientSecret: socialConfig.vkontakte.clientSecret,
+        callbackURL: '/auth/vkontakte/callback',
+        scope: socialConfig.vkontakte.scope,
         profileFields: ['email']
     },
     google: {
         clientID: process.env.GOOGLE_ID || 'APP_ID',
         clientSecret: process.env.GOOGLE_SECRET || 'APP_SECRET',
-        callbackURL: '/auth/google/callback',
-        scope: process.env.VKONTAKTE_SCOPE || ['scope'],
-        profileFields: ['email']
+        callbackURL: '/auth/google/callback'
     },
     linkedin: {
         clientID: process.env.LINKEDIN_ID || 'APP_ID',
@@ -62,12 +68,14 @@ module.exports = {
         callbackURL: '/auth/github/callback'
     },
     mailer: {
-        from: process.env.MAILER_FROM || 'MAILER_FROM',
+        // fallback email provider is hardcoded to ensure that
+        // email features are working if no env variables provided
+        from: process.env.MAILER_FROM || 'testmailerservice1@gmail.com',
         options: {
-            service: process.env.MAILER_SERVICE_PROVIDER || 'MAILER_SERVICE_PROVIDER',
+            service: process.env.MAILER_SERVICE_PROVIDER || 'gmail',
             auth: {
-                user: process.env.MAILER_EMAIL_ID || 'MAILER_EMAIL_ID',
-                pass: process.env.MAILER_PASSWORD || 'MAILER_PASSWORD'
+                user: process.env.MAILER_EMAIL_ID || 'testmailerservice1@gmail.com',
+                pass: process.env.MAILER_PASSWORD || 'qwe123rty456'
             }
         }
     },

@@ -7,7 +7,7 @@ angular.module('schedule-notifications').config(['$stateProvider',
 			.state('restricted.overdue', {
 				url: '/overdue',
 				views: {
-					'aside@': {
+					'aside@restricted': {
 						templateUrl: 'modules/schedule-notifications/views/list-notifications.client.view.html'
 					},
 					'main-view@restricted': {
@@ -21,7 +21,7 @@ angular.module('schedule-notifications').config(['$stateProvider',
 			.state('restricted.overdue.edit', {
 				url: '/:taskId/edit',
 				views: {
-					'aside@': {
+					'aside@restricted': {
 						templateUrl: 'modules/schedule-notifications/views/list-notifications.client.view.html'
 					},
 					'main-view@restricted': {

@@ -76,13 +76,11 @@
 
     .dropdown-menu-container__link {
       display: block;
-      height: @dropdown-height;
       min-width: @dropdown-min-width;
       padding: @dropdown-padding;
       margin: 0;
       color: inherit;
       white-space: nowrap;
-      line-height: @dropdown-height;
       text-align: left;
       text-overflow: ellipsis;
       overflow: hidden;
@@ -99,11 +97,17 @@
       }
     }
 
+    .dropdown-item-title {
+      display: block;
+      border-bottom: 1px solid @dropdown-item-border;
+    }
+
     &--collapse {
       background-color: @dropdown-bg-color;
       transform: translate3d(0, -150%, 0);
     }
   }
+
 }
 
 // Responsive Breakpoints
