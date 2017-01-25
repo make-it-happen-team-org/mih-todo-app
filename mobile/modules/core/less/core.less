@@ -12,11 +12,43 @@
   text-transform: uppercase;
 }
 
-.main-view-container {
-  height: 100%;
-
-  & > div {
+.main {
+  &-view-container {
     height: 100%;
+
+    & > div {
+      height: 100%;
+    }
+  }
+
+  &-header {
+    position: fixed;
+    width: 100%;
+    top: 0;
+  }
+
+  &-footer {
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+  }
+
+  &-content {
+    height: 100%;
+  }
+
+  &-sidebar {
+    position: fixed;
+    height: 100%;
+    width: 60%;
+    left: -60%;
+    z-index: 1;
+
+    transition: left 1s;
+
+    &-active {
+      left: 0;
+    }
   }
 }
 
