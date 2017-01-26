@@ -10,8 +10,6 @@
     }
   }
 
-  &__body { min-width: @header-min-width; }
-
   &__header {
     position: relative;
     height: @header-height;
@@ -33,14 +31,12 @@
 
 .header-nav-element {
   display: inline-block;
+  vertical-align: top;
   position: relative;
   background-color: @header-btn-bg-color;
   color: @header-color;
 
   &__container {
-    display: flex;
-    justify-content: space-between;
-    overflow: hidden;
     height: 100%;
     background: @header-bg-color;
   }
@@ -48,13 +44,32 @@
   &__list { padding: 0; }
 
   &__item {
+    width: 9rem;
     text-align: center;
     transition: width .1s;
   }
 
+  &__notifications {
+    width: 4rem;
+  }
+
+  &__user-profile {
+    width: 15rem;
+    .header-nav-element-btn-holder__username {
+      padding-right: 5px;
+    }
+  }
+
+  &__username-wrapper {
+    display: inline-block;
+    max-width: 8rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
   &__image-wrapper {
-    display: inline-flex;
-    align-items: center;
+    display: inline-block;
     position: relative;
     max-width: 6rem;
     vertical-align: top;
@@ -91,8 +106,7 @@
     }
 
     &-holder {
-      display: inline-flex;
-      height: @header-height;
+      float: left;
 
       &__item {
         display: inline-block;
@@ -101,15 +115,16 @@
   }
 
   &-btn-holder {
-    display: inline-flex;
-    height: 100%;
+    float: right;
 
-    &__item { padding-right: 1rem;}
+    &__item {
+      height: @header-height;
+      line-height: @header-height;
+    }
 
     &__dropdown-toggle {
       height: @header-height;
-      display: inline-flex;
-      align-items: center;
+      line-height: @header-height;
       background-color: @header-btn-bg-color;
       border: none;
       outline: none;
@@ -125,7 +140,6 @@
       height: @header-height - 2.5rem;
       width: @header-height - 2.5rem;
       border-radius: 50%;
-      margin: 0 .5rem;
     }
   }
 }
