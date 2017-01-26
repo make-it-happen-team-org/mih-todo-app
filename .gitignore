@@ -56,3 +56,10 @@ public/build
 *.tmp
 *.bak
 *.swp
+
+# Mobile
+# =======
+mobile/index.html
+mobile/lib
+mobile/css
+mobile/**/*.js

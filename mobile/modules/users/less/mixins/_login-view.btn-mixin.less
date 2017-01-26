@@ -1,0 +1,36 @@
+@import (once) "../../../../less/_app.variables.less";
+
+.login-view-btn-mixin {
+  .login-view__btn {
+    margin-top: 1.3rem;
+    padding: 0;
+    height: 3.8rem;
+    width: 100%;
+    display: inline-block;
+    color: @login-btn-font-color;
+    border-radius: 0;
+    border: none;
+    text-transform: uppercase;
+    text-align: center;
+    line-height: 3.8rem;
+    transition: all .5s;
+    cursor: pointer;
+
+    &--green {
+      background-color: @login-sing-in-btn-color;
+
+      &:hover {
+        background-color: @login-sing-in-btn-hover-color;
+      }
+    }
+
+    &--blue {
+      background-color: @login-create-account-btn-color;
+
+      &:hover {
+        background-color: @login-create-account-btn-hover-color;
+        color: @login-btn-font-color;
+      }
+    }
+  }
+}

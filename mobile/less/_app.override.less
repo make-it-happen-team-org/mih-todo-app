@@ -1,0 +1,111 @@
+@import (once) "_app.variables.less";
+
+// ------------------------ browser ------------------------
+html {
+  font-size: @default-font-size;
+  height:100%;
+}
+
+body {
+  font-size: 1.4rem;
+  font-family: @font-open-sans-regular;
+  overflow-x: auto;
+  color: @color-white;
+  height:100%;
+  transform:  scale(1);
+}
+
+a { color: @link-color; }
+
+textarea { resize: vertical; }
+
+ol,
+ul { list-style: none; }
+
+ol,
+ul,
+li {
+  margin: 0;
+  padding: 0;
+}
+
+label {
+  font-family: @font-open-sans-bold;
+}
+
+select[disabled],
+input[disabled]{
+  background: @disabled-background-color;
+}
+
+::-webkit-inner-spin-button {
+  height: 100%;
+}
+
+input[type=time] {
+  line-height: inherit;
+}
+
+// ------------------------ Angular ------------------------
+[ng\:cloak],
+[ng-cloak],
+[data-ng-cloak],
+[x-ng-cloak],
+.ng-cloak,
+.x-ng-cloak {
+  display: none !important;
+}
+
+// ------------------------ 3-rd party libs ------------------------
+.auth-form {
+  .has-error {
+    .control-label {
+      color: @login-btn-font-color;
+    }
+  }
+
+  .browsehappy.jumbotron.hide,
+  body.ng-cloak {
+    display: block;
+  }
+
+  .btn {
+    background-image: none;
+    outline: none;
+
+    &:focus,
+    &:active,
+    &:focus:active {
+      outline: none;
+    }
+  }
+}
+
+rzslider {
+  margin-top: 2rem;
+  & .rz-pointer {
+    top: -6px;
+    width: 15px;
+    height: 15px;
+    background-color: @color-mountain-meadow-green-s84;
+    outline: none;
+    &::after {
+      display: none;
+    }
+    &:hover {
+      background-color: @color-mountain-meadow-green-s89;
+    }
+  }
+  & .rz-bubble.rz-limit,
+  & .rz-bubble {
+    display: none;
+  }
+}
+
+.rzslider-manual-input {
+  margin-top: 1.4rem;
+}
+
+.fc-toolbar .fc-state-active {
+  z-index: 0;
+}

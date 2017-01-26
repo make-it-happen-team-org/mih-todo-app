@@ -10,6 +10,9 @@ const env = {
     },
     test: {
         NODE_ENV: 'test'
+    },
+    mobile: {
+        NODE_ENV: 'mobile'
     }
 };
 const less = {
