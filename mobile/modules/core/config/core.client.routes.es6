@@ -9,7 +9,16 @@ angular.module('core').config(['$stateProvider', '$urlRouterProvider', function 
     $stateProvider
         .state('restricted', {
             abstract: true,
-            templateUrl: 'modules/core/views/base.client.view.html',
+            views: {
+                'root': {
+                    templateUrl: 'modules/core/views/base.client.view.html'
+                },
+                'sidebar': {
+                    templateUrl: 'modules/sidebar/views/sidebar.client.view.html',
+                    controller: 'SidebarController',
+                    controllerAs: 'sidebarCtrl'
+                }
+            },
             resolve: {
                 /** @ngInject */
                 user: (SessionService, $state) => {

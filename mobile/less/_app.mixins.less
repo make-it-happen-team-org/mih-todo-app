@@ -112,8 +112,14 @@
 
 // Responsive Breakpoints
 // Phones only
-.phone (@rules) {
+.phone(@rules) {
   @media only screen and (max-width: @phone-max) {
+    @rules();
+  }
+}
+.phoneX2(@rules) {
+  @media only screen
+  and (min-width: @phone-max) {
     @rules();
   }
 }
