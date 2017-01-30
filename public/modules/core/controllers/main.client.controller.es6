@@ -47,7 +47,11 @@ class MainController {
     this.sidebarCollapsed = !this.sidebarCollapsed;
   }
 
-  toggleDropdown(dropdownItem) {
+  toggleDropdown(dropdownItem, clickOuside) {
+    if (clickOuside) {
+        this.dropdown[dropdownItem] = false;
+    }
+
     for(let item in this.dropdown) {
       if (this.dropdown.hasOwnProperty(item)) {
         if (item === dropdownItem){
