@@ -7,6 +7,12 @@
       .from-min-to-max-width(@header-media-tablet-collapsed, @header-media-tablet, {
         .header-mixin();
       });
+
+      .notifications__dropdown.dropdown-menu-container {
+        right: -7rem;
+
+        &::before { right: 7.7rem;}
+      }
     }
   }
 
@@ -20,6 +26,7 @@
     color: @login-input-font-color;
     z-index: 2;
     min-width: @header-min-width;
+    user-select: none;
 
     .from-tablet {
       font-size: @header-font-size;
@@ -39,8 +46,7 @@
 
   &__container {
     display: flex;
-    justify-content: space-between;
-    overflow: hidden;
+    justify-content: flex-start;
     height: 100%;
     background: @header-bg-color;
   }
@@ -101,8 +107,38 @@
   }
 
   &-btn-holder {
+    position: absolute;
     display: inline-flex;
+    justify-content: flex-end;
+    width: auto;
     height: 100%;
+    right: 0;
+    z-index: 0;
+
+    @media (max-width: 1200px){
+       width: 40%;
+    }
+
+    .header-nav-element__notifications .dropdown-menu-container {
+      &::before {
+        right: 7.3rem;;
+      }
+    }
+
+    .header-nav-element__user-profile .dropdown-menu-container {
+      &::before {
+        right: 3rem;
+      }
+    }
+
+    &::before {
+      content: '';
+      position: absolute;
+      height: 100%;
+      width: 100%;
+      background-color: @header-bg-color;
+      left: -7rem;
+    }
 
     &__item { padding-right: 1rem;}
 

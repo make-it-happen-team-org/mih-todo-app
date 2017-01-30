@@ -60,12 +60,12 @@
 .dropdown-mixin(@left, @right) {
   &.dropdown-menu-container {
     position: absolute;
-    top: @header-height;
-    right: @right;
-    left: @left;
-    margin: 0;
-    z-index: -1;
     display: block;
+    top: @header-height + .5rem;
+    padding: .5rem 0;
+    right: @right;
+    z-index: -2;
+    min-width: 245px;
     font-size: 1.4rem;
     color: @dropdown-color;
     list-style: none;
@@ -74,37 +74,50 @@
     box-shadow: @dropdown-box-shadow;
     transition: transform .25s;
 
+    &::before {
+      position: absolute;
+      content: '';
+      border-left: 9px solid transparent;
+      border-right: 9px solid transparent;
+      border-bottom: 9px solid @color-white;
+      top: -5px;
+      z-index: -4;
+      box-shadow: 0 0.6rem 1.2rem rgba(0, 0, 0, 0.175);
+    }
+
+    :not(.notification-item--control).notification-item  {
+      position: relative;
+      background: @color-white;
+
+      &:hover {
+        color: inherit;
+        background: @dropdown-bg-color--hover;
+
+        .dropdown-menu-container__link { border-bottom: 1px solid transparent; }
+      }
+    }
+
     .dropdown-menu-container__link {
       display: block;
-      min-width: @dropdown-min-width;
-      padding: @dropdown-padding;
-      margin: 0;
+      padding: 10px 0;
+      margin: 0 15px;
       color: inherit;
       white-space: nowrap;
       text-align: left;
       text-overflow: ellipsis;
       overflow: hidden;
       transition: background-color .25s;
-
-      &:focus {
-        color: inherit;
-        background: @dropdown-bg-color--hover;
-      }
-
-      &:hover {
-        color: inherit;
-        background: @dropdown-bg-color--hover;
-      }
-    }
-
-    .dropdown-item-title {
-      display: block;
       border-bottom: 1px solid @dropdown-item-border;
+
+      &:last-child {
+        .dropdown-menu-container__link { border-bottom: 1px solid transparent;}
+      }
     }
 
     &--collapse {
       background-color: @dropdown-bg-color;
       transform: translate3d(0, -150%, 0);
+      z-index: -2;
     }
   }
 
