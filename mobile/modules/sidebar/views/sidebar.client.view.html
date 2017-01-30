@@ -1,0 +1,49 @@
+<div class="sidebar">
+    <header>
+        <div class="user-info">
+            <div class="user-info__avatar">
+                <img data-ng-src="{{user.profileImageURL}}" alt="{{user.username}}">
+            </div>
+            <div class="user-info__username">{{user.username}}</div>
+            <div class="user-info__email">{{user.email}}</div>
+        </div>
+    </header>
+    <nav class="sidebar-menu">
+        <ul>
+            <li>
+                <img src="/modules/sidebar/img/date.png">
+                <a href="#!/todo">Calendar</a>
+            </li>
+            <li>
+                <img src="/modules/sidebar/img/favorite.png">
+                <a href="#!/todo/events/create?eventPresetType=sick">Sick today</a>
+            </li>
+            <li>
+                <img src="/modules/sidebar/img/airplane.png">
+                <a href="#!/todo/events/create?eventPresetType=vacation">Vacation</a>
+            </li>
+            <li>
+                <img src="/modules/sidebar/img/notifications.png">
+                <a href="#!/todo/reminder">Reminder</a>
+            </li>
+            <li class="separator"></li>
+            <li>
+                <img src="/modules/sidebar/img/star.png">
+                <a href="#!/todo/tasks/create">Tasks</a>
+            </li>
+            <li>
+                <img src="/modules/sidebar/img/event.png">
+                <a href="#!/todo/events/create">Events</a>
+            </li>
+            <li class="separator"></li>
+            <li>
+                <img src="/modules/sidebar/img/repeat.png">
+                <a href="#!/migrate">Import content</a>
+            </li>
+            <li>
+                <img src="/modules/sidebar/img/exit.png">
+                <a href="/auth/signout">Sign Out</a>
+            </li>
+        </ul>
+    </nav>
+</div>
