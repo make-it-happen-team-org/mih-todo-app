@@ -158,8 +158,16 @@ angular.module('events').controller('EventsController',
 					eventId: $stateParams.eventId
 				});
 			};
+			
 			$scope.updateEvent = function () {
 				var event = $scope.event;
+				if (!event.title) {
+					$scope.eventData.validationError = {
+						message: 'Please fill the Title'
+					};
+					
+					return;
+				}
 
 				event.$update(function () {
 					$location.path('events/' + event._id);
@@ -168,6 +176,7 @@ angular.module('events').controller('EventsController',
 					$scope.error = errorResponse.data.message;
 				});
 			};
+			
 			$scope.deleteEvent = function () {
 				$scope.event.$remove(function () {
 					$location.search('');

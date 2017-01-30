@@ -11,10 +11,15 @@
                             <div class="col-sm-12 tile__body clearfix">
                                 <div class="col-sm-12 clearfix">
                                     <div class="col-md-4 col-sm-12">
-                                        <div class="form-group form-box form-box--without-error">
+                                        <div class="form-group form-box">
                                             <label for="title">Title*</label>
                                             <input type="text" data-ng-model="event.title" id="title"
                                                    class="form-input form-input--required" placeholder="Title"/>
+                                            <div class="form-input-error-holder">
+                                                <p data-ng-show="eventData.validationError" class="form-input-error-text">
+                                                    {{eventData.validationError.message}}
+                                                </p>
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="col-md-4 col-sm-12">
