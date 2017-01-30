@@ -135,13 +135,12 @@ module.exports = {
         google: {
             credentials: {
                 'installed': {
-                    'client_id': '363155610973-vjj9phgiqlnq3a4rv73lssv74sm5eci6.apps.googleusercontent.com',
-                    'project_id': 'makeithappen-150410',
-                    'auth_uri': 'https://accounts.google.com/o/oauth2/auth',
-                    'token_uri': 'https://accounts.google.com/o/oauth2/token',
-                    'auth_provider_x509_cert_url': 'https://www.googleapis.com/oauth2/v1/certs',
-                    'client_secret': 'D7yd0OjW6JoreQdxEGZvufV-',
-                    'redirect_url': 'http://localhost:3000/migrate/google-calendar/authorize'
+                    "client_id": "363155610973-8pvt31e9q49e2asakb8ja73anssf9qpj.apps.googleusercontent.com",
+                    "project_id": "makeithappen-150410",
+                    "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+                    "token_uri": "https://accounts.google.com/o/oauth2/token",
+                    "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+                    "client_secret": "sLMa6_RtE6py1SRjlx0rMfUN"
                 }
             },
             access_type: 'offline',
