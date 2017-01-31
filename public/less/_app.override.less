@@ -58,6 +58,14 @@ input[type=time] {
 
 // ------------------------ 3-rd party libs ------------------------
 .auth-form {
+  &__form-group {
+    .popover { display: none!important; }
+
+    &.has-error {
+      .popover { display: block!important; }
+    }
+  }
+
   .has-error {
     .control-label {
       color: @login-btn-font-color;
