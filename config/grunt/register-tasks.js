@@ -8,13 +8,14 @@ module.exports = (grunt) => {
         'babel',
         'buildDevIndex'
     ]);
+
     grunt.registerTask('default', [ 'develop' ]);
 
     // Build task(s).
     grunt.registerTask('prebuild', [
         'env:development',
         'loadConfig',
-        'less:prod',
+        'cssmin:prodCss',
         'ngAnnotate',
         'htmlmin',
         'copy:prodImg',

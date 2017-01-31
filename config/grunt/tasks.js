@@ -21,17 +21,18 @@ const less = {
         files: {
             'css/app.main.css': 'less/app.main.less'
         }
-    },
-    prod: {
+    }
+};
+
+const cssmin = {
+    prodCss: {
         files: {
             'build/inspinia/css/lib.min.css': '<%= config.assets.lib.css %>',
             'build/css/app.min.css': '<%= config.assets.cssFullPath %>'
-        },
-        options: {
-            compress: true
         }
     }
 };
+
 const babel = {
     es6: {
         files: [
@@ -153,7 +154,7 @@ const copy = {
                 src: 'inspinia/font-awesome/fonts/*',
                 expand: true,
                 rename: function (base, src) {
-                    return 'build/inspinia/css/fonts/' + src.split('/').pop();
+                    return 'build/inspinia/fonts/' + src.split('/').pop();
                 }
             }
         ]
@@ -196,5 +197,6 @@ module.exports = {
     karma,
     clean,
     htmlmin,
-    copy
+    copy,
+    cssmin
 };
