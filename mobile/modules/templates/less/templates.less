@@ -1,34 +1,89 @@
-@import (once) "../../../less/_app.variables.less";
+.templates {
+  header {
+    background: @color-blue-whale-blue-s53;
+    color: @color-bali-hai-blue-s24;
+  }
 
-.presets-template {
-  max-width: 94rem;
-  &-item {
-    &__fieldset {
-      padding: 2.5rem 0 .7rem;
+  &__sort {
+    padding: 14px;
+
+    .phoneX2({ padding: 28px; });
+
+    &-label {
+      font-size: 12px;
+      float: left;
+
+      .phoneX2({ font-size: 24px; });
     }
-    &__field-group {
-      padding-bottom: 3rem;
-      &--tasks-title {
-        padding-bottom: 1.9rem;
+
+    &-actions {
+      float: right;
+    }
+
+    &-button {
+      width: 22px;
+      height: 22px;
+      margin: 0 0 0 22px;
+      opacity: 0.5;
+
+      .phoneX2({ width: 44px; height: 44px; margin: 0 0 0 44px; });
+
+      &--active {
+        opacity: 1;
       }
     }
-    &__notes-area {
-      min-height: 12.3rem;
-    }
-    &__label {
-      font-family: @font-open-sans-bold;
-      font-size: 1.3rem;
-    }
-    &__hours-input {
-      display: inline-block;
-      width: 5.2rem;
-    }
-    &__no-items {
-      padding: 1rem;
+  }
+
+  &__tabs {
+    &-tab {
+      float: left;
+      width: 50%;
+      padding: 7px 0 6px;
+      text-transform: uppercase;
+      color: @color-bali-hai-blue-s24;
+      font-size: 14px;
       text-align: center;
-      background-color: @tile-main-color;
-      & p {
-        margin-bottom: 0;
+
+      .phoneX2({ padding: 14px 0 12px; font-size: 28px; });
+
+      &--active {
+        color: @color-white;
+        border-bottom: 3px solid @color-mountain-meadow-green-s84;
+
+        .phoneX2({ border-bottom-width: 6px; });
+      }
+    }
+  }
+
+  &__list {
+
+    &-item {
+      background-color: @color-white;
+      border-bottom: 1px solid @color-sidebar-separator;
+
+      .phoneX2({ border-bottom-width: 2px; });
+
+      a {
+        position: relative;
+        color: @color-biscay-blue-s41;
+        display: block;
+        padding: 14px;
+
+        .phoneX2({ padding: 28px; font-size: 28px; });
+
+        &:after {
+          position: absolute;
+          background: url('/modules/templates/img/edit.png') no-repeat;
+          background-size: cover;
+          height: 22px;
+          width: 22px;
+          content: '';
+          right: 13px;
+          top: 13px;
+          opacity: 0.2;
+
+          .phoneX2({ height: 44px; width: 44px; right: 26px; top: 26px; });
+        }
       }
     }
   }

@@ -1,42 +1,36 @@
+const TASKS_TAB_KEY = 'tasks';
+const EVENTS_TAB_KEY = 'events';
+
 class TemplatesController {
     /** @ngInject */
-    constructor(template, Authentication, Users, Notification, $state, TemplatesService) {
-        Object.assign(this, { Users, Authentication, Notification, $state, TemplatesService });
-
+    constructor(Authentication) {
         this.user = Authentication.user;
-        this.list = template._id ? [template] : [];
-
-        this.sliderOptions = {
-            floor: 0,
-            ceil:  template.estimation * 2
-        };
+        this.activeTab = TASKS_TAB_KEY;
+        this.soprtingReverse = true;
     }
 
-    update(template) {
-        let updatedUser = new this.Users(this.user);
-
-        updatedUser.$update(updatedUser => {
-            this.Notification.success(`'Template ${template.title}' was successfully updated`);
-            this.user = this.Authentication.user = updatedUser;
-        }, err => console.error(err));
+    activateSortingReverse() {
+        this.soprtingReverse = true;
     }
 
-    remove(templateToRemove, templateType) {
-        let updatedUser = new this.Users(this.user);
+    deactivateSortingReverse() {
+        this.soprtingReverse = false;
+    }
 
-        updatedUser[templateType] = updatedUser[templateType].filter(template => template._id !== templateToRemove._id);
+    setTasksTabActive() {
+        this.activeTab = TASKS_TAB_KEY;
+    }
 
-        updatedUser.$update(updatedUser => {
-            this.Notification.success(`'Template ${templateToRemove.title}' was successfully removed`);
-            this.user = this.Authentication.user = updatedUser;
+    setEventsTabActive() {
+        this.activeTab = EVENTS_TAB_KEY;
+    }
 
-            const lastUsedTemplate = this.TemplatesService.getLastUsed(templateType, updatedUser);
+    isTasksTabActive() {
+        return this.activeTab === TASKS_TAB_KEY;
+    }
 
-            this.$state.go('restricted.templates', {
-                templateId:   lastUsedTemplate._id,
-                templateType: templateType
-            });
-        }, err => console.error(err));
+    isEventsTabActive() {
+        return this.activeTab === EVENTS_TAB_KEY;
     }
 }
 
