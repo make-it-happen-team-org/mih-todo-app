@@ -1,7 +1,7 @@
 class AsideController {
   /** @ngInject */
-  constructor($scope, Authentication, $state, TemplatesService) {
-    Object.assign(this, { $scope, Authentication, $state, TemplatesService });
+  constructor($scope, Authentication, $state) {
+    Object.assign(this, { $scope, Authentication, $state });
 
     this.user = this.Authentication.user;
 

@@ -16,7 +16,11 @@ angular.module('users').config(['$stateProvider', function ($stateProvider) {
 
     $stateProvider.state('auth', {
         abstract: true,
-        templateUrl: 'modules/core/views/base.client.view.html'
+        views: {
+            'root': {
+                templateUrl: 'modules/core/views/base.client.view.html'
+            }
+        }
     }).state('auth.signup', {
         url: '/signup',
         views: {
