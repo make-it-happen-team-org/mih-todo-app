@@ -1,13 +1,44 @@
-<div data-ng-controller="EventsListController as eventCtrl">
-    <header class="sidebar-header sidebar__block sidebar__block--group">
-        <a data-ui-sref="restricted.todo_state.events.list">
-            <span class="sidebar-header__button fa fa-arrow-left"></span>
-        </a>
-        <h3 class="sidebar-header__title">Events</h3>
-        <a data-ui-sref="restricted.todo_state.events.edit({ eventId: event._id })">
-            <span class="sidebar-header__button fa fa-pencil"></span>
-        </a>
+<div data-ng-controller="EventsDetailsController as details" data-ng-init="showEvent()">
+    <header class="events-list__header">
+        <div class="events-list__main-tab-info">
+            <a data-ui-sref="restricted.todo_state.events.list">
+                <span class="events-list__icons--arrow fa fa-arrow-left"></span>
+            </a>
+            <h3 class="events-list__title">Events Details</h3>
+        </div>
+        <div class="events-list__icons">
+            <a data-ui-sref="restricted.todo_state.events.edit({ eventId: event._id })">
+                <span class="events-list__icons--edit-state fa fa-pencil"></span>
+            </a>
+        </div>
     </header>
-</div>
 
-<p>details</p>
+    <div class="events-details__sub-header">
+        <span class="events-details__date">
+            <span class="events-details__date--month">
+                <span class="events-details__date--day">{{details.event.days.startTime | date:"d"}}</span>
+                {{details.event.days.startTime | date:"MMMM"}}
+            </span>
+        </span>
+        <span class="events-details__event-name" data-ng-bind="details.event.title"></span>
+    </div>
+    <ul class="events-details__list">
+        <li class="events-details__list-item">
+            <span class="events-details-item__icons fa fa-calendar-o"></span>
+            <div class="events-details-item__description">{{details.event.days.startTime | date: "dd.MM h:mma"}} - {{ details.event.days.endTime | date: "dd.MM h:mma" }}</div>
+        </li>
+        <li class="events-details__list-item">
+            <span class="events-details-item__icons fa fa-clock-o"></span>
+            <div class="events-details-item__description">Duration - {{ details.event.estimation }}h</div>
+        </li>
+        <li class="events-details__list-item">
+            <span class="events-details-item__icons fa fa-pencil"></span>
+            <label for="detail-notes" class="events-details-item__description labels">Notes</label>
+            <span class="events-details-item__icons dropp fa fa-arrow-down"
+                  data-ng-click="details.isOpenNotes = !details.isOpenNotes"></span>
+            <div data-ng-if="details.isOpenNotes">
+                <textarea id="detail-notes">{{ details.event.notes }}</textarea>
+            </div>
+        </li>
+    </ul>
+</div>
