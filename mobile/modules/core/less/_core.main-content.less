@@ -1,6 +1,10 @@
 @import (once) "../../../less/_app.variables.less";
 @import (once) "./_.core.mixins.less";
 
+.root-container {
+  background: @color-zircon-grey-s1;
+}
+
 .main-view {
   position: relative;
   max-width: @main-max-width;
@@ -45,7 +49,6 @@
     width: calc(@main-width);
     z-index: 2;
     color: @main-font-color;
-    background: @main-white-lilac-white-s0;
 
     &::after,
     &::before {
