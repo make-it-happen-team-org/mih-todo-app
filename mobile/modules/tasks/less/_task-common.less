@@ -1,0 +1,41 @@
+@import (once) "../../../less/_app.variables.less";
+@import (once) "../../../less/_app.mixins.less";
+
+.task {
+
+  rzslider {
+    margin-bottom: @task-rzslider-margin-bottom;
+  }
+
+  .rzslider {
+
+    &-max-value {
+      font-size: @task-rzslider-max-value-font-size;
+      vertical-align: top;
+    }
+
+    &-manual-input {
+      width: auto;
+      margin-top: @task-rzslider-input-margin-top;
+
+      &__label {
+        padding-left: @task-rzslider-input-label-padding-left;
+      }
+
+    }
+
+  }
+
+}
+
+.from-min-width(992px, {
+
+  .task {
+
+    .tile__body--slots {
+      height: @task-tile-slots-height-md;
+    }
+
+  }
+
+});

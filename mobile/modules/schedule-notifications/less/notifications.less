@@ -1,0 +1,107 @@
+@import (once) "../../../less/_app.variables.less";
+@import (once) "../../../less/_app.mixins.less";
+
+.header-nav-element {
+  &:last-child {
+    .dropdown-mixin(auto, 0);
+  }
+}
+
+.notifications__dropdown {
+  .dropdown-mixin(auto, 50%);
+  min-width: 310px;
+
+  .notification-item {
+    position: relative;
+
+    &__view-all {
+      font-size: 1.4rem;
+      line-height: 1.5rem;
+    }
+    &--control {
+      padding: 7px 15px 11px;
+      .button {
+        height: auto;
+        padding: 8px 19px 9px 20px;
+
+        font-size: inherit;
+        line-height: inherit;
+      }
+    }
+
+    .overdue-checkbox, .label {
+      position: absolute;
+      top: 50%;
+      right: 15px;
+      transform: translateY(-50%);
+
+      font-size: 1rem;
+      line-height: 1.1rem;
+    }
+
+    .dropdown-item-title {
+      &:before {
+        @bullet-size: 8px;
+        content: '';
+        display: inline-block;
+        width: @bullet-size;
+        height: @bullet-size;
+        border-radius: 50%;
+
+        margin-right: 9px;
+      }
+      &.task-priority {
+        &--1 {
+          &:before {
+            background: @priority-1-color;
+          }
+        }
+        &--2 {
+          &:before {
+            background: @priority-2-color;
+          }
+        }
+        &--3 {
+          &:before {
+            background: @priority-3-color;
+          }
+        }
+        &--4 {
+          &:before {
+            background: @priority-4-color;
+          }
+        }
+      }
+    }
+    .dropdown-checkbox {
+      &--square {
+        display: inline-block;
+
+        width: 12px;
+        height: 12px;
+
+        margin:0 0 0 5px;
+
+        border: 1px solid @dropdown-item-border;
+
+        vertical-align: middle;
+        &:hover {
+          cursor: pointer;
+        }
+      }
+
+      & input[type="checkbox"] {
+        position: absolute;
+        left: -99999px;
+      }
+    }
+  }
+
+  &-link {
+    &:hover {
+      &~ .overdue-badge {
+        background-color: @dropdown-badge-bg-color--hover;
+      }
+    }
+  }
+}

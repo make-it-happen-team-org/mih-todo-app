@@ -1,0 +1,82 @@
+<div class="wrapper dashboard-panel tile" data-ng-controller="GoogleCalendarController as ctrl">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="tile__wrapper">
+                <header class="col-xs-12 tile__header">
+                    <h3 class="tile__title">Google calendar synchronization</h3>
+                </header>
+                <ul class="col-xs-12 tile__body migrate-sync-list">
+                    <li class="tile-item" data-ng-show="ctrl.authUrl">
+                        <a class="btn tile__btn tile__btn--login"
+                           href="{{ctrl.authUrl}}">Login</a>
+                    </li>
+                    <li class="tile-item" data-ng-show="ctrl.authorized">
+                        <div class="col-xs-12 tile-item__form">
+                            <fieldset class="migrate__fieldset">
+                                <div class="col-xs-5 mw-410">
+                                    <label for="syncDateFrom" class="control-label migrate__fieldset-item">Start date</label>
+                                    <input id="syncDateFrom" type="date" class="form-control"
+                                           data-ng-model="ctrl.params.startDate">
+                                </div>
+                                <div class="col-xs-5 mw-410">
+                                    <label for="eventsLimit" class="control-label migrate__fieldset-item">Events limit</label>
+                                    <input id="eventsLimit" type="number" class="form-control"
+                                           min="1" max="30"
+                                           data-ng-model="ctrl.params.maxResults">
+                                </div>
+                            </fieldset>
+                        </div>
+                    </li>
+                </ul>
+                <div class="col-xs-12 tile__footer migrate__footer">
+                    <button type="button" class="btn tile__btn tile__btn--import icon-arrow icon-arrow--down"
+                            data-ng-disabled="!ctrl.authorized"
+                            data-ng-click="ctrl.getEvents()">Get events</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row p-t15" data-ng-show="ctrl.authorized">
+        <div class="col-xs-12">
+            <div class="tile__wrapper">
+                <header class="col-xs-12 tile__header">
+                    <h3 class="tile__title">Events</h3>
+                </header>
+                <ul class="col-xs-12 tile__body migrate-sync-list">
+                    <li class="tile-item tile-item__empty-msg" data-ng-show="!ctrl.events.length">
+                        No events yet
+                    </li>
+                    <li class="tile-item migrate__table-wrapper">
+                        <table class="col-xs-12 migrate__table-events-list" data-ng-show="ctrl.events.length">
+                            <thead class="migrate__table-head">
+                                <tr>
+                                    <th class="col-xs-3">Title</th>
+                                    <th class="col-xs-3">Notes</th>
+                                    <th class="col-xs-2">Start date</th>
+                                    <th class="col-xs-2">End date</th>
+                                    <th class="col-xs-2">Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr data-ng-repeat="event in ctrl.events">
+                                    <td>{{event.title}}</td>
+                                    <td>{{event.notes}}</td>
+                                    <td>{{event.days.startTime | date:ctrl.dateFormat}}</td>
+                                    <td>{{event.days.endTime | date:ctrl.dateFormat}}</td>
+                                    <td>{{event.status}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </li>
+                </ul>
+                <div class="col-xs-12 tile__footer migrate__footer">
+                    <button type="button" class="btn tile__btn tile__btn--save"
+                            data-ng-click="ctrl.importEvents()"
+                            data-ng-disabled="!ctrl.events.length">Import events
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

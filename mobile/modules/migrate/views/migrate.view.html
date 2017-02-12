@@ -1,0 +1,34 @@
+<div class="wrapper dashboard-panel tile" data-ng-controller="MigrateController as migrate">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="tile__wrapper">
+                <header class="col-xs-12 tile__header">
+                    <h3 class="tile__title">Synchronization</h3>
+                </header>
+                <ul class="col-xs-12 tile__body migrate-sync-list migrate-sync-list__main">
+                    <li class="tile-item migrate-sync-item--heading">Select service for synchronization</li>
+                    <li class="tile-item migrate-sync-item">
+                        <span class="icon-outlook migrate-sync-item__icon"
+                              data-ng-class="migrate.syncService == 'sync-item-outlook' ? 'sync-item-outlook' : ''"></span>
+                        <span class="migrate-sync-item__title">Outlook</span>
+                        <input type="radio" name="outlookImport" value="sync-item-outlook" data-ng-model="migrate.syncService">
+                    </li>
+                    <li class="tile-item migrate-sync-item">
+                        <span class="icon-gmail migrate-sync-item__icon"
+                              data-ng-class="migrate.syncService == 'sync-item-gmail' ? 'sync-item-gmail' : ''"></span>
+                        <span class="migrate-sync-item__title">Google calendar</span>
+                        <input type="radio" name="gmailImport" value="sync-item-gmail" data-ng-model="migrate.syncService">
+                    </li>
+                </ul>
+                <div class="col-xs-12 tile__footer migrate__footer">
+                    <a class="btn tile__btn tile__btn--login icon-arrow"
+                        data-ng-show="migrate.setRestrictedUrlPath()"
+                        data-ui-sref="restricted.migrate.outlook">Next</a>
+                    <a class="btn tile__btn tile__btn--login icon-arrow"
+                        data-ng-hide="migrate.setRestrictedUrlPath()"
+                        data-ui-sref="restricted.migrate.googleCalendar">Next</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

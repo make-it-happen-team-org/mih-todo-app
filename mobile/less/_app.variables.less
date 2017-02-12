@@ -1,0 +1,397 @@
+// ----------------------------------------------- SCREENS -----------------------------------------------
+// Responsive Breakpoints
+@phone-min: 320px;
+@phone-max: 639px;
+@tablet-portrait-min: 768px;
+@tablet-portrait-max: 980px;
+@tablet-landscape-min: 981px;
+@tablet-landscape-max: 1240px;
+@desktop-min: 1241px;
+
+// ---------------------------------------------  - FONTS ------------------------------------------------
+@font-open-sans-light: 'open_sanslight', Arial, sans-serif;
+@font-open-sans-light-italic: 'open_sanslight_italic', Arial, sans-serif;
+// ---------------------------------------------
+@font-open-sans-regular: 'open_sansregular', Arial, sans-serif;
+@font-open-sans-italic: 'open_sansitalic', Arial, sans-serif;
+// ---------------------------------------------
+@font-open-sans-semibold: 'open_sanssemibold', Arial, sans-serif;
+@font-open-sans-semibold-italic: 'open_sanssemibold_italic', Arial, sans-serif;
+// ---------------------------------------------
+@font-open-sans-bold: 'open_sansbold', Arial, sans-serif;
+@font-open-sans-bold-italic: 'open_sansbold_italic', Arial, sans-serif;
+// ---------------------------------------------
+@font-open-sans-extrabold: 'open_sansextrabold', Arial, sans-serif;
+@font-open-sans-extrabold-italic: 'open_sansextrabold_italic', Arial, sans-serif;
+@default-font-size: 10px;
+
+// --------------------------------------------- BASE COLORS ---------------------------------------------
+/* naming from http://www.color-blindness.com/color-name-hue/
+  Use @color-[ColorName]-[Hue]-s[SaturationValue]
+*/
+@color-white: #FFF;
+@main-white-smoke-white-s0: #F5F5F5;
+@main-white-lilac-white-s0: #F3F3F4;
+@main-magnolia-white-s11: #F0DFFC;
+@color-10-percent-opacity-white: rgba(255, 255, 255, .1);
+@color-50-percent-opacity-white: rgba(255, 255, 255, .5);
+@color-175-percent-opacity-black: rgba(0, 0, 0, .175);
+@color-mid-grey-s4: #676A6C;
+@color-hit-grey-s0: #AEAFAF;
+@color-light-grey-s0: #D6D6D6;
+@color-roof-terracotta-red-s60: #A94442;
+@color-brick-red-s72: #D43A4A;
+@color-dark-pink-red-s64: #ED5565;
+@color-sundown-red-s34: #FBA4AE;
+@color-wewak-red-s38: #F1959E;
+@color-carissma-red-s39: #E88C95;
+@color-pale-pink-red-s6: #FDEDEF;
+@color-pale-pink-red-s11: #FBDDE0;
+@color-casablanca-yellow-s70: #F3A747;
+@color-sea-buckthorn-orange-s60: #EA9B5C;
+@color-chsrdonnay-yellows47: #FCC885;
+@color-serenade-orange-s15: #FCE7D6;
+@color-mountain-meadow-green-s85: #1AB394;
+@color-mountain-meadow-green-s84: #1AAA8F;
+@color-mountain-meadow-green-s89: #119B7F;
+@color-downy-green-s44: #75D1BE;
+@color-downy-green-s43: #78D6C5;
+@color-white-ice-green-s5: #E8F6F4;
+@color-biscay-blue-s41: #2F4050;
+@color-blue-whale-blue-s53: #1E3141;
+@color-blue-whale-blue-s58: #172837;
+@color-bali-hai-blue-s25: #879EB4;
+@color-bali-hai-blue-s24: #859CB1;
+@color-pattens-blue-s9: #DEEBF4;
+@color-solitude-blue-s7: #DBE4EC;
+@color-solitude-blue-s2: #F4F7F9;
+@color-mariner-blue-s61: #3B5998;
+@color-san-marino-blue-s47: #507299;
+@color-malibu-blue-s53: #6CB8E8;
+@color-denim-blue-s85: #1C84C6;
+@color-denim-blue-s90: #1176B7;
+@color-mabel-blue-s12: #77B5DD;
+@color-jordy-blue-s46: #C7DEE3;
+@color-conflower-blue-s64: #55ACEE;
+@color-lavender-violet-s6: #E8F2F9;
+@color-biloba-flower-violet-s35: #AE84CC;
+@color-suva-grey-s0: #888888;
+@color-gainsboro-white-s0: #E5E5E5;
+@color-black-squeeze-grey-s2: #EBEBE4;
+@color-blue-nepal-grey-s15: #A4B4C3;
+@color-rock-blue-blue-s24: #889EB5;
+@color-navy-blue-blue-s97: #0471C3;
+@color-solitude-blue-s7: #DAE3EB;
+@color-solitude-blue-s2: #F3F6F8;
+@color-sidebar-separator: #e5e7e8;
+
+// ------------------------------------------- TYPOGRAPHY COLORS -----------------------------------------
+@light-text: @color-white;
+@link-color: @color-denim-blue-s85;
+@controls-link-color: @color-bali-hai-blue-s25;
+
+// ------------------------------------------- PRIORITY COLORS -------------------------------------------
+@priority-1-color: @color-dark-pink-red-s64;
+@priority-2-color: @color-casablanca-yellow-s70;
+@priority-3-color: @color-downy-green-s44;
+@priority-4-color: @color-denim-blue-s85;
+
+// -------------------------------------------- ERROR COLORS ---------------------------------------------
+@error-text: @color-wewak-red-s38;
+@error-message-color: @color-roof-terracotta-red-s60;
+
+// ----------------------------------------------- SIDEBAR -----------------------------------------------
+@aside-background-color: @color-biscay-blue-s41;
+
+// ----------------------------------------------- SOCIALS -----------------------------------------------
+@socials-facebook-color: @color-mariner-blue-s61;
+@socials-twitter-color: @color-conflower-blue-s64;
+@socials-vk-color: @color-san-marino-blue-s47;
+@socials-dimension: 3.8rem;
+
+// --------------------------------------------- LOGIN PAGE ----------------------------------------------
+
+@login-valid-value: @color-mountain-meadow-green-s85;
+@login-pristine-color: @color-hit-grey-s0;
+@login-error-color: @color-dark-pink-red-s64;
+@login-input-font-color: @color-bali-hai-blue-s25;
+@login-font-color: @light-text;
+@login-sing-in-btn-color: @color-mountain-meadow-green-s84;
+@login-sing-in-btn-hover-color: @color-mountain-meadow-green-s89;
+@login-create-account-btn-color: @color-denim-blue-s85;
+@login-create-account-btn-hover-color: @color-denim-blue-s90;
+@login-btn-font-color: @light-text;
+// ---------------------------------------------
+@login-auth-bg-img: url('/modules/users/img/backgrounds/bg-1.jpg');
+@login-bg-color: @color-blue-whale-blue-s58;
+// ---------------------------------------------
+@login-input-bg-color: @color-blue-whale-blue-s58;
+@login-input-border-color: @color-blue-whale-blue-s58;
+@login-input-font-color: @color-blue-whale-blue-s58;
+// ---------------------------------------------
+@login-form-max-width: 460px;
+@login-form-min-width: 200px;
+@login-description-max-width: 800px;
+// ---------------------------------------------
+@login-error-message-font-size: .75rem;
+
+// ----------------------------------------------- POPOVER -----------------------------------------------
+@popover-font-size: 1rem;
+@popover-font-color: @color-biscay-blue-s41;
+
+// ------------------------------------------------- LOGO ------------------------------------------------
+@logo-lg-light: url('/modules/users/img/logo-lg-light.png');
+
+// -------------------------------------------- MAIN CONTENT ---------------------------------------------
+@main-font-color: @color-biscay-blue-s41;
+@main-navbar-default-bg-color: @light-text;
+@main-width: 100% ~"-" @sidebar-width;
+@main-max-width: 198rem;
+
+// ----------------------------------------------- SIDEBAR -----------------------------------------------
+@sidebar-width: 30rem;
+@sidebar-width-collapsed: 6.8rem;
+@sidebar-block-wrapper-bg: @color-blue-whale-blue-s53;
+@sidebar-wrapper-color: @color-bali-hai-blue-s25;
+@sidebar-brd-b: @color-bali-hai-blue-s25;
+@sidebar-color: @color-bali-hai-blue-s25;
+@sidebar-filter-color: @color-bali-hai-blue-s25;
+@sidebar-filter-color--active: @light-text;
+@sidebar-filter-bg: @color-blue-whale-blue-s58;
+@sidebar-filter-bg--active: @color-mountain-meadow-green-s85;
+@sidebar-color--hover: @light-text;
+@sidebar-outline--hover: @color-10-percent-opacity-white;
+@sidebar-border-caret: @color-10-percent-opacity-white;
+@sidebar-border-caret--in-active: @color-50-percent-opacity-white;
+@sidebar-border-caret--active: @light-text;
+@sidebar-default-messages-color: @color-suva-grey-s0;
+
+// ----------------------------------------------- TOGGLER -----------------------------------------------
+@toggler--outline-color--hover: @color-10-percent-opacity-white;
+@toggler-bg-color: @color-mountain-meadow-green-s85;
+@toggler-indent: 1.5rem;
+@toggler-padding: 1.3rem;
+
+// ------------------------------------------------ HEADER -----------------------------------------------
+@header-height: 6rem;
+@header-color: @color-bali-hai-blue-s25;
+@header-color--hover: @light-text;
+@header-line-height: @header-height;
+@header-btn-bg-color: @color-biscay-blue-s41;
+@header-bg-color: @color-biscay-blue-s41;
+@header-btn-bg-color--hover: @color-blue-whale-blue-s53;
+@header-notification-bg-color--regular: @color-mountain-meadow-green-s85;
+@header-notification-bg-color--default: @color-hit-grey-s0;
+@header-notification-label-dimension: 1.4rem;
+@header-font-size: 1.4rem;
+@header-min-width: 64rem;
+@header-media-tablet: 1100px;
+@header-media-tablet-collapsed: 860px;
+
+// ------------------------------------------------ DROPDOWN -----------------------------------------------
+@dropdown-height: 5rem;
+@dropdown-line-height: 2.2rem;
+@dropdown-min-width: 20rem;
+@dropdown-padding: 0 15px;
+@dropdown-color: @color-blue-whale-blue-s53;
+@dropdown-bg-color: @color-white;
+@dropdown-bg-color--hover: @color-hit-grey-s0;
+@dropdown-box-shadow: 0 .6rem 1.2rem @color-175-percent-opacity-black;
+@dropdown-notification-border: @color-bali-hai-blue-s25;
+@dropdown-item-border: @color-solitude-blue-s7;
+@dropdown-fa-dimention: 2rem;
+@dropdown-fa-top: @dropdown-height/2 - @dropdown-fa-dimention/2;
+@dropdown-fa-right: 1em;
+@dropdown-badge-color: @color-blue-whale-blue-s53;
+@dropdown-badge-color--hover: @color-blue-whale-blue-s58;
+@dropdown-badge-bg-color: @color-bali-hai-blue-s25;
+@dropdown-badge-bg-color--hover: @color-white;
+// ---------------- CALENDAR :: SIZES ----------------
+@calendar-wrapper-padding: 15px;
+@calendar-slot-border-width: 10px;
+
+// ---------------- CALENDAR :: COLORS :: BASE ----------------
+@calendar-primary-font-color: @color-white;
+@calendar-secondary-font-color: @color-bali-hai-blue-s24;
+@calendar-header-border-color: @color-biscay-blue-s41;
+@calendar-day-header-bg-color: @color-blue-whale-blue-s53;
+@calendar-toolbar-bg-color: @color-biscay-blue-s41;
+@calendar-today-btn-bg-color: @color-mountain-meadow-green-s84;
+@calendar-today-btn-hover-bg-color: @color-mountain-meadow-green-s89;
+@calendar-header-divider: @color-solitude-blue-s7;
+
+// ---------------- CALENDAR :: COLORS :: SLOT ----------------
+@calendar-free-slot-border-color: @color-solitude-blue-s7;
+@calendar-free-slot-minor-border-color: @color-solitude-blue-s2;
+@calendar-free-slot-bg-color: @color-white;
+@calendar-today-slot-border-color: @color-jordy-blue-s46;
+@calendar-today-slot-bg-color: @color-white-ice-green-s5;
+@calendar-non-working-slot-border-color: @color-pattens-blue-s9;
+@calendar-non-working-slot-bg-color: @color-lavender-violet-s6;
+
+// ---------------- CALENDAR :: COLORS :: EVENT ----------------
+@calendar-event-sick-bg-color: @color-pale-pink-red-s11;
+@calendar-event-sick-font-color: @color-dark-pink-red-s64;
+@calendar-event-vac-bg-color: @main-magnolia-white-s11;
+@calendar-event-vac-font-color: @color-biloba-flower-violet-s35;
+
+// ---------------- CALENDAR :: COLORS :: TASK ----------------
+@calendar-task-priority-1-bg-color: @color-sundown-red-s34;
+@calendar-task-priority-1-border-color: @color-dark-pink-red-s64;
+@calendar-task-priority-2-bg-color: @color-chsrdonnay-yellows47;
+@calendar-task-priority-2-border-color: @color-casablanca-yellow-s70;
+@calendar-task-priority-3-bg-color: @color-downy-green-s43;
+@calendar-task-priority-3-border-color: @color-mountain-meadow-green-s84;
+@calendar-task-priority-4-bg-color: @color-malibu-blue-s53;
+@calendar-task-priority-4-border-color: @color-denim-blue-s85;
+
+// ---------------- MODAL WINDOW :: COLORS :: BASE ----------------
+@modal-header-color: @color-blue-whale-blue-s53;
+@modal-button-shift-slots: @color-denim-blue-s85;
+@modal-button-shift-slots-hovered: @color-denim-blue-s90;
+@modal-button-leave-as-is: @color-mountain-meadow-green-s85;
+@modal-button-leave-as-is-hovered: @color-mountain-meadow-green-s84;
+@modal-button-text-color: @color-white;
+
+// ---------------- DASHBOARD PANEL :: SIZES ----------------
+@dashboard-panel-padding-left-right: 2rem;
+@dashboard-panel-padding-top-bottom: 1.5rem;
+
+// ---------------- FORM CONTROLS :: SIZES ----------------
+@form-control-height: 3.8rem;
+
+@checkbox-dimension: 1.5rem;
+@checkbox-margin-top: -@checkbox-dimension / 2;
+@checkbox-marker-width: 1.1rem;
+@checkbox-marker-height: .8rem;
+@checkbox-marker-thickness: .3rem;
+@checkbox-marker-padding: (@checkbox-dimension - @checkbox-marker-width) / 2;
+@checkbox-marker-margin-top: -@checkbox-marker-height / 2;
+@checkbox-label-padding: @checkbox-dimension * 2;
+
+@marker-dimension: 1.5rem;
+
+@input-font-size: 1.4rem;
+@input-error-text-height: 1.6rem;
+@input-error-text-size: 1.2rem;
+
+// ---------------- FORM CONTROLS :: COLORS ---------------
+@button-color: @color-white;
+@button-green-color: @color-mountain-meadow-green-s84;
+@button-green-color-active: @color-mountain-meadow-green-s89;
+@button-blue-color: @color-denim-blue-s85;
+@button-blue-color-active: @color-denim-blue-s90;
+@button-grey-color: @color-bali-hai-blue-s24;
+@button-grey-color-active: @color-biscay-blue-s41;
+@button-red-color: @color-dark-pink-red-s64;
+@button-red-color-active: @color-brick-red-s72;
+
+@input-border-color: @color-solitude-blue-s7;
+@input-bg-color: @color-white;
+@input-error-text-color: @color-white;
+
+@checkbox-background-color: @color-white;
+
+@marker-green-color: @color-mountain-meadow-green-s89;
+@marker-red-color: @color-dark-pink-red-s64;
+@marker-left-color: @color-casablanca-yellow-s70;
+@marker-done-color: @color-mountain-meadow-green-s84;
+
+@disabled-background-color: @color-black-squeeze-grey-s2;
+@error-color: @color-dark-pink-red-s64;
+@valid-color: @color-mountain-meadow-green-s84;
+@pristine-color: @color-solitude-blue-s7;
+
+@datetimepicker-button-color: @color-white;
+@datetimepicker-button-bg-color: @color-mountain-meadow-green-s84;
+
+// ---------------- SETTINGS :: SIZES ----------------
+@settings-avatar-dimension: 24.4rem;
+@settings-avatar-border-width: .5rem;
+
+@settings-heading-font-size: 2.5rem;
+@settings-heading-line-height: 1.76;
+
+@settings-button-icon-font-size: 1.8rem;
+@settings-input-padding: 1.5rem;
+
+// ---------------- SETTINGS :: COLORS ---------------
+@settings-main-font-color: @color-biscay-blue-s41;
+@settings-sub-font-color: @color-bali-hai-blue-s24;
+
+@settings-avatar-border-color: @color-white;
+
+// ---------------- TILES :: COLORS ---------------
+@tile-main-color: @color-white;
+@tile-heading-bg-color: @color-blue-whale-blue-s53;
+@tile-footer-border-color: @color-gainsboro-white-s0;
+@tile-empty-msg-color: @color-blue-nepal-grey-s15;
+@tile-footer-button-save-color: @color-mountain-meadow-green-s84;
+@tile-footer-button-save-color-hover: @color-mountain-meadow-green-s89;
+@tile-footer-button-login-color: @color-mountain-meadow-green-s84;
+@tile-footer-button-login-color-hover: @color-mountain-meadow-green-s89;
+@tile-footer-button-delete-color: @color-dark-pink-red-s64;
+@tile-footer-button-delete-color-hover: @color-roof-terracotta-red-s60;
+@tile-footer-button-import-color: @color-denim-blue-s85;
+@tile-footer-button-import-color-hover: @color-denim-blue-s90;
+
+// ---------------- TILES :: SIZES ----------------
+@tile-heading-font-size: 1.4rem;
+
+// ---------------- TASK-EVENT FORM :: SIZES ----------------
+@task-event-tile-margin-bottom: 2rem;
+
+@task-event-form-input-right-padding: 1.5rem;
+@task-event-form-input-left-padding: 1.5rem;
+
+@task-event-button-width: 10%;
+@task-event-button-calendar-width: 20%;
+@task-event-button-width-md: 15%;
+@task-event-button-calendar-width-md: 30%;
+@task-event-button-margin-left: 1rem;
+
+// ---------------- TASK-EVENT FORM :: COLORS ----------------
+@task-event-form-tile-color: @tile-main-color;
+@task-event-form-checkbox-bg-color: @color-solitude-blue-s7;
+
+// ---------------- TASK COMMON :: SIZES ----------------
+@task-tile-slots-height-md: 20rem;
+
+@task-rzslider-margin-bottom: 3.8rem;
+@task-rzslider-max-value-font-size: 1.2rem;
+@task-rzslider-input-margin-top: 1.4rem;
+@task-rzslider-input-label-padding-left: 1.5rem;
+
+// ---------------- TASK CREATE :: SIZES ----------------
+@task-create-tile-slots-height: 43.7rem;
+@task-create-input-notes-height: 29.5rem;
+@task-create-input-notes-height-lg: @task-edit-input-notes-height;
+
+// ---------------- TASK EDIT :: SIZES ----------------
+@task-edit-tile-slots-height: 20.4rem;
+@task-edit-tile-slots-height-lg: 89.4rem;
+@task-edit-input-notes-height: 6rem;
+
+// ---------------- TASK SLOTS :: SIZES ----------------
+@task-slots-info-font-size: 2rem;
+@task-slots-info-line-height: 4rem;
+@task-slots-info-left-right-padding: 6rem;
+
+@task-slots-info-icon-font-size: 8rem;
+@task-slots-info-icon-bottom-padding: 2rem;
+
+// ---------------- TASK SLOTS :: COLORS ---------------
+@task-slots-info-color: @color-hit-grey-s0;
+@task-slots-marker-bg-color: @color-white;
+@task-slots-marker-border-color: @color-solitude-blue-s7;
+
+// ---------------- EVENT :: SIZES ----------------
+@event-input-notes-height: 13rem;
+
+// ---------------- MIGRATE :: COLORS ---------------
+@migrate-sync-text-color: @color-biscay-blue-s41;
+@migrate-sync-heading-color: @color-blue-nepal-grey-s15;
+@migrate-sync-icon-active-color: @color-navy-blue-blue-s97;
+@migrate-sync-icon-inactive-color: @color-rock-blue-blue-s24;
+@migrate-sync-table-head-color: @color-solitude-blue-s7;
+@migrate-sync-table-row-even-color: @color-solitude-blue-s2;

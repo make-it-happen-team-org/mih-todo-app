@@ -1,0 +1,90 @@
+.templates {
+  header {
+    background: @color-blue-whale-blue-s53;
+    color: @color-bali-hai-blue-s24;
+  }
+
+  &__sort {
+    padding: 14px;
+
+    .phoneX2({ padding: 28px; });
+
+    &-label {
+      font-size: 12px;
+      float: left;
+
+      .phoneX2({ font-size: 24px; });
+    }
+
+    &-actions {
+      float: right;
+    }
+
+    &-button {
+      width: 22px;
+      height: 22px;
+      margin: 0 0 0 22px;
+      opacity: 0.5;
+
+      .phoneX2({ width: 44px; height: 44px; margin: 0 0 0 44px; });
+
+      &--active {
+        opacity: 1;
+      }
+    }
+  }
+
+  &__tabs {
+    &-tab {
+      float: left;
+      width: 50%;
+      padding: 7px 0 6px;
+      text-transform: uppercase;
+      color: @color-bali-hai-blue-s24;
+      font-size: 14px;
+      text-align: center;
+
+      .phoneX2({ padding: 14px 0 12px; font-size: 28px; });
+
+      &--active {
+        color: @color-white;
+        border-bottom: 3px solid @color-mountain-meadow-green-s84;
+
+        .phoneX2({ border-bottom-width: 6px; });
+      }
+    }
+  }
+
+  &__list {
+
+    &-item {
+      background-color: @color-white;
+      border-bottom: 1px solid @color-sidebar-separator;
+
+      .phoneX2({ border-bottom-width: 2px; });
+
+      a {
+        position: relative;
+        color: @color-biscay-blue-s41;
+        display: block;
+        padding: 14px;
+
+        .phoneX2({ padding: 28px; font-size: 28px; });
+
+        &:after {
+          position: absolute;
+          background: url('/modules/templates/img/edit.png') no-repeat;
+          background-size: cover;
+          height: 22px;
+          width: 22px;
+          content: '';
+          right: 13px;
+          top: 13px;
+          opacity: 0.2;
+
+          .phoneX2({ height: 44px; width: 44px; right: 26px; top: 26px; });
+        }
+      }
+    }
+  }
+}
