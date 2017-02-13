@@ -1,5 +1,6 @@
 @import "../../../less/_app.variables.less";
 @import "../../../less/_mobile.variables.less";
+@import "../../../less/_app.mixins.less";
 
 .main-content {
   width: @mobile-width;
@@ -14,6 +15,32 @@
   width: 100%;
   height: 100%;
   color: @color-white;
+
+  &.user-login--sing-up {
+    .auth-form {
+      &__form-group {
+        &--btns {
+          position: absolute;
+          bottom: 0;
+          left: 28px;
+          width: 264px;
+        }
+      }
+    }
+  }
+
+  &.user-login--sing-in {
+    .auth-form {
+      &__form-group {
+        &--btns {
+          .error-message {
+            height: auto;
+            line-height: 0;
+          }
+        }
+      }
+    }
+  }
 
   &:before {
     content: '';
@@ -125,11 +152,14 @@
     border-bottom: 1px solid white;
     padding: 2.6rem 0 1rem 0;
     margin-bottom: 2.5rem;
+
     .placeholder(@color-bali-hai-blue-s24);
 
     &.ng-invalid:not(.ng-pristine) {
       color: @login-error-color;
       border-bottom: 1px solid @login-error-color;
+
+      .placeholder(@login-error-color);
 
       ~ .error-message .help-block {
         color: @login-error-color;
@@ -137,7 +167,28 @@
     }
 
     &--password{
-      margin-bottom: 0;
+      letter-spacing: .25rem;
+      font-size: 1.5em;
+
+      &::-webkit-input-placeholder {
+        font-size: 1.4rem;
+        letter-spacing: 0;
+      }
+
+      &::-moz-placeholder {
+        font-size: 1.4rem;
+        letter-spacing: 0;
+      }
+
+      &:-moz-placeholder {
+        font-size: 1.4rem;
+        letter-spacing: 0;
+      }
+
+      &:-ms-input-placeholder {
+        font-size: 1.4rem;
+        letter-spacing: 0;
+      }
     }
 
     &.ng-valid {
