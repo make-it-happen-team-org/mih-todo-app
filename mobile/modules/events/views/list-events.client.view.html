@@ -1,32 +1,32 @@
 <div class="events-list" data-ng-controller="EventsListController as eventCtrl">
     <header class="main-header-mobile">
         <div class="main-header-mobile__main-tab-info">
-            <span class="main-header-mobile__icons--burger fa fa-square-o"></span>
+            <span class="main-header-mobile__icons--burger icon-dehaze"></span>
             <h3 class="main-header-mobile__title">Events</h3>
         </div>
         <div class="main-header-mobile__icons">
             <a data-ui-sref="restricted.todo_state.events.create">
-                <span class="main-header-mobile__icons--add-task fa fa-plus"></span>
+                <span class="main-header-mobile__icons--add-task icon-add"></span>
             </a>
             <a data-ui-sref="restricted.overdue">
-                <span class="main-header-mobile__icons--notifications fa fa-bell"></span>
+                <span class="main-header-mobile__icons--notifications icon-notifications_active"></span>
             </a>
         </div>
     </header>
     <ul class="events-list__list" data-ng-show="eventCtrl.events.length">
         <li class="events-list__list-item" data-ng-repeat="event in eventCtrl.events | orderBy:'days.startTime'">
-            <span class="events-list__icons--event fa fa-calendar-o"></span>
+            <span class="events-list__icons--event icon-event"></span>
             <div class="events-list-item__info">
                 <div class="events-list-item__title" data-ng-bind="event.title"></div>
                 <div class="events-list-item__description">{{ event.days.startTime | date:"h:mma" }} - {{ event.days.endTime | date:"h:mma" }}</div>
             </div>
             <a class="events-list-item__edit" data-ui-sref="restricted.todo_state.events.details({ eventId: event._id })">
-                <span class="events-list__icons--edit fa fa-pencil"></span>
+                <span class="events-list__icons--edit icon-create"></span>
             </a>
         </li>
     </ul>
     <p class="events-list__no-items"
-       data-ng-hide="eventCtrl.events.length">
-        No events yet.<br/>Please, click on <span class="fa fa-plus"></span> to add new one.
+        data-ng-hide="eventCtrl.events.length">
+        No events yet.<br/>Please, click on <span class="icon-add"></span> to add new one.
     </p>
 </div>

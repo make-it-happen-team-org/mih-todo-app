@@ -2,13 +2,13 @@
     <header class="main-header-mobile">
         <div class="main-header-mobile__main-tab-info">
             <a data-ui-sref="restricted.todo_state.events.list">
-                <span class="main-header-mobile__icons--arrow fa fa-arrow-left"></span>
+                <span class="main-header-mobile__icons--arrow icon-arrow_back"></span>
             </a>
             <h3 class="main-header-mobile__title">Events Details</h3>
         </div>
         <div class="main-header-mobile__icons">
             <a data-ui-sref="restricted.todo_state.events.edit({ eventId: event._id })">
-                <span class="main-header-mobile__icons--edit-state fa fa-pencil"></span>
+                <span class="main-header-mobile__icons--edit-state icon-create"></span>
             </a>
         </div>
     </header>
@@ -23,20 +23,20 @@
     </div>
     <ul class="events-details__list">
         <li class="events-details__list-item">
-            <span class="events-details-item__icons fa fa-calendar-o"></span>
+            <span class="events-details-item__icons icon-date_range"></span>
             <div class="events-details-item__description">{{details.event.days.startTime | date: "dd.MM h:mma"}} - {{ details.event.days.endTime | date: "dd.MM h:mma" }}</div>
         </li>
         <li class="events-details__list-item">
-            <span class="events-details-item__icons fa fa-clock-o"></span>
+            <span class="events-details-item__icons icon-access_time"></span>
             <div class="events-details-item__description">Duration - {{ details.event.duration }}h</div>
         </li>
         <li class="events-details__list-item"
             data-ng-if="details.event.notes"
             data-ng-class="{active: details.isOpenNotes}">
-            <span class="events-details-item__icons fa fa-pencil"></span>
+            <span class="events-details-item__icons icon-create"></span>
             <div class="events-details-item__description">Notes</div>
-            <span class="events-details-item__icons dropp fa"
-                  data-ng-class="details.isOpenNotes ? 'fa-arrow-up' : 'fa-arrow-down'"
+            <span class="events-details-item__icons dropp"
+                  data-ng-class="details.isOpenNotes ? 'icon-keyboard_arrow_up' : 'icon-keyboard_arrow_down'"
                   data-ng-click="details.isOpenNotes = !details.isOpenNotes"></span>
         </li>
         <div class="events-details__list-item" data-ng-if="details.isOpenNotes">

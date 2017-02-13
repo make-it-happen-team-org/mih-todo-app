@@ -7,12 +7,12 @@
   },
   "scripts": {
     "start": "grunt develop && grunt prebuild && grunt build && set NODE_ENV=production&&node ./server-app-folder/server.js",
-    "start-mobile": "grunt mobile",
     "preinstall": "node scripts/preinstall.js",
     "postinstall": "node scripts/postinstall.js",
     "server": "set NODE_ENV=development&&nodemon ./server-app-folder/server.js --debug",
-    "server-mobile": "set NODE_ENV=mobile&&nodemon ./server-app-folder/server.js --debug",
-    "client": "grunt"
+    "client": "grunt",
+    "mobile_client": "grunt mobile",
+    "mobile_server": "set NODE_ENV=mobile&&nodemon ./server-app-folder/server.js --debug"
   },
   "dependencies": {
     "angular-bootstrap-datetimepicker": "^1.0.1",
