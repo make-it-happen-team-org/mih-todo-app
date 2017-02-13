@@ -1,0 +1,48 @@
+@import (once) "../../../less/_app.variables.less";
+
+.main-header-mobile {
+  padding: 0 1.8rem;
+  background-color: @event-header-color;
+  position: relative;
+  display: block;
+  color: @event-header-text-color;
+  height: 5rem;
+  &__main-tab-info {
+    display: inline-block;
+    width: 60%;
+    & span:hover {
+      color: @color-white;
+    }
+  }
+  &__title {
+    display: inline-block;
+    padding-left: 2rem;
+    line-height: 5rem;
+    margin: 0;
+    font-size: 1.4rem;
+    text-transform: uppercase;
+  }
+  &__icons {
+    height: 5rem;
+    line-height: 5rem;
+    float: right;
+    & > a span:hover {
+      color: @color-white;
+    }
+    &--notifications,
+    &--add-task {
+      color: #879EB4;
+      padding: 0 0 0 1.5rem;
+      font-size: 1.8rem;
+    }
+    &--arrow {
+      color: #879EB4;
+      font-size: 1.8rem;
+    }
+    &--edit-state {
+      color: #879EB4;
+      font-size: 1.8rem;
+      padding: 0 0 0 1.1rem;
+    }
+  }
+}

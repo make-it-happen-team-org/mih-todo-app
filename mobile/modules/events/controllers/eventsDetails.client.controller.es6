@@ -11,13 +11,17 @@ class EventsDetailsController {
 
         this.isOpenNotes = false;
         this.event = {};
+
         this.showEvent();
         attachEvent();
     }
 
     showEvent() {
-        this.event = this.Events.get({
+        this.Events.get({
             eventId: this.$stateParams.eventId
+        }).$promise.then((res) => {
+            this.event = res;
+            this.event.duration = moment(res.days.endTime).diff(moment(res.days.startTime), 'hours');
         });
     }
 }

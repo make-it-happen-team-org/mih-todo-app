@@ -3,80 +3,33 @@
 .events-list {
   &__no-items {
     position: relative;
-    padding: 5px 10px;
+    padding: 0.5rem 1rem;
     background-color: @color-white;
     text-align: center;
     color: @color-blue-whale-blue-s53;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
   }
-  &__header {
-    padding: 0 1.8rem;
-    background-color: @event-header-color;
-    position: relative;
-    display: block;
-    color: @event-header-text-color;
-    height: 5rem;
-  }
-  &__main-tab-info {
-    display: inline-block;
-    width: 60%;
-    & span:hover {
-      color: @color-white;
-    }
-  }
   &__icons {
-    height: 5rem;
-    line-height: 5rem;
-    float: right;
-    & > a span:hover {
-      color: @color-white;
-    }
-    &--notifications,
-    &--add-task {
-      color: #879EB4;
-      padding: 0 15px;
-      font-size: 18px;
-    }
-    &--arrow {
-      color: #879EB4;
-      font-size: 18px;
-    }
-    &--edit-state {
-      color: #879EB4;
-      font-size: 18px;
-      padding: 0 0 0 11px;
-    }
     &--event {
       color: #000;
-      padding: 0 30px 0 0;
-      font-size: 22px;
+      padding: 0 3rem 0 0;
+      font-size: 2.2rem;
     }
     &--edit {
       color: @event-list-item-time-color;
-      font-size: 22px;
+      font-size: 2.2rem;
       &:hover {
         color: @color-rock-blue-blue-s24;
       }
     }
-  }
-  &__title {
-    display: inline-block;
-    padding-left: 2rem;
-    line-height: 5rem;
-    margin: 0;
-    font-size: 14px;
-    text-transform: uppercase;
-  }
-  &__list {
-
   }
   &__list-item {
     position: relative;
     display: flex;
     flex-flow: row nowrap;
     align-items: center;
-    padding: 5px 10px;
-    border-left: 5px solid @event-list-item-color;
+    padding: 0.5rem 1rem;
+    border-left: 0.5rem solid @event-list-item-color;
     border-bottom: 1px solid @event-list-item-border-bottom;
     background-color: @color-white;
     &:last-child {
@@ -92,12 +45,13 @@
       font-family: @font-open-sans-semibold;
     }
     &__description {
+      font-family: @font-open-sans-regular;
       color: @event-list-item-time-color;
-      font-size: 12px;
+      font-size: 1.2rem;
     }
     &__edit {
       position: absolute;
-      right: 15px;
+      right: 1.5rem;
     }
   }
 }
