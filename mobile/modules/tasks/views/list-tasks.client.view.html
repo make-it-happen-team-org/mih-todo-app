@@ -1,46 +1,51 @@
-<a class="sidebar-header sidebar__block sidebar__block--group"
-   data-ui-sref="restricted.todo_state.tasks.create">
-    <h3 class="sidebar-header__title">Tasks</h3>
-    <span class="sidebar-header__button fa fa-plus-circle add-task"></span>
-</a>
+<div class="tasks-list" data-ng-controller="TasksListController as taskListCtrl">
+    <header class="main-header-mobile">
+        <div class="main-header-mobile__main-tab-info">
+            <span class="main-header-mobile__icons--burger fa fa-square-o"></span>
+            <h3 class="main-header-mobile__title">Tasks</h3>
+        </div>
+        <div class="main-header-mobile__icons">
+            <a data-ui-sref="restricted.todo_state.tasks.create">
+                <span class="main-header-mobile__icons--add-task fa fa-plus"></span>
+            </a>
+            <a data-ui-sref="restricted.overdue">
+                <span class="main-header-mobile__icons--notifications fa fa-bell"></span>
+            </a>
+        </div>
+    </header>
 
-<div class="sidebar__block sidebar__block--group sidebar__block--group-nav"
-     data-ng-show="taskListCtrl.tasks.length > 1">
-    <div class="sidebar__nav-item-wrapper sidebar__nav-item-wrapper--left">
-        <div class="sidebar__nav-item">Sort by:</div>
-        <a class="sidebar__nav-item sidebar__nav-item--sort sidebar__nav-item--sort-priority"
-           data-ng-class="{
+    <div class="sidebar__block sidebar__block--group sidebar__block--group-nav"
+         data-ng-show="taskListCtrl.tasks.length > 1">
+        <div class="sidebar__nav-item-wrapper sidebar__nav-item-wrapper--left">
+            <div class="sidebar__nav-item">Sort by:</div>
+            <a class="sidebar__nav-item sidebar__nav-item--sort sidebar__nav-item--sort-priority"
+               data-ng-class="{
                'sort-reverse-up': taskListCtrl.renderSortOption() === 'ascPriority',
                'sort-reverse-down': taskListCtrl.renderSortOption() === 'descPriority'
                }"
-           data-ng-click="taskListCtrl.sortListBy('priority')">Priority</a>
-        <a class="sidebar__nav-item sidebar__nav-item--sort sidebar__nav-item--sort-time"
-           data-ng-class="{
+               data-ng-click="taskListCtrl.sortListBy('priority')">Priority</a>
+            <a class="sidebar__nav-item sidebar__nav-item--sort sidebar__nav-item--sort-time"
+               data-ng-class="{
                'sort-reverse-up': taskListCtrl.renderSortOption() === 'ascTime',
                'sort-reverse-down': taskListCtrl.renderSortOption() === 'descTime'
                }"
-           data-ng-click="taskListCtrl.sortListBy('time')">Time</a>
-    </div>
-    <div class="sidebar__nav-item-wrapper sidebar__nav-item-wrapper--right">
-        <div class="sidebar__nav-item sidebar__nav-item-complete">
-            <input class="sidebar__nav-item--task-checkbox"
-                   id="sidebar__nav-item--task-checkbox"
-                   type="checkbox"
-                   data-ng-model="taskListCtrl.filter.isComplete"
-                   data-ng-change="taskListCtrl.sortListBy('isComplete')"/>
-            <label class="sidebar__nav-item--task-checkbox-label"
-                   for="sidebar__nav-item--task-checkbox"></label>
+               data-ng-click="taskListCtrl.sortListBy('time')">Time</a>
+        </div>
+        <div class="sidebar__nav-item-wrapper sidebar__nav-item-wrapper--right">
+            <div class="sidebar__nav-item sidebar__nav-item-complete">
+                <input class="sidebar__nav-item--task-checkbox"
+                       id="sidebar__nav-item--task-checkbox"
+                       type="checkbox"
+                       data-ng-model="taskListCtrl.filter.isComplete"
+                       data-ng-change="taskListCtrl.sortListBy('isComplete')"/>
+                <label class="sidebar__nav-item--task-checkbox-label"
+                       for="sidebar__nav-item--task-checkbox"></label>
+            </div>
         </div>
     </div>
-</div>
 
-<ul class="sidebar__list">
-    <li data-ng-repeat="task in taskListCtrl.tasks">
-        <a class="sidebar__block sidebar-list-item sidebar-list-item__common-list {{'task-priority-' + task.priority}}"
-           data-ui-sref="restricted.todo_state.tasks.edit({ taskId: task._id })">
-            <div class="sidebar-list-item__title">
-                <span data-ng-bind="task.title"></span>
-            </div>
+    <ul class="tasks-list__list" data-ng-show="taskListCtrl.tasks.length">
+        <li class="tasks-list__list-item {{'task-priority-' + task.priority}}" data-ng-repeat="task in taskListCtrl.tasks" >
             <div class="progress__wrapper">
                 <progress class="progress"
                           max="100"
@@ -50,11 +55,17 @@
                     <div class="progress-bar"></div>
                 </div>
             </div>
-        </a>
-    </li>
-</ul>
+            <div class="tasks-list-item__info">
+                <div class="tasks-list-item__title" data-ng-bind="task.title"></div>
+            </div>
+            <a class="tasks-list-item__edit" data-ui-sref="restricted.todo_state.tasks.details({ taskId: task._id })">
+                <span class="tasks-list__icons--edit fa fa-pencil"></span>
+            </a>
+        </li>
+    </ul>
 
-<p class="sidebar-default-message__no-items"
-    data-ng-hide="taskListCtrl.tasks.length">
-    No tasks yet.<br/>Please, click on <span class="fa fa-plus-circle"></span> to add new one.
-</p>
+    <p class="tasks-list__no-items"
+        data-ng-hide="taskListCtrl.tasks.length">
+        No tasks yet.<br/>Please, click on <span class="fa fa-plus"></span> to add new one.
+    </p>
+</div>
