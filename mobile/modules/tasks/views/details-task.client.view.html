@@ -38,7 +38,7 @@
         </li>
         <li class="tasks-details__list-item">
             <span class="tasks-details-item__icons icon icon-access_time"></span>
-            <div class="tasks-details-item__description">Estimation - {{ tasksDetails.task.duration }}h</div>
+            <div class="tasks-details-item__description">Estimation - {{ tasksDetails.task.progress.done + tasksDetails.task.progress.left }}h</div>
         </li>
         <li class="tasks-details__list-item"
             data-ng-if="tasksDetails.task.notes"
@@ -61,7 +61,36 @@
                   data-ng-click="tasksDetails.isOpenTimeSlots = !tasksDetails.isOpenTimeSlots"></span>
         </li>
         <li class="tasks-details__list-item" data-ng-if="tasksDetails.isOpenTimeSlots">
-            <span class="tasks-details-item__notes">text</span>
+            <ul class="tasks-details-item__notes" data-ng-if="!tasksDetails.slotsRange.length">
+                <li class="tasks-details-slot__item">Please generate slots with subtasks</li>
+            </ul>
+            <ul class="tasks-details-item__notes tasks-details-item__slots">
+                <li class="tasks-details-slot__item" data-ng-repeat="item in tasksDetails.slotsRange"
+                    data-ng-class="{
+                        'slot-opacity' : !(tasksDetails.isOverdueSlot(item) && !item.isComplete),
+                        'active' : !item.isComplete && tasksDetails.isOverdueSlot(item)
+                    }">
+                    <span class="tasks-details-slot__item--day">{{item.start | date:'EEE'}}</span>
+                    <span class="tasks-details-slot__item--date">{{item.start | date: 'dd/MM'}}</span>
+                    <span class="tasks-details-slot__item--duration">{{item.duration}}h</span>
+
+                    <button class="tasks-details-slot__btn tasks-details-slot__item--overdue" type="button"
+                            data-ng-if="!item.isComplete && tasksDetails.isOverdueSlot(item)"
+                            data-ng-click="tasksDetails.completeSlot(item)">DONE
+                    </button>
+                    <button class="tasks-details-slot__btn tasks-details-slot__item--completed" type="button"
+                            data-ng-if="item.isComplete"
+                            data-ng-click="tasksDetails.completeSlot(item)"
+                            data-ng-disabled="true">DONE
+                    </button>
+                    <button class="tasks-details-slot__btn tasks-details-slot__item--actived" type="button"
+                            data-ng-if="!item.isComplete && !tasksDetails.isOverdueSlot(item)"
+                            data-ng-click="tasksDetails.completeSlot(item)"
+                            data-ng-disabled="true">DONE
+                    </button>
+                    </span>
+                </li>
+            </ul>
         </li>
     </ul>
 </div>

@@ -101,6 +101,46 @@
       font-size: 1.5rem;
       color: @color-blue-whale-blue-s53;
     }
+    &__slots {
+      padding-left: 5.5rem;
+      width: 100%;
+      box-sizing: border-box;
+    }
+  }
+  &-slot {
+    &__btn {
+      padding: 0.7rem 2.3rem;
+      font-family: @font-open-sans-regular;
+      color: @color-white;
+      border-radius: 0;
+      background-color: @task-details-button-color;
+      border: none;
+      touch-action: manipulation;
+    }
+    &__item {
+      width: 100%;
+      display: flex;
+      flex-flow: row nowrap;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.8rem 0;
+      box-sizing: border-box;
+      font-size: 1.2rem;
+      &:not(.active) {
+        color: @task-details-disables-text-color;
+      }
+      &:first-child {
+        padding-top: 0;
+      }
+      &--day {
+        text-transform: uppercase;
+        font-family: @font-open-sans-extrabold;
+      }
+      &--completed,
+      &--actived {
+        background-color: @task-details-button-disabled-color;
+      }
+    }
   }
 }
 
