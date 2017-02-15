@@ -48,13 +48,7 @@
     <ul class="tasks-list__list" data-ng-show="taskListCtrl.tasks.length">
         <li class="tasks-list__list-item {{'task-priority-' + task.priority}}" data-ng-repeat="task in taskListCtrl.tasks" >
             <div class="progress__wrapper">
-                <progress class="progress"
-                          max="100"
-                          value="{{taskListCtrl.getTaskDonePercentage(task)}}"></progress>
-                <div class="progress-value"></div>
-                <div class="progress-bg">
-                    <div class="progress-bar"></div>
-                </div>
+
             </div>
             <div class="tasks-list-item__info">
                 <div class="tasks-list-item__title" data-ng-bind="task.title"></div>

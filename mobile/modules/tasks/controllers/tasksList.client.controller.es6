@@ -36,37 +36,36 @@ class TasksListController {
 
   sortListBy(type) {
     switch (type) {
-    case 'priority': {
-      this.filter.name         = 'priority';
-      this.filter.priorityAsc = !this.filter.priorityAsc;
-      this.tasks               = this.$filter('orderBy')(this.tasks, this.filter.priorityAsc ? 'priority' : '-priority');
-      this.setFiltersToLocalStorage();
-      break;
-    }
-    case 'time': {
-      this.filter.name     = 'time';
-      this.filter.timeAsc = !this.filter.timeAsc;
-
-      if (this.filter.timeAsc) {
-        this.tasks = TasksListController.bulbSortForEndTime(this.tasks);
-      } else {
-        this.tasks = TasksListController.bulbSortForEndTime(this.tasks).reverse();
+      case 'priority': {
+        this.filter.name         = 'priority';
+        this.filter.priorityAsc = !this.filter.priorityAsc;
+        this.tasks               = this.$filter('orderBy')(this.tasks, this.filter.priorityAsc ? 'priority' : '-priority');
+        this.setFiltersToLocalStorage();
+        break;
       }
-      this.setFiltersToLocalStorage();
-      break;
-    }
-    case 'isComplete': {
-      if (this.filter.isComplete) {
-        this.tasks = this.tasks.filter(el => el.isComplete);
-      } else {
-        this.tasks = this.tasksCopy.slice()
+      case 'time': {
+        this.filter.name     = 'time';
+        this.filter.timeAsc = !this.filter.timeAsc;
+  
+        if (this.filter.timeAsc) {
+          this.tasks = TasksListController.bulbSortForEndTime(this.tasks);
+        } else {
+          this.tasks = TasksListController.bulbSortForEndTime(this.tasks).reverse();
+        }
+        this.setFiltersToLocalStorage();
+        break;
       }
-      this.setFiltersToLocalStorage();
-      break;
-    }
-    }
+      case 'isComplete': {
+        if (this.filter.isComplete) {
+          this.tasks = this.tasks.filter(el => el.isComplete);
+        } else {
+          this.tasks = this.tasksCopy.slice()
+        }
+        this.setFiltersToLocalStorage();
+        break;
+      }
+      }
   }
-
 
   find() {
     this.Tasks.query().$promise
