@@ -1,26 +1,32 @@
-<a class="sidebar-header sidebar__block sidebar__block--group"
-   data-ui-sref="restricted.todo_state.events.create">
-    <h3 class="sidebar-header__title">Events</h3>
-    <span class="sidebar-header__button fa fa-plus-circle add-task"></span>
-</a>
-
-<ul class="sidebar__list">
-    <li data-ng-repeat="event in eventCtrl.events | orderBy:'days.startTime'">
-        <a class="sidebar__block sidebar-list-item sidebar-list-item__common-list"
-           data-ui-sref="restricted.todo_state.events.edit({ eventId: event._id })">
-            <div class="sidebar-list-item__title"
-                 data-ng-bind="event.title"></div>
-            <div class="sidebar-list-item__description">
-                <div class="sidebar-list-item__description--event-day">{{ event.days.startTime | date:'EEEE' }}
-                </div>
-                <div class="sidebar-list-item__description--event-time">{{ event.days.startTime | date:'HH:mm' }}
-                </div>
+<div class="events-list" data-ng-controller="EventsListController as eventCtrl">
+    <header class="main-header-mobile">
+        <div class="main-header-mobile__main-tab-info">
+            <span class="main-header-mobile__icons--burger icon icon-dehaze"></span>
+            <h3 class="main-header-mobile__title">Events</h3>
+        </div>
+        <div class="main-header-mobile__icons">
+            <a data-ui-sref="restricted.todo_state.events.create">
+                <span class="main-header-mobile__icons--add-task icon icon-add"></span>
+            </a>
+            <a data-ui-sref="restricted.overdue">
+                <span class="main-header-mobile__icons--notifications icon icon-notifications_active"></span>
+            </a>
+        </div>
+    </header>
+    <ul class="events-list__list" data-ng-show="eventCtrl.events.length">
+        <li class="events-list__list-item" data-ng-repeat="event in eventCtrl.events | orderBy:'days.startTime'">
+            <span class="events-list__icons--event icon icon-event"></span>
+            <div class="events-list-item__info">
+                <div class="events-list-item__title" data-ng-bind="event.title"></div>
+                <div class="events-list-item__description">{{ event.days.startTime | date:"h:mma" }} - {{ event.days.endTime | date:"h:mma" }}</div>
             </div>
-        </a>
-    </li>
-</ul>
-
-<p class="sidebar-default-message__no-items"
-   data-ng-hide="eventCtrl.events.length">
-    No events yet.<br/>Please, click on <span class="fa fa-plus-circle"></span> to add new one.
-</p>
+            <a class="events-list-item__edit" data-ui-sref="restricted.todo_state.events.details({ eventId: event._id })">
+                <span class="events-list__icons--edit icon icon-create"></span>
+            </a>
+        </li>
+    </ul>
+    <p class="events-list__no-items"
+        data-ng-hide="eventCtrl.events.length">
+        No events yet.<br/>Please, click on <span class="icon icon-add"></span> to add new one.
+    </p>
+</div>

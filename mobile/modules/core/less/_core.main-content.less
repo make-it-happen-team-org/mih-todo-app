@@ -1,13 +1,16 @@
 @import (once) "../../../less/_app.variables.less";
 @import (once) "./_.core.mixins.less";
 
+.root-container {
+  background: @color-zircon-grey-s1;
+}
+
 .main-view {
   position: relative;
   max-width: @main-max-width;
   margin: 0 auto;
   height: 100vh;
   background: @main-white-lilac-white-s0;
-  //overflow: hidden;
 
   &--collapsed {
 
@@ -45,7 +48,6 @@
     width: calc(@main-width);
     z-index: 2;
     color: @main-font-color;
-    background: @main-white-lilac-white-s0;
 
     &::after,
     &::before {

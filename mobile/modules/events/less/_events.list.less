@@ -1,22 +1,57 @@
 @import (once) "../../../less/_app.variables.less";
 
-.event-list-item {
-  .event-day {
-    display: block;
-    text-align: right;
+.events-list {
+  &__no-items {
+    position: relative;
+    padding: 0.5rem 1rem;
+    background-color: @color-white;
+    text-align: center;
+    color: @color-blue-whale-blue-s53;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
   }
-
-  .event-time {
-    display: block;
-    text-align: right;
-    font-size: 12px;
+  &__icons {
+    &--event {
+      color: #000;
+      padding: 0 3rem 0 0;
+      font-size: 2.2rem;
+    }
+    &--edit {
+      color: @event-list-item-time-color;
+      font-size: 2.2rem;
+      &:hover {
+        color: @color-rock-blue-blue-s24;
+      }
+    }
   }
-
-  .event-name {
-    max-width: 160px;
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
+  &__list-item {
+    position: relative;
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    padding: 0.5rem 1rem;
+    border-left: 0.5rem solid @event-list-item-color;
+    border-bottom: 1px solid @event-list-item-border-bottom;
+    background-color: @color-white;
+    &:last-child {
+      box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+    }
+  }
+  &-item {
+    &__info {
+      display: inline-block;
+      color: #000;
+    }
+    &__title {
+      font-family: @font-open-sans-semibold;
+    }
+    &__description {
+      font-family: @font-open-sans-regular;
+      color: @event-list-item-time-color;
+      font-size: 1.2rem;
+    }
+    &__edit {
+      position: absolute;
+      right: 1.5rem;
+    }
   }
 }
-

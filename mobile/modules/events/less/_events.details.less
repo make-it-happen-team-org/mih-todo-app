@@ -1,0 +1,83 @@
+@import (once) "../../../less/_app.variables.less";
+
+.events-details {
+  &__sub-header {
+    height: 13.4rem;
+    background-color: @color-blue-whale-blue-s53;
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    padding: 1.5rem;
+  }
+  &__date {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 9.5rem;
+    width: 9.5rem;
+    height: 9.5rem;
+    border-radius: 50%;
+    border: 7px solid @event-list-item-color;
+    font-family: @font-open-sans-regular;
+    &--month {
+      text-transform: uppercase;
+      font-size: 1.3rem;
+      letter-spacing: -0.6px;
+    }
+    &--day {
+      display: block;
+      font-size: 2.9rem;
+      line-height: 3rem;
+      text-align: center;
+    }
+  }
+  &__event-name {
+    padding-left: 2.3rem;
+    font-size: 1.6rem;
+    letter-spacing: 0.2px;
+    line-height: 2.4rem;
+  }
+  &__list {
+    &-item {
+      position: relative;
+      display: flex;
+      flex-flow: row nowrap;
+      align-items: center;
+      padding: 1.4rem;
+      border-bottom: 1px solid @event-list-item-border-bottom;
+      background-color: @color-white;
+      font-family: @font-open-sans-semibold;
+      &:last-child {
+        box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+      }
+      &.active {
+        & .events-details-item__icons,
+        & .events-details-item__description {
+          color: @event-list-item-color;
+        }
+      }
+    }
+  }
+  &-item {
+    &__icons {
+      color: #000;
+      font-size: 2rem;
+      padding-right: 3.2rem;
+      &.dropp {
+        font-size: 1.4rem;
+        color: #777;
+        position: absolute;
+        right: 1.8rem;
+        padding-right: 0;
+      }
+    }
+    &__notes {
+      color: @color-blue-whale-blue-s53;
+      padding-left: 3.7rem;
+    }
+    &__description {
+      font-size: 1.5rem;
+      color: @color-blue-whale-blue-s53;
+    }
+  }
+}

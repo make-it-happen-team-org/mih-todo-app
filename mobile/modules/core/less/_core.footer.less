@@ -1,0 +1,32 @@
+@import (once) "../../../less/_app.variables.less";
+
+.main-footer {
+  height: 5.6rem;
+  background-color: @color-biscay-blue-s41;
+  &__list {
+    display: flex;
+    position: relative;
+    flex-flow: row nowrap;
+    width: 100%;
+    text-align: center;
+    justify-content: center;
+  }
+  &__item {
+    flex-grow: 1;
+    &.active {
+      & .main-footer__icon,
+      & .main-footer__title {
+        color: @color-white;
+      }
+    }
+  }
+  &__icon {
+    color: @event-header-text-color;
+    font-size: 2.5rem;
+  }
+  &__title {
+    color: @event-header-text-color;
+    font-family: @font-open-sans-regular;
+    font-size: 1.2rem;
+  }
+}
