@@ -15,6 +15,7 @@ class TasksListController {
     this.authentication = Authentication;
     this.tasks          = this.find();
     this.filter         = {};
+    this.filteredTasks  = this.tasks;
 
     attachEvents();
   }
@@ -39,7 +40,7 @@ class TasksListController {
     case 'priority': {
       this.filter.name         = 'priority';
       this.filter.priorityAsc = !this.filter.priorityAsc;
-      this.tasks               = this.$filter('orderBy')(this.tasks, this.filter.priorityAsc ? 'priority' : '-priority');
+      this.filteredTasks               = this.$filter('orderBy')(this.filteredTasks, this.filter.priorityAsc ? 'priority' : '-priority');
       this.setFiltersToLocalStorage();
       break;
     }
@@ -48,18 +49,18 @@ class TasksListController {
       this.filter.timeAsc = !this.filter.timeAsc;
 
       if (this.filter.timeAsc) {
-        this.tasks = TasksListController.bulbSortForEndTime(this.tasks);
+        this.filteredTasks = TasksListController.bulbSortForEndTime(this.filteredTasks);
       } else {
-        this.tasks = TasksListController.bulbSortForEndTime(this.tasks).reverse();
+        this.filteredTasks = TasksListController.bulbSortForEndTime(this.filteredTasks).reverse();
       }
       this.setFiltersToLocalStorage();
       break;
     }
     case 'isComplete': {
       if (this.filter.isComplete) {
-        this.tasks = this.tasks.filter(el => el.isComplete);
+        this.filteredTasks = this.tasks.filter(el => el.isComplete);
       } else {
-        this.tasks = this.tasksCopy.slice()
+        this.filteredTasks = this.tasks;
       }
       this.setFiltersToLocalStorage();
       break;
@@ -72,7 +73,6 @@ class TasksListController {
     this.Tasks.query().$promise
         .then((resolved) => {
           this.tasks     = resolved;
-          this.tasksCopy = resolved.slice();
           this.getFiltersFromLocalStorage();
           this.sortListBy('isComplete');
           this.sortListBy(this.filter.name);
@@ -99,6 +99,11 @@ class TasksListController {
 
   setFiltersToLocalStorage() {
     localStorage.setItem('sidebarFilter', JSON.stringify(this.filter));
+  }
+
+  resetCompleteFilter() {
+    this.filter.isComplete = false;
+    this.sortListBy('isComplete');
   }
 
   static bulbSortForEndTime(arr){

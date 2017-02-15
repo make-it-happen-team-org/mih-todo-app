@@ -8,6 +8,7 @@ module.exports = (grunt) => {
         'babel',
         'buildDevIndex'
     ]);
+
     grunt.registerTask('default', [ 'develop' ]);
 
     grunt.registerTask('mobile', [
@@ -23,7 +24,7 @@ module.exports = (grunt) => {
     grunt.registerTask('prebuild', [
         'env:development',
         'loadConfig',
-        'less:prod',
+        'cssmin:prodCss',
         'ngAnnotate',
         'htmlmin',
         'copy:prodImg',

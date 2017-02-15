@@ -48,7 +48,7 @@
                 </div>
             </div>
             <div class="auth-form__form-group"
-                 data-ng-class="{'has-error': signupForm.submitted && signupForm.password.$invalid || signupForm.password.$dirty && signupForm.password.$invalid}">
+                 data-ng-class="{'has-error': signupForm.submitted || signupForm.password.$dirty && signupForm.password.$invalid}">
                 <label for="password" class="text-uppercase auth-form__label">Password</label>
                 <input type="password"
                        id="password"
@@ -60,8 +60,9 @@
                        data-password-validator
                        data-ng-change="validatePassword()"
                        data-ng-blur="notifyIfInvalid()">
-                <div class="error-message">
-                    <p class="help-block error-text" data-ng-show="(signinForm.password.$dirty && signinForm.password.$invalid) || (signinForm.submitted && signinForm.password.$error.required)">
+                <div class="error-message"
+                     data-ng-show="signupForm.submitted && signupForm.password.$invalid">
+                    <p class="help-block error-text">
                         Please enter a password</p>
                 </div>
             </div>
@@ -86,7 +87,4 @@
             The password must:</p>
         <p data-ng-repeat="error in errors">{{error}}</p>
     </div>
-    <p class="error-popover-title text-navy"
-       data-ng-show="errors.length === 0">
-        The password is valid</p>
 </script>
