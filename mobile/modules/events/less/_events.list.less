@@ -1,22 +1,84 @@
 @import (once) "../../../less/_app.variables.less";
+.events-list {
+  &__no-items {
 
-.event-list-item {
-  .event-day {
-    display: block;
-    text-align: right;
   }
-
-  .event-time {
+  &__header {
+    padding: 0 1.8rem;
+    background-color: @event-header-color;
+    position: relative;
     display: block;
-    text-align: right;
-    font-size: 12px;
+    color: @event-header-text-color;
+    height: 5rem;
   }
+  &__main-tab-info {
+    display: inline-block;
+    width: 50%;
+    & span:hover {
+      color: @color-white;
+    }
+  }
+  &__icons {
+    height: 5rem;
+    line-height: 5rem;
+    float: right;
+    & > span:hover {
+      color: @color-white;
+    }
+    &--add-task {
+      padding: 0 15px;
+      font-size: 18px;
+    }
+    &--notifications {
+      font-size: 18px;
+      padding: 0 0 0 11px;
+    }
+    &--event {
+      color: #000;
+      padding: 0 30px 0 0;
+      font-size: 22px;
+    }
+    &--edit {
+      color: @event-list-item-time-color;
+      font-size: 22px;
+    }
+  }
+  &__title {
+    display: inline-block;
+    padding-left: 2rem;
+    line-height: 5rem;
+    margin: 0;
+    font-size: 14px;
+    text-transform: uppercase;
+  }
+  &__list {
 
-  .event-name {
-    max-width: 160px;
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
+  }
+  &__list-item {
+    position: relative;
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    padding: 5px 10px;
+    border-left: 5px solid @event-list-item-color;
+    border-bottom: 1px solid @event-list-item-border-bottom;
+    background-color: @color-white;
+  }
+  &-item {
+    &__info {
+      display: inline-block;
+      color: #000;
+    }
+    &__title {
+      font-family: @font-open-sans-semibold;
+    }
+    &__description {
+      color: @event-list-item-time-color;
+      font-size: 12px;
+    }
+    &__edit {
+      position: absolute;
+      right: 15px;
+    }
   }
 }
-

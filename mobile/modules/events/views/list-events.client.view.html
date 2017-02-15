@@ -1,26 +1,28 @@
-<a class="sidebar-header sidebar__block sidebar__block--group"
-   data-ui-sref="restricted.todo_state.events.create">
-    <h3 class="sidebar-header__title">Events</h3>
-    <span class="sidebar-header__button fa fa-plus-circle add-task"></span>
-</a>
-
-<ul class="sidebar__list">
-    <li data-ng-repeat="event in eventCtrl.events | orderBy:'days.startTime'">
-        <a class="sidebar__block sidebar-list-item sidebar-list-item__common-list"
-           data-ui-sref="restricted.todo_state.events.edit({ eventId: event._id })">
-            <div class="sidebar-list-item__title"
-                 data-ng-bind="event.title"></div>
-            <div class="sidebar-list-item__description">
-                <div class="sidebar-list-item__description--event-day">{{ event.days.startTime | date:'EEEE' }}
-                </div>
-                <div class="sidebar-list-item__description--event-time">{{ event.days.startTime | date:'HH:mm' }}
-                </div>
+<div class="events-list" data-ng-controller="EventsListController as eventCtrl">
+    <header class="sidebar__block sidebar__block--group events-list__header">
+        <div class="events-list__main-tab-info">
+            <span class="events-list__icons--burger fa fa-square-o"></span>
+            <h3 class="events-list__title">Events</h3>
+        </div>
+        <div class="events-list__icons">
+            <span class="events-list__icons--add-task fa fa-plus"></span>
+            <span class="events-list__icons--notifications fa fa-bell"></span>
+        </div>
+    </header>
+    <ul class="events-list__list">
+        <li class="events-list__list-item" data-ng-repeat="event in eventCtrl.events | orderBy:'days.startTime'">
+            <span class="events-list__icons--event fa fa-calendar-o"></span>
+            <div class="events-list-item__info">
+                <div class="events-list-item__title" data-ng-bind="event.title"></div>
+                <div class="events-list-item__description">{{ event.days.startTime | date:"h:mma" }} - {{ event.days.endTime | date:"h:mma" }}</div>
             </div>
-        </a>
-    </li>
-</ul>
-
-<p class="sidebar-default-message__no-items"
-   data-ng-hide="eventCtrl.events.length">
-    No events yet.<br/>Please, click on <span class="fa fa-plus-circle"></span> to add new one.
-</p>
+            <a class="events-list-item__edit" data-ui-sref="restricted.todo_state.events.details({ eventId: event._id })">
+                <span class="events-list__icons--edit fa fa-pencil"></span>
+            </a>
+        </li>
+    </ul>
+    <p class="events-list__no-items"
+       data-ng-hide="eventCtrl.events.length">
+        No events yet.<br/>Please, click on <span class="fa fa-plus"></span> to add new one.
+    </p>
+</div>

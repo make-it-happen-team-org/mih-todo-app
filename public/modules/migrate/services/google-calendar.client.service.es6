@@ -22,8 +22,8 @@ class GoogleCalendarService {
                 title: event.summary,
                 notes: event.description,
                 days: {
-                    startTime: event.start.dateTime,
-                    endTime: event.end.dateTime
+                    startTime: event.start.date,
+                    endTime: event.end.date
                 }
             }
         });
