@@ -3,6 +3,8 @@ class MainController {
   constructor($scope, $location, $timeout, $state, Authentication) {
     Object.assign(this, {$scope, $location, $timeout, $state, Authentication});
 
+    let state = JSON.parse(sessionStorage.getItem('state'));
+
     if (!Authentication.user) {
       $location.path('/signin');
     }
@@ -18,7 +20,8 @@ class MainController {
       user: false,
       notification: false
     };
-    this.goToState('restricted.todo_state');
+    
+    this.goToState(state);
     this.$scope.$on('toggleSidebar', () => {
       this.sidebarCollapsed = !this.sidebarCollapsed;
     });
@@ -30,19 +33,25 @@ class MainController {
 
 
   goToState(state) {
-    if (state) {
-      this.$state.go(state);
+    if (!state) {
+      state = this.$state.get('restricted.todo_state');
     }
     if (this.sidebarCollapsed) {
       this.sidebarCollapsed = false;
     }
+    this.$state.go(state.name);
+    sessionStorage.setItem('state', JSON.stringify(state));
   };
 
   toggleSidebar() {
     this.sidebarCollapsed = !this.sidebarCollapsed;
   }
 
-  toggleDropdown(dropdownItem) {
+  toggleDropdown(dropdownItem, clickOuside) {
+    if (clickOuside) {
+        this.dropdown[dropdownItem] = false;
+    }
+
     for(let item in this.dropdown) {
       if (this.dropdown.hasOwnProperty(item)) {
         if (item === dropdownItem){

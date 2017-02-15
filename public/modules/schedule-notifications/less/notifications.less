@@ -2,13 +2,11 @@
 @import (once) "../../../less/_app.mixins.less";
 
 .header-nav-element {
-  &:last-child {
-    .dropdown-mixin(auto, 0);
-  }
+  .dropdown-mixin(auto, 1rem);
 }
 
 .notifications__dropdown {
-  .dropdown-mixin(auto, 50%);
+  .dropdown-mixin(auto, -6.5rem);
   min-width: 310px;
 
   .notification-item {
@@ -19,11 +17,11 @@
       line-height: 1.5rem;
     }
     &--control {
-      padding: 7px 15px 11px;
+      padding: 10px 15px;
+
       .button {
         height: auto;
         padding: 8px 19px 9px 20px;
-
         font-size: inherit;
         line-height: inherit;
       }
@@ -31,12 +29,10 @@
 
     .overdue-checkbox, .label {
       position: absolute;
-      top: 50%;
+      top: 0;
       right: 15px;
-      transform: translateY(-50%);
-
       font-size: 1rem;
-      line-height: 1.1rem;
+      line-height: 4rem;
     }
 
     .dropdown-item-title {
@@ -47,9 +43,9 @@
         width: @bullet-size;
         height: @bullet-size;
         border-radius: 50%;
-
         margin-right: 9px;
       }
+
       &.task-priority {
         &--1 {
           &:before {
@@ -76,15 +72,12 @@
     .dropdown-checkbox {
       &--square {
         display: inline-block;
-
         width: 12px;
         height: 12px;
-
         margin:0 0 0 5px;
-
         border: 1px solid @dropdown-item-border;
-
         vertical-align: middle;
+
         &:hover {
           cursor: pointer;
         }
