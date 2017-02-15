@@ -1,15 +1,18 @@
 @import (once) "../../../less/_app.variables.less";
 
 .main-header-mobile {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  position: relative;
   padding: 0 1.8rem;
   background-color: @event-header-color;
-  position: relative;
-  display: block;
   color: @event-header-text-color;
   height: 5rem;
   &__main-tab-info {
-    display: inline-block;
-    width: 60%;
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
     & span:hover {
       color: @color-white;
     }
@@ -23,9 +26,7 @@
     text-transform: uppercase;
   }
   &__icons {
-    height: 5rem;
     line-height: 5rem;
-    float: right;
     & > a span:hover {
       color: @color-white;
     }
@@ -33,15 +34,19 @@
     &--add-task {
       color: #879EB4;
       padding: 0 0 0 1.5rem;
-      font-size: 1.8rem;
+      font-size: 2.5rem;
+    }
+    &--burger {
+      color: #879EB4;
+      font-size: 2.5rem;
     }
     &--arrow {
       color: #879EB4;
-      font-size: 1.8rem;
+      font-size: 2.5rem;
     }
     &--edit-state {
       color: #879EB4;
-      font-size: 1.8rem;
+      font-size: 2.5rem;
       padding: 0 0 0 1.1rem;
     }
   }

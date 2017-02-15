@@ -1,15 +1,15 @@
 <div class="tasks-list" data-ng-controller="TasksListController as taskListCtrl">
     <header class="main-header-mobile">
         <div class="main-header-mobile__main-tab-info">
-            <span class="main-header-mobile__icons--burger icon-dehaze"></span>
+            <span class="main-header-mobile__icons--burger icon icon-dehaze"></span>
             <h3 class="main-header-mobile__title">Tasks</h3>
         </div>
         <div class="main-header-mobile__icons">
             <a data-ui-sref="restricted.todo_state.tasks.create">
-                <span class="main-header-mobile__icons--add-task icon-add"></span>
+                <span class="main-header-mobile__icons--add-task icon icon-add"></span>
             </a>
             <a data-ui-sref="restricted.overdue">
-                <span class="main-header-mobile__icons--notifications icon-notifications_active"></span>
+                <span class="main-header-mobile__icons--notifications icon icon-notifications_active"></span>
             </a>
         </div>
     </header>
@@ -60,12 +60,12 @@
                 <div class="tasks-list-item__title" data-ng-bind="task.title"></div>
             </div>
             <a class="tasks-list-item__edit" data-ui-sref="restricted.todo_state.tasks.details({ taskId: task._id })">
-                <span class="tasks-list__icons--edit icon-create"></span>
+                <span class="tasks-list__icons--edit icon icon-create"></span>
             </a>
         </li>
     </ul>
     <p class="tasks-list__no-items"
         data-ng-hide="taskListCtrl.tasks.length">
-        No tasks yet.<br/>Please, click on <span class="icon-add"></span> to add new one.
+        No tasks yet.<br/>Please, click on <span class="icon icon-add"></span> to add new one.
     </p>
 </div>
