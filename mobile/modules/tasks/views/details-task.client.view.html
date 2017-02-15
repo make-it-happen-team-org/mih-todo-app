@@ -17,13 +17,13 @@
              donut-data="tasksDetails.task.progress.progressChart.data"
              donut-colors="tasksDetails.task.progress.progressChart.colors"
              donut-formatter="tasksDetails.task.progress.progressChart.formatter">
-            <span class="tasks-details__formatted">{{ 100 - tasksDetails.task.progress.percent }}%</span>
+            <span class="tasks-details__formatted">{{ tasksDetails.task.progress.percent }}%</span>
         </div>
         <div class="tasks-details__text-wrapper">
             <span class="tasks-details__task-name" data-ng-bind="tasksDetails.task.title"></span>
             <div class="tasks-details__percentage">
-                <span class="tasks-details__done">DONE: {{ tasksDetails.task.progress.left }}h</span>
-                <span class="tasks-details__left">LEFT: {{ tasksDetails.task.progress.done }}h</span>
+                <span class="tasks-details__done">DONE: {{ tasksDetails.task.progress.done }}h</span>
+                <span class="tasks-details__left">LEFT: {{ tasksDetails.task.progress.left }}h</span>
             </div>
         </div>
     </div>

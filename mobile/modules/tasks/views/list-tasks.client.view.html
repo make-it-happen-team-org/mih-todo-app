@@ -45,10 +45,15 @@
         </div>
     </div>
 
-    <ul class="tasks-list__list" data-ng-show="taskListCtrl.tasks.length">
-        <li class="tasks-list__list-item {{'task-priority-' + task.priority}}" data-ng-repeat="task in taskListCtrl.tasks" >
-            <div class="progress__wrapper">
-
+    <ul class="tasks-list__list" data-ng-show="taskListCtrl.filteredTasks.length">
+        <li class="tasks-list__list-item {{'task-priority-' + task.priority}}" data-ng-repeat="task in taskListCtrl.filteredTasks">
+            <div class="tasks-list__progress-wrapper">
+                <div class="tasks-list__progress-wrapper" donut-chart=""
+                     donut-data="task.progress.progressChart.data"
+                     donut-colors="task.progress.progressChart.colors"
+                     donut-formatter="task.progress.progressChart.formatter">
+                    <span class="tasks-list__formatted">{{ task.progress.percent }}%</span>
+                </div>
             </div>
             <div class="tasks-list-item__info">
                 <div class="tasks-list-item__title" data-ng-bind="task.title"></div>
@@ -61,5 +66,9 @@
     <p class="tasks-list__no-items"
         data-ng-hide="taskListCtrl.tasks.length">
         No tasks yet.<br/>Please, click on <span class="icon icon-add"></span> to add new one.
+    </p>
+    <p class="tasks-list__no-items"
+       data-ng-show="taskListCtrl.tasks.length && taskListCtrl.filter.isComplete && !taskListCtrl.filteredTasks.length">
+        There are no completed tasks <br/>Please <button type="button" class="sidebar-button__reset" ng-click="taskListCtrl.resetCompleteFilter()">reset</button> filter to display all tasks.
     </p>
 </div>

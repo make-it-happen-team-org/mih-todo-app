@@ -2,10 +2,12 @@
 
 .tasks-details {
   &__progress-chart {
-    height: 120px;
-    width: 120px;
+    position: relative;
+    height: 12rem;
+    width: 12rem;
     & path[stroke='#ffffff'] {
       stroke: transparent;
+      stroke-width: 2;
     }
     & path[fill='none'] {
       stroke: transparent;
@@ -19,9 +21,6 @@
     align-items: center;
     padding: 1.5rem 1.5rem 1.5rem 0;
   }
-  &__progress-chart {
-    position: relative;
-  }
   &__formatted {
     position: absolute;
     top: 50%;
@@ -30,10 +29,11 @@
     width: 50%;
     font-size: 24px;
     margin: 0 auto;
+    text-align: center;
   }
   &__text-wrapper {
     display: flex;
-    padding-left: 18px;
+    padding-left: 1.8rem;
     flex-flow: column nowrap;
     justify-content: space-between;
     height: 100%;
@@ -42,15 +42,15 @@
     font-size: 1.6rem;
     letter-spacing: 0.2px;
     line-height: 2.4rem;
-    padding-top: 10px;
+    padding-top: 1rem;
   }
   &__percentage {
-    font-size: 12px;
+    font-size: 1.2rem;
     color: @task-text-color;
     font-family: @font-open-sans-semibold;
   }
   &__done {
-    padding-right: 10px;
+    padding-right: 1rem;
   }
   &__left {
 
@@ -61,7 +61,7 @@
       display: flex;
       flex-flow: row nowrap;
       align-items: center;
-      padding: 0.8rem;
+      padding: 0.7rem 1rem;
       border-bottom: 1px solid @event-list-item-border-bottom;
       background-color: @color-white;
       font-family: @font-open-sans-semibold;
@@ -82,8 +82,8 @@
   }
   &-item {
     &__icons {
-      color: #000;
-      font-size: 2rem;
+      color: @task-list-item-text-color;
+      font-size: 2.5rem;
       padding-right: 3.2rem;
       &.dropp {
         font-size: 2.5rem;

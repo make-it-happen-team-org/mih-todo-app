@@ -15,7 +15,6 @@ class TasksDetailsController {
 
         this.showTask();
         attachEvent();
-
     }
 
     showTask() {
@@ -23,30 +22,21 @@ class TasksDetailsController {
             taskId: this.$stateParams.taskId
         }).$promise.then((res) => {
             this.task = res;
-            this.task.progress = this.TasksListService.recalcChart(this.task);
+            this.task.progress = this.TasksListService.recalcChart(this.task, '#172837', '#1AAA8F');
             this.task.duration = moment(res.days.endTime).diff(moment(res.days.startTime), 'hours');
             this.task.taskPriorityText = this.priorityForHuman(res);
         });
     }
 
     priorityForHuman(task) {
-        let text = '';
-        switch(task.priority) {
-            case 1:
-                text = 'Urgent and Important';
-                break;
-            case 2:
-                text = 'Not Urgent but Important';
-                break;
-            case 3:
-                text = 'Urgent but not Important';
-                break;
-            case 4:
-                text = 'Not Urgent and not Important';
-                break;
-        }
+        let priorityMap = [
+            'Urgent and Important',
+            'Not Urgent but Important',
+            'Urgent but not Important',
+            'Not Urgent and not Important'
+        ];
 
-        return text;
+        return priorityMap[task.priority - 1];
     }
 }
 

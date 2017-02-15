@@ -16,7 +16,7 @@ class TasksListService {
         };
     };
 
-    recalcChart (task) {
+    recalcChart (task, color1, color2) {
         let progress = this.getFormattedProgress(task);
 
         task.progress = angular.extend(progress, {
@@ -28,7 +28,7 @@ class TasksListService {
                     value: 100 - progress.percent,
                     label: ''
                 }],
-                colors:    ['#172837', '#1AAA8F'],
+                colors:    [color1, color2],
                 formatter: function formatter() {
                     return '';
                 }

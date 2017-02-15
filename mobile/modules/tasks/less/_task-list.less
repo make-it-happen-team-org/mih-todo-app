@@ -23,7 +23,7 @@
     display: flex;
     flex-flow: row nowrap;
     align-items: center;
-    padding: 0.5rem 1rem;
+    padding: 0 1rem 0 0;
     border-left: 0.5rem solid @event-list-item-color;
     border-bottom: 1px solid @event-list-item-border-bottom;
     background-color: @color-white;
@@ -40,7 +40,7 @@
   &-item {
     &__info {
       display: inline-block;
-      color: #000;
+      color: @task-list-item-text-color;
     }
     &__title {
       font-family: @font-open-sans-semibold;
@@ -49,5 +49,29 @@
       position: absolute;
       right: 1.5rem;
     }
+  }
+  &__progress-wrapper {
+    position: relative;
+    width: 5.5rem;
+    height: 5.5rem;
+    & path[stroke='#ffffff'] {
+      stroke: transparent;
+      stroke-width: 2;
+    }
+    & path[fill='none'] {
+      stroke: transparent;
+    }
+  }
+  &__formatted {
+    position: absolute;
+    top: 50%;
+    left: 27%;
+    width: 50%;
+    margin: 0 auto;
+    color: @task-list-item-text-color;
+    transform: translateY(-50%);
+    z-index: 5;
+    text-align: center;
+    font-size: 1.1rem;
   }
 }
