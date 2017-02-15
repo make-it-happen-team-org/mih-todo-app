@@ -1,0 +1,156 @@
+@import (once) "../../../less/_app.variables.less";
+@import (once) "../../../less/_app.mixins.less";
+
+
+
+.settings {
+  background: @color-sidebar-separator;
+
+  height: 100%;
+
+  .main-info {
+    background: @settings-main-background;
+
+    padding: 16px 20px;
+  }
+
+  .main-info--wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  .main-info--col {
+  }
+
+  .main-info--col__center {
+    align-self: center;
+  }
+
+  .main-info--username {
+    .font-size(16);
+  }
+
+  .main-info--email {
+    .font-size(14);
+  }
+
+  .main-info--upload {
+    color: @settings-sub-font-color;
+  }
+
+  @avatar-size: 95px;
+
+  .avatar {
+    width: @avatar-size;
+    height: @avatar-size;
+  }
+}
+.settings-page {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+
+.settings-groups {
+  background: @settings-additional-background;
+
+  box-shadow: 0 1px 7px -3px #333333;
+}
+
+.settings-groups--link {
+  display: block;
+
+  width: 100%;
+
+  border-bottom: 1px solid @settings-sub-background;
+
+  padding: 16px;
+
+  color: @settings-main-font-color;
+
+  .icon {
+    margin-right: 30px;
+
+    vertical-align: middle;
+  }
+}
+
+.settings-content {
+  height: 100%;
+
+  background: @settings-main-background;
+
+  padding: 16px 16px 0;
+
+  .field-group {
+    padding: 14px 0 10px;
+
+    &__select {
+      position: relative;
+
+      .field-group--unit {
+        position: absolute;
+        right: 2px;
+        top: 50%;
+      }
+
+      .field-group--field {
+        width: 90%;
+      }
+    }
+  }
+
+  .field-group--name {
+    margin: 0;
+
+    color: @settings-sub-font-color;
+    .font-size(12);
+  }
+
+  .field-group--field {
+    width: 100%;
+    height: 17px;
+
+    box-sizing: content-box;
+
+    padding: 10px 0;
+
+    border: 0 none;
+    border-bottom: 1px solid @settings-sub-font-color;
+
+    background: transparent;
+
+    color: @color-white;
+    .font-size(16);
+
+    outline: none;
+
+    option {
+      color: @settings-main-font-color;
+    }
+  }
+
+  .field-group--label {
+    display: block;
+  }
+
+  .field-row {
+    display: flex;
+
+    margin-bottom: 24px;
+  }
+
+  .field-col {
+    flex-grow: 1;
+
+    &__small {
+      flex-grow: 0;
+    }
+
+    &__row-control {
+      align-self: center;
+    }
+  }
+}
