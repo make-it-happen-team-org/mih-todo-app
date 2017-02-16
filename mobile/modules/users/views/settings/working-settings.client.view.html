@@ -15,9 +15,9 @@
     <div class="settings-content">
         <form>
             <fieldset>
-                <div class="field-row">
+                <div class="field-row" ng-repeat="workday in settings.workingDays">
                     <div class="field-col">
-                        <div class="field-group__select">
+                        <div class="field-group field-group__select">
                             <h2 class="field-group--name">From</h2>
                             <select class="field-group--field">
                                 <option>04:30 PM</option>
@@ -31,7 +31,7 @@
                     </div>
 
                     <div class="field-col">
-                        <div class="field-group__select">
+                        <div class="field-group field-group__select">
                             <h2 class="field-group--name">To</h2>
                             <select class="field-group--field">
                                 <option>04:30 PM</option>
@@ -46,44 +46,7 @@
 
                     <div class="field-col__small field-col__row-control">
                         <label>
-                            <span class="field-col--label">Sun</span>
-                            <input type="checkbox">
-                        </label>
-                    </div>
-                </div>
-
-                <div class="field-row">
-                    <div class="field-col">
-                        <div class="field-group__select">
-                            <h2 class="field-group--name">From</h2>
-                            <select class="field-group--field">
-                                <option>04:30 PM</option>
-                                <option>05:00 PM</option>
-                                <option>05:30 PM</option>
-                                <option>06:00 PM</option>
-                                <option>06:30 PM</option>
-                                <option>07:00 PM</option>
-                            </select>
-                        </div>
-                    </div>
-
-                    <div class="field-col">
-                        <div class="field-group__select">
-                            <h2 class="field-group--name">To</h2>
-                            <select class="field-group--field">
-                                <option>04:30 PM</option>
-                                <option>05:00 PM</option>
-                                <option>05:30 PM</option>
-                                <option>06:00 PM</option>
-                                <option>06:30 PM</option>
-                                <option>07:00 PM</option>
-                            </select>
-                        </div>
-                    </div>
-
-                    <div class="field-col__small field-col__row-control">
-                        <label>
-                            <span class="field-group--label">Mon</span>
+                            <span class="field-col--label">{{ workday }}</span>
                             <input type="checkbox">
                         </label>
                     </div>

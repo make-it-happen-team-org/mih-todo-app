@@ -1,12 +1,12 @@
 @import (once) "../../../less/_app.variables.less";
 @import (once) "../../../less/_app.mixins.less";
 
-
+@avatar-size: 95px;
 
 .settings {
   background: @color-sidebar-separator;
 
-  height: 100%;
+  min-height: 100%;
 
   .main-info {
     background: @settings-main-background;
@@ -39,15 +39,13 @@
     color: @settings-sub-font-color;
   }
 
-  @avatar-size: 95px;
-
   .avatar {
     width: @avatar-size;
     height: @avatar-size;
   }
 }
 .settings-page {
-  height: 100%;
+  min-height: 100%;
   display: flex;
   flex-direction: column;
 }
@@ -78,14 +76,14 @@
 }
 
 .settings-content {
-  height: 100%;
-
   background: @settings-main-background;
 
   padding: 16px 16px 0;
 
   .field-group {
     padding: 14px 0 10px;
+
+    color: @settings-additional-font-color;
 
     &__select {
       position: relative;
@@ -122,7 +120,6 @@
 
     background: transparent;
 
-    color: @color-white;
     .font-size(16);
 
     outline: none;
@@ -138,19 +135,22 @@
 
   .field-row {
     display: flex;
-
-    margin-bottom: 24px;
   }
 
   .field-col {
     flex-grow: 1;
 
     &__small {
-      flex-grow: 0;
+      width: 30px;
     }
 
     &__row-control {
       align-self: center;
+      text-align: center;
     }
+  }
+
+  .field-col--label {
+    display: block;
   }
 }
