@@ -47,6 +47,13 @@
   &-priority-4 { color: @priority-4-color; }
 }
 
+// screen view --------------------
+.screen-view--task,
+.screen-view--event {
+  height: 100%;
+  background-color: @screen-view-bg-color;
+}
+
 // screen panel --------------------
 .screen-panel {
   padding: @screen-panel-padding;
@@ -54,6 +61,10 @@
   color: @screen-panel-color;
 
   &.with-fixed-header {
+    padding-top: @screen-panel-fixed-header-padding-top;
+  }
+
+  &.with-fixed-footer {
     padding-top: @screen-panel-fixed-header-padding-top;
   }
 }

@@ -1,14 +1,17 @@
 @import "../../../less/_app.variables.less";
 
-.calendar-wrapper {
+.main-calendar {
     position: relative;
     z-index: 0;
     padding: 0;
     color: @calendar-primary-font-color;
 
-    .row { margin: 0; }
+    .calendar-wrap {
+        padding-top: @header-height;
+        padding-bottom: @footer-height;
+    }
 
-    .ibox .ibox-content { padding: 0; }
+    .fc { padding: 0;}
 
     .fc-month-view .fc-day-number { color: @calendar-secondary-font-color; }
 
@@ -16,6 +19,8 @@
         margin: 0;
         padding: .71em 1.07em;
         background: @calendar-toolbar-bg-color;
+
+        .fc-button-group {  margin-left: 0; }
 
         .fc-button {
             border: transparent;
@@ -30,27 +35,18 @@
         }
 
         .fc-today-button {
-            height: 2.14em;
-            padding: 0 1.5em;
-            background: @calendar-today-btn-bg-color;
-            border-radius: 0;
-            color: @calendar-primary-font-color;
-            opacity: 1;
-            outline: none;
-
-            &:hover {
-                background: @calendar-today-btn-hover-bg-color;
-                cursor: pointer;
-            }
+            display: none;
         }
 
         .fc-center {
             vertical-align: text-top;
             font-family: @font-open-sans-light;
+            overflow: hidden;
+            width: 100%;
 
             h2 {
-                margin: 0;
-                font-size: 1.79em;
+                float: none;
+                font-size: 1.5em;
                 line-height: 1em;
             }
         }

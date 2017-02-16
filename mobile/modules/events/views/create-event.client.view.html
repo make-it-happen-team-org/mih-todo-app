@@ -1,4 +1,4 @@
-<div data-ng-controller="EventsController">
+<div data-ng-controller="EventsController" class="screen-view--event">
     <form class="event event--create" novalidate>
         <header class="main-header-mobile main-header-mobile--fixed">
             <div class="main-header-mobile__main-tab-info">
@@ -14,7 +14,7 @@
                 </button>
             </div>
         </header>
-        <section class="screen-panel with-fixed-header">
+        <section class="screen-panel with-fixed-header with-fixed-footer">
             <div class="form-box">
                 <input type="text" data-ng-model="eventData.title"
                        class="form-input form-input--required" placeholder="Title*" required/>

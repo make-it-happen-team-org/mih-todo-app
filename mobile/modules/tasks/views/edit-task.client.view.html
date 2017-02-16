@@ -1,4 +1,4 @@
-<div data-ng-controller="TasksController" data-ng-init="editMode()">
+<div data-ng-controller="TasksController" data-ng-init="editMode()" class="screen-view--task">
     <div class="task task--edit">
         <form name="taskForm" novalidate>
             <header class="main-header-mobile main-header-mobile--fixed">
@@ -18,7 +18,7 @@
                     </button>
                 </div>
             </header>
-            <section class="screen-panel with-fixed-header">
+            <section class="screen-panel with-fixed-header with-fixed-footer">
                 <div class="form-box">
                     <label for="title">Title*</label>
                     <input type="text" id="title" name="title" class="form-input form-input--required"
