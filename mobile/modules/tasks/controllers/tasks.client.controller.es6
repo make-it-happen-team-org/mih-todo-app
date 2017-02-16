@@ -50,10 +50,6 @@ class TasksController {
       maxDate: dateMax
     };
 
-    $scope.calendar = {
-      isShown : false
-    };
-
     $scope.clear = () => {
       return $scope.dt = null;
     };

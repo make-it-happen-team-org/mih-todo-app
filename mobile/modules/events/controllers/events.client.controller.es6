@@ -7,10 +7,6 @@ angular.module('events').controller('EventsController',
 			$scope.authentication = Authentication;
 
 			$scope.user = Authentication.user;
-
-			$scope.calendar = {
-				isShown : false
-			};
 			
 			var currentDate = new Date(),
 				defaultEventData = {
