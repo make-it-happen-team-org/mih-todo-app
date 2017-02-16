@@ -39,8 +39,8 @@
                   data-ng-class="details.isOpenNotes ? 'icon-keyboard_arrow_up' : 'icon-keyboard_arrow_down'"
                   data-ng-click="details.isOpenNotes = !details.isOpenNotes"></span>
         </li>
-        <div class="events-details__list-item" data-ng-if="details.isOpenNotes">
+        <li class="events-details__list-item" data-ng-if="details.isOpenNotes">
             <span class="events-details-item__notes">{{ details.event.notes }}</span>
-        </div>
+        </li>
     </ul>
 </div>

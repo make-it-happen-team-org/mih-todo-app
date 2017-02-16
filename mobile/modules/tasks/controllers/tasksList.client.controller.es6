@@ -3,8 +3,8 @@
 
 class TasksListController {
   /** @ngInject */
-  constructor($scope, $filter, Authentication, Tasks) {
-    Object.assign(this, { $scope, $filter, Authentication, Tasks });
+  constructor($scope, $filter, Authentication, Tasks, TasksListService) {
+    Object.assign(this, { $scope, $filter, Authentication, Tasks, TasksListService });
 
     const attachEvents = () => {
       this.$scope.$on('NEW_TASK_MODIFY', () => {
@@ -15,6 +15,7 @@ class TasksListController {
     this.authentication = Authentication;
     this.tasks          = this.find();
     this.filter         = {};
+    this.filteredTasks  = this.tasks;
 
     attachEvents();
   }
@@ -36,49 +37,49 @@ class TasksListController {
 
   sortListBy(type) {
     switch (type) {
-    case 'priority': {
-      this.filter.name         = 'priority';
-      this.filter.priorityAsc = !this.filter.priorityAsc;
-      this.tasks               = this.$filter('orderBy')(this.tasks, this.filter.priorityAsc ? 'priority' : '-priority');
-      this.setFiltersToLocalStorage();
-      break;
-    }
-    case 'time': {
-      this.filter.name     = 'time';
-      this.filter.timeAsc = !this.filter.timeAsc;
-
-      if (this.filter.timeAsc) {
-        this.tasks = TasksListController.bulbSortForEndTime(this.tasks);
-      } else {
-        this.tasks = TasksListController.bulbSortForEndTime(this.tasks).reverse();
+      case 'priority': {
+        this.filter.name         = 'priority';
+        this.filter.priorityAsc = !this.filter.priorityAsc;
+        this.filteredTasks               = this.$filter('orderBy')(this.filteredTasks, this.filter.priorityAsc ? 'priority' : '-priority');
+        this.setFiltersToLocalStorage();
+        break;
       }
-      this.setFiltersToLocalStorage();
-      break;
-    }
-    case 'isComplete': {
-      if (this.filter.isComplete) {
-        this.tasks = this.tasks.filter(el => el.isComplete);
-      } else {
-        this.tasks = this.tasksCopy.slice()
+      case 'time': {
+        this.filter.name     = 'time';
+        this.filter.timeAsc = !this.filter.timeAsc;
+  
+        if (this.filter.timeAsc) {
+          this.filteredTasks = TasksListController.bulbSortForEndTime(this.filteredTasks);
+        } else {
+          this.filteredTasks = TasksListController.bulbSortForEndTime(this.filteredTasks).reverse();
+        }
+        this.setFiltersToLocalStorage();
+        break;
       }
-      this.setFiltersToLocalStorage();
-      break;
-    }
+      case 'isComplete': {
+        if (this.filter.isComplete) {
+          this.filteredTasks = this.tasks.filter(el => el.isComplete);
+        } else {
+          this.filteredTasks = this.tasks;
+        }
+        this.setFiltersToLocalStorage();
+        break;
+      }
     }
   }
 
-
   find() {
     this.Tasks.query().$promise
-        .then((resolved) => {
-          this.tasks     = resolved;
-          this.tasksCopy = resolved.slice();
+        .then((tasks) => {
+          this.tasks     = tasks;
+          this.filteredTasks     = tasks;
+          this.progressExtend();
           this.getFiltersFromLocalStorage();
           this.sortListBy('isComplete');
           this.sortListBy(this.filter.name);
           this.setFiltersToLocalStorage();
-        }, (rejected) => {
-          console.log(rejected);
+        }, (err) => {
+          console.log(err);
         });
   }
 
@@ -99,6 +100,17 @@ class TasksListController {
 
   setFiltersToLocalStorage() {
     localStorage.setItem('sidebarFilter', JSON.stringify(this.filter));
+  }
+  
+  resetCompleteFilter() {
+    this.filter.isComplete = false;
+    this.sortListBy('isComplete');
+  }
+
+  progressExtend() {
+    _.forEach(this.filteredTasks, (value, key) => {
+      this.filteredTasks[key].progress = this.TasksListService.recalcChart(value, '#879EB4', '#1AAA8F');
+    });
   }
 
   static bulbSortForEndTime(arr){

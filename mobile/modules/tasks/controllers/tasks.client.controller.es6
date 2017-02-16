@@ -1,7 +1,7 @@
 class TasksController {
   constructor($scope, $rootScope, $stateParams, $location,
               Authentication, Tasks, Users, $timeout, Algorithm,
-              Slots, Notification) {
+              Slots, Notification, TasksListService) {
     $scope.authentication = Authentication;
     $scope.isATemplate = false;
     $scope.user = Authentication.user;
@@ -18,6 +18,7 @@ class TasksController {
     this.Algorithm = Algorithm;
     this.Slots = Slots;
     this.Notification = Notification;
+    this.TasksListService = TasksListService;
 
     this.listen();
 
@@ -307,7 +308,6 @@ class TasksController {
       }
 
       task.$update(() => {
-        this.recalcChart();
         this.$rootScope.$broadcast('NEW_TASK_MODIFY');
       }, (errorResponse) => {
         this.$scope.error = errorResponse.data.message;
@@ -322,37 +322,6 @@ class TasksController {
     }
   };
 
-  getFormattedProgress () {
-    let complete   = this.$scope.task.progress;
-    let estimation = this.$scope.task.estimation;
-
-    return {
-      percent: +(complete / estimation * 100).toFixed(2),
-      left:    estimation - complete,
-      done:    complete
-    };
-  };
-
-  recalcChart () {
-    let progress = this.getFormattedProgress();
-
-    this.$scope.progress = angular.extend(progress, {
-      progressChart: {
-        data:      [{
-          value: progress.percent,
-          label: 'Done'
-        }, {
-          value: 100 - progress.percent,
-          label: 'Left'
-        }],
-        colors:    ['#1ab394', '#f8ac59'],
-        formatter: function formatter(input) {
-          return input + '%';
-        }
-      }
-    });
-  };
-
   getSlotsByTask () {
     return this.Tasks.getSlotsByTask({
           taskId: this.$stateParams.taskId
@@ -361,9 +330,6 @@ class TasksController {
             this.$scope.progress = false;
             return;
           }
-          this.$timeout(() => {
-            this.recalcChart();
-          }, 100);
         }
     );
   };
@@ -472,6 +438,6 @@ class TasksController {
 }
 
 TasksController.$inject = ['$scope', '$rootScope', '$stateParams', '$location',
-  'Authentication', 'Tasks', 'Users', '$timeout', 'Algorithm', 'Slots', 'Notification'];
+  'Authentication', 'Tasks', 'Users', '$timeout', 'Algorithm', 'Slots', 'Notification', 'TasksListService'];
 
 angular.module('tasks').controller('TasksController', TasksController);

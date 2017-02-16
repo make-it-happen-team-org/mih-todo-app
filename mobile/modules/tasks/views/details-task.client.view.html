@@ -12,18 +12,84 @@
             </a>
         </div>
     </header>
-    <div class="events-details__sub-header">
-        <span class="events-details__date">
-            <span class="events-details__date--month">
-                <span class="events-details__date--day">{{tasksDetails.progress}}%</span>
-            </span>
-        </span>
-        <span class="events-details__event-name" data-ng-bind="tasksDetails.task.title"></span>
-        <span class="events-details__done">DONE: {{ tasksDetails.task.progress }}h</span>
-        <span class="events-details__left">LEFT: {{ tasksDetails.task.progress }}h</span>
+    <div class="tasks-details__sub-header">
+        <div class="tasks-details__progress-chart" donut-chart=""
+             donut-data="tasksDetails.task.progress.progressChart.data"
+             donut-colors="tasksDetails.task.progress.progressChart.colors">
+            <span class="tasks-details__formatted">{{ tasksDetails.task.progress.percent }}%</span>
+        </div>
+        <div class="tasks-details__text-wrapper">
+            <span class="tasks-details__task-name" data-ng-bind="tasksDetails.task.title"></span>
+            <div class="tasks-details__percentage">
+                <span class="tasks-details__done">DONE: {{ tasksDetails.task.progress.done }}h</span>
+                <span class="tasks-details__left">LEFT: {{ tasksDetails.task.progress.left }}h</span>
+            </div>
+        </div>
     </div>
+    <ul class="tasks-details__list">
+        <li class="tasks-details__list-item">
+            <span class="tasks-details-item__icons icon icon-star icon-{{tasksDetails.task.priority}}"></span>
+            <div class="tasks-details-item__description">{{ tasksDetails.task.taskPriorityText }}</div>
+        </li>
+        <li class="tasks-details__list-item">
+            <span class="tasks-details-item__icons icon icon-date_range"></span>
+            <div class="tasks-details-item__description">{{tasksDetails.task.days.startTime | date: "dd.MM h:mma"}} - {{ tasksDetails.task.days.endTime | date: "dd.MM h:mma" }}</div>
+        </li>
+        <li class="tasks-details__list-item">
+            <span class="tasks-details-item__icons icon icon-access_time"></span>
+            <div class="tasks-details-item__description">Estimation - {{ tasksDetails.task.progress.done + tasksDetails.task.progress.left }}h</div>
+        </li>
+        <li class="tasks-details__list-item"
+            data-ng-if="tasksDetails.task.notes"
+            data-ng-class="{active: tasksDetails.isOpenNotes}">
+            <span class="tasks-details-item__icons icon icon-create"></span>
+            <div class="tasks-details-item__description">Notes</div>
+            <span class="tasks-details-item__icons dropp icon"
+                  data-ng-class="tasksDetails.isOpenNotes ? 'icon-keyboard_arrow_up' : 'icon-keyboard_arrow_down'"
+                  data-ng-click="tasksDetails.isOpenNotes = !tasksDetails.isOpenNotes"></span>
+        </li>
+        <li class="tasks-details__list-item" data-ng-if="details.isOpenNotes">
+            <span class="tasks-details-item__notes">{{ details.event.notes }}</span>
+        </li>
+        <li class="tasks-details__list-item"
+            data-ng-class="{active: tasksDetails.isOpenTimeSlots}">
+            <span class="tasks-details-item__icons icon icon-av_timer"></span>
+            <div class="tasks-details-item__description">Time slots</div>
+            <span class="tasks-details-item__icons dropp icon"
+                  data-ng-class="tasksDetails.isOpenTimeSlots ? 'icon-keyboard_arrow_up' : 'icon-keyboard_arrow_down'"
+                  data-ng-click="tasksDetails.isOpenTimeSlots = !tasksDetails.isOpenTimeSlots"></span>
+        </li>
+        <li class="tasks-details__list-item" data-ng-if="tasksDetails.isOpenTimeSlots">
+            <ul class="tasks-details-item__notes" data-ng-if="!tasksDetails.slotsRange.length">
+                <li class="tasks-details-slot__item">Please generate slots with subtasks</li>
+            </ul>
+            <ul class="tasks-details-item__notes tasks-details-item__slots">
+                <li class="tasks-details-slot__item" data-ng-repeat="item in tasksDetails.slotsRange"
+                    data-ng-class="{
+                        'slot-opacity' : !(tasksDetails.isOverdueSlot(item) && !item.isComplete),
+                        'active' : !item.isComplete && tasksDetails.isOverdueSlot(item)
+                    }">
+                    <span class="tasks-details-slot__item--day">{{item.start | date:'EEE'}}</span>
+                    <span class="tasks-details-slot__item--date">{{item.start | date: 'dd/MM'}}</span>
+                    <span class="tasks-details-slot__item--duration">{{item.duration}}h</span>
 
-    <ul class="events-details__list">
-        items
+                    <button class="tasks-details-slot__btn tasks-details-slot__item--overdue" type="button"
+                            data-ng-if="!item.isComplete && tasksDetails.isOverdueSlot(item)"
+                            data-ng-click="tasksDetails.completeSlot(item)">DONE
+                    </button>
+                    <button class="tasks-details-slot__btn tasks-details-slot__item--completed" type="button"
+                            data-ng-if="item.isComplete"
+                            data-ng-click="tasksDetails.completeSlot(item)"
+                            data-ng-disabled="true">DONE
+                    </button>
+                    <button class="tasks-details-slot__btn tasks-details-slot__item--actived" type="button"
+                            data-ng-if="!item.isComplete && !tasksDetails.isOverdueSlot(item)"
+                            data-ng-click="tasksDetails.completeSlot(item)"
+                            data-ng-disabled="true">DONE
+                    </button>
+                    </span>
+                </li>
+            </ul>
+        </li>
     </ul>
 </div>
