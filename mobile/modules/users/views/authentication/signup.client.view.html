@@ -64,6 +64,7 @@
                     <p class="help-block error-text" data-ng-show="(signinForm.password.$dirty && signinForm.password.$invalid) || (signinForm.submitted && signinForm.password.$error.required)">
                         Please enter a password</p>
                 </div>
+                <div data-test-class></div>
             </div>
             <div class="text-center text-danger"
                  data-ng-show="error">
@@ -71,32 +72,17 @@
             </div>
             <div class="password-complexity">
                 <div data-ng-show="errors.length > 0">
-                    <p class="error-popover-title text-danger">
-                        The password must:</p>
+                    <p class="error-popover-title text-danger"> The password must:</p>
                     <p data-ng-repeat="error in errors">{{error}}</p>
                 </div>
                 <p class="error-popover-title text-navy"
-                   data-ng-show="errors.length === 0">
-                    The password is valid</p>
+                   data-ng-show="errors.length === 0"> The password is valid</p>
             </div>
     </fieldset>
     <div class="text-center auth-form__form-group auth-form__form-group--btns">
         <button class="login-view__btn login-view__btn--blue"
-                type="submit">
-            Create account</button>
+                type="submit"> Create account</button>
         <a href="/#!/signin"
-           class="show-signup login-view__btn login-view__btn--green">Sign
-            in</a>
+           class="show-signup login-view__btn login-view__btn--green">Sign in</a>
     </div>
 </form>
-
-<script type="text/ng-template" id="validationErrorsTmp.html">
-    <div data-ng-show="errors.length > 0">
-        <p class="error-popover-title text-danger">
-            The password must:</p>
-        <p data-ng-repeat="error in errors">{{error}}</p>
-    </div>
-    <p class="error-popover-title text-navy"
-       data-ng-show="errors.length === 0">
-        The password is valid</p>
-</script>

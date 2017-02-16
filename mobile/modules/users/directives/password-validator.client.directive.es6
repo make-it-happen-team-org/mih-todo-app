@@ -2,7 +2,6 @@ angular.module('users')
 .directive('passwordValidator', ['PasswordValidator', "$popover", function(PasswordValidator,$popover ) {
 	return {
 		require: 'ngModel',
-		scope: {},
 		link: function(scope, element, attrs) {
 
 			var	validationPopover = $popover(element, {
