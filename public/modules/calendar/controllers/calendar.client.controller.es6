@@ -22,7 +22,7 @@ class Calendar {
 
     this.uiConfig = {
       calendar: {
-        height:        700,
+        height:        500,
         editable:      true,
         header:        {
           left:   'today prev,next',

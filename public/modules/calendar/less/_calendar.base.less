@@ -8,50 +8,79 @@
 
     .row { margin: 0; }
 
-    .ibox .ibox-content { padding: 0; }
+    .fc-time-grid .fc-slats .fc-minor td { border: 0; }
 
-    .fc-month-view .fc-day-number { color: @calendar-secondary-font-color; }
+    .ibox .ibox-content {
+        padding: 0;
+        border: 0;
+        min-height: inherit;
+    }
+
+    .fc-button {
+        height: auto;
+        border: transparent;
+        background: transparent;
+        color: @calendar-secondary-font-color;
+        line-height: 1em;
+        outline: none;
+
+        .fc-icon { margin: 0; }
+    }
 
     .fc-toolbar {
+        position: relative;
         margin: 0;
-        padding: .71em 1.07em;
         background: @calendar-toolbar-bg-color;
 
-        .fc-button {
-            border: transparent;
-            background: transparent;
-            color: @calendar-secondary-font-color;
-            text-transform: capitalize;
-            outline: none;
+        .fc-left {
+            float: none;
 
-            &:hover { color: @calendar-primary-font-color; }
+            .fc-today-button { display: none; }
 
-            .fc-icon { margin: 0; }
+            .fc-button-group {
+                position: absolute;
+                width: 100%;
+                bottom: 0;
+                left: 0;
+                margin-left: 0;
+
+                .fc-prev-button { padding-left: 1.14em; }
+
+                .fc-next-button {
+                    float: right;
+                    padding-right: 1.14em;
+                }
+            }
         }
 
-        .fc-today-button {
-            height: 2.14em;
-            padding: 0 1.5em;
-            background: @calendar-today-btn-bg-color;
-            border-radius: 0;
-            color: @calendar-primary-font-color;
-            opacity: 1;
-            outline: none;
+        .fc-right {
+            float: none;
+            margin-bottom: 1.22em;
 
-            &:hover {
-                background: @calendar-today-btn-hover-bg-color;
-                cursor: pointer;
+            .fc-button {
+                float: none;
+                width: 33%;
+                margin: 0;
+                padding: 0.8em 0;
+                text-transform: uppercase;
+                font-family: @font-open-sans-light;
+
+                &.fc-state-active {
+                    border-top: 3px solid @color-mountain-meadow-green-s85;
+                    border-radius: 0;
+                }
             }
         }
 
         .fc-center {
+            display: block;
             vertical-align: text-top;
-            font-family: @font-open-sans-light;
 
             h2 {
+                float: none;
+                font: 1em/1em @font-open-sans-light;
                 margin: 0;
-                font-size: 1.79em;
-                line-height: 1em;
+                color: @calendar-secondary-font-color;
             }
         }
 
@@ -64,34 +93,22 @@
 
         .fc-row { border-right: 1px solid @calendar-header-border-color; }
 
+        &.fc-axis { border-left: 0; }
+
         .fc-day-header {
-            padding: 1em 0;
+            padding: .85em 0 1.24em;
             border-left: 1px solid @calendar-header-border-color;
-            color: @calendar-secondary-font-color;
             text-transform: uppercase;
         }
     }
 
-    .fc-agenda-view { padding: 0 @calendar-wrapper-padding @calendar-wrapper-padding; }
-
-    .fc-view-container:before {
-        width: 100%;
-        height: 48px;
-        position: absolute;
-        background: @calendar-day-header-bg-color;
-        content: '';
-    }
-
     .fc-body {
-        & > tr > .fc-widget-content {
+        .fc-widget-content {
             border-right: 0;
             border-left: 0;
         }
 
-        .fc-divider {
-            height: 4px;
-            background: @calendar-header-divider;
-        }
+        .fc-divider { display: none; }
 
         .fc-axis {
             color: @calendar-secondary-font-color;
@@ -99,8 +116,11 @@
 
             &.fc-time {
                 padding-top: 0.33em;
-                font: .86em/1.41em @font-open-sans-bold;
+                border-right: 0;
+                font: 1em/1.41em @font-open-sans-regular;
                 text-transform: uppercase;
+                color: @calendar-slot-font-color;
+                text-align: center;
             }
         }
 
@@ -112,25 +132,84 @@
         }
 
         .fc-today {
-            border-color: @calendar-today-slot-border-color;
             background: @calendar-today-slot-bg-color;
+            border-right-width: 0;
+            border-left-width: 0;
         }
 
-        .fc-minor { border: 1px solid @calendar-free-slot-minor-border-color; }
+        .fc-minor { border: none; }
     }
 
-    .fc-day-grid .fc-axis {
-        padding: @calendar-wrapper-padding .61em .77em 0;
-        font-size: .93em;
-        text-transform: capitalize;
+    .fc-agenda-view .fc-day-grid { display: none; }
+
+    .fc-time-grid-container .fc-event-container {
+        margin: 0;
+        font-size: .95em;
     }
 
-    .fc-time-grid-container {
-        .fc-event-container {
-            margin: 0;
-            font-size: .95em;
+    .fc-agendaDay-view {  
+        .fc-widget-header.fc-axis { display: none; }
+
+        .fc-widget-header .fc-day-header {
+            color: @calendar-primary-font-color;
+            font: 1.28em @font-open-sans-light;
+        }
+    }
+
+    .fc-agendaWeek-view,
+    .fc-month-view { border-top: 1.48em solid @calendar-day-header-bg-color; }
+
+    .fc-agendaWeek-view {
+        .fc-body { display: none; }
+
+        .fc-day-header {
+            word-spacing: 9999px;
+            background: @calendar-free-slot-bg-color;
+            border-left: 0;
+            color:@color-biscay-blue-s41;
+            padding: 10px 0;
+            text-transform: capitalize;
+
+            &::first-line {
+                font-size: 12px;
+                font-family: @font-open-sans-light;
+                color: @calendar-secondary-font-color;
+            }
         }
 
-        .fc-widget-content { border-color: @calendar-free-slot-border-color; }
+        .fc-widget-header.fc-axis { display: none;}
+        .fc-widget-header .fc-row { border: 0;}
     }
+
+    .fc-month-view {
+        .fc-row.fc-widget-header,
+        .fc-day,
+        td { border: 0; }
+
+        .fc-body .fc-day.fc-sat,
+        .fc-body .fc-day.fc-sun { background-color: transparent; }
+
+        .fc-event-container { display: none; }
+
+        .fc-day-number { color: @color-biscay-blue-s41; }
+
+        .fc-day-number.fc-other-month { opacity: 0.5; }
+
+        .fc-day-number { text-align: center; }
+
+        .fc-day-header {
+            padding: 0.72em 0;
+            border-left: 0;
+            background: @calendar-free-slot-bg-color;
+            color: @calendar-slot-font-color;
+            text-transform: capitalize;
+            word-spacing: 9999px;
+
+            &::first-line {
+                font: 0.86em @font-open-sans-light;
+                color: @calendar-secondary-font-color;
+            }
+        }
+    }
+
 }

@@ -4,25 +4,17 @@
     margin: 0;
     padding: .42em;
     border-radius: 0;
-    font: 0.91em/1.3em @font-open-sans-bold;
+    font: 1em/1.3em @font-open-sans-regular;
+    text-transform: capitalize;
 
     .fc-bg { opacity: 0; }
 
-    .fc-time { display: none; }
-
-    .fc-end-resizer {
-        bottom: 3px;
-        left: -@calendar-slot-border-width;
-        font-family: 'FontAwesome';
-        opacity: .6;
-
-        &:after { content: "\f0dd"; }
-
-        &:hover { opacity: 1; }
-    }
+    .fc-time,
+    .fc-end-resizer { display: none; }
 
     &.task {
         border-width: 0 0 0 @calendar-slot-border-width;
+        padding: 0.5em 0.72em;
 
         &-priority-1 {
             background-color: @calendar-task-priority-1-bg-color;
@@ -47,7 +39,6 @@
 
     &.event {
         border: none;
-        text-transform: capitalize;
 
         &.sick,
         &.vacation {
@@ -75,7 +66,5 @@
 
             .fc-title:before { content: "\f072"; }
         }
-
-        .fc-end-resizer { left: 0; }
     }
 }
