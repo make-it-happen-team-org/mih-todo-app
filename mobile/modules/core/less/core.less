@@ -2,7 +2,6 @@
 @import "_core.logo.less";
 @import "_core.datepicker.less";
 @import "_core.navigation.less";
-@import "core.main-view.sidebar/core.main-view.sidebar.less";
 @import "_core.socials.less";
 @import "_core.main-content.less";
 @import "_core.form-controls.less";
@@ -23,12 +22,6 @@
     }
   }
 
-  &-header {
-    position: fixed;
-    width: 100%;
-    top: 0;
-  }
-
   &-footer {
     position: fixed;
     width: 100%;
@@ -39,7 +32,6 @@
     height: 100%;
 
     &-wrapper {
-      //padding: 56px 0;
       height: 100%;
       background: @color-sidebar-separator;
       color: #000;
@@ -48,20 +40,6 @@
         padding: 112px 0;
       })
     }
-  }
-
-  &-sidebar {
-    position: fixed;
-    height: 100%;
-    width: 60%;
-    left: -60%;
-    z-index: 1;
-
-    transition: left 1s;
-
-    &-active {
-      left: 0;
-  }
   }
 }
 
@@ -74,18 +52,6 @@
 });
 
 .ui-sref.back { margin-bottom: 20px; }
-
-.rzslider-manual-input { margin-top: .5em; }
-
-// ---------------- IBOX ----------------
-.ibox {
-  .ibox-content {
-    padding: 15px 20px 20px;
-    min-height: 330px;
-  }
-}
-
-.btn-ibox-title { margin-top: -10px; }
 
 // ---------------- NOTIFICATION ----------------
 div.ui-notification {
@@ -118,51 +84,4 @@ div.ui-notification {
   position: absolute;
   right: 6px;
   top: 12px;
-}
-
-// ---------------- PRIORITY ----------------
-.item {
-  &-priority { color: @color-mid-grey-s4; }
-
-  &-priority-1 {
-    border-left: 10px solid @priority-1-color;
-    color: @priority-1-color;
-  }
-
-  &-priority-2 {
-    border-left: 10px solid @priority-2-color;
-    color: @priority-2-color;
-  }
-
-  &-priority-3 {
-    border-left: 10px solid @priority-3-color;
-    color: @priority-3-color;
-  }
-
-  &-priority-4 {
-    border-left: 10px solid @priority-4-color;
-    color: @priority-4-color;
-  }
-}
-
-.dashboard-panel {
-  padding: @dashboard-panel-padding-left-right @dashboard-panel-padding-top-bottom;
-}
-
-.fade-element-in.ng-enter {
-  transition: 1s linear all;
-  opacity: 0;
-}
-
-.fade-element-in-init .fade-element-in.ng-enter,
-.fade-element-in.ng-enter.ng-enter-active {
-  opacity: 1;
-}
-
-.fade-element-in.ng-leave {
-  transition: .5s linear all;
-  opacity: 1;
-}
-.fade-element-in.ng-leave.ng-leave-active {
-  opacity: 0;
 }

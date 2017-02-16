@@ -1,146 +1,100 @@
 <div data-ng-controller="TasksController" data-ng-init="createMode()">
-    <div class="container-fluid dashboard-panel task-event-form task task--create">
-        <section class="col-md-12">
-            <form novalidate>
-                <div class="row">
-                    <div class="col-lg-8 col-md-6 col-sm-12">
-                        <div class="tile clearfix">
-                            <div class="col-sm-12 tile__header">
-                                <h3 class="tile__title">New task</h3>
-                            </div>
-                            <div class="col-sm-12 tile__body clearfix">
-                                <div class="col-lg-4 col-md-12">
-                                    <div class="form-group" data-ng-class="{ 'has-error': validationError.title }">
-                                        <label for="title">Title*</label>
-                                        <input type="text" data-ng-model="newTask.title" id="title"
-                                               class="form-input form-input--required" placeholder="Title" required>
-                                        <div class="form-input-error-holder">
-                                            <p data-ng-show="validationError.title"
-                                               class="form-input-error-text">{{validationError.title.message}}</p>
-                                        </div>
-                                    </div>
-                                    <div class="form-group form-box form-box--without-error">
-                                        <label for="templates">Template</label>
-                                        <select class="form-input" id="templates"
-                                                data-ng-change="loadTaskTemplate(selectedTemplate)"
-                                                data-ng-model="selectedTemplate"
-                                                data-ng-options="template.title for template in user.taskTemplates">
-                                            <option value="">Select template</option>
-                                        </select>
-                                    </div>
-                                    <div class="form-group form-box form-box--without-error">
-                                        <label for="priority">Priority</label>
-                                        <div data-ng-class="'item-priority-' + newTask.priority">
-                                            <select name="priority" id="priority" class="form-input item-priority"
-                                                    data-ng-model="newTask.priority"
-                                                    data-ng-change="clearSlotsList()">
-                                                <option value="1" class="item-priority-1">Urgent and Important
-                                                </option>
-                                                <option value="2" class="item-priority-2">Not Urgent but Important
-                                                </option>
-                                                <option value="3" class="item-priority-3">Urgent but not Important
-                                                </option>
-                                                <option value="4" class="item-priority-4">Not Urgent and not Important
-                                                </option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="form-group is-template-checkbox">
-                                        <input type="checkbox" id="isATemplate" class="form-checkbox"
-                                               data-ng-model="newTask.isATemplate">
-                                        <label for="isATemplate" class="form-checkbox-label form-checkbox-label--right">
-                                            Save as template
-                                        </label>
-                                    </div>
-                                </div>
-                                <div class="col-lg-4 col-md-12">
-                                    <div class="form-group form-box form-box--without-error">
-                                        <datetime-picker data-type="startTime" data-label="Start date"
-                                                         data-activity="newTask" data-is-readonly="false"
-														 data-picker-id="startDatePicker"
-                                                         data-linked-picker-id="endDatePicker"></datetime-picker>
-                                    </div>
-                                    <div class="form-group form-box form-box--without-error">
-                                        <datetime-picker data-type="endTime" data-label="End date"
-                                                         data-activity="newTask" data-is-readonly="false"
-                                                         data-picker-id="endDatePicker"></datetime-picker>
-                                    </div>
-                                    <div class="form-group form-box form-box--without-error">
-                                        <label for="estimation">Estimation</label>
-                                        <span class="rzslider-max-value"> max: {{slider.options.ceil}}h</span>
-                                        <rzslider rz-slider-model="newTask.estimation"
-                                                  rz-slider-options="slider.options">
-                                        </rzslider>
-                                        <input type="number"
-                                               id="estimation"
-                                               class="rzslider-manual-input form-input"
-                                               data-ng-model="newTask.estimation"
-                                               data-ng-change="clearSlotsList()"
-                                               data-ng-pattern="/^\d+$/"
-                                               min="{{slider.options.floor}}"
-                                               max="{{slider.options.ceil}}">
-                                        <label class="rzslider-manual-input__label">hours</label>
-                                    </div>
-                                </div>
-                                <div class="col-lg-4 col-md-12">
-                                    <div class="form-group form-box form-box--without-error">
-                                        <label for="notes">Notes</label>
-                                        <textarea id="notes" class="form-input form-input--notes"
-                                                  data-ng-model="newTask.notes"></textarea>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-xs-12 tile__footer">
-                                <button class="btn tile__btn tile__btn--blue" title="Generate slots"
-                                        data-ng-click="generateSlots()">
-                                    Generate slots
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6 col-sm-12 tile" data-ng-init="initCreateSlots()">
-                        <div class="tile__header">
-                            <h3 class="tile__title">Time slots</h3>
-                        </div>
-                        <div class="tile__body tile__body--slots clearfix">
-                            <div class="text-center slots-generate" data-ng-if="!slotsRange.length">
-                                <i class="fa fa-refresh slots-generate__icon" aria-hidden="true"></i>
-                                <p>Please generate slots with subtasks</p>
-                            </div>
-                            <div class="col-sm-12 table-responsive table-slots">
-                                <table class="table table-no-tb">
-                                    <tr data-ng-repeat="item in slotsRange"
-                                        data-ng-class="{'slot-opacity' : !(isOverdueSlot(item) && !item.isComplete) && !createSlot}">
-                                        <td><label class="text-uppercase">{{item.start | date: 'EEE'}}</label></td>
-                                        <td>{{item.start | date: 'dd/MM'}}</td>
-                                        <td>{{item.duration}}h</td>
-                                    </tr>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
+    <form novalidate class="task task--create">
+        <header class="main-header-mobile main-header-mobile--fixed">
+            <div class="main-header-mobile__main-tab-info">
+                <a class="main-header-mobile-control" href="#!/todo/tasks/list">
+                    <span class="main-header-mobile-control__icon icon icon-arrow_back"></span>
+                </a>
+                <h3 class="main-header-mobile__title">Add task</h3>
+            </div>
+            <div class="main-header-mobile__icons">
+                <button type="submit" class="main-header-mobile-control main-header-mobile-control--right"
+                        data-ng-click="create(newTask)" data-ng-disabled="!slotsRange.length">
+                    <span class="main-header-mobile-control__icon
+                            icon icon-done"></span>
+                </button>
+            </div>
+        </header>
+        <section class="screen-panel with-fixed-header">
+            <div class="form-box" data-ng-class="{ 'has-error': validationError.title }">
+                <input type="text" data-ng-model="newTask.title" class="form-input form-input--required"
+                       placeholder="Title*" required>
+                <div class="form-input-error-holder">
+                    <p data-ng-show="validationError.title && !newTask.title"
+                       class="form-input-error-text">{{validationError.title.message}}</p>
                 </div>
-                <div class="row">
-                    <div class="col-sm-12 text-right clearfix">
-                        <button class="button button--grey button-cancel pull-left"
-                                data-ng-click="cancel()">
-                            Cancel
-                        </button>
-                        <button class="button button--blue button-calendar"
-                                data-ng-click="calendar.isShown = !calendar.isShown">
-                            Calendar preview
-                        </button>
-                        <button type="submit" class="button button--green"
-                                data-ng-click="create(newTask)"
-                                data-ng-disabled="!slotsRange.length">
-                            Create
-                        </button>
-                    </div>
+            </div>
+            <div class="form-box form-box--without-error">
+                <select class="form-input" id="templates" data-ng-model="selectedTemplate"
+                        data-ng-change="loadTaskTemplate(selectedTemplate)"
+                        data-ng-options="template.title for template in user.taskTemplates">
+                    <option value="">Select template</option>
+                </select>
+            </div>
+            <div class="form-box form-box--without-error">
+                <label for="priority">Priority</label>
+                <div data-ng-class="'item-priority-' + newTask.priority">
+                    <select name="priority" id="priority" class="form-input"
+                            data-ng-model="newTask.priority" data-ng-change="clearSlotsList()">
+                        <option value="1" class="item-priority-1">Urgent and Important</option>
+                        <option value="2" class="item-priority-2">Not Urgent but Important</option>
+                        <option value="3" class="item-priority-3">Urgent but not Important</option>
+                        <option value="4" class="item-priority-4">Not Urgent and not Important</option>
+                    </select>
                 </div>
-            </form>
+            </div>
+            <div class="form-box form-box--without-error">
+                <label for="estimation">Estimation</label>
+                <span class="rzslider-max-value">/ max: {{slider.options.ceil}}h /</span>
+                <div class="estimation-rz-slider">
+                    <rzslider rz-slider-model="newTask.estimation" rz-slider-options="slider.options"></rzslider>
+                    <input type="number" id="estimation" class="rzslider-manual-input form-input"
+                           data-ng-model="newTask.estimation" data-ng-change="clearSlotsList()"
+                           data-ng-pattern="/^\d+$/" min="{{slider.options.floor}}" max="{{slider.options.ceil}}">
+                </div>
+            </div>
+            <div class="form-box form-box--without-error">
+                <datetime-picker data-type="startTime" data-label="Start date" data-activity="newTask"
+                                 data-picker-id="startDatePicker"
+                                 data-linked-picker-id="endDatePicker"></datetime-picker>
+            </div>
+            <div class="form-box form-box--without-error">
+                <datetime-picker data-type="endTime" data-label="End date" data-activity="newTask"
+                                 data-picker-id="endDatePicker"></datetime-picker>
+            </div>
+            <div class="form-box form-box--without-error">
+                <label for="notes">Add notes</label>
+                <textarea id="notes" class="form-input form-input--notes" data-ng-model="newTask.notes"></textarea>
+            </div>
+            <div class="form-box form-box--without-error form-checkbox-holder">
+                <input type="checkbox" id="isATemplate" class="form-checkbox" data-ng-model="newTask.isATemplate">
+                <label for="isATemplate" class="form-checkbox-label form-checkbox-label--right">
+                    Save as template
+                </label>
+            </div>
+            <div>
+                <button class="button button--green" title="Generate slots" data-ng-click="generateSlots()">
+                    Generate time slots
+                </button>
+            </div>
         </section>
-    </div>
-    <div data-ng-if="calendar.isShown" class="fade-element-in">
-        <div data-ng-include="'/modules/calendar/views/calendar.client.view.html'"></div>
-    </div>
+        <div data-ng-if="slotsRange.length" class="screen-panel generate-slots">
+            <table>
+                <thead class="generate-slots-head">
+                <tr>
+                    <td><span class="generate-slots-icon icon icon-av_timer"></span></td>
+                    <td colspan="3">Time slots</td>
+                </tr>
+                </thead>
+                <tbody class="generate-slots-body">
+                <tr data-ng-repeat="item in slotsRange">
+                    <td></td>
+                    <td class="slot-day">{{item.start | date: 'EEE'}}</td>
+                    <td>{{item.start | date: 'dd/MM'}}</td>
+                    <td>{{item.duration}}h</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </form>
 </div>

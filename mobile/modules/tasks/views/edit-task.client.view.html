@@ -1,179 +1,39 @@
 <div data-ng-controller="TasksController" data-ng-init="editMode()">
-    <div class="container-fluid dashboard-panel task-event-form task task--edit">
-        <section class="col-md-12">
-            <form name="taskForm" novalidate>
-                <div class="row">
-                    <div class="col-md-5 col-sm-12">
-                        <div class="tile clearfix">
-                            <div class="col-sm-12 tile__header">
-                                <h3 class="tile__title">Edit task</h3>
-                            </div>
-                            <div class="col-sm-12 tile__body clearfix">
-                                <div class="col-sm-12">
-                                    <div class="form-group">
-                                        <label for="title">Title*</label>
-                                        <input type="text" id="title" name="title"
-                                               class="form-input form-input--required"
-                                               placeholder="Title" data-ng-model="task.title" required>
-                                        <div class="form-input-error-holder">
-                                            <p data-ng-show="taskForm.title.$error.required"
-                                               class="form-input-error-text">
-                                                Please fill title
-                                            </p>
-                                        </div>
-                                    </div>
-                                    <div class="form-group form-box form-box--without-error">
-                                        <label for="priority">Priority</label>
-                                        <div data-ng-class="'item-priority-' + task.priority">
-                                            <select name="priority" id="priority" class="form-input item-priority"
-                                                    data-ng-model="task.priority" disabled>
-                                                <option value="1" class="item-priority-1">Urgent and Important</option>
-                                                <option value="2" class="item-priority-2">Not Urgent but Important
-                                                </option>
-                                                <option value="3" class="item-priority-3">Urgent but not Important
-                                                </option>
-                                                <option value="4" class="item-priority-4">Not Urgent and not Important
-                                                </option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="form-group form-box form-box--without-error">
-                                        <label class="field-label" for="estimation">Estimation</label>
-                                        <span class="rzslider-max-value"> max: {{slider.options.ceil}}h</span>
-
-                                        <rzslider rz-slider-model="task.estimation"
-                                                  rz-slider-options="slider.options" disabled></rzslider>
-                                        <input type="number" disabled
-                                               id="estimation"
-                                               class="rzslider-manual-input form-input"
-                                               data-ng-model="task.estimation"
-                                               data-ng-pattern="/^\d+$/"
-                                               min="{{slider.options.floor}}"
-                                               max="{{slider.options.ceil}}">
-                                        <label class="rzslider-manual-input__label">
-                                            hours
-                                        </label>
-                                    </div>
-                                </div>
-                                <div class="col-sm-12">
-                                    <div class="form-group form-box form-box--without-error">
-                                        <datetime-picker data-type="startTime" data-label="Start date"
-                                                         data-activity="task" data-is-readonly="true"
-                                                         data-picker-id="startDatePicker"
-                                                         data-linked-picker-id="endDatePicker"></datetime-picker>
-                                    </div>
-                                    <div class="form-group form-box form-box--without-error">
-                                        <datetime-picker data-type="endTime" data-label="End date"
-                                                         data-activity="task" data-is-readonly="true"
-                                                         data-picker-id="endDatePicker"></datetime-picker>
-                                    </div>
-                                    <div class="form-group form-box form-box--without-error">
-                                        <label for="notes">Notes</label>
-                                        <textarea id="notes" class="form-input form-input--notes"
-                                                  data-ng-model="task.notes"></textarea>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-7 col-sm-12">
-                        <div class="row">
-                            <div class="col-sm-12">
-                                <div data-ng-init="getSlotsByTask()" class="tile clearfix">
-                                    <div class="tile__header">
-                                        <h3 class="tile__title">Time slots</h3>
-                                    </div>
-                                    <div class="tile__body tile__body--slots clearfix">
-                                        <div class="text-center slots-generate" data-ng-if="!slotsRange.length">
-                                            <i class="fa fa-refresh slots-generate__icon" aria-hidden="true"></i>
-                                            <p>Please generate slots with subtasks</p>
-                                        </div>
-                                        <div class="col-sm-12 table-responsive table-slots">
-                                            <table class="table">
-                                                <tr data-ng-repeat="item in slotsRange"
-                                                    data-ng-class="{'slot-opacity' : !(isOverdueSlot(item) && !item.isComplete) && !createSlot}">
-                                                    <td><label class="text-uppercase">{{item.start | date:
-                                                        'EEE'}}</label></td>
-                                                    <td>{{item.start | date: 'dd/MM'}}</td>
-                                                    <td>{{item.duration}}h</td>
-                                                    <td class="text-right text-uppercase" data-ng-if="!createSlot">
-                                                <span data-ng-if="!item.isComplete && isOverdueSlot(item)"
-                                                      class="is-template-checkbox">
-                                                    <label for="completeSlot"
-                                                           class="form-checkbox-label form-checkbox-label--left">done</label>
-                                                    <input type="checkbox" id="completeSlot" class="form-checkbox"
-                                                           data-ng-click="completeSlot(item)">
-
-                                                </span>
-                                                <span data-ng-if="item.isComplete">
-                                                    <label class="form-marker-label">done</label>
-                                                    <span class="form-marker form-marker--done"></span>
-                                                </span>
-                                                <span data-ng-if="!item.isComplete && !isOverdueSlot(item)">
-                                                    <label class="form-marker-label">left</label>
-                                                    <span class="form-marker form-marker--left"></span>
-                                                </span>
-                                                    </td>
-                                                </tr>
-                                            </table>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-12 tile clearfix tile-progress">
-                                <div class="tile__header">
-                                    <h3 class="tile__title">Progress</h3>
-                                </div>
-                                <div class="tile__body clearfix">
-                                    <div class="progress-chart" donut-chart=""
-                                         donut-data="progress.progressChart.data"
-                                         donut-colors="progress.progressChart.colors"
-                                         donut-formatter="progress.progressChart.formatter">
-                                    </div>
-                                </div>
-                                <div class="tile__footer">
-                                    <div class="row">
-                                        <div class="col-sm-6 text-center">
-                                            <span class="form-marker form-marker--left"></span>
-                                            <span class="form-marker-label">
-                                                <label class="text-uppercase">left:</label>
-                                                {{progress.left}}h
-                                            </span>
-                                        </div>
-                                        <div class="col-sm-6 text-center">
-                                            <span class="form-marker form-marker--done"></span>
-                                            <span class="form-marker-label">
-                                                <label class="text-uppercase">done:</label>
-                                                {{progress.done}}h
-                                            </span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+    <div class="task task--edit">
+        <form name="taskForm" novalidate>
+            <header class="main-header-mobile main-header-mobile--fixed">
+                <div class="main-header-mobile__main-tab-info">
+                    <a class="main-header-mobile-control"
+                            data-ui-sref="restricted.todo_state.tasks.details({ taskId: task._id })">
+                        <span class="main-header-mobile-control__icon icon icon-arrow_back"></span>
+                    </a>
+                    <span class="screen-header__title">Edit task</span>
+                </div>
+                <div class="main-header-mobile__icons">
+                    <button class="main-header-mobile-control main-header-mobile-control--right" data-ng-click="remove(task)">
+                        <span class="main-header-mobile-control__icon icon icon-delete"></span>
+                    </button>
+                    <button type="submit" class="main-header-mobile-control main-header-mobile-control--right" data-ng-click="update(task)">
+                        <span class="main-header-mobile-control__icon icon icon-done"></span>
+                    </button>
+                </div>
+            </header>
+            <section class="screen-panel with-fixed-header">
+                <div class="form-box">
+                    <label for="title">Title*</label>
+                    <input type="text" id="title" name="title" class="form-input form-input--required"
+                           placeholder="Title" data-ng-model="task.title" required>
+                    <div class="form-input-error-holder">
+                        <p data-ng-show="taskForm.title.$error.required" class="form-input-error-text">
+                            Please fill title
+                        </p>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-sm-12 text-right clearfix">
-                        <button class="button button--grey button-cancel pull-left"
-                                data-ng-click="cancel()">
-                            Cancel
-                        </button>
-                        <button class="button button--blue button-calendar"
-                                data-ng-click="calendar.isShown = !calendar.isShown">
-                            Calendar preview
-                        </button>
-                        <button class="button button--red"
-                                data-ng-click="remove(task)">
-                            Delete
-                        </button>
-                        <button class="button button--green" data-ng-click="update(task)">Update</button>
-                    </div>
+                <div class="form-group form-box form-box--without-error">
+                    <label for="notes">Notes</label>
+                    <textarea id="notes" class="form-input form-input--notes" data-ng-model="task.notes"></textarea>
                 </div>
-            </form>
-        </section>
-    </div>
-    <div data-ng-if="calendar.isShown" class="fade-element-in">
-        <div data-ng-include="'/modules/calendar/views/calendar.client.view.html'"></div>
+            </section>
+        </form>
     </div>
 </div>
