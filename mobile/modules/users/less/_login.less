@@ -14,7 +14,7 @@
   overflow: hidden;
   width: 100%;
   height: 100%;
-  color: @color-white;
+  color: @login-font-color;
 
   &.user-login--sing-up {
     .auth-form {
@@ -47,7 +47,7 @@
     color: @color-white;
 
     .login-view__form-control.form-control {
-      border-bottom: 1px solid @color-bali-hai-blue-s24;
+      border-bottom: 1px solid @login-input-font-color;
     }
 
     .auth-form {
@@ -67,7 +67,7 @@
     color: @color-white;
 
     .login-view__form-control.form-control {
-      border-bottom: 1px solid @color-bali-hai-blue-s24;
+      border-bottom: 1px solid @login-input-font-color;
     }
 
 
@@ -127,7 +127,7 @@
 
     &__form-group {
        &--socials {
-         color: @color-bali-hai-blue-s24;
+         color: @login-input-font-color;
          position: absolute;
          bottom: 28px;
          left: 50%;
@@ -193,11 +193,11 @@
     border: none;
     line-height: 1em;
     height: 4.5rem;
-    border-bottom: 1px solid white;
+    border-bottom: 1px solid @color-white;
     padding: 2.6rem 0 1rem 0;
     margin-bottom: 2.5rem;
 
-    .placeholder(@color-bali-hai-blue-s24);
+    .placeholder(@login-input-font-color);
 
     &.ng-invalid:not(.ng-pristine) {
       color: @login-error-color;

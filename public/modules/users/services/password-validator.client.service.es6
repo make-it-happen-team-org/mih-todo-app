@@ -16,7 +16,6 @@ class PasswordValidator {
     let result    = owaspPasswordStrengthTest.test(password);
 
     result.errors = result.errors.map((val) => val.replace(/The password (must|may)/g, '-'));
-    console.log(result);
 
     return result;
   }
