@@ -1,12 +1,60 @@
 @import (once) "../../../less/_app.variables.less";
 @import (once) "../../../less/_app.mixins.less";
 
-.datetimepicker-button {
-  background-color: @datetimepicker-button-bg-color;
-  color: @datetimepicker-button-color;
+// rzslider ------------------------
+.estimation-rz-slider {
 
-  &.disabled {
-    opacity: .5;
+  rzslider {
+    width: 85%;
+    margin: 0 5% 0 0;
+
+    .rz-bar {
+      background: @rz-slider-bar-bg-color;
+
+      &.rz-selection {
+        background-color: @rz-slider-bar-selected-bg-color;
+      }
+    }
+
+    & .rz-pointer {
+      top: -6px;
+      width: 15px;
+      height: 15px;
+      background-color: @rz-slider-bar-pointer-bg-color;
+      outline: none;
+
+      &::after {
+        display: none;
+      }
+
+    }
+
+  }
+
+  .rzslider-manual-input {
+    width: 10%;
+    margin-left: -4px;
+    text-align: center;
+  }
+
+}
+
+// priority ------------------------
+.item {
+  &-priority-1 { color: @priority-1-color; }
+  &-priority-2 { color: @priority-2-color; }
+  &-priority-3 { color: @priority-3-color; }
+  &-priority-4 { color: @priority-4-color; }
+}
+
+// screen panel --------------------
+.screen-panel {
+  padding: @screen-panel-padding;
+  background: @screen-panel-bg-color;
+  color: @screen-panel-color;
+
+  &.with-fixed-header {
+    padding-top: @screen-panel-fixed-header-padding-top;
   }
 }
 
@@ -20,8 +68,7 @@
   line-height: @form-control-height;
   text-align: center;
   color: @button-color;
-  cursor: pointer;
-  transition: background-color .5s;
+  text-transform: uppercase;
 
   &[disabled] {
     opacity: .5;
@@ -67,6 +114,7 @@
 .form {
 
   &-box {
+    margin-bottom: 1rem;
 
     &--without-error {
       padding-bottom: @input-error-text-height;
@@ -81,6 +129,9 @@
     border-radius: 0;
     font-size: @input-font-size;
     line-height: @form-control-height;
+    color: @input-color;
+    width: 100%;
+    background: transparent;
 
     &--required {
 
@@ -105,11 +156,9 @@
 
       &-text {
         margin: 0;
-        padding: 0 @input-error-text-size;
         font-size: @input-error-text-size;
         line-height: @input-error-text-height;
-        background-color: @error-color;
-        color: @input-error-text-color;
+        color: @error-color;
       }
 
     }
@@ -119,34 +168,17 @@
     border: 1px solid @error-color;
   }
 
-  &-marker {
-    display: inline-block;
-    height: @marker-dimension;
-    width: @marker-dimension;
-    vertical-align: middle;
-
-    &--left {
-      background-color: @marker-left-color;
-    }
-
-    &--done {
-      background-color: @marker-done-color;
-    }
-
-    &-label {
-      margin: 0;
-      vertical-align: middle;
-    }
-
-  }
-
   &-checkbox {
     display: none;
+
+    &-holder {
+      position: relative;
+    }
 
     &-label {
       margin: 0;
       line-height: @form-control-height;
-      cursor: pointer;
+      color: @checkbox-label-color;
 
       &::before,
       &::after {
@@ -210,74 +242,3 @@
   }
 }
 
-.dashboard-panel.task-event-form {
-  padding-left: 0;
-  padding-right: 0;
-}
-
-.task-event-form {
-  .tile {
-    margin-bottom: @task-event-tile-margin-bottom;
-
-    &__body {
-      padding: 2.5rem 0 .7rem;
-      margin-bottom: 0;
-      background: @task-event-form-tile-color;
-    }
-
-    &__footer {
-      background: @task-event-form-tile-color;
-    }
-
-  }
-
-  .form-input {
-    width: 100%;
-    padding-right: @task-event-form-input-right-padding;
-    padding-left: @task-event-form-input-left-padding;
-  }
-
-  .form-checkbox {
-
-    &-label {
-      white-space: nowrap;
-
-      &::before {
-        background-color: @task-event-form-checkbox-bg-color;
-      }
-    }
-
-  }
-
-  .is-template-checkbox {
-    position: relative;
-  }
-
-  .button {
-    width: @task-event-button-width;
-    margin-left: @task-event-button-margin-left;
-
-    &.button-cancel {
-      margin-left: 0;
-    }
-
-    &.button-calendar {
-      width: @task-event-button-calendar-width;
-    }
-  }
-}
-
-.from-min-width(992px, {
-
-  .task-event-form {
-    .button {
-      width: @task-event-button-width-md;
-
-      &.button-calendar {
-        width: @task-event-button-calendar-width-md;
-      }
-
-    }
-  }
-
-});

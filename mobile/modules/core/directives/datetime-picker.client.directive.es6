@@ -8,8 +8,7 @@ angular.module('core')
 			type: '@',
 			pickerId: '@',
 			linkedPickerId: '@',
-			activity: '=',
-			isReadonly: '='
+			activity: '='
 		},
 		link : (scope, element) => {
 			var datepickerElement = $(element).find('.datetime-picker'),

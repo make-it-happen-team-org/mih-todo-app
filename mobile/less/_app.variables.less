@@ -39,6 +39,7 @@
 @color-mid-grey-s4: #676A6C;
 @color-hit-grey-s0: #AEAFAF;
 @color-light-grey-s0: #D6D6D6;
+@color-light-slate-grey-grey-s26: #72879B;
 @color-roof-terracotta-red-s60: #A94442;
 @color-brick-red-s72: #D43A4A;
 @color-dark-pink-red-s64: #ED5565;
@@ -57,6 +58,7 @@
 @color-downy-green-s44: #75D1BE;
 @color-downy-green-s43: #78D6C5;
 @color-white-ice-green-s5: #E8F6F4;
+@color-hoki-blue-s27: #627688;
 @color-biscay-blue-s41: #2F4050;
 @color-blue-whale-blue-s53: #1E3141;
 @color-blue-whale-blue-s58: #172837;
@@ -175,7 +177,7 @@
 @toggler-padding: 1.3rem;
 
 // ------------------------------------------------ HEADER -----------------------------------------------
-@header-height: 6rem;
+@header-height: 5rem;
 @header-color: @color-bali-hai-blue-s25;
 @header-color--hover: @light-text;
 @header-line-height: @header-height;
@@ -190,6 +192,11 @@
 @header-media-tablet: 1100px;
 @header-media-tablet-collapsed: 860px;
 
+@header-icon-color: @color-bali-hai-blue-s25;
+@header-icon-font-size: @header-height / 2;
+
+@screen-panel-padding: 1.5rem;
+@screen-panel-fixed-header-padding-top: @header-height + @screen-panel-padding;
 // ------------------------------------------------ DROPDOWN -----------------------------------------------
 @dropdown-height: 5rem;
 @dropdown-line-height: 2.2rem;
@@ -262,13 +269,13 @@
 // ---------------- FORM CONTROLS :: SIZES ----------------
 @form-control-height: 3.8rem;
 
-@checkbox-dimension: 1.5rem;
-@checkbox-margin-top: -@checkbox-dimension / 2;
-@checkbox-marker-width: 1.1rem;
-@checkbox-marker-height: .8rem;
+@checkbox-dimension: 2.5rem;
+@checkbox-margin-top: -2rem;
+@checkbox-marker-width: 2rem;
+@checkbox-marker-height: 1rem;
 @checkbox-marker-thickness: .3rem;
 @checkbox-marker-padding: (@checkbox-dimension - @checkbox-marker-width) / 2;
-@checkbox-marker-margin-top: -@checkbox-marker-height / 2;
+@checkbox-marker-margin-top: -1.5rem;
 @checkbox-label-padding: @checkbox-dimension * 2;
 
 @marker-dimension: 1.5rem;
@@ -288,11 +295,13 @@
 @button-red-color: @color-dark-pink-red-s64;
 @button-red-color-active: @color-brick-red-s72;
 
-@input-border-color: @color-solitude-blue-s7;
+@input-color: @color-white;
+@input-border-color: @color-hoki-blue-s27;
 @input-bg-color: @color-white;
 @input-error-text-color: @color-white;
 
-@checkbox-background-color: @color-white;
+@checkbox-background-color: @color-blue-whale-blue-s58;
+@checkbox-label-color: @color-white;
 
 @marker-green-color: @color-mountain-meadow-green-s89;
 @marker-red-color: @color-dark-pink-red-s64;
@@ -306,6 +315,13 @@
 
 @datetimepicker-button-color: @color-white;
 @datetimepicker-button-bg-color: @color-mountain-meadow-green-s84;
+
+@rz-slider-bar-bg-color: @color-blue-whale-blue-s58;
+@rz-slider-bar-selected-bg-color: @color-mountain-meadow-green-s84;
+@rz-slider-bar-pointer-bg-color: @color-mountain-meadow-green-s84;
+
+@screen-panel-bg-color: @color-blue-whale-blue-s53;
+@screen-panel-color: @color-hoki-blue-s27;
 
 // ---------------- SETTINGS :: SIZES ----------------
 @settings-avatar-dimension: 24.4rem;
@@ -381,6 +397,15 @@
 
 @task-slots-info-icon-font-size: 8rem;
 @task-slots-info-icon-bottom-padding: 2rem;
+
+
+@generate-slots-bg-color: @color-blue-whale-blue-s58;
+@generate-slots-color: @color-white;
+@generate-slots-icon-color: @color-mountain-meadow-green-s89;
+@generate-slots-icon-font-size: 2.5rem;
+
+
+@generate-slots-head-bg-color: @color-light-slate-grey-grey-s26;
 
 // ---------------- TASK SLOTS :: COLORS ---------------
 @task-slots-info-color: @color-hit-grey-s0;
