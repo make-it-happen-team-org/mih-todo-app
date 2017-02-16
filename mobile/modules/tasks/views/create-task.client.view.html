@@ -1,4 +1,4 @@
-<div data-ng-controller="TasksController" data-ng-init="createMode()">
+<div data-ng-controller="TasksController" data-ng-init="createMode()" class="screen-view--task">
     <form novalidate class="task task--create">
         <header class="main-header-mobile main-header-mobile--fixed">
             <div class="main-header-mobile__main-tab-info">
@@ -15,7 +15,7 @@
                 </button>
             </div>
         </header>
-        <section class="screen-panel with-fixed-header">
+        <section class="screen-panel with-fixed-header with-fixed-footer">
             <div class="form-box" data-ng-class="{ 'has-error': validationError.title }">
                 <input type="text" data-ng-model="newTask.title" class="form-input form-input--required"
                        placeholder="Title*" required>
