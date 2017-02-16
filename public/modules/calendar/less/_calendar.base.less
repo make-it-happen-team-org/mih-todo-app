@@ -66,7 +66,7 @@
                 font-family: @font-open-sans-light;
 
                 &.fc-state-active {
-                    border-top: 3px solid @color-mountain-meadow-green-s85;
+                    border-top: 3px solid @calendar-toolbar-active-border-color;
                     border-radius: 0;
                 }
             }
@@ -191,11 +191,12 @@
 
         .fc-event-container { display: none; }
 
-        .fc-day-number { color: @color-biscay-blue-s41; }
+        .fc-day-number {
+            color: @calendar-month-view-slot-color;
+            text-align: center;
 
-        .fc-day-number.fc-other-month { opacity: 0.5; }
-
-        .fc-day-number { text-align: center; }
+            &.fc-other-month { opacity: 0.5; }
+        }
 
         .fc-day-header {
             padding: 0.72em 0;
