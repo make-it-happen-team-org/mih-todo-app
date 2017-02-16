@@ -70,16 +70,16 @@ class TasksListController {
 
   find() {
     this.Tasks.query().$promise
-        .then((resolved) => {
-          this.tasks     = resolved;
-          this.filteredTasks     = resolved;
+        .then((tasks) => {
+          this.tasks     = tasks;
+          this.filteredTasks     = tasks;
           this.progressExtend();
           this.getFiltersFromLocalStorage();
           this.sortListBy('isComplete');
           this.sortListBy(this.filter.name);
           this.setFiltersToLocalStorage();
-        }, (rejected) => {
-          console.log(rejected);
+        }, (err) => {
+          console.log(err);
         });
   }
 

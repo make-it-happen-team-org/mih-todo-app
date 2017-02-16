@@ -3,7 +3,7 @@
 .events-details {
   &__sub-header {
     height: 13.4rem;
-    background-color: @color-blue-whale-blue-s53;
+    background-color: @event-list-item-text-color;
     display: flex;
     flex-flow: row nowrap;
     align-items: center;
@@ -45,7 +45,7 @@
       align-items: center;
       padding: 0.6rem 1.3rem;
       border-bottom: 1px solid @event-list-item-border-bottom;
-      background-color: @color-white;
+      background-color: @tasks-events-list-bg-color;
       font-family: @font-open-sans-semibold;
       &:last-child {
         box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
@@ -61,10 +61,10 @@
   &-item {
     &__icons {
       color: @event-list-item-text-color;
-      font-size: 2.5rem;
+      font-size: @tasks-events-icon-size;
       padding-right: 3.2rem;
       &.dropp {
-        font-size: 2.5rem;
+        font-size: @tasks-events-icon-size;
         color: #777;
         position: absolute;
         right: 1.8rem;
@@ -72,12 +72,12 @@
       }
     }
     &__notes {
-      color: @color-blue-whale-blue-s53;
+      color: @event-list-item-text-color;
       padding-left: 3.7rem;
     }
     &__description {
       font-size: 1.5rem;
-      color: @color-blue-whale-blue-s53;
+      color: @event-list-item-text-color;
     }
   }
 }

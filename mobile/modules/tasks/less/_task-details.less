@@ -12,6 +12,9 @@
     & path[fill='none'] {
       stroke: transparent;
     }
+    & text {
+      display: none;
+    }
   }
   &__sub-header {
     height: 13.4rem;
@@ -52,9 +55,6 @@
   &__done {
     padding-right: 1rem;
   }
-  &__left {
-
-  }
   &__list {
     &-item {
       position: relative;
@@ -63,7 +63,7 @@
       align-items: center;
       padding: 0.7rem 1rem;
       border-bottom: 1px solid @event-list-item-border-bottom;
-      background-color: @color-white;
+      background-color: @tasks-events-list-bg-color;
       font-family: @font-open-sans-semibold;
       & .icon-1 { color: @priority-1-color; }
       & .icon-2 { color: @priority-2-color; }
@@ -83,10 +83,10 @@
   &-item {
     &__icons {
       color: @task-list-item-text-color;
-      font-size: 2.5rem;
+      font-size: @tasks-events-icon-size;
       padding-right: 3.2rem;
       &.dropp {
-        font-size: 2.5rem;
+        font-size: @tasks-events-icon-size;
         color: #777;
         position: absolute;
         right: 1.8rem;
@@ -94,12 +94,12 @@
       }
     }
     &__notes {
-      color: @color-blue-whale-blue-s53;
+      color: @task-list-item-text-color;
       padding-left: 3.7rem;
     }
     &__description {
       font-size: 1.5rem;
-      color: @color-blue-whale-blue-s53;
+      color: @task-list-item-text-color;
     }
     &__slots {
       padding-left: 5.5rem;
@@ -111,7 +111,7 @@
     &__btn {
       padding: 0.7rem 2.3rem;
       font-family: @font-open-sans-regular;
-      color: @color-white;
+      color: @tasks-events-list-bg-color;
       border-radius: 0;
       background-color: @task-details-button-color;
       border: none;

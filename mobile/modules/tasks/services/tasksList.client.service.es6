@@ -28,10 +28,7 @@ class TasksListService {
                     value: 100 - progress.percent,
                     label: ''
                 }],
-                colors:    [color1, color2],
-                formatter: function formatter() {
-                    return '';
-                }
+                colors:    [color1, color2]
             }
         });
         
