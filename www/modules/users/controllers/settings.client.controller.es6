@@ -40,6 +40,8 @@ class SettingsController {
           }, 0);
         };
       }
+
+      this.uploadProfilePicture();
     };
 
     var onSuccessItem = (fileItem, response, status, headers) => {
