@@ -1,29 +1,33 @@
-angular.module('users')
-.directive('passwordValidator', ['PasswordValidator', "$popover", function(PasswordValidator,$popover ) {
-	return {
-		require: 'ngModel',
-		link: function(scope, element, attrs) {
+class PasswordValidatorDirective {
+  constructor(PasswordValidatorFactory) {
+    Object.assign(this, { PasswordValidatorFactory });
+    this.restrict   = 'A';
+    this.scope = false;
 
-			var	validationPopover = $popover(element, {
-				contentTemplate: 'validationErrorsTmp.html',
-				html: true,
-				trigger: 'focus',
-				autoClose: false,
-				placement: 'right-bottom',
-				scope: scope
-			});
-			scope.errors = PasswordValidator.getResult("").errors;
-			scope.validatePassword = function() {
-				var password = element.val(),
-					result = PasswordValidator.getResult(password);
-				scope.errors = result.errors;
-				scope.errors.length == 0 ?  validationPopover.hide() : validationPopover.show();
-			};
+    const passwordEl = document.getElementById('password');
+    if (passwordEl) {
+      angular.element(passwordEl).scope().PasswordValidatorFactory = PasswordValidatorFactory;
+    }
+  }
 
-			scope.notifyIfInvalid = function() {
-				scope.errors.length == 0 ? (element.addClass("valid"), $(element).closest('.form-group').removeClass("has-error")) :  $(element).closest('.form-group').addClass("has-error");
-				scope.signupForm.password.$setValidity("password", scope.errors.length == 0);
-			};
-		}
-	};
-}]);
+  link(scope, element) {
+    scope.errors = scope.$parent.PasswordValidatorFactory.getResult("").errors;
+    scope.setErrors = () => {
+      scope.errors = scope.$parent.PasswordValidatorFactory.getResult(scope.signupForm.password.$modelValue).errors;
+    };
+    scope.notifyIfInvalid = () => {
+      scope.errors.length === 0
+        ? $(element).closest('.form-group').removeClass("has-error")
+        : $(element).closest('.form-group').addClass("has-error");
+      scope.errors.length === 0 && scope.$valid
+        ? element.addClass("valid")
+        : element.removeClass("valid");
+      scope.signupForm.password.$setValidity("password", scope.errors.length === 0);
+    };
+  }
+}
+
+// TODO Add controller
+angular
+  .module('users')
+  .directive('passwordValidator', (PasswordValidatorFactory) => new PasswordValidatorDirective(PasswordValidatorFactory));

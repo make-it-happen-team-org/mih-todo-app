@@ -58,7 +58,7 @@
                        placeholder="Password"
                        required
                        data-password-validator
-                       data-ng-change="validatePassword()"
+                       data-ng-change="setErrors()"
                        data-ng-blur="notifyIfInvalid()">
                 <div class="error-message">
                     <p class="help-block error-text" data-ng-show="(signinForm.password.$dirty && signinForm.password.$invalid) || (signinForm.submitted && signinForm.password.$error.required)">
@@ -70,7 +70,7 @@
                  data-ng-show="error">
                 <strong data-ng-bind="error"></strong>
             </div>
-            <div class="password-complexity">
+            <div data-password-validator class="password-complexity">
                 <div data-ng-show="errors.length > 0">
                     <p class="error-popover-title text-danger"> The password must:</p>
                     <p data-ng-repeat="error in errors">{{error}}</p>
