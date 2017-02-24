@@ -1,27 +1,27 @@
 // PasswordValidator service used for testing the password strength
-class PasswordValidator {
-  constructor ($window) {
-    Object.assign(this, { $window });
+angular.module('users').factory('PasswordValidator', ['$window',
+  function ($window) {
+    var owaspPasswordStrengthTest = $window.owaspPasswordStrengthTest;
 
-    this.owaspPasswordStrengthTest = $window.owaspPasswordStrengthTest;
-    this.owaspPasswordStrengthTest.config({
-      allowPassphrases: false,
-      maxLength: 10,
-      minLength: 6,
-      minOptionalTestsToPass: 1
+    owaspPasswordStrengthTest.config({
+      allowPassphrases       : false,
+      maxLength              : 10,
+      minLength              : 6,
+      minOptionalTestsToPass : 1
     });
-    this.owaspPasswordStrengthTest.tests.optional = this.owaspPasswordStrengthTest.tests.optional.filter((val) => !(/one special character/).test(val));
+
+    owaspPasswordStrengthTest.tests.optional = owaspPasswordStrengthTest.tests.optional.filter(function(val){
+      return !(/one special character/).test(val);
+    });
+
+    return {
+      getResult: function (password) {
+        var result = owaspPasswordStrengthTest.test(password);
+        result.errors = result.errors.map(function(val){
+          return val.replace(/The password (must|may)/g, '-');
+        });
+        return result;
+      }
+    };
   }
-  getResult (password) {
-    let result    = owaspPasswordStrengthTest.test(password);
-
-    result.errors = result.errors.map((val) => val.replace(/The password (must|may)/g, '-'));
-
-    return result;
-  }
-}
-PasswordValidator.$inject = ['$window'];
-
-angular
-  .module('users')
-  .factory('PasswordValidator', () => new PasswordValidator());
+]);

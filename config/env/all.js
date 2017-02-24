@@ -42,7 +42,6 @@ module.exports = {
         lib: {
             css: [
                 'inspinia/font-awesome/css/font-awesome.css',
-                'inspinia/css/bootstrap.min.css',
                 'lib/bootstrap/dist/css/bootstrap.css',
                 'lib/bootstrap/dist/css/bootstrap-theme.css',
                 'lib/angular-ui-notification/dist/angular-ui-notification.css',
@@ -91,7 +90,6 @@ module.exports = {
             'config.js',
             'application.js',
             'modules/*/*.js',
-            'inspinia/js/directives.js',
             'modules/*/*[!tests]*/*.js'
         ],
         tests: [
