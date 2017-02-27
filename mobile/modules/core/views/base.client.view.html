@@ -1,2 +1,4 @@
 <section class="main-content" data-ui-view="main-view"></section>
-<footer class="main-footer" data-ng-include="'/modules/core/views/footer.client.view.html'"></footer>
+<footer class="main-footer"
+    data-ng-include="'/modules/core/views/footer.client.view.html'"
+    data-ng-controller="FooterController as footerCtrl" data-ng-hide="footerCtrl.isLoginPage"></footer>
