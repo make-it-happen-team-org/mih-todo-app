@@ -18,7 +18,7 @@ const env = {
 const less = {
     options: {
         plugins: [new (require('less-plugin-autoprefix'))({browsers: ["last 3 versions"]})],
-        rootpath: 'public'
+        rootpath: 'www'
     },
     dev: {
         files: {
@@ -111,7 +111,7 @@ const htmlmin = {
 };
 const copy = {
     options: {
-        rootpath: 'public'
+        rootpath: 'www'
     },
     prodImg: {
         files: [
@@ -132,7 +132,7 @@ const copy = {
                     'inspinia/**/*.jpg'
                 ],
                 rename: function (base, src) {
-                    return 'build/css/public/' + src.replace('inspinia/css/', '');
+                    return 'build/css/www/' + src.replace('inspinia/css/', '');
                 }
             }
         ]
