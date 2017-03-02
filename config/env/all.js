@@ -79,7 +79,8 @@ module.exports = {
                 'lib/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js',
                 'lib/angular-cookies/angular-cookies.min.js',
                 'lib/angular-loading-bar/build/loading-bar.min.js',
-                'lib/ng-dialog/js/ngDialog.min.js'
+                'lib/ng-dialog/js/ngDialog.min.js',
+                'lib/ngCordova/dist/ng-cordova.min.js'
             ]
         },
         css: [
