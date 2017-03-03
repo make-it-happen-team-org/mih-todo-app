@@ -1,85 +1,85 @@
 module.exports = (grunt) => {
-    // Development tasks - when external server is needed (e.g. debug through IDE)
-    grunt.registerTask('develop', [
-        'env:development',
-        'loadConfig',
-        'clean',
-        'less',
-        'babel',
-        'buildDevIndex'
-    ]);
+  // Development tasks - when external server is needed (e.g. debug through IDE)
+  grunt.registerTask('develop', [
+    'env:development',
+    'loadConfig',
+    'clean',
+    'less',
+    'babel',
+    'buildDevIndex'
+  ]);
 
-    grunt.registerTask('default', [ 'develop' ]);
+  grunt.registerTask('default', [ 'develop' ]);
 
-    grunt.registerTask('mobile', [
-        'env:mobile',
-        'loadConfig:www',
-        'clean',
-        'less',
-        'babel',
-        'buildDevIndex'
-    ]);
+  grunt.registerTask('mobile', [
+    'env:mobile',
+    'loadConfig:www',
+    'clean',
+    'less',
+    'babel',
+    'buildDevIndex'
+  ]);
 
-    // Build task(s).
-    grunt.registerTask('prebuild', [
-        'env:development',
-        'loadConfig',
-        'cssmin:prodCss',
-        'ngAnnotate',
-        'htmlmin',
-        'copy:prodImg',
-        'copy:prodFonts',
-        'uglify'
-    ]);
-    grunt.registerTask('build', [
-        'env:production',
-        'loadConfig',
-        'buildProdIndex'
-    ]);
-    grunt.task.registerTask('buildProdIndex', () => {
-        grunt.file.write(
-            'build/index.html',
-            grunt.template.process(
-                grunt.file.read('index.template.html'),
-                {data: grunt.config.get('config')}
-            )
-        )
-    });
-    grunt.task.registerTask('buildDevIndex', () => {
-        grunt.file.write(
-            'index.html',
-            grunt.template.process(
-                grunt.file.read('index.template.html'),
-                {data: grunt.config.get('config')}
-            )
-        )
-    });
+  // Build task(s).
+  grunt.registerTask('prebuild', [
+    'env:development',
+    'loadConfig',
+    'cssmin:prodCss',
+    'ngAnnotate',
+    'htmlmin',
+    'copy:prodImg',
+    'copy:prodFonts',
+    'uglify'
+  ]);
+  grunt.registerTask('build', [
+    'env:production',
+    'loadConfig',
+    'buildProdIndex'
+  ]);
+  grunt.task.registerTask('buildProdIndex', () => {
+    grunt.file.write(
+      'build/index.html',
+      grunt.template.process(
+        grunt.file.read('index.template.html'),
+        {data: grunt.config.get('config')}
+      )
+    )
+  });
+  grunt.task.registerTask('buildDevIndex', () => {
+    grunt.file.write(
+      'index.html',
+      grunt.template.process(
+        grunt.file.read('index.template.html'),
+        {data: grunt.config.get('config')}
+      )
+    )
+  });
 
-    // A Task for loading the configuration object
-    grunt.task.registerTask('loadConfig', 'Task that loads the config into a grunt option.', folderPath => {
-        const init = require('../init');
-        const config = require('../config');
+  // A Task for loading the configuration object
+  grunt.task.registerTask('loadConfig', 'Task that loads the config into a grunt option.', folderPath => {
+    const init = require('../init');
+    const config = require('../config');
 
-        init();
-        grunt.file.setBase(folderPath || 'www/');
+    init();
+    grunt.file.setBase(folderPath || 'www/');
 
-        config.assets.cssFullPath = [];
-        config.assets.css.forEach((path) => {
-            const filePath = /\*/.test(path) ? grunt.file.expand(path) : [path];
+    config.assets.cssFullPath = [];
+    config.assets.css.forEach((path) => {
+      const filePath = /\*/.test(path) ? grunt.file.expand(path) : [path];
 
-            config.assets.cssFullPath.push(filePath);
-        });
-
-        config.assets.jsFullPath = [];
-        config.assets.js.forEach((path) => {
-            const filePath = /\*/.test(path) ? grunt.file.expand(path) : [path];
-
-            config.assets.jsFullPath.push(filePath);
-        });
-
-        grunt.config.set('config', config);
+      config.assets.cssFullPath.push(filePath);
     });
 
-    // Test task.
-    grunt.registerTask('test', ['karma:unit']);
+    config.assets.jsFullPath = [];
+    config.assets.js.forEach((path) => {
+      const filePath = /\*/.test(path) ? grunt.file.expand(path) : [path];
+
+      config.assets.jsFullPath.push(filePath);
+    });
+
+    grunt.config.set('config', config);
+  });
+
+  // Test task.
+  grunt.registerTask('test', ['karma:unit']);
 };
