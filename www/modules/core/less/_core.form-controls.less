@@ -1,0 +1,255 @@
+@import (once) "../../../less/_app.variables.less";
+@import (once) "../../../less/_app.mixins.less";
+
+// rzslider ------------------------
+.estimation-rz-slider {
+
+  rzslider {
+    width: 85%;
+    margin: 0 5% 0 0;
+
+    .rz-bar {
+      background: @rz-slider-bar-bg-color;
+
+      &.rz-selection {
+        background-color: @rz-slider-bar-selected-bg-color;
+      }
+    }
+
+    & .rz-pointer {
+      top: -6px;
+      width: 15px;
+      height: 15px;
+      background-color: @rz-slider-bar-pointer-bg-color;
+      outline: none;
+
+      &::after {
+        display: none;
+      }
+
+    }
+
+  }
+
+  .rzslider-manual-input {
+    width: 10%;
+    margin-left: -4px;
+    text-align: center;
+  }
+
+}
+
+// priority ------------------------
+.item {
+  &-priority-1 { color: @priority-1-color; }
+  &-priority-2 { color: @priority-2-color; }
+  &-priority-3 { color: @priority-3-color; }
+  &-priority-4 { color: @priority-4-color; }
+}
+
+// screen view --------------------
+.screen-view--task,
+.screen-view--event {
+  height: 100%;
+  background-color: @screen-view-bg-color;
+}
+
+// screen panel --------------------
+.screen-panel {
+  padding: @screen-panel-padding;
+  background: @screen-panel-bg-color;
+  color: @screen-panel-color;
+
+  &.with-fixed-header {
+    padding-top: @screen-panel-fixed-header-padding-top;
+  }
+
+  &.with-fixed-footer {
+    padding-top: @screen-panel-fixed-header-padding-top;
+  }
+}
+
+.button {
+  display: inline-block;
+  padding: 0;
+  height: @form-control-height;
+  width: 100%;
+  border: none;
+  border-radius: 0;
+  line-height: @form-control-height;
+  text-align: center;
+  color: @button-color;
+  text-transform: uppercase;
+
+  &[disabled] {
+    opacity: .5;
+  }
+
+  &--green {
+    background-color: @button-green-color;
+
+    &:hover {
+      background-color: @button-green-color-active;
+    }
+
+  }
+
+  &--blue {
+    background-color: @button-blue-color;
+
+    &:hover {
+      background-color: @button-blue-color-active;
+    }
+
+  }
+
+  &--grey {
+    background-color: @button-grey-color;
+
+    &:hover {
+      background-color: @button-grey-color-active;
+    }
+
+  }
+
+  &--red {
+    background-color: @button-red-color;
+
+    &:hover {
+      background-color: @button-red-color-active;
+    }
+
+  }
+}
+
+.form {
+
+  &-box {
+    margin-bottom: 1rem;
+
+    &--without-error {
+      padding-bottom: @input-error-text-height;
+    }
+
+  }
+
+  &-input {
+    box-sizing: border-box;
+    height: @form-control-height;
+    border: 1px solid @input-border-color;
+    border-radius: 0;
+    font-size: @input-font-size;
+    line-height: @form-control-height;
+    color: @input-color;
+    width: 100%;
+    background: transparent;
+
+    &--required {
+
+      &.ng-invalid {
+          border: 1px solid @error-color;
+      }
+
+      &.ng-valid {
+        border: 1px solid @valid-color;
+      }
+
+      &.ng-pristine {
+        border: 1px solid @pristine-color;
+      }
+    }
+
+    &-error {
+
+      &-holder {
+        height: @input-error-text-height;
+      }
+
+      &-text {
+        margin: 0;
+        font-size: @input-error-text-size;
+        line-height: @input-error-text-height;
+        color: @error-color;
+      }
+
+    }
+  }
+
+  .has-error &-input--required.ng-invalid {
+    border: 1px solid @error-color;
+  }
+
+  &-checkbox {
+    display: none;
+
+    &-holder {
+      position: relative;
+    }
+
+    &-label {
+      margin: 0;
+      line-height: @form-control-height;
+      color: @checkbox-label-color;
+
+      &::before,
+      &::after {
+        content: '';
+        position: absolute;
+        top: 50%;
+      }
+
+      &::before {
+        width: @checkbox-dimension;
+        height: @checkbox-dimension;
+        margin-top: @checkbox-margin-top;
+        background: @checkbox-background-color;
+      }
+
+      &::after {
+        width: @checkbox-marker-width;
+        height: @checkbox-marker-height;
+        margin-top: @checkbox-marker-margin-top;
+        border: @checkbox-marker-thickness solid @marker-green-color;
+        border-top: none;
+        border-right: none;
+        opacity: 0;
+        transform: rotate(-45deg);
+      }
+
+      &:hover::after {
+        opacity: .3;
+      }
+
+      &--right {
+        padding-left: @checkbox-label-padding;
+
+        &::before {
+          left: 0;
+        }
+
+        &::after {
+          left: @checkbox-marker-padding;
+        }
+      }
+
+      &--left {
+        padding-right: @checkbox-label-padding;
+
+        &::before {
+          right: 0;
+        }
+
+        &::after {
+          right: @checkbox-marker-padding;
+        }
+      }
+
+    }
+
+    &:checked + &-label::after {
+      opacity: 1;
+    }
+
+  }
+}
+

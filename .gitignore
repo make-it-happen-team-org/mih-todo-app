@@ -1,13 +1,6 @@
 !scripts
-public/*.js
-public/dist
 /**/*.map
-public/modules/**/*.js
-public/modules/**/*.css
 /**/*min.css
-public/modules/users/img/profiles/*
-public/css/
-public/index.html
 
 #=========== THIS IS ORIGINAL FROM ROOT/APP folder
 # iOS / Apple
@@ -23,17 +16,9 @@ config/env/local.js
 .sass-cache/
 npm-debug.log
 node_modules/
-public/lib/
 tests/coverage/
 .bower-*/
 .idea/
-
-# MEAN.js app and assets
-# ======================
-config/sslcerts/*.pem
-access.log
-public/dist/
-public/build
 
 # Sublime editor
 # ==============
@@ -59,7 +44,11 @@ public/build
 
 # Mobile
 # =======
-mobile/index.html
-mobile/lib
-mobile/css
-mobile/**/*.js
+www/index.html
+www/lib
+www/css
+www/**/*.js
+
+# Cordova
+/platforms
+/plugins

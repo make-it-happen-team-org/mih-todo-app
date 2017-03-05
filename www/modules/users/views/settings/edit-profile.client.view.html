@@ -1,0 +1,47 @@
+<div class="settings">
+    <header class="main-header-mobile">
+        <div class="main-header-mobile__main-tab-info">
+            <span class="main-header-mobile-control__icon icon icon-dehaze"></span>
+            <h3 class="main-header-mobile__title">Edit profile</h3>
+        </div>
+        <div class="main-header-mobile__icons">
+            <a data-ui-sref="restricted.overdue" class="main-header-mobile-control--right">
+                <span class="main-header-mobile-control__icon icon icon-notifications"></span>
+            </a>
+        </div>
+    </header>
+    <div class="main-info">
+        <form>
+            <fieldset>
+                <div class="main-info--wrapper">
+                    <div class="main-info--avatar main-info--col">
+                        <img data-ng-src="{{settings.imageURL}}" alt="{{settings.user.username}}" class="img-circle avatar">
+                    </div>
+                    <div class="main-info--text flex-item main-info--col main-info--col__center">
+                        <p class="main-info--username"> {{ settings.user.username }} </p>
+                        <p class="main-info--email"> {{ settings.user.email }}</p>
+                    </div>
+                    <div class="main-info--upload flex-item main-info--col">
+                        <i ng-click="settings.uploadProfilePicture()" class="icon icon-photo_camera"></i>
+                    </div>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+    <div class="settings-groups">
+        <ul>
+            <li>
+                <a class="settings-groups--link" data-ui-sref="restricted.main">
+                    <i class="icon icon-person"></i>
+                    <span>Main settings</span>
+                </a>
+            </li>
+            <li>
+                <a class="settings-groups--link" data-ui-sref="restricted.working">
+                    <i class="icon icon-schedule"></i>
+                    <span>Working time</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>

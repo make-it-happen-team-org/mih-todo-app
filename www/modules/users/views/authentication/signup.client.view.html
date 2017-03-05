@@ -1,0 +1,88 @@
+<form class="user-login user-login--sing-up"
+      name="signupForm"
+      data-ng-controller="AuthenticationController"
+      data-ng-submit="signup(signupForm.$valid)"
+      novalidate
+      autocomplete="off">
+    <div class="app-logo">
+        <img class="app-logo__img"
+             src="/modules/users/img/logo-lg-light.png"
+             alt="Make It Happen">
+        <h1 class="app-logo__description">Make It Happen</h1>
+    </div>
+    <fieldset>
+        <div class="auth-form__form-group"
+             data-ng-class="{'has-error': signupForm.submitted && signupForm.email.$invalid || signupForm.email.$dirty && signupForm.email.$invalid}">
+            <label class="text-uppercase auth-form__label" for="email">Email</label>
+            <input class="login-view__form-control form-control"
+                   id="email"
+                   type="email"
+                   name="email"
+                   data-ng-model="credentials.email"
+                   placeholder="Email"
+                   required>
+            <div class="error-message">
+                <p class="help-block error-text"
+                   data-ng-show="(signupForm.email.$dirty && signupForm.email.$invalid && signupForm.email.$error.email) || (signupForm.submitted && signupForm.email.$error.email)">
+                    Please enter a valid email</p>
+                <p class="help-block error-text"
+                   data-ng-show="(signupForm.email.$dirty && signupForm.email.$invalid) || (signupForm.submitted && signupForm.email.$error.required)">
+                    Please enter your email</p>
+                </div>
+            </div>
+            <div class="auth-form__form-group"
+                 data-ng-class="{'has-error': signupForm.submitted && signupForm.username.$invalid || signupForm.username.$dirty && signupForm.username.$invalid}">
+                <label for="username" class="text-uppercase auth-form__label">Username</label>
+                <input type="text"
+                       id="username"
+                       name="username"
+                       class="login-view__form-control form-control"
+                       data-ng-model="credentials.username"
+                       placeholder="Username"
+                       required>
+                <div data-ng-show="signupForm.submitted || signupForm.username.$dirty"
+                     class="error-message">
+                    <p class="help-block error-text"
+                       data-ng-show="signupForm.username.$error.required">
+                        Please enter your username</p>
+                </div>
+            </div>
+            <div class="auth-form__form-group"
+                 data-ng-class="{'has-error': signupForm.submitted && signupForm.password.$invalid || signupForm.password.$dirty && signupForm.password.$invalid}">
+                <label for="password" class="text-uppercase auth-form__label">Password</label>
+                <input type="password"
+                       id="password"
+                       name="password"
+                       class="login-view__form-control form-control login-view__form-control--password"
+                       data-ng-model="credentials.password"
+                       placeholder="Password"
+                       required
+                       data-password-validator
+                       data-ng-change="setErrors()"
+                       data-ng-blur="notifyIfInvalid()">
+                <div class="error-message">
+                    <p class="help-block error-text" data-ng-show="(signinForm.password.$dirty && signinForm.password.$invalid) || (signinForm.submitted && signinForm.password.$error.required)">
+                        Please enter a password</p>
+                </div>
+                <div data-test-class></div>
+            </div>
+            <div class="text-center text-danger"
+                 data-ng-show="error">
+                <strong data-ng-bind="error"></strong>
+            </div>
+            <div data-password-validator class="password-complexity">
+                <div data-ng-show="errors.length > 0">
+                    <p class="error-popover-title text-danger"> The password must:</p>
+                    <p data-ng-repeat="error in errors">{{error}}</p>
+                </div>
+                <p class="error-popover-title text-navy"
+                   data-ng-show="errors.length === 0"> The password is valid</p>
+            </div>
+    </fieldset>
+    <div class="text-center auth-form__form-group auth-form__form-group--btns">
+        <button class="login-view__btn login-view__btn--blue"
+                type="submit"> Create account</button>
+        <a href="/#!/signin"
+           class="show-signup login-view__btn login-view__btn--green">Sign in</a>
+    </div>
+</form>

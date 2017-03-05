@@ -21,7 +21,7 @@ module.exports = {
     app: {
         title: 'MIH - Development Environment'
     },
-    appFolder: './mobile',
+    appFolder: './www',
     facebook: {
         clientID: socialConfig.facebook.clientID,
         clientSecret: socialConfig.facebook.clientSecret,

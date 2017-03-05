@@ -1,0 +1,56 @@
+<div data-ng-controller="EventsController" class="screen-view--event">
+    <form class="event event--create" novalidate>
+        <header class="main-header-mobile main-header-mobile--fixed">
+            <div class="main-header-mobile__main-tab-info">
+                <a class="main-header-mobile-control" href="#!/todo/events/list">
+                    <span class="main-header-mobile-control__icon icon icon-arrow_back"></span>
+                </a>
+                <h3 class="main-header-mobile__title">Add event</h3>
+            </div>
+            <div class="main-header-mobile__icons">
+                <button type="submit" class="main-header-mobile-control main-header-mobile-control--right"
+                        data-ng-click="createEvent()">
+                    <span class="main-header-mobile-control__icon icon icon-done"></span>
+                </button>
+            </div>
+        </header>
+        <section class="screen-panel with-fixed-header with-fixed-footer">
+            <div class="form-box">
+                <input type="text" data-ng-model="eventData.title"
+                       class="form-input form-input--required" placeholder="Title*" required/>
+                <div class="form-input-error-holder">
+                    <p data-ng-show="eventData.validationError" class="form-input-error-text">
+                        {{eventData.validationError.message}}
+                    </p>
+                </div>
+            </div>
+            <div class="form-box form-box--without-error">
+                <select class="form-input" id="template"
+                        data-ng-change="loadEventTemplate(selectedTemplate)"
+                        data-ng-model="selectedTemplate"
+                        data-ng-options="template.title for template in user.eventTemplates">
+                    <option value="">Select a template</option>
+                </select>
+            </div>
+            <div class="form-box form-box--without-error">
+                <datetime-picker data-type="startTime" data-label="Start date"
+                                 data-activity="eventData" data-picker-id="startDatePicker"
+                                 data-linked-picker-id="endDatePicker"></datetime-picker>
+            </div>
+            <div class="form-box form-box--without-error">
+                <datetime-picker data-type="endTime" data-label="End date"
+                                 data-activity="eventData" data-picker-id="endDatePicker"></datetime-picker>
+            </div>
+            <div class="form-box form-box--without-error">
+                <label for="notes">Add notes</label>
+                <textarea id="notes" class="form-input form-input--notes" data-ng-model="eventData.notes"></textarea>
+            </div>
+            <div class="form-box form-box--without-error form-checkbox-holder">
+                <input type="checkbox" id="isATemplate" class="form-checkbox" data-ng-model="eventData.isATemplate">
+                <label for="isATemplate" class="form-checkbox-label form-checkbox-label--right">
+                    Save as template
+                </label>
+            </div>
+        </section>
+    </form>
+</div>

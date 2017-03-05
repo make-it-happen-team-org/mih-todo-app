@@ -1,0 +1,16 @@
+<div class="main-calendar" data-ng-controller="CalendarController as calendar">
+	<header class="main-header-mobile main-header-mobile--fixed">
+		<div class="main-header-mobile__main-tab-info">
+			<span class="main-header-mobile-control__icon icon icon-dehaze"></span>
+			<h3 class="main-header-mobile__title">Calendar</h3>
+		</div>
+		<div class="main-header-mobile__icons">
+			<a data-ui-sref="restricted.overdue" class="main-header-mobile-control--right">
+				<span class="main-header-mobile-control__icon icon icon-notifications_active"></span>
+			</a>
+		</div>
+	</header>
+	<div class="calendar-wrap">
+		<div ui-calendar="calendar.uiConfig.calendar" class="calendar ibox-content" data-ng-model="calendar.eventSources" calendar="main"></div>
+	</div>
+</div>

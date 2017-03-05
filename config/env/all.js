@@ -42,7 +42,6 @@ module.exports = {
         lib: {
             css: [
                 'inspinia/font-awesome/css/font-awesome.css',
-                'inspinia/css/bootstrap.min.css',
                 'lib/bootstrap/dist/css/bootstrap.css',
                 'lib/bootstrap/dist/css/bootstrap-theme.css',
                 'lib/angular-ui-notification/dist/angular-ui-notification.css',
@@ -80,7 +79,8 @@ module.exports = {
                 'lib/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js',
                 'lib/angular-cookies/angular-cookies.min.js',
                 'lib/angular-loading-bar/build/loading-bar.min.js',
-                'lib/ng-dialog/js/ngDialog.min.js'
+                'lib/ng-dialog/js/ngDialog.min.js',
+                'lib/ngCordova/dist/ng-cordova.min.js'
             ]
         },
         css: [
@@ -91,7 +91,6 @@ module.exports = {
             'config.js',
             'application.js',
             'modules/*/*.js',
-            'inspinia/js/directives.js',
             'modules/*/*[!tests]*/*.js'
         ],
         tests: [
