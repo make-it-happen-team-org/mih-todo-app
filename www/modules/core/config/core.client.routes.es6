@@ -17,6 +17,11 @@ angular.module('core').config(['$stateProvider', '$urlRouterProvider', function 
                     templateUrl: 'modules/sidebar/views/sidebar.client.view.html',
                     controller: 'SidebarController',
                     controllerAs: 'sidebarCtrl'
+                },
+                'footer': {
+                    templateUrl: 'modules/core/views/footer.client.view.html',
+                    controller: 'FooterController',
+                    controllerAs: 'footerCtrl'
                 }
             },
             resolve: {
