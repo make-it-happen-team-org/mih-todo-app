@@ -1,9 +1,10 @@
 class GoogleCalendarController {
   /** @ngInject */
-  constructor(GoogleCalendarService, $cookies, $filter, $stateParams, MigrateService, MigrateConstants) {
+  constructor(GoogleCalendarService, MigrateService, MigrateConstants, $cookies, $filter, $stateParams) {
     Object.assign(this, {
       GoogleCalendarService,
       MigrateService,
+      MigrateConstants,
       $cookies,
       dateFormat:     MigrateConstants.dateFormat,
       authorized:     false,
@@ -11,7 +12,7 @@ class GoogleCalendarController {
       events:         [],
       params:         {
         viewPath:   MigrateService.getImportClientPathView($stateParams.client),
-        maxResults: MigrateConstants.limitEvents,
+        maxResults: MigrateConstants.google.limitEvents,
         startDate:  $filter('date')(new Date(), MigrateConstants.dateFormat)
       }
     });
@@ -20,9 +21,9 @@ class GoogleCalendarController {
   }
 
   initialize() {
-    if (this.$cookies['google_calendar_access_token'] && this.$cookies['google_calendar_refresh_token']) {
-      this.params.accessToken  = this.$cookies['google_calendar_access_token'];
-      this.params.refreshToken = this.$cookies['google_calendar_refresh_token'];
+    if (this.$cookies[this.MigrateConstants.google.token.access] && this.$cookies[this.MigrateConstants.google.token.refresh]) {
+      this.params.accessToken  = this.$cookies[this.MigrateConstants.google.token.access];
+      this.params.refreshToken = this.$cookies[this.MigrateConstants.google.token.refresh];
       this.authorized          = true;
       this.getEventsError      = false;
     } else {
@@ -36,8 +37,8 @@ class GoogleCalendarController {
   }
 
   deleteClientCookies() {
-    delete this.$cookies['google_calendar_access_token'];
-    delete this.$cookies['google_calendar_refresh_token'];
+    delete this.$cookies[this.MigrateConstants.google.token.access];
+    delete this.$cookies[this.MigrateConstants.google.token.refresh];
   }
 
   getEvents() {

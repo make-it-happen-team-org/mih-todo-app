@@ -1,9 +1,10 @@
 class OutlookMigrateController {
   /** @ngInject */
-  constructor(OutlookService, $cookies, $filter, $stateParams, MigrateService, MigrateConstants) {
+  constructor(OutlookService, MigrateService, MigrateConstants, $cookies, $filter, $stateParams) {
     Object.assign(this, {
       OutlookService,
       MigrateService,
+      MigrateConstants,
       $cookies,
       dateFormat:     MigrateConstants.dateFormat,
       authorized:     false,
@@ -20,9 +21,9 @@ class OutlookMigrateController {
   }
 
   initialize() {
-    if (this.$cookies['outlook_access_token'] && this.$cookies['outlook_email']) {
-      this.params.token   = this.$cookies['outlook_access_token'];
-      this.params.email   = this.$cookies['outlook_email'];
+    if (this.$cookies[this.MigrateConstants.outlook.token.access] && this.$cookies[this.MigrateConstants.outlook.email]) {
+      this.params.token   = this.$cookies[this.MigrateConstants.outlook.token.access];
+      this.params.email   = this.$cookies[this.MigrateConstants.outlook.email];
       this.authorized     = true;
       this.getEventsError = false;
     } else {
@@ -36,8 +37,8 @@ class OutlookMigrateController {
   }
 
   deleteClientCookies() {
-    delete this.$cookies['outlook_access_token'];
-    delete this.$cookies['outlook_email'];
+    delete this.$cookies[this.MigrateConstants.outlook.token.access];
+    delete this.$cookies[this.MigrateConstants.outlook.email];
   }
 
   getEvents() {
