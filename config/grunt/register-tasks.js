@@ -13,7 +13,7 @@ module.exports = (grunt) => {
 
     grunt.registerTask('mobile', [
         'env:mobile',
-        'loadConfig:mobile',
+        'loadConfig:www',
         'clean',
         'less',
         'babel',
@@ -61,7 +61,7 @@ module.exports = (grunt) => {
         const config = require('../config');
 
         init();
-        grunt.file.setBase(folderPath || 'public/');
+        grunt.file.setBase(folderPath || 'www/');
 
         config.assets.cssFullPath = [];
         config.assets.css.forEach((path) => {
