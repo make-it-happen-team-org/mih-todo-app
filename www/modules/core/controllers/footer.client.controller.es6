@@ -1,9 +1,15 @@
 class FooterController {
 
     /** @ngInject */
-    constructor($scope) {
-        Object.assign(this, { $scope });
+    constructor($scope, $state) {
+        Object.assign(this, { $scope, $state });
+
         this.activeMenu = '';
+        this.isLoginPage = this.isLoginPage();
+    }
+
+    isLoginPage() {
+      return /^auth/g.test(this.$state.current.name);
     }
 }
 
