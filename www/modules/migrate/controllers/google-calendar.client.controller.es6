@@ -1,21 +1,18 @@
-const DEFAULT_MAX_RESULTS = 10;
-const DATE_FORMAT         = 'yyyy-MM-dd';
-
 class GoogleCalendarController {
   /** @ngInject */
-  constructor(GoogleCalendarService, $cookies, $filter, $stateParams, MigrateService) {
+  constructor(GoogleCalendarService, $cookies, $filter, $stateParams, MigrateService, MigrateConstants) {
     Object.assign(this, {
       GoogleCalendarService,
       MigrateService,
       $cookies,
-      dateFormat:     DATE_FORMAT,
+      dateFormat:     MigrateConstants.dateFormat,
       authorized:     false,
       getEventsError: true,
       events:         [],
       params:         {
         viewPath:   MigrateService.getImportClientPathView($stateParams.client),
-        maxResults: DEFAULT_MAX_RESULTS,
-        startDate:  $filter('date')(new Date(), DATE_FORMAT)
+        maxResults: MigrateConstants.limitEvents,
+        startDate:  $filter('date')(new Date(), MigrateConstants.dateFormat)
       }
     });
 

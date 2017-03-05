@@ -1,20 +1,18 @@
-const DATE_FORMAT = 'yyyy-MM-dd';
-
 class OutlookMigrateController {
   /** @ngInject */
-  constructor(OutlookService, $cookies, $filter, $stateParams, MigrateService) {
+  constructor(OutlookService, $cookies, $filter, $stateParams, MigrateService, MigrateConstants) {
     Object.assign(this, {
       OutlookService,
       MigrateService,
       $cookies,
-      dateFormat:     DATE_FORMAT,
+      dateFormat:     MigrateConstants.dateFormat,
       authorized:     false,
       getEventsError: true,
       events:         [],
       params:         {
         viewPath:      MigrateService.getImportClientPathView($stateParams.client),
-        startDateTime: $filter('date')(new Date(), DATE_FORMAT),
-        endDateTime:   $filter('date')(new Date(), DATE_FORMAT)
+        startDateTime: $filter('date')(new Date(), MigrateConstants.dateFormat),
+        endDateTime:   $filter('date')(new Date(), MigrateConstants.dateFormat)
       }
     });
 
