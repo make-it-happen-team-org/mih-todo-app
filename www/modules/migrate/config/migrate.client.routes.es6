@@ -17,10 +17,6 @@ let migrationRoute = ($stateProvider) => {
                     templateUrl: 'modules/migrate/views/import-events.view.html',
                     controller: 'OutlookMigrateController',
                     controllerAs: 'ctrl'
-                },
-                'import-form@restricted': {
-                    templateUrl: 'modules/migrate/views/import-events.view.html'
-
                 }
             }
         })
