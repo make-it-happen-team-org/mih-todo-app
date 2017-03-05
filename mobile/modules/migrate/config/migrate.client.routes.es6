@@ -11,17 +11,27 @@ let migrationRoute = ($stateProvider) => {
         })
         .state('restricted.migrate.outlook', {
             url: '/outlook',
+            params : { client: 'outlook' },
             views: {
                 'main-view@restricted': {
-                    templateUrl: 'modules/migrate/views/outlook.view.html'
+                    templateUrl: 'modules/migrate/views/import-events.view.html',
+                    controller: 'OutlookMigrateController',
+                    controllerAs: 'ctrl'
+                },
+                'import-form@restricted': {
+                    templateUrl: 'modules/migrate/views/import-events.view.html'
+
                 }
             }
         })
         .state('restricted.migrate.googleCalendar', {
             url: '/google-calendar',
+            params : { client: 'gmail' },
             views: {
                 'main-view@restricted': {
-                    templateUrl: 'modules/migrate/views/google-calendar.view.html'
+                    templateUrl: 'modules/migrate/views/import-events.view.html',
+                    controller: 'GoogleCalendarController',
+                    controllerAs: 'ctrl'
                 }
             }
         });

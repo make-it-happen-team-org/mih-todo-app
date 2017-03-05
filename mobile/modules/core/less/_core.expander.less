@@ -1,0 +1,28 @@
+@import (once) "../../../less/_app.variables.less";
+
+.expander {
+  background-color: @expander-bg-color;
+  color: @expander-color;
+
+  .icon { vertical-align: middle; }
+
+  &-heading {
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: .7rem 1.5rem;
+    border-bottom: 1px solid @expander-border-color;
+    font-family: @font-open-sans-semibold;
+    font-size: 1.7rem;
+
+    &.active {
+      color: @expander-color-active;
+    }
+
+  }
+
+  &-title { vertical-align: middle; }
+
+}

@@ -1,104 +1,64 @@
 @import (once) "../../../less/_app.variables.less";
+
 .migrate {
-  &-sync {
-    &-list {
-      padding: 1.2rem 0;
-      background-color: @color-white;
-      text-align: center;
-      &__main { padding-top: 5.5rem; }
-    }
-    &-item {
-      display: inline-block;
-      padding: 4.5rem 8rem 5rem;
-      & .sync-item-outlook,
-      & .sync-item-gmail {
-        color: @migrate-sync-icon-active-color;
-      }
-      &--heading {
-        display: block;
-        width: 100%;
-        color: @migrate-sync-heading-color;
-        font-family: @font-open-sans-light;
-        font-size: 2.6rem;
-      }
-      & a { display: block; }
+  a { display: block; }
 
-      &__icon {
-        font-size: 7.2rem;
-        color: @migrate-sync-icon-inactive-color;
-      }
-      &__title {
-        display: block;
-        color: @migrate-sync-text-color;
-        font-family: @font-open-sans-semibold;
-        font-size: 1.4rem;
-        padding: 15px 0;
-      }
-    }
-  }
-  &__fieldset {
-    padding: 2.5rem 0 2.6rem;
-    &-item {
-      display: block;
-      text-align: left;
-    }
-  }
-  &__table {
-    &-wrapper {
-      padding: 0 1rem;
-      width: 98%;
-    }
-    &-events-list {
-      font-size: 1.4rem;
-      margin: 1rem;
-      table-layout: fixed;
-
-      td {
-        padding: 1rem;
-        word-break: break-all;
-        overflow-x: hidden;
-      }
-
-      tbody tr {
-        text-align: left;
-        font-family: @font-open-sans-regular;
-        &:nth-child(even) {
-          background-color: @migrate-sync-table-row-even-color;
-        }
-      }
-    }
-    &-head {
-      background-color: @migrate-sync-table-head-color;
-      font-family: @font-open-sans-bold;
-      & th {
-        padding: 1rem;
-        word-break: break-all;
-      }
-    }
+  .screen-panel {
+    padding-left: @migrate-side-padding;
+    padding-right: @migrate-side-padding;
+    font-family: @font-open-sans-semibold;
+    font-size: 1.7rem;
+    text-align: center;
   }
 
-  &__footer { background-color: @color-white; }
-}
-
-.p-t15 { padding-top: 1.5rem; }
-
-.mw-410 { max-width: 41rem; }
-
-.icon-arrow {
-  &::after {
-    content: "";
-    display: inline-block;
-    width: 8px;
-    height: 8px;
-    margin-left: 10px;
-    border-style: solid;
-    border-width: 2px 2px 0 0;
-    transform: rotate(45deg);
-    color: @color-white;
+  &__heading {
+    padding: 2rem 0 1rem;
+    font-family: @font-open-sans-light;
+    font-size: 2.5rem;
   }
-  &--down::after {
-    position: relative;
-    bottom: 3px;
-    transform: rotate(135deg);
+
+  &__email-clients {
+    padding: 2rem 0;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
   }
+
+  .icon {
+    &-migrate { font-size: 7rem; }
+    &-outlook { color: @migrate-outlook-color; }
+    &-gmail { color: @migrate-gmail-color; }
+  }
+
+  &-email-client {
+    font-family: @font-open-sans-semibold;
+    font-size: 1.7rem;
+
+    .screen-panel {
+      padding-left: @migrate-side-padding;
+      padding-right: @migrate-side-padding;
+    }
+
+    .form-box { color: @migrate-form-box-color; }
+
+    .expander {
+      &-heading {
+        padding-left: @migrate-side-padding;
+        padding-right: @migrate-side-padding;
+      }
+    }
+
+    .migrate-message { text-align: center; }
+
+    .event-info-line {
+      padding: .7rem @migrate-side-padding;
+      display: flex;
+      flex-flow: row nowrap;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid @migrate-event-info-line;
+    }
+
+  }
+
 }

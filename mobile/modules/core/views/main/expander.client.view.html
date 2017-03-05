@@ -1,0 +1,10 @@
+<div class="expander">
+    <div class="expander-heading" data-ng-class="{active: isVisible}" data-ng-click="handleToggle()">
+        <div>
+            <span class="icon" data-ng-class="iconClass"></span>
+            <span class="expander-title" data-ng-bind="title"></span>
+        </div>
+        <span class="icon" data-ng-class="isVisible ? 'icon-keyboard_arrow_up' : 'icon-keyboard_arrow_down'"></span>
+    </div>
+    <div class="expander-body" data-ng-show="isVisible" data-ng-transclude></div>
+</div>
