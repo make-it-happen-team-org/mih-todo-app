@@ -15,7 +15,8 @@ const ApplicationConfiguration = (() => {
         'rzModule',
         'ngCookies',
         'angular-loading-bar',
-        'ngDialog'
+        'ngDialog',
+        'ngCordova'
     ];
 
     // Add a new vertical module

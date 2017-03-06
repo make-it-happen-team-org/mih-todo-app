@@ -51,7 +51,7 @@
 
 <!--Application JavaScript Files-->
 <% _.forEach(assets.lib.js, function(url) { %>
-<script type="text/javascript" src="<%= url %>"></script>
+    <script type="text/javascript" src="<%= url %>"></script>
 <% }); %>
 
 <% _.forEach(assets.jsFullPath, function(jsRules) { %>
@@ -60,10 +60,6 @@
     <% }); %>
 <% }); %>
 
-<% if (process.env.NODE_ENV === 'development') { %>
-<!--Livereload script rendered -->
-<script type="text/javascript" src="http://localhost:35729/livereload.js"></script>
-<% } %>
 
 <!--[if lt IE 9]>
 <section class="browsehappy jumbotron hide">

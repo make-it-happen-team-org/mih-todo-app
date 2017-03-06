@@ -1,51 +1,25 @@
 module.exports = (grunt) => {
-  // Development tasks - when external server is needed (e.g. debug through IDE)
-  grunt.registerTask('develop', [
-    'env:development',
-    'loadConfig',
-    'clean',
-    'less',
-    'babel',
-    'buildDevIndex'
-  ]);
-
   grunt.registerTask('default', [ 'develop' ]);
 
-  grunt.registerTask('mobile', [
+  grunt.registerTask('browser', [
     'env:mobile',
-    'loadConfig:www',
+    'loadConfig:browser',
     'clean',
     'less',
     'babel',
-    'buildDevIndex'
+    'index'
   ]);
 
-  // Build task(s).
-  grunt.registerTask('prebuild', [
-    'env:development',
-    'loadConfig',
-    'cssmin:prodCss',
-    'ngAnnotate',
-    'htmlmin',
-    'copy:prodImg',
-    'copy:prodFonts',
-    'uglify'
+  grunt.registerTask('cordova', [
+    'env:mobile',
+    'loadConfig:cordova',
+    'clean',
+    'less',
+    'babel',
+    'index'
   ]);
-  grunt.registerTask('build', [
-    'env:production',
-    'loadConfig',
-    'buildProdIndex'
-  ]);
-  grunt.task.registerTask('buildProdIndex', () => {
-    grunt.file.write(
-      'build/index.html',
-      grunt.template.process(
-        grunt.file.read('index.template.html'),
-        {data: grunt.config.get('config')}
-      )
-    )
-  });
-  grunt.task.registerTask('buildDevIndex', () => {
+
+  grunt.task.registerTask('index', () => {
     grunt.file.write(
       'index.html',
       grunt.template.process(
@@ -56,12 +30,12 @@ module.exports = (grunt) => {
   });
 
   // A Task for loading the configuration object
-  grunt.task.registerTask('loadConfig', 'Task that loads the config into a grunt option.', folderPath => {
+  grunt.task.registerTask('loadConfig', 'Task that loads the config into a grunt option.', platform => {
     const init = require('../init');
     const config = require('../config');
 
     init();
-    grunt.file.setBase(folderPath || 'www/');
+    grunt.file.setBase('www/');
 
     config.assets.cssFullPath = [];
     config.assets.css.forEach((path) => {
@@ -71,6 +45,12 @@ module.exports = (grunt) => {
     });
 
     config.assets.jsFullPath = [];
+
+    if (platform === 'cordova') {
+      config.assets.jsFullPath.push([config.assets.cordova]);
+      config.endpointUrl = process.env.MIH_URL || config.endpointUrl;
+    }
+
     config.assets.js.forEach((path) => {
       const filePath = /\*/.test(path) ? grunt.file.expand(path) : [path];
 

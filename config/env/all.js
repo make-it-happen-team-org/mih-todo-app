@@ -83,6 +83,7 @@ module.exports = {
                 'lib/ngCordova/dist/ng-cordova.min.js'
             ]
         },
+        cordova: 'cordova.js',
         css: [
             'inspinia/css/*.css',
             'css/app.main.css'
