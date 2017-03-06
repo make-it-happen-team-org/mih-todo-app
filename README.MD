@@ -2,7 +2,7 @@
 >Is an online app, which helps you to plan your days and achieve more. When signing up to "Make It Happen", online organizer will get a schedule that is powerful & flexible enough to help you get much more done. This is an online calendar based solution for your total time management. Handy for tracking your progress and maintain life balance between family, health, friends and career.
 
 ## Step by step installation:
-#####1. Clone Git repository into local machine and configure user:
+### Clone Git repository into local machine and configure user:
 - Fork git repository ```https://github.com/make-it-happen-team-org/mih-todo-app.git``` ;
 - Clone your repository ```git clone [``` your repository ```]``` ;
 - Set git config:
@@ -13,22 +13,42 @@
     git config --global user.email johndoe@example.com
     ```
 
-#####2. System Configuration
+### System Configuration
 - Install ```NodeJS ^6.91``` [download](https://nodejs.org/en/download/);
 - Ensure that ```npm ^3``` ;
 - Install ```MongoDB``` and create folder structure ```db/data```, check System Environment for ```mongod``` variable;
-- Execute command: ``` npm install```
+- Install ```JDK 1.8``` ;
+- Install ```Android SDK``` and set ANDROID_HOME with path to your Android SDK folder in system variables;
+- Run ```android.bat``` in root of Android SDK folder and install all from folder "Tools" and "Android 7.1.1 (API 25)". You cant choose another API level if you want.;
+- Install Cordova ```npm install cordova -g```;
+- Add android platform by running ```cordova platform add android```;
+- Execute command: ``` npm install```;
 - Command ```npm install -g eslint``` to install eslint;
 - ```[optional]``` Command ```npm install -g karma-cli``` to install karma CLI for windows;
 - ```[optional]``` Command ```npm install -g grunt-cli``` to install grunt CLI for windows;
 - P.S. EditorConfig ```mih_editorconfig.xml``` (import to IDE config)
 
-#####3. Running Application
+### Set up android emulator
+- Go to root Android SDK folder;
+- Run "android.bat" file;
+- "Tools" -> "Manage AVDs...";
+- Open "Device Definitions" tab to display all available devices;
+- Pick device you want to emulate and click "Create AVD...";
+- Go
+
+### Running Application
 - Command ```mongod --dbpath "d:/db/data"``` to run mongo server;
 - Command ```npm run client``` compile files;
 - Command ```npm run server``` starts server and gets static;
 
-#####4. Open in browser link [http://localhost:3000/](http://localhost:3000/).
+### Running application on phone
+- Connect android device to computer;
+- Inside device open "Developers options" in "settings" and allow "USB debugging";
+- Command ```cordova run --list``` to display all available devices to deploy;
+- Command ```cordova run android --device``` to running application on real device;
+- Command ```cordova run android --emulator``` to running application on emulator;
+
+### Open in browser link [http://localhost:3000/](http://localhost:3000/).
 
 ## GIT flow
 
