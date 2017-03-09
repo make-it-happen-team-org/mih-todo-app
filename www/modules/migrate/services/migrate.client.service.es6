@@ -22,7 +22,7 @@ class MigrateService {
   }
 
   getImportClientPathView(viewName) {
-    return '/modules/migrate/views/import-' + viewName + '.view.html';
+    return 'modules/migrate/views/import-' + viewName + '.view.html';
   }
 }
 
