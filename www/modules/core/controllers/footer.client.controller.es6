@@ -1,8 +1,5 @@
 class FooterController {
-
-    /** @ngInject */
-    constructor($scope) {
-        Object.assign(this, { $scope });
+    constructor() {
         this.activeMenu = '';
     }
 }
