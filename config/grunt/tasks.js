@@ -18,7 +18,6 @@ const env = {
 const less = {
   options: {
     plugins: [new (require('less-plugin-autoprefix'))({browsers: ["last 3 versions"]})],
-    rootpath: 'www'
   },
   dev: {
     files: {

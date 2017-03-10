@@ -11,38 +11,38 @@
     <nav class="sidebar-menu">
         <ul>
             <li>
-                <img src="/modules/sidebar/img/date.png">
-                <a href="#!/todo">Calendar</a>
+                <img src="modules/sidebar/img/date.png">
+                <a ui-sref="restricted.todo_state">Calendar</a>
             </li>
             <li>
-                <img src="/modules/sidebar/img/favorite.png">
-                <a href="#!/todo/events/create?eventPresetType=sick">Sick today</a>
+                <img src="modules/sidebar/img/favorite.png">
+                <a ui-sref="restricted.todo_state.events.create({eventPresetType: sick})">Sick today</a>
             </li>
             <li>
-                <img src="/modules/sidebar/img/airplane.png">
-                <a href="#!/todo/events/create?eventPresetType=vacation">Vacation</a>
+                <img src="modules/sidebar/img/airplane.png">
+                <a href="restricted.todo_state.events.create(eventPresetType:vacation)">Vacation</a>
             </li>
             <li>
-                <img src="/modules/sidebar/img/notifications.png">
-                <a href="#!/todo/reminder">Reminder</a>
-            </li>
-            <li class="separator"></li>
-            <li>
-                <img src="/modules/sidebar/img/star.png">
-                <a href="#!/todo/tasks/list">Tasks</a>
-            </li>
-            <li>
-                <img src="/modules/sidebar/img/event.png">
-                <a href="#!/todo/events/list">Events</a>
+                <img src="modules/sidebar/img/notifications.png">
+                <a href="#">Reminder</a>
             </li>
             <li class="separator"></li>
             <li>
-                <img src="/modules/sidebar/img/repeat.png">
-                <a href="#!/migrate">Import content</a>
+                <img src="modules/sidebar/img/star.png">
+                <a ui-sref="restricted.todo_state.tasks.list">Tasks</a>
             </li>
             <li>
-                <img src="/modules/sidebar/img/exit.png">
-                <a href="/auth/signout">Sign Out</a>
+                <img src="modules/sidebar/img/event.png">
+                <a ui-sref="restricted.todo_state.events.list">Events</a>
+            </li>
+            <li class="separator"></li>
+            <li>
+                <img src="modules/sidebar/img/repeat.png">
+                <a ui-sref="restricted.migrate">Import content</a>
+            </li>
+            <li>
+                <img src="modules/sidebar/img/exit.png">
+                <button ng-click="sidebarCtrl.signOut()">Sign Out</button>
             </li>
         </ul>
     </nav>
