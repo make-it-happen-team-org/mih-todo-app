@@ -38,15 +38,20 @@
 
 ### Running Application
 - Command ```mongod --dbpath "d:/db/data"``` to run mongo server;
-- Command ```npm run client``` compile files;
-- Command ```npm run server``` starts server and gets static;
+- Command ```npm build:web``` to build app for browser;
+- Command ```npm build:mobile``` to build app for android device;
+- Command ```npm start``` run server;
 
-### Running application on phone
+### Running application on mobile device
+- Run server;
+- Set up server url as process environment variable: ```set MIH_URL=http://_your_ip_addres_:3000/```;
+- Build application for android device;
 - Connect android device to computer;
 - Inside device open "Developers options" in "settings" and allow "USB debugging";
 - Command ```cordova run --list``` to display all available devices to deploy;
 - Command ```cordova run android --device``` to running application on real device;
 - Command ```cordova run android --emulator``` to running application on emulator;
+- If all is done correctly, you can find "Make It Happen" application on target device;
 
 ### Open in browser link [http://localhost:3000/](http://localhost:3000/).
 
