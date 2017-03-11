@@ -1,0 +1,17 @@
+<form name="migrate">
+    <fieldset class="form-box form-box--without-error">
+        <label for="syncDateFrom">Start date</label>
+        <input id="syncDateFrom" name="syncDateFrom" type="date" class="form-input"
+               data-ng-model="ctrl.params.startDateTime" required>
+    </fieldset>
+    <fieldset class="form-box form-box--without-error">
+        <label for="syncDateTo">End date</label>
+        <input id="syncDateTo" name="syncDateTo" type="date" class="form-input"
+               data-ng-model="ctrl.params.endDateTime" required>
+    </fieldset>
+    <button type="button" class="button button--blue"
+            data-ng-disabled="migrate.syncDateFrom.$error.required || migrate.syncDateTo.$error.required"
+            data-ng-click="ctrl.getEvents()">
+        Get events
+    </button>
+</form>

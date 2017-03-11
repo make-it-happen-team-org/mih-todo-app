@@ -1,25 +1,29 @@
 class MigrateService {
-    /** @ngInject */
-    constructor($http, Events) {
-        Object.assign(this, {
-            Events,
-            $http
-        });
-    }
+  /** @ngInject */
+  constructor($http, Events) {
+    Object.assign(this, {
+      Events,
+      $http
+    });
+  }
 
-    importEvents(evets) {
-        return new this.Events(evets).$importEvents(response => {
-            response.data.forEach(result => {
-                evets.forEach(event => {
-                    if (event.id == result.id) {
-                        event.status = result.message;
-                    }
-                });
-
-                return evets;
-            })
+  importEvents(events) {
+    return new this.Events(events).$importEvents(response => {
+      response.data.forEach(result => {
+        events.forEach(event => {
+          if (event.id === result.id) {
+            event.status = result.message;
+          }
         });
-    }
+
+        return events;
+      })
+    });
+  }
+
+  getImportClientPathView(viewName) {
+    return 'modules/migrate/views/import-' + viewName + '.view.html';
+  }
 }
 
 angular.module('migrate').service('MigrateService', MigrateService);

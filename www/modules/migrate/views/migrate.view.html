@@ -1,34 +1,37 @@
-<div class="wrapper dashboard-panel tile" data-ng-controller="MigrateController as migrate">
-    <div class="row">
-        <div class="col-xs-12">
-            <div class="tile__wrapper">
-                <header class="col-xs-12 tile__header">
-                    <h3 class="tile__title">Synchronization</h3>
-                </header>
-                <ul class="col-xs-12 tile__body migrate-sync-list migrate-sync-list__main">
-                    <li class="tile-item migrate-sync-item--heading">Select service for synchronization</li>
-                    <li class="tile-item migrate-sync-item">
-                        <span class="icon-outlook migrate-sync-item__icon"
-                              data-ng-class="migrate.syncService == 'sync-item-outlook' ? 'sync-item-outlook' : ''"></span>
-                        <span class="migrate-sync-item__title">Outlook</span>
-                        <input type="radio" name="outlookImport" value="sync-item-outlook" data-ng-model="migrate.syncService">
-                    </li>
-                    <li class="tile-item migrate-sync-item">
-                        <span class="icon-gmail migrate-sync-item__icon"
-                              data-ng-class="migrate.syncService == 'sync-item-gmail' ? 'sync-item-gmail' : ''"></span>
-                        <span class="migrate-sync-item__title">Google calendar</span>
-                        <input type="radio" name="gmailImport" value="sync-item-gmail" data-ng-model="migrate.syncService">
-                    </li>
-                </ul>
-                <div class="col-xs-12 tile__footer migrate__footer">
-                    <a class="btn tile__btn tile__btn--login icon-arrow"
-                        data-ng-show="migrate.setRestrictedUrlPath()"
-                        data-ui-sref="restricted.migrate.outlook">Next</a>
-                    <a class="btn tile__btn tile__btn--login icon-arrow"
-                        data-ng-hide="migrate.setRestrictedUrlPath()"
-                        data-ui-sref="restricted.migrate.googleCalendar">Next</a>
-                </div>
+<div class="migrate">
+    <header class="main-header-mobile main-header-mobile--fixed">
+        <div class="main-header-mobile__main-tab-info">
+            <span class="main-header-mobile-control__icon icon icon-dehaze"></span>
+            <h3 class="main-header-mobile__title">Synchronisation</h3>
+        </div>
+        <div class="main-header-mobile__icons">
+            <a data-ui-sref="restricted.overdue" class="main-header-mobile-control--right">
+                <span class="main-header-mobile-control__icon icon icon-notifications_active"></span>
+            </a>
+        </div>
+    </header>
+    <div class="screen-panel screen-panel--transparent with-fixed-header with-fixed-footer">
+        <h3 class="migrate__heading">Choose email client</h3>
+        <div class="migrate__email-clients">
+            <div data-ng-controller="OutlookMigrateController as outlook">
+                <a data-ng-if="outlook.authUrl" href="{{outlook.authUrl}}">
+                    <span class="icon-migrate icon-outlook"></span>
+                </a>
+                <a data-ng-if="!outlook.authUrl" data-ui-sref="restricted.migrate.outlook">
+                    <span class="icon-migrate icon-outlook"></span>
+                </a>
+            </div>
+            <span>or</span>
+            <div data-ng-controller="GoogleCalendarController as google">
+                <a data-ng-if="google.authUrl" href="{{google.authUrl}}">
+                    <span class="icon-migrate icon-gmail"></span>
+                </a>
+                <a data-ng-if="!google.authUrl" data-ui-sref="restricted.migrate.googleCalendar">
+                    <span class="icon-migrate icon-gmail"></span>
+                </a>
             </div>
         </div>
+        <div>for synchronization</div>
+        <div>/ import events /</div>
     </div>
 </div>

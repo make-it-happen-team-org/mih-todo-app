@@ -1,0 +1,46 @@
+<div class="migrate-email-client">
+    <header class="main-header-mobile main-header-mobile--fixed">
+        <div class="main-header-mobile__main-tab-info">
+            <a class="main-header-mobile-control"
+               data-ui-sref="restricted.migrate">
+                <span class="main-header-mobile-control__icon icon icon-arrow_back"></span>
+            </a>
+            <h3 class="main-header-mobile__title">Import events</h3>
+        </div>
+        <div class="main-header-mobile__icons">
+            <a data-ui-sref="restricted.overdue" class="main-header-mobile-control--right">
+                <span class="main-header-mobile-control__icon icon icon-notifications_active"></span>
+            </a>
+        </div>
+    </header>
+    <div class="screen-panel screen-panel--transparent with-fixed-header with-fixed-footer migrate-message"
+         data-ng-show="ctrl.authUrl">
+        Start with <a data-ui-sref="restricted.migrate">choosing email client</a> for import events
+    </div>
+    <div class="screen-panel with-fixed-header with-fixed-footer" data-ng-show="ctrl.authorized">
+        <div data-ng-include="ctrl.params.viewPath"></div>
+    </div>
+    <div data-ng-if="ctrl.authorized && ctrl.events.length && !ctrl.tokenExpired">
+        <expander data-ng-repeat="event in ctrl.events" data-icon-class="icon-date_range" data-title="{{event.title}}">
+            <div class="event-info-line">
+                <span>Start date</span>
+                <span data-ng-bind="event.days.startTime | date:ctrl.dateFormat"></span>
+            </div>
+            <div class="event-info-line">
+                <span>End date</span>
+                <span data-ng-bind="event.days.endTime | date:ctrl.dateFormat"></span>
+            </div>
+            <div class="event-info-line" data-ng-if="event.notes" data-ng-bind="event.notes"></div>
+        </expander>
+    </div>
+    <div class="screen-panel screen-panel--transparent" data-ng-show="ctrl.authorized">
+        <div class="migrate-message" data-ng-show="!ctrl.events.length">No events yet</div>
+        <div class="migrate-message" data-ng-show="ctrl.tokenExpired">Oops, something went wrong, please
+            <a data-ui-sref="restricted.migrate" data-ng-click="ctrl.deleteClientCookies()">login to email client</a>
+        </div>
+        <button type="button" class="button button--green"
+                data-ng-click="ctrl.importEvents()" data-ng-show="ctrl.events.length">
+            Import events
+        </button>
+    </div>
+</div>

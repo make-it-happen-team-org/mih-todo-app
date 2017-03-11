@@ -1,0 +1,17 @@
+<form name="migrate">
+    <fieldset class="form-box form-box--without-error">
+        <label for="syncDateFrom">Start date</label>
+        <input id="syncDateFrom" name="syncDateFrom" type="date" class="form-input"
+               data-ng-model="ctrl.params.startDate" required>
+    </fieldset>
+    <fieldset class="form-box form-box--without-error">
+        <label for="eventsLimit">Events limit</label>
+        <input id="eventsLimit" name="eventsLimit" type="number" class="form-input" min="1" max="30"
+               data-ng-model="ctrl.params.maxResults" required>
+    </fieldset>
+    <button type="button" class="button button--blue"
+            data-ng-disabled="migrate.syncDateFrom.$error.required || migrate.eventsLimit.$error.required"
+            data-ng-click="ctrl.getEvents()">
+        Get events
+    </button>
+</form>
