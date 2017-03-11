@@ -1,23 +1,26 @@
 <nav class="header-nav-element__container"
-        data-ng-show="mainCtrl.Authentication.user">
+     data-ng-show="mainCtrl.Authentication.user">
 
     <ul class="header-nav-element header-nav-element__list header-nav-element-tab-holder">
         <li class="header-nav-element-tab-holder__item" data-ng-repeat="state in mainCtrl.topStatesInNavDropdown">
             <button class="header-nav-element-tab"
-                    data-ng-click="mainCtrl.goToState(state)">{{ state.data.menuLabel}}</button>
+                    data-ng-click="mainCtrl.goToState(state)">{{ state.data.menuLabel}}
+            </button>
         </li>
     </ul>
 
 
     <ul class="header-nav-element header-nav-element__list header-nav-element-btn-holder">
         <li class="header-nav-element header-nav-element__item header-nav-element-btn-holder__item">
-            <a class="header-nav-element-link" data-ui-sref="restricted.todo_state.events.create({ eventPresetType: 'sick' })">
+            <a class="header-nav-element-link"
+               data-ui-sref="restricted.todo_state.events.create({ eventPresetType: 'sick' })">
                 <i class="fa fa-heartbeat" aria-hidden="true"></i>
                 <span class="from-tablet">Sick today</span>
             </a>
         </li>
         <li class="header-nav-element header-nav-element__item header-nav-element-btn-holder__item">
-            <a class="header-nav-element-link" data-ui-sref="restricted.todo_state.events.create({ eventPresetType: 'vacation' })">
+            <a class="header-nav-element-link"
+               data-ui-sref="restricted.todo_state.events.create({ eventPresetType: 'vacation' })">
                 <i class="fa fa-plane" aria-hidden="true"></i>
                 <span class="from-tablet">Vacation</span>
             </a>
@@ -34,7 +37,8 @@
             <button class="header-nav-element-btn-holder__dropdown-toggle"
                     data-ng-click="mainCtrl.toggleDropdown('user')">
                 <div class="header-nav-element__username-wrapper">
-                    <span class="from-tablet header-nav-element-btn-holder__username" data-ng-bind="mainCtrl.user.username"></span>
+                    <span class="from-tablet header-nav-element-btn-holder__username"
+                          data-ng-bind="mainCtrl.user.username"></span>
                 </div>
                 <span class="header-nav-element__image-wrapper">
                     <img class="header-nav-element-btn-holder__profile-image" src="{{mainCtrl.user.profileImageURL}}">

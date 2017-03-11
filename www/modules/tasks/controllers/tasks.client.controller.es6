@@ -2,32 +2,32 @@ class TasksController {
   constructor($scope, $rootScope, $stateParams, $location,
               Authentication, Tasks, Users, $timeout, Algorithm,
               Slots, Notification, TasksListService) {
-    $scope.authentication = Authentication;
-    $scope.isATemplate = false;
-    $scope.user = Authentication.user;
+    $scope.authentication   = Authentication;
+    $scope.isATemplate      = false;
+    $scope.user             = Authentication.user;
     $scope.selectedTemplate = false;
 
-    this.$scope = $scope;
-    this.$rootScope = $rootScope;
-    this.$stateParams = $stateParams;
-    this.$location = $location;
-    this.Authentication = Authentication;
-    this.Tasks = Tasks;
-    this.Users = Users;
-    this.$timeout = $timeout;
-    this.Algorithm = Algorithm;
-    this.Slots = Slots;
-    this.Notification = Notification;
+    this.$scope           = $scope;
+    this.$rootScope       = $rootScope;
+    this.$stateParams     = $stateParams;
+    this.$location        = $location;
+    this.Authentication   = Authentication;
+    this.Tasks            = Tasks;
+    this.Users            = Users;
+    this.$timeout         = $timeout;
+    this.Algorithm        = Algorithm;
+    this.Slots            = Slots;
+    this.Notification     = Notification;
     this.TasksListService = TasksListService;
 
     this.listen();
 
-    let date = new Date(),
+    let date    = new Date(),
         dateMax = new Date(Date.now() + (365 * 24 * 60 * 60 * 1000));
 
     $scope.dt = {
       startDate: date,
-      endDate: date
+      endDate:   date
     };
 
     let d = new Date();
@@ -39,7 +39,7 @@ class TasksController {
     d2.setMinutes(0);
 
     $scope.startTime = d;
-    $scope.endTime = d2;
+    $scope.endTime   = d2;
 
     $scope.startDate = {
       minDate: date,
@@ -57,7 +57,7 @@ class TasksController {
 
     $scope.opened = {
       startDate: false,
-      endDate: false
+      endDate:   false
     };
 
     $scope.openStart = ($event) => {
@@ -65,23 +65,24 @@ class TasksController {
       $event.stopPropagation();
       return $scope.opened = {
         startDate: true,
-        endDate: false
+        endDate:   false
       };
     };
+
     $scope.openEnd = ($event) => {
       $event.preventDefault();
       $event.stopPropagation();
-      $scope.dt.endDate = $scope.dt.startDate;
+      $scope.dt.endDate      = $scope.dt.startDate;
       $scope.endDate.minDate = $scope.dt.startDate;
       return $scope.opened = {
         startDate: false,
-        endDate: true
+        endDate:   true
       };
     };
 
     $scope.dateOptions = {
       startDate: {},
-      endDate: {}
+      endDate:   {}
     };
 
     $scope.getDisabledDates = (date, mode) => {
@@ -98,17 +99,18 @@ class TasksController {
       this.clearSlotsList();
 
       newTask = {
-        type: 'task',
-        title: '',
-        priority: 1,
-        estimation: TasksController.getOptimalEstimation($scope.dt.startDate, $scope.dt.endDate),
-        notes: '',
-        days: {
+        type:         'task',
+        title:        '',
+        priority:     1,
+        estimation:   TasksController.getOptimalEstimation($scope.dt.startDate, $scope.dt.endDate),
+        notes:        '',
+        days:         {
           startTime: $scope.dt.startDate,
-          endTime: $scope.dt.endDate
+          endTime:   $scope.dt.endDate
         },
         withoutDates: false
       };
+
       $scope.newTask = angular.copy(newTask);
 
       $scope.slider = TasksController.setEstimationExtremes($scope.newTask);
@@ -126,7 +128,7 @@ class TasksController {
           delete $scope.newTask.$$hashKey;
         } else {
           $scope.selectedTemplate = false;
-          $scope.newTask = angular.copy(newTask);
+          $scope.newTask          = angular.copy(newTask);
         }
       };
 
@@ -186,10 +188,10 @@ class TasksController {
       }).$promise.then(function (slots) {
         slots.forEach((slot) => {
 
-          slot.title = task.title;
+          slot.title     = task.title;
           slot.className = ['task', `task-priority-${task.priority}`];
 
-          Slots.update({_id: slot._id}, slot);
+          Slots.update({ _id: slot._id }, slot);
         });
       });
       if (task) {
@@ -205,24 +207,16 @@ class TasksController {
       }
     };
 
-    $scope.initCreateSlots = () => {
-      $scope.createSlot = true;
-    };
-
-    $scope.isOverdueSlot = (item) => {
-      return (Date.parse(item.start) + 3600000 * item.duration) <= new Date().valueOf();
-    };
-
     $scope.completeSlot = (slot) => {
       this.updateProgress(slot, $scope.task);
     };
   }
 
-  static getEstimationDaysRange (startDate, endDate) {
+  static getEstimationDaysRange(startDate, endDate) {
     let weekDay             = new Date(startDate),
         estimationDaysRange = [weekDay];
 
-    endDate                 = new Date(endDate);
+    endDate = new Date(endDate);
 
     while (weekDay < endDate) { //Get all days for this period
       estimationDaysRange.push(weekDay);
@@ -232,22 +226,22 @@ class TasksController {
     return estimationDaysRange;
   }
 
-  static getMaxEstimation (startDate, endDate) {
+  static getMaxEstimation(startDate, endDate) {
     return TasksController.getEstimationDaysRange(startDate, endDate).length * 12;
   }
 
-  static getOptimalEstimation (startDate, endDate) {
+  static getOptimalEstimation(startDate, endDate) {
     // TODO: what is considered optimal?
     let optimalEstimation = 1 /* hour */;
     return optimalEstimation;
   }
 
-  removeAvailHoursInfo () {
+  removeAvailHoursInfo() {
     delete this.$scope.timeAvailability;
   }
 
-  updateEstimation (model) {
-    let maxEstimation = TasksController.getMaxEstimation(model.days.startTime, model.days.endTime);
+  updateEstimation(model) {
+    let maxEstimation               = TasksController.getMaxEstimation(model.days.startTime, model.days.endTime);
     this.$scope.slider.options.ceil = maxEstimation;
     if (model.estimation > maxEstimation) {
       model.estimation = maxEstimation;
@@ -255,11 +249,11 @@ class TasksController {
     this.removeAvailHoursInfo();
   };
 
-  static setEstimationExtremes (model) {
+  static setEstimationExtremes(model) {
     return {
       options: {
-        floor: 1,
-        ceil: TasksController.getMaxEstimation(new Date(model.days.startTime), new Date(model.days.endTime)),
+        floor:     1,
+        ceil:      TasksController.getMaxEstimation(new Date(model.days.startTime), new Date(model.days.endTime)),
         translate: function translate(unit) {
           return unit + 'h';
         }
@@ -267,13 +261,13 @@ class TasksController {
     };
   };
 
-  getNewSlots (model) {
+  getNewSlots(model) {
     this.Algorithm.generateSlots(
-        new Date(model.days.startTime),
-        new Date(model.days.endTime),
-        model.priority,
-        model.estimation,
-        this.$scope.user.predefinedSettings.workingHours
+      new Date(model.days.startTime),
+      new Date(model.days.endTime),
+      model.priority,
+      model.estimation,
+      this.$scope.user.predefinedSettings.workingHours
     ).then(slotsRange => {
       this.$timeout(() => {
         this.$scope.timeAvailability = this.Algorithm.getTimeAvailabilityFromSlotsGroupedByDays();
@@ -285,18 +279,18 @@ class TasksController {
     });
   };
 
-  removeSlotsByTask () {
+  removeSlotsByTask() {
     this.Tasks.deleteSlotsByTask({
-          taskId: this.$stateParams.taskId
-        }
+        taskId: this.$stateParams.taskId
+      }
     );
   };
 
-  updateProgress (slot, task) {
+  updateProgress(slot, task) {
     slot.isComplete = true;
 
     this.Slots.update(slot, () => {
-      let slotsQty = this.$scope.slotsRange.map(function (slot) {
+      let slotsQty         = this.$scope.slotsRange.map(function (slot) {
         return slot.isComplete;
       });
       let completeSlotsQty = slotsQty.filter(Boolean);
@@ -315,22 +309,22 @@ class TasksController {
     });
   };
 
-  clearSlotsList () {
+  clearSlotsList() {
     if (this.$scope.slotsRange && this.$scope.slotsRange.length) {
       this.$scope.slotsRange = [];
       this.Notification.info('Don\'t forget to generate slots');
     }
   };
 
-  getSlotsByTask () {
+  getSlotsByTask() {
     return this.Tasks.getSlotsByTask({
-          taskId: this.$stateParams.taskId
-        }, (slots) => {
-          if (!slots.length) {
-            this.$scope.progress = false;
-            return;
-          }
+        taskId: this.$stateParams.taskId
+      }, (slots) => {
+        if (!slots.length) {
+          this.$scope.progress = false;
+          return;
         }
+      }
     );
   };
 
@@ -344,7 +338,7 @@ class TasksController {
     });
   };
 
-  saveTask (model) {
+  saveTask(model) {
     return new Promise(resolve => {
       let task = new this.Tasks(model);
 
@@ -369,7 +363,7 @@ class TasksController {
     });
   };
 
-  updateTaskTemplates (model) {
+  updateTaskTemplates(model) {
     return new Promise(resolve => {
       let user = new this.Users(this.$scope.user);
 
@@ -396,7 +390,7 @@ class TasksController {
   listen() {
     this.$scope.$on('COMPLETED_SLOT_FROM_OVERDUE', () => {
       this.$timeout(() => {
-        this.$scope.task = this.getTask();
+        this.$scope.task       = this.getTask();
         this.$scope.slotsRange = this.getSlotsByTask();
       });
     });
@@ -410,11 +404,11 @@ class TasksController {
       let model = this.$scope.newTask;
 
       this.Algorithm.generateSlots(
-          new Date(model.days.startTime),
-          new Date(model.days.endTime),
-          model.priority,
-          model.estimation,
-          this.$scope.user.predefinedSettings.workingHours
+        new Date(model.days.startTime),
+        new Date(model.days.endTime),
+        model.priority,
+        model.estimation,
+        this.$scope.user.predefinedSettings.workingHours
       ).then(slotsRange => {
         if (!slotsRange.length) {
           return;

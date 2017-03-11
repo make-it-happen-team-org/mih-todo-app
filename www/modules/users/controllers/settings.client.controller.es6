@@ -1,110 +1,111 @@
 class SettingsController {
-	static get $inject() {
-		return ['$injector'];
-	}
-	constructor($injector) {
-		this.Authentication = $injector.get('Authentication');
-		this.$location = $injector.get('$location');
-		if (!this.Authentication.user) this.$location.path('/');
+  static get $inject() {
+    return ['$injector'];
+  }
 
-		/*@ngInject*/
-		this.Users = $injector.get('Users');
-		this.user = this.Authentication.user;
-		this.imageURL = this.user.profileImageURL;
-		this.$timeout = $injector.get('$timeout');
-		this.$window = $injector.get('$window');
-		this.FileUploader = $injector.get('FileUploader');
-		// TODO: move to root controller + share
-		// TODO: refactor into directive so that we do not need to always inject it
-		this.MIHUtils = $injector.get('MIHUtils');
-		this.$rootScope = $injector.get('$rootScope');
-		this.Notification = $injector.get('Notification');
+  constructor($injector) {
+    this.Authentication = $injector.get('Authentication');
+    this.$location      = $injector.get('$location');
+    if (!this.Authentication.user) this.$location.path('/');
 
-		/*fields*/
-		this.workingDays = ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun'];
-		this.reminders = [5, 10, 15, 20, 25, 30];
+    /*@ngInject*/
+    this.Users        = $injector.get('Users');
+    this.user         = this.Authentication.user;
+    this.imageURL     = this.user.profileImageURL;
+    this.$timeout     = $injector.get('$timeout');
+    this.$window      = $injector.get('$window');
+    this.FileUploader = $injector.get('FileUploader');
+    // TODO: move to root controller + share
+    // TODO: refactor into directive so that we do not need to always inject it
+    this.MIHUtils     = $injector.get('MIHUtils');
+    this.$rootScope   = $injector.get('$rootScope');
+    this.Notification = $injector.get('Notification');
 
-		this.initFileUploader();
-	}
+    /*fields*/
+    this.workingDays = ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun'];
+    this.reminders   = [5, 10, 15, 20, 25, 30];
 
-	initFileUploader() {
-		var onAfterAddingFile = (fileItem) => {
-			if (this.$window.FileReader) {
-				var fileReader = new this.$window.FileReader();
-				fileReader.readAsDataURL(fileItem._file);
+    this.initFileUploader();
+  }
 
-				fileReader.onload = (fileReaderEvent) => {
-					this.$timeout(() => {
-						this.imageURL = fileReaderEvent.target.result;
-					}, 0);
-				};
-			}
-		};
+  initFileUploader() {
+    var onAfterAddingFile = (fileItem) => {
+      if (this.$window.FileReader) {
+        var fileReader = new this.$window.FileReader();
+        fileReader.readAsDataURL(fileItem._file);
 
-		var onSuccessItem = (fileItem, response, status, headers) => {
-			this.Notification.success('file upload Success');
-			angular.extend(this.user, response);
-			this.cancelUpload();
-		};
+        fileReader.onload = (fileReaderEvent) => {
+          this.$timeout(() => {
+            this.imageURL = fileReaderEvent.target.result;
+          }, 0);
+        };
+      }
+    };
 
-		var onErrorItem = (fileItem, response, status, headers) => {
-			this.cancelUpload();
-			this.Notification.error(response.message);
-		};
+    var onSuccessItem = (fileItem, response, status, headers) => {
+      this.Notification.success('file upload Success');
+      angular.extend(this.user, response);
+      this.cancelUpload();
+    };
 
-		this.uploader = new this.FileUploader({
-			url: 'users/picture',
-			alias: 'newProfilePicture',
-			onAfterAddingFile: onAfterAddingFile,
-			onSuccessItem: onSuccessItem,
-			onErrorItem: onErrorItem
-		});
+    var onErrorItem = (fileItem, response, status, headers) => {
+      this.cancelUpload();
+      this.Notification.error(response.message);
+    };
 
-		// Set file uploader image filter
-		this.uploader.filters.push({
-			name: 'imageFilter',
-			fn (item, options) {
-				var type = '|' + item.type.slice(item.type.lastIndexOf('/') + 1) + '|';
-				return '|jpg|png|jpeg|bmp|gif|'.indexOf(type) !== -1;
-			}
-		});
-	}
+    this.uploader = new this.FileUploader({
+      url:               'users/picture',
+      alias:             'newProfilePicture',
+      onAfterAddingFile: onAfterAddingFile,
+      onSuccessItem:     onSuccessItem,
+      onErrorItem:       onErrorItem
+    });
 
-	addNewBookedSlot() {
-		this.user.predefinedSettings.booked.push({
-			startTime: '14:00',
-			endTime: '15:00'
-		});
-	}
+    // Set file uploader image filter
+    this.uploader.filters.push({
+      name: 'imageFilter',
+      fn (item, options) {
+        var type = '|' + item.type.slice(item.type.lastIndexOf('/') + 1) + '|';
+        return '|jpg|png|jpeg|bmp|gif|'.indexOf(type) !== -1;
+      }
+    });
+  }
 
-	removeBookedSlot(index) {
-		this.user.predefinedSettings.booked.splice(index, 1);
-	}
+  addNewBookedSlot() {
+    this.user.predefinedSettings.booked.push({
+      startTime: '14:00',
+      endTime:   '15:00'
+    });
+  }
 
-	updateUserProfile(isValid) {
-		if (isValid) {
-			var user = new this.Users(this.user);
+  removeBookedSlot(index) {
+    this.user.predefinedSettings.booked.splice(index, 1);
+  }
 
-			user.$update(response => {
-				this.Notification.success(`Profile Saved Successfully`);
-				this.user = response;
-				this.$rootScope.$broadcast('updateUserInfo', this.user);
-			}, response => {
-				this.Notification.error(`Error: ${response.data.message}. Please try again later`);
-			});
-		} else {
-			this.submitted = true;
-		}
-	}
+  updateUserProfile(isValid) {
+    if (isValid) {
+      var user = new this.Users(this.user);
 
-	uploadProfilePicture() {
-		this.uploader.uploadAll();
-	}
+      user.$update(response => {
+        this.Notification.success(`Profile Saved Successfully`);
+        this.user = response;
+        this.$rootScope.$broadcast('updateUserInfo', this.user);
+      }, response => {
+        this.Notification.error(`Error: ${response.data.message}. Please try again later`);
+      });
+    } else {
+      this.submitted = true;
+    }
+  }
 
-	cancelUpload() {
-		this.uploader.clearQueue();
-		this.imageURL = this.user.profileImageURL;
-	}
+  uploadProfilePicture() {
+    this.uploader.uploadAll();
+  }
+
+  cancelUpload() {
+    this.uploader.clearQueue();
+    this.imageURL = this.user.profileImageURL;
+  }
 }
 
 angular.module('users').controller('SettingsController', SettingsController);

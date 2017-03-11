@@ -13,8 +13,6 @@
             </a>
         </div>
     </header>
-
-    <!--TODO: style this in task-325-->
     <div class="sidebar__block sidebar__block--group sidebar__block--group-nav"
          data-ng-show="taskListCtrl.tasks.length > 1">
         <div class="sidebar__nav-item-wrapper sidebar__nav-item-wrapper--left">
@@ -44,9 +42,9 @@
             </div>
         </div>
     </div>
-
     <ul class="tasks-list__list" data-ng-show="taskListCtrl.filteredTasks.length">
-        <li class="tasks-list__list-item {{'task-priority-' + task.priority}}" data-ng-repeat="task in taskListCtrl.filteredTasks">
+        <li class="tasks-list__list-item {{'task-priority-' + task.priority}}"
+            data-ng-repeat="task in taskListCtrl.filteredTasks">
             <div class="tasks-list__progress-wrapper">
                 <div class="tasks-list__progress-wrapper" donut-chart=""
                      donut-data="task.progress.progressChart.data"
@@ -63,11 +61,15 @@
         </li>
     </ul>
     <p class="tasks-list__no-items"
-        data-ng-hide="taskListCtrl.tasks.length">
+       data-ng-hide="taskListCtrl.tasks.length">
         No tasks yet.<br/>Please, click on <span class="icon icon-add"></span> to add new one.
     </p>
     <p class="tasks-list__no-items"
        data-ng-show="taskListCtrl.tasks.length && taskListCtrl.filter.isComplete && !taskListCtrl.filteredTasks.length">
-        There are no completed tasks <br/>Please <button type="button" class="sidebar-button__reset" data-ng-click="taskListCtrl.resetCompleteFilter()">reset</button> filter to display all tasks.
+        There are no completed tasks <br/>Please
+        <button type="button" class="sidebar-button__reset" data-ng-click="taskListCtrl.resetCompleteFilter()">
+            reset
+        </button>
+        filter to display all tasks.
     </p>
 </div>

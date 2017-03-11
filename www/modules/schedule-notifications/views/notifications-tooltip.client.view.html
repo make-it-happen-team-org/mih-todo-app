@@ -14,18 +14,19 @@
     data-ng-show="notifications.overdueSlots.length">
     <li class="notification-item"
         data-ng-repeat="slot in notifications.overdueSlots | limitTo: 3 ">
-            <a class="notifications__dropdown-link dropdown-menu-container__link"
-               data-ui-sref="restricted.overdue.edit({ taskId: slot.taskId })">
-                <span class="dropdown-item-title" data-ng-class="'task-priority--' + slot.priority" data-ng-bind="slot.title"></span>
-            </a>
-            <span class="overdue-checkbox" data-ng-if="!slot.isComplete">
+        <a class="notifications__dropdown-link dropdown-menu-container__link"
+           data-ui-sref="restricted.overdue.edit({ taskId: slot.taskId })">
+            <span class="dropdown-item-title" data-ng-class="'task-priority--' + slot.priority"
+                  data-ng-bind="slot.title"></span>
+        </a>
+        <span class="overdue-checkbox" data-ng-if="!slot.isComplete">
                 DONE
                 <label class="dropdown-checkbox">
                     <input type="checkbox" ng-model="slot.isComplete" ng-change="completeSlot(slot)">
                     <span class="dropdown-checkbox--square"></span>
                 </label>
             </span>
-            <span data-ng-if="slot.isComplete" class="label label-primary">done</span>
+        <span data-ng-if="slot.isComplete" class="label label-primary">done</span>
     </li>
     <li class="notification-item notification-item--control clearfix">
         <a class="notification-item__view-all pull-right" data-ui-sref="restricted.overdue">

@@ -5,12 +5,10 @@
 
 .settings {
   background: @color-sidebar-separator;
-
   min-height: 100%;
 
   .main-info {
     background: @settings-main-background;
-
     padding: 16px 20px;
   }
 
@@ -44,45 +42,37 @@
     height: @avatar-size;
   }
 }
+
 .settings-page {
   min-height: 100%;
   display: flex;
   flex-direction: column;
 }
 
-
 .settings-groups {
   background: @settings-additional-background;
-
-  box-shadow: 0 1px 7px -3px #333333;
+  box-shadow: 0 1px 7px -3px #333;
 }
 
 .settings-groups--link {
   display: block;
-
   width: 100%;
-
   border-bottom: 1px solid @settings-sub-background;
-
   padding: 16px;
-
   color: @settings-main-font-color;
 
   .icon {
     margin-right: 30px;
-
     vertical-align: middle;
   }
 }
 
 .settings-content {
   background: @settings-main-background;
-
   padding: 16px 16px 0;
 
   .field-group {
     padding: 14px 0 10px;
-
     color: @settings-additional-font-color;
 
     &__select {
@@ -102,7 +92,6 @@
 
   .field-group--name {
     margin: 0;
-
     color: @settings-sub-font-color;
     .font-size(12);
   }
@@ -110,18 +99,12 @@
   .field-group--field {
     width: 100%;
     height: 17px;
-
     box-sizing: content-box;
-
     padding: 10px 0;
-
     border: 0 none;
     border-bottom: 1px solid @settings-sub-font-color;
-
     background: transparent;
-
     .font-size(16);
-
     outline: none;
 
     option {

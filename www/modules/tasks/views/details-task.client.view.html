@@ -7,7 +7,8 @@
             <h3 class="main-header-mobile__title">Task Details</h3>
         </div>
         <div class="main-header-mobile__icons">
-            <a data-ui-sref="restricted.todo_state.tasks.edit({ taskId: tasksDetails.task._id })" class="main-header-mobile-control--right">
+            <a data-ui-sref="restricted.todo_state.tasks.edit({ taskId: tasksDetails.task._id })"
+               class="main-header-mobile-control--right">
                 <span class="main-header-mobile-control__icon icon icon-create"></span>
             </a>
         </div>
@@ -33,11 +34,15 @@
         </li>
         <li class="tasks-details__list-item">
             <span class="tasks-details-item__icons icon icon-date_range"></span>
-            <div class="tasks-details-item__description">{{tasksDetails.task.days.startTime | date: "dd.MM h:mma"}} - {{ tasksDetails.task.days.endTime | date: "dd.MM h:mma" }}</div>
+            <div class="tasks-details-item__description">
+                {{tasksDetails.task.days.startTime | date: "dd.MM h:mma"}} - {{tasksDetails.task.days.endTime | date: "dd.MM h:mma" }}
+            </div>
         </li>
         <li class="tasks-details__list-item">
             <span class="tasks-details-item__icons icon icon-access_time"></span>
-            <div class="tasks-details-item__description">Estimation - {{ tasksDetails.task.progress.done + tasksDetails.task.progress.left }}h</div>
+            <div class="tasks-details-item__description">
+                Estimation - {{ tasksDetails.task.progress.done + tasksDetails.task.progress.left }}h
+            </div>
         </li>
         <li class="tasks-details__list-item"
             data-ng-if="tasksDetails.task.notes"
@@ -87,7 +92,6 @@
                             data-ng-click="tasksDetails.completeSlot(item)"
                             data-ng-disabled="true">DONE
                     </button>
-                    </span>
                 </li>
             </ul>
         </li>

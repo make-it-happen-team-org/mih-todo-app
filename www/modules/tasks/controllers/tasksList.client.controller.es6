@@ -22,13 +22,13 @@ class TasksListController {
 
   renderSortOption() {
     if (this.filter.name === 'time') {
-      if(this.filter.timeAsc) {
+      if (this.filter.timeAsc) {
         return 'ascTime'
       }
       return 'descTime'
     }
     if (this.filter.name === 'priority') {
-      if(this.filter.priorityAsc) {
+      if (this.filter.priorityAsc) {
         return 'ascPriority'
       }
       return 'descPriority'
@@ -37,42 +37,42 @@ class TasksListController {
 
   sortListBy(type) {
     switch (type) {
-      case 'priority': {
-        this.filter.name         = 'priority';
-        this.filter.priorityAsc = !this.filter.priorityAsc;
-        this.filteredTasks               = this.$filter('orderBy')(this.filteredTasks, this.filter.priorityAsc ? 'priority' : '-priority');
-        this.setFiltersToLocalStorage();
-        break;
+    case 'priority': {
+      this.filter.name        = 'priority';
+      this.filter.priorityAsc = !this.filter.priorityAsc;
+      this.filteredTasks      = this.$filter('orderBy')(this.filteredTasks, this.filter.priorityAsc ? 'priority' : '-priority');
+      this.setFiltersToLocalStorage();
+      break;
+    }
+    case 'time': {
+      this.filter.name    = 'time';
+      this.filter.timeAsc = !this.filter.timeAsc;
+
+      if (this.filter.timeAsc) {
+        this.filteredTasks = TasksListController.bulbSortForEndTime(this.filteredTasks);
+      } else {
+        this.filteredTasks = TasksListController.bulbSortForEndTime(this.filteredTasks).reverse();
       }
-      case 'time': {
-        this.filter.name     = 'time';
-        this.filter.timeAsc = !this.filter.timeAsc;
-  
-        if (this.filter.timeAsc) {
-          this.filteredTasks = TasksListController.bulbSortForEndTime(this.filteredTasks);
-        } else {
-          this.filteredTasks = TasksListController.bulbSortForEndTime(this.filteredTasks).reverse();
-        }
-        this.setFiltersToLocalStorage();
-        break;
+      this.setFiltersToLocalStorage();
+      break;
+    }
+    case 'isComplete': {
+      if (this.filter.isComplete) {
+        this.filteredTasks = this.tasks.filter(el => el.isComplete);
+      } else {
+        this.filteredTasks = this.tasks;
       }
-      case 'isComplete': {
-        if (this.filter.isComplete) {
-          this.filteredTasks = this.tasks.filter(el => el.isComplete);
-        } else {
-          this.filteredTasks = this.tasks;
-        }
-        this.setFiltersToLocalStorage();
-        break;
-      }
+      this.setFiltersToLocalStorage();
+      break;
+    }
     }
   }
 
   find() {
     this.Tasks.query().$promise
         .then((tasks) => {
-          this.tasks     = tasks;
-          this.filteredTasks     = tasks;
+          this.tasks         = tasks;
+          this.filteredTasks = tasks;
           this.progressExtend();
           this.getFiltersFromLocalStorage();
           this.sortListBy('isComplete');
@@ -91,17 +91,17 @@ class TasksListController {
 
   getFiltersFromLocalStorage() {
     this.filter = JSON.parse(localStorage.getItem('sidebarFilter')) || {
-        name:         'time',
+        name:        'time',
         priorityAsc: true,
         timeAsc:     true,
-        isComplete:   false
+        isComplete:  false
       };
   }
 
   setFiltersToLocalStorage() {
     localStorage.setItem('sidebarFilter', JSON.stringify(this.filter));
   }
-  
+
   resetCompleteFilter() {
     this.filter.isComplete = false;
     this.sortListBy('isComplete');
@@ -113,7 +113,7 @@ class TasksListController {
     });
   }
 
-  static bulbSortForEndTime(arr){
+  static bulbSortForEndTime(arr) {
     const len  = arr.length - 1;
     let result = arr.slice();
 
