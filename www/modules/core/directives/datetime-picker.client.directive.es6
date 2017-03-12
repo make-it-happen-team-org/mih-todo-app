@@ -2,7 +2,7 @@ angular.module('core')
        .directive('datetimePicker', function () {
          return {
            restrict:    'E',
-           templateUrl: '/modules/core/views/main/datetime-picker.client.view.html',
+           templateUrl: 'modules/core/views/main/datetime-picker.client.view.html',
            scope:       {
              label:          '@',
              type:           '@',

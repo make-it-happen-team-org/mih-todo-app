@@ -2,7 +2,7 @@ class NotificationTooltip {
   constructor() {
     this.restrict    = 'A';
     this.controller  = 'ScheduleNotificationsController';
-    this.templateUrl = '/modules/schedule-notifications/views/notifications-tooltip.client.view.html';
+    this.templateUrl = 'modules/schedule-notifications/views/notifications-tooltip.client.view.html';
   }
 }
 

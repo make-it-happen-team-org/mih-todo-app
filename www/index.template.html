@@ -1,20 +1,16 @@
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
-
 <head>
     <title><%= app.title %></title>
-
     <meta charset="utf-8">
     <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
-
     <meta name="keywords" content="<%= app.keywords %>">
     <meta name="description" content="<%= app.description %>">
-
-    <link href="./modules/core/img/brand/favicon.ico" rel="shortcut icon" type="image/x-icon">
+    <link href="modules/core/img/brand/favicon.ico" rel="shortcut icon" type="image/x-icon">
 
     <!--Application CSS Files-->
     <% _.forEach(assets.lib.css, function(url) { %>
@@ -52,6 +48,7 @@
 <script type="text/javascript" src="<%= url %>"></script>
 <% }); %>
 <% }); %>
+
 </body>
 
 </html>

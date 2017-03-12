@@ -9,7 +9,7 @@ class ModalsService {
 
   getModalWindowOpen(msg) {
     this.ngDialog.open({
-      template:        '/modules/modals/views/modals.view.html',
+      template:        'modules/modals/views/modals.view.html',
       controller:      'ModalsController',
       controllerAs:    'modal',
       width:           '55%',
