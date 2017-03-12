@@ -18,15 +18,17 @@
             <span class="events-list__icons--event icon icon-event"></span>
             <div class="events-list-item__info">
                 <div class="events-list-item__title" data-ng-bind="event.title"></div>
-                <div class="events-list-item__description">{{ event.days.startTime | date:"h:mma" }} - {{ event.days.endTime | date:"h:mma" }}</div>
+                <div class="events-list-item__description">
+                    {{ event.days.startTime | date:"h:mma" }} - {{event.days.endTime | date:"h:mma" }}
+                </div>
             </div>
-            <a class="events-list-item__edit" data-ui-sref="restricted.todo_state.events.details({ eventId: event._id })">
+            <a class="events-list-item__edit"
+               data-ui-sref="restricted.todo_state.events.details({ eventId: event._id })">
                 <span class="events-list__icons--edit icon icon-create"></span>
             </a>
         </li>
     </ul>
-    <p class="events-list__no-items"
-        data-ng-hide="eventCtrl.events.length">
+    <p class="events-list__no-items" data-ng-hide="eventCtrl.events.length">
         No events yet.<br/>Please, click on <span class="icon icon-add"></span> to add new one.
     </p>
 </div>

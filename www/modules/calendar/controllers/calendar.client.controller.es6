@@ -18,7 +18,7 @@ class Calendar {
     this.eventSources = [
       this.getEvents.bind(this)
     ];
-    let hours = _.chain(this.user.predefinedSettings.workingHours).toArray();
+    let hours         = _.chain(this.user.predefinedSettings.workingHours).toArray();
 
     this.uiConfig = {
       calendar: {

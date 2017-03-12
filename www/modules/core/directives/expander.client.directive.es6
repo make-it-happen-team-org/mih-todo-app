@@ -7,7 +7,7 @@ class ExpanderDirective {
       iconClass: '@',
       title:     '@'
     };
-    this.templateUrl = '/modules/core/views/main/expander.client.view.html';
+    this.templateUrl = 'modules/core/views/main/expander.client.view.html';
   }
 
   link(scope) {

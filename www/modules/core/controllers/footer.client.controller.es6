@@ -1,9 +1,9 @@
 class FooterController {
-    constructor() {
-        this.activeMenu = '';
-    }
+  constructor() {
+    this.activeMenu = '';
+  }
 }
 
 angular
-    .module('core')
-    .controller('FooterController', FooterController);
+  .module('core')
+  .controller('FooterController', FooterController);

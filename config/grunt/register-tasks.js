@@ -1,5 +1,5 @@
 module.exports = (grunt) => {
-  grunt.registerTask('default', [ 'develop' ]);
+  grunt.registerTask('default', ['develop']);
 
   grunt.registerTask('browser', [
     'env:mobile',
@@ -24,14 +24,14 @@ module.exports = (grunt) => {
       'index.html',
       grunt.template.process(
         grunt.file.read('index.template.html'),
-        {data: grunt.config.get('config')}
+        { data: grunt.config.get('config') }
       )
     )
   });
 
   // A Task for loading the configuration object
   grunt.task.registerTask('loadConfig', 'Task that loads the config into a grunt option.', platform => {
-    const init = require('../init');
+    const init   = require('../init');
     const config = require('../config');
 
     init();

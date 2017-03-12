@@ -1,8 +1,8 @@
 class PasswordValidatorDirective {
   constructor(PasswordValidatorFactory) {
     Object.assign(this, { PasswordValidatorFactory });
-    this.restrict   = 'A';
-    this.scope = false;
+    this.restrict = 'A';
+    this.scope    = false;
 
     const passwordEl = document.getElementById('password');
     if (passwordEl) {
@@ -11,8 +11,8 @@ class PasswordValidatorDirective {
   }
 
   link(scope, element) {
-    scope.errors = scope.$parent.PasswordValidatorFactory.getResult("").errors;
-    scope.setErrors = () => {
+    scope.errors          = scope.$parent.PasswordValidatorFactory.getResult("").errors;
+    scope.setErrors       = () => {
       scope.errors = scope.$parent.PasswordValidatorFactory.getResult(scope.signupForm.password.$modelValue).errors;
     };
     scope.notifyIfInvalid = () => {

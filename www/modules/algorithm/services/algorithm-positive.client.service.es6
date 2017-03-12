@@ -5,7 +5,7 @@ class AlgorithmPositive {
   }
 
   getBalancedRecommendations(data) {
-    var estimation           = data.estimation,
+    let estimation           = data.estimation,
         availableHoursPerDay = data.availableHoursPerDay,
         availableDaysAmount  = data.availableDaysAmount,
         recommendations      = {},
@@ -28,7 +28,7 @@ class AlgorithmPositive {
   }
 
   getIntensiveRecommendations(data) {
-    var hoursToDistribute        = data.estimation,
+    let hoursToDistribute        = data.estimation,
         availableHoursPerDay     = data.availableHoursPerDay,
         availableDaysAmount      = data.availableDaysAmount,
         recommendedDuration      = data.recommendedDuration,

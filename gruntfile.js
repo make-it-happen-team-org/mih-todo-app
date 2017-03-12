@@ -1,6 +1,6 @@
-const initConfig = require('./config/grunt/tasks');
+const initConfig    = require('./config/grunt/tasks');
 const registerTasks = require('./config/grunt/register-tasks');
-const loadTasks = require('load-grunt-tasks');
+const loadTasks     = require('load-grunt-tasks');
 
 module.exports = (grunt) => {
   loadTasks(grunt);

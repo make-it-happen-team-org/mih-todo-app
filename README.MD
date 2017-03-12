@@ -36,11 +36,12 @@
 - Pick device you want to emulate and click "Create AVD...";
 - Go
 
-### Running Application
-- Command ```mongod --dbpath "d:/db/data"``` to run mongo server;
-- Command ```npm build:web``` to build app for browser;
-- Command ```npm build:mobile``` to build app for android device;
+### Running Application (common)
+- Command ```mongod``` to run mongo server (to specify db path use --dbpath option);
+- Command ```npm run build:web``` to build app for browser;
+- Command ```npm run build:mobile``` to build app for android device;
 - Command ```npm start``` run server;
+- If running on browser, target endpoint [http://localhost:3000/](http://localhost:3000/).
 
 ### Running application on mobile device
 - Run server;
@@ -52,8 +53,6 @@
 - Command ```cordova run android --device``` to running application on real device;
 - Command ```cordova run android --emulator``` to running application on emulator;
 - If all is done correctly, you can find "Make It Happen" application on target device;
-
-### Open in browser link [http://localhost:3000/](http://localhost:3000/).
 
 ## GIT flow
 

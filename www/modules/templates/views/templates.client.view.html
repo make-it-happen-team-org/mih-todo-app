@@ -14,33 +14,33 @@
         <div class="templates__sort clearfix">
             <div class="templates__sort-label">Sort by last date of use:</div>
             <div class="templates__sort-actions clearfix">
-                <img src="/modules/templates/img/sort-desc.png"
+                <img src="modules/templates/img/sort-desc.png"
                      class="templates__sort-button"
-                     ng-class="{'templates__sort-button--active': !templatesCtrl.soprtingReverse}"
-                     ng-click="templatesCtrl.deactivateSortingReverse()"/>
-                <img src="/modules/templates/img/sort-asc.png"
+                     data-ng-class="{'templates__sort-button--active': !templatesCtrl.soprtingReverse}"
+                     data-ng-click="templatesCtrl.deactivateSortingReverse()"/>
+                <img src="modules/templates/img/sort-asc.png"
                      class="templates__sort-button"
-                     ng-class="{'templates__sort-button--active': templatesCtrl.soprtingReverse}"
-                     ng-click="templatesCtrl.activateSortingReverse()"/>
+                     data-ng-class="{'templates__sort-button--active': templatesCtrl.soprtingReverse}"
+                     data-ng-click="templatesCtrl.activateSortingReverse()"/>
             </div>
         </div>
         <ul class="templates__tabs clearfix">
             <li class="templates__tabs-tab"
-                ng-class="{'templates__tabs-tab--active': templatesCtrl.isTasksTabActive()}"
-                ng-click="templatesCtrl.setTasksTabActive()">
+                data-ng-class="{'templates__tabs-tab--active': templatesCtrl.isTasksTabActive()}"
+                data-ng-click="templatesCtrl.setTasksTabActive()">
                 Tasks
             </li>
             <li class="templates__tabs-tab"
-                ng-class="{'templates__tabs-tab--active': templatesCtrl.isEventsTabActive()}"
-                ng-click="templatesCtrl.setEventsTabActive()">
+                data-ng-class="{'templates__tabs-tab--active': templatesCtrl.isEventsTabActive()}"
+                data-ng-click="templatesCtrl.setEventsTabActive()">
                 Events
             </li>
         </ul>
     </header>
     <div class="templates__list">
-        <ul ng-show="templatesCtrl.isTasksTabActive()">
+        <ul data-ng-show="templatesCtrl.isTasksTabActive()">
             <li class="templates__list-item"
-                ng-repeat="task in user.taskTemplates | orderBy: 'lastUsingDate' : templatesCtrl.soprtingReverse">
+                data-ng-repeat="task in user.taskTemplates | orderBy: 'lastUsingDate' : templatesCtrl.soprtingReverse">
                 <a href="#!.todo/tasks/{{task._id}}/edit">
                     <span>{{task.title}}</span>
                 </a>
@@ -48,7 +48,7 @@
         </ul>
         <ul ng-show="templatesCtrl.isEventsTabActive()">
             <li class="templates__list-item"
-                ng-repeat="event in user.eventTemplates | orderBy: 'lastUsingDate' : templatesCtrl.soprtingReverse">
+                data-ng-repeat="event in user.eventTemplates | orderBy: 'lastUsingDate' : templatesCtrl.soprtingReverse">
                 <a href="#!.todo/events/{{event._id}}/edit">
                     <span>{{event.title}}</span>
                 </a>

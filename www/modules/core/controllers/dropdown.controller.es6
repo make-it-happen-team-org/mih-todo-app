@@ -1,5 +1,5 @@
 class DropdownController {
-  constructor(){
+  constructor() {
     this.dropdown = false;
   }
 

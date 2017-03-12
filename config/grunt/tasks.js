@@ -52,35 +52,6 @@ const clean = {
     'modules/**/*.js', 'modules/**/*.js.map'
   ]
 };
-const watch = {
-  clientViews: {
-    files: watchFiles.clientViews,
-    options: {
-      livereload: true
-    }
-  },
-  allES6: {
-    files: watchFiles.allES6,
-    tasks: ['build-es6', 'jshint'],
-    options: {
-      livereload: true
-    }
-  },
-  clientCSS: {
-    files: watchFiles.clientCSS,
-    tasks: ['csslint'],
-    options: {
-      livereload: true
-    }
-  },
-  clientLESS: {
-    files: watchFiles.clientLESS,
-    tasks: ['less'],
-    options: {
-      livereload: true
-    }
-  }
-};
 
 /** PRODUCTION **/
 const ngAnnotate = {
@@ -189,7 +160,6 @@ const pkg = require('grunt').file.readJSON('package.json');
 
 module.exports = {
   pkg,
-  watch,
   less,
   jshint,
   uglify,

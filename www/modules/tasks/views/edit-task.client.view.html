@@ -4,16 +4,18 @@
             <header class="main-header-mobile main-header-mobile--fixed">
                 <div class="main-header-mobile__main-tab-info">
                     <a class="main-header-mobile-control"
-                            data-ui-sref="restricted.todo_state.tasks.details({ taskId: task._id })">
+                       data-ui-sref="restricted.todo_state.tasks.details({ taskId: task._id })">
                         <span class="main-header-mobile-control__icon icon icon-arrow_back"></span>
                     </a>
                     <span class="main-header-mobile__title">Edit task</span>
                 </div>
                 <div class="main-header-mobile__icons">
-                    <button class="main-header-mobile-control main-header-mobile-control--right" data-ng-click="remove(task)">
+                    <button class="main-header-mobile-control main-header-mobile-control--right"
+                            data-ng-click="remove(task)">
                         <span class="main-header-mobile-control__icon icon icon-delete"></span>
                     </button>
-                    <button type="submit" class="main-header-mobile-control main-header-mobile-control--right" data-ng-click="update(task)">
+                    <button type="submit" class="main-header-mobile-control main-header-mobile-control--right"
+                            data-ng-click="update(task)">
                         <span class="main-header-mobile-control__icon icon icon-done"></span>
                     </button>
                 </div>

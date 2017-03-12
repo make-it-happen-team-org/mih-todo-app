@@ -1,4 +1,3 @@
-// PasswordValidator service used for testing the password strength
 class PasswordValidatorFactory {
   /** @ngInject */
   constructor($window) {
@@ -11,7 +10,8 @@ class PasswordValidatorFactory {
       minLength:              6,
       minOptionalTestsToPass: 1
     });
-    this.owaspPasswordStrengthTest.tests.optional = this.owaspPasswordStrengthTest.tests.optional.filter((val) => !(/one special character/).test(val));
+    this.owaspPasswordStrengthTest.tests.optional = this.owaspPasswordStrengthTest.tests.optional
+                                                        .filter((val) => !(/one special character/).test(val));
   }
 
   getResult(password) {

@@ -1,11 +1,11 @@
 @import "../../../less/_app.variables.less";
-@import "../../../less/_mobile.variables.less";
 @import "../../../less/_app.mixins.less";
 
 .main-content {
   width: 100%;
   height: 100vh;
 }
+
 .user-login {
   padding: @mobile-padding;
   background-size: cover;
@@ -70,7 +70,6 @@
       border-bottom: 1px solid @login-input-font-color-mobile;
     }
 
-
     .auth-form {
       &__form-group {
         &--btns {
@@ -119,20 +118,20 @@
   .auth-form {
     &-wrapper {
       &__link {
-        &--forgot:hover { text-decoration: underline;}
+        &--forgot:hover { text-decoration: underline; }
       }
     }
 
     &__label { display: none; }
 
     &__form-group {
-       &--socials {
-         color: @login-input-font-color-mobile;
-         position: absolute;
-         bottom: 28px;
-         left: 50%;
-         transform: translateX(-50%);
-       }
+      &--socials {
+        color: @login-input-font-color-mobile;
+        position: absolute;
+        bottom: 28px;
+        left: 50%;
+        transform: translateX(-50%);
+      }
 
       &--btns {
         position: relative;
@@ -185,7 +184,7 @@
           }
         }
       }
-     }
+    }
   }
 
   .login-view__form-control {
@@ -196,13 +195,11 @@
     border-bottom: 1px solid @login-input-border-custom-color;
     padding: 2.6rem 0 1rem 0;
     margin-bottom: 2.5rem;
-
     .placeholder(@login-input-font-color-mobile);
 
     &.ng-invalid:not(.ng-pristine) {
       color: @login-error-color;
       border-bottom: 1px solid @login-error-color;
-
       .placeholder(@login-error-color);
 
       ~ .error-message .help-block {
@@ -210,7 +207,7 @@
       }
     }
 
-    &--password{
+    &--password {
       letter-spacing: .25rem;
       font-size: 1.5em;
 

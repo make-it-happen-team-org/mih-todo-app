@@ -5,26 +5,26 @@ angular.module('schedule-notifications').controller('ScheduleNotificationsContro
     function ($scope, $rootScope, $stateParams, Authentication, ScheduleNotifications, $interval, $location, $state, Slots, Tasks, Notification) {
       // TODO: move to common app config
       const NOTIFICATIONS_INTERVAL = 30 * 60 * 1000;
-      const CALENDAR_TIME_UNIT = 30 * 60 * 1000; // Calendar works only with time that is multiple of 30 minutes
-      let currentTime = moment(),
-          closestTimeUnitEnd = moment(Math.ceil(currentTime / CALENDAR_TIME_UNIT) * CALENDAR_TIME_UNIT),
-          initialInterval = closestTimeUnitEnd - currentTime;
+      const CALENDAR_TIME_UNIT     = 30 * 60 * 1000; // Calendar works only with time that is multiple of 30 minutes
+      let currentTime              = moment(),
+            closestTimeUnitEnd     = moment(Math.ceil(currentTime / CALENDAR_TIME_UNIT) * CALENDAR_TIME_UNIT),
+            initialInterval        = closestTimeUnitEnd - currentTime;
 
-      var getOverdueTaskProgress = (task) => {
+      let getOverdueTaskProgress = (task) => {
         return {
           percent: +((task.progress * 100) / task.estimation).toFixed(2)
         }
       };
 
-      var getFormattedDataForCompleteSlot = (slot) => {
-        var allSlots          = $scope.notifications.allSlots;
-        var overdueTasks      = $scope.notifications.overdueTasks;
-        var overdueSlots      = $scope.notifications.overdueSlots;
-        var overdueTaskBySlot = getTaskBySlot(overdueTasks, slot);
-        var overdueTaskSlots  = allSlots.filter(function (slot) {
+      let getFormattedDataForCompleteSlot = (slot) => {
+        let allSlots          = $scope.notifications.allSlots;
+        let overdueTasks      = $scope.notifications.overdueTasks;
+        let overdueSlots      = $scope.notifications.overdueSlots;
+        let overdueTaskBySlot = getTaskBySlot(overdueTasks, slot);
+        let overdueTaskSlots  = allSlots.filter(function (slot) {
           return slot.taskId === overdueTaskBySlot._id;
         });
-        var completeSlotsQty  = overdueTaskSlots.filter(function (slot) {
+        let completeSlotsQty  = overdueTaskSlots.filter(function (slot) {
           return slot.isComplete;
         }).length;
 
@@ -41,19 +41,19 @@ angular.module('schedule-notifications').controller('ScheduleNotificationsContro
         }
       };
 
-      var getTaskBySlot = (tasks, slot) => {
+      let getTaskBySlot = (tasks, slot) => {
         return tasks.filter(function (el) {
           return el._id === slot.taskId;
         })[0];
       };
 
-      var updateActivity = (cfg) => {
+      let updateActivity = (cfg) => {
         cfg.slotToComplete.isComplete = true;
         Slots.update(cfg.slotToComplete,
           () => updateOverdueSlotSuccessHandler(cfg));
       };
 
-      var updateOverdueSlotSuccessHandler = (cfg) => {
+      let updateOverdueSlotSuccessHandler = (cfg) => {
         if (cfg.isCompetedTask) {
           cfg.overdueTask.isComplete = true;
         }
@@ -66,8 +66,8 @@ angular.module('schedule-notifications').controller('ScheduleNotificationsContro
           });
       };
 
-      var updateOverdueTaskSuccessHandler = (cfg) => {
-        var overdueTaskProgress = getOverdueTaskProgress(cfg.overdueTask).percent;
+      let updateOverdueTaskSuccessHandler = (cfg) => {
+        let overdueTaskProgress = getOverdueTaskProgress(cfg.overdueTask).percent;
 
         if (!cfg.isCurrentTaskPage) {
           if (cfg.overdueTasksQty === 1 && cfg.overdueSlotsQty === 1) {
@@ -104,30 +104,30 @@ angular.module('schedule-notifications').controller('ScheduleNotificationsContro
 
         $interval(() => {
           getNotifications();
-          
+
           $interval(() => {
             getNotifications();
           }, NOTIFICATIONS_INTERVAL);
-          
+
         }, initialInterval, 1);
       };
 
       $scope.getNonCompletedSlotsLength = () => {
-        if(!$scope.notifications.overdueSlots) {
+        if (!$scope.notifications.overdueSlots) {
           return 0;
         }
-        return $scope.notifications.overdueSlots.filter((slot)=> {
+        return $scope.notifications.overdueSlots.filter((slot) => {
           return !slot.isComplete;
         }).length;
       };
 
       $scope.completeSlot = (slot) => {
-          let cfg = getFormattedDataForCompleteSlot(slot);
+        let cfg = getFormattedDataForCompleteSlot(slot);
 
-          if ($stateParams.taskId === cfg.overdueTask._id) {
-            cfg.isCurrentTaskPage = true;
-          }
-          updateActivity(cfg);
+        if ($stateParams.taskId === cfg.overdueTask._id) {
+          cfg.isCurrentTaskPage = true;
+        }
+        updateActivity(cfg);
       };
     }
   ]);
