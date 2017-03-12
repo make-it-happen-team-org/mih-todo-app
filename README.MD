@@ -37,7 +37,7 @@
 - Go
 
 ### Running Application (common)
-- Command ```mongod``` to run mongo server;
+- Command ```mongod``` to run mongo server (to specify db path use --dbpath option);
 - Command ```npm run build:web``` to build app for browser;
 - Command ```npm run build:mobile``` to build app for android device;
 - Command ```npm start``` run server;
