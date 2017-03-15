@@ -77,18 +77,67 @@
     text-align: center;
     font-size: 1.1rem;
   }
+  &__header {
+    &-sort {
+      display: flex;
+      flex-flow: row nowrap;
+      justify-content: space-between;
+      background-color: @task-list-sortheader-color;
+      padding: 7px 15px;
+      box-shadow: 0 0 11px rgba(0,0,0,0.19), 0 2px 6px rgba(0,0,0,0.23);
+    }
+    &-select {
+      display: flex;
+      flex-flow: row nowrap;
+      align-items: center;
+    }
+    &-title {
+      color: @task-list-sort-icon-not-active;
+      padding-right: 13px;
+    }
+    &-priority {
+      color: @task-list-sort-text-not-active;
+      padding-right: 9px;
+      &.active {
+        color: @task-list-sort-active;
+      }
+    }
+    &-time {
+      color: @task-list-sort-text-not-active;
+      &.active {
+        color: @task-list-sort-active;
+      }
+    }
+    &-icons {
+      display: flex;
+      flex-flow: row nowrap;
+      align-items: center;
+    }
+    &-icon {
+      padding-left: 0;
+      color: @task-list-sort-icon-not-active;
+      &.active {
+        color: @task-list-sort-active;
+      }
+      &--reverse {
+        padding-left: 15px;
+        color: @task-list-sort-icon-not-active;
+        transform: rotate(180deg);
+      }
+    }
+  }
   &__subheader {
     &-wrapper {
       display: flex;
       flex-flow: row nowrap;
       justify-content: space-between;
       padding: 14px;
-      background-color: @task-list-item-text-color;
+      background-color: @task-list-subheader-color;
     }
     &-label {
       font-family: @font-open-sans-regular;
       font-size: 12px;
-      color: @color-white;
+      color: @task-list-sort-active;
     }
     &-switch {
       position: relative;
@@ -120,7 +169,7 @@
       left: 0;
       right: 0;
       bottom: 0;
-      background-color: #ccc;
+      background-color: @color-hit-grey-s0;
       -webkit-transition: .4s;
       transition: .4s;
       &:before {

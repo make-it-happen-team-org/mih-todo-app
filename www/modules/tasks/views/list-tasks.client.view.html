@@ -13,23 +13,26 @@
             </a>
         </div>
     </header>
-
-    <div class="sidebar__block sidebar__block--group sidebar__block--group-nav"
+    <div class="tasks-list__header"
          data-ng-show="taskListCtrl.tasks.length > 1">
-        <div class="sidebar__nav-item-wrapper sidebar__nav-item-wrapper--left">
-            <div class="sidebar__nav-item">Sort by:</div>
-            <a class="sidebar__nav-item sidebar__nav-item--sort sidebar__nav-item--sort-priority"
-               data-ng-class="{
-               'sort-reverse-up': taskListCtrl.renderSortOption() === 'ascPriority',
-               'sort-reverse-down': taskListCtrl.renderSortOption() === 'descPriority'
-               }"
-               data-ng-click="taskListCtrl.sortListBy('priority')">Priority</a>
-            <a class="sidebar__nav-item sidebar__nav-item--sort sidebar__nav-item--sort-time"
-               data-ng-class="{
-               'sort-reverse-up': taskListCtrl.renderSortOption() === 'ascTime',
-               'sort-reverse-down': taskListCtrl.renderSortOption() === 'descTime'
-               }"
-               data-ng-click="taskListCtrl.sortListBy('time')">Time</a>
+        <div class="tasks-list__header-sort">
+            <div class="tasks-list__header-select">
+                <div class="tasks-list__header-title">Sort by:</div>
+                <a class="tasks-list__header-priority"
+                   data-ng-click="taskListCtrl.sortListBy('priority')"
+                   data-ng-class="{'active': taskListCtrl.filter.name === 'priority'}">Priority</a>
+                <a class="tasks-list__header-time"
+                   data-ng-click="taskListCtrl.sortListBy('time')"
+                   data-ng-class="{'active': taskListCtrl.filter.name === 'time'}">Time</a>
+            </div>
+            <div class="tasks-list__header-icons">
+                <span class="tasks-list__header-icon icon icon-sort tasks-list__header-icon--reverse"
+                      data-ng-click="taskListCtrl.renderSortOption()"
+                      data-ng-class="{'active': taskListCtrl.getSortOption() === 'asc'}"></span>
+                <span class="tasks-list__header-icon icon icon-sort"
+                      data-ng-click="taskListCtrl.renderSortOption()"
+                      data-ng-class="{'active': taskListCtrl.getSortOption() === 'desc'}"></span>
+            </div>
         </div>
 
         <div class="tasks-list__subheader">
@@ -45,9 +48,7 @@
                 </label>
             </div>
         </div>
-
     </div>
-
     <ul class="tasks-list__list" data-ng-show="taskListCtrl.filteredTasks.length">
         <li class="tasks-list__list-item {{'task-priority-' + task.priority}}"
             data-ng-repeat="task in taskListCtrl.filteredTasks">
