@@ -21,50 +21,38 @@ class TasksListController {
   }
 
   renderSortOption() {
-    if (this.filter.name === 'time') {
-      if (this.filter.timeAsc) {
-        return 'ascTime'
-      }
-      return 'descTime'
-    }
+    this.filter.asc = !this.filter.asc;
+    
     if (this.filter.name === 'priority') {
-      if (this.filter.priorityAsc) {
-        return 'ascPriority'
-      }
-      return 'descPriority'
-    }
-  }
-
-  sortListBy(type) {
-    switch (type) {
-    case 'priority': {
-      this.filter.name        = 'priority';
-      this.filter.priorityAsc = !this.filter.priorityAsc;
-      this.filteredTasks      = this.$filter('orderBy')(this.filteredTasks, this.filter.priorityAsc ? 'priority' : '-priority');
+      this.filteredTasks      = this.$filter('orderBy')(this.filteredTasks, this.filter.asc ? 'priority' : '-priority');
       this.setFiltersToLocalStorage();
-      break;
-    }
-    case 'time': {
-      this.filter.name    = 'time';
-      this.filter.timeAsc = !this.filter.timeAsc;
-
-      if (this.filter.timeAsc) {
+    } else if (this.filter.name === 'time') {
+      if (this.filter.asc) {
         this.filteredTasks = TasksListController.bulbSortForEndTime(this.filteredTasks);
       } else {
         this.filteredTasks = TasksListController.bulbSortForEndTime(this.filteredTasks).reverse();
       }
       this.setFiltersToLocalStorage();
-      break;
     }
-    case 'isComplete': {
-      if (this.filter.isComplete) {
-        this.filteredTasks = this.tasks.filter(el => el.isComplete);
-      } else {
-        this.filteredTasks = this.tasks;
+  }
+  
+  getSortOption() {
+    return this.filter.asc ? 'asc' : 'desc';
+  }
+
+  sortListBy(type) {
+    this.filter.name = type;
+    
+    switch(type) {
+      case 'isComplete': {
+        if (this.filter.isComplete) {
+          this.filteredTasks = this.tasks.filter(el => el.isComplete);
+        } else {
+          this.filteredTasks = this.tasks;
+        }
+        this.setFiltersToLocalStorage();
+        break;
       }
-      this.setFiltersToLocalStorage();
-      break;
-    }
     }
   }
 
@@ -92,8 +80,7 @@ class TasksListController {
   getFiltersFromLocalStorage() {
     this.filter = JSON.parse(localStorage.getItem('sidebarFilter')) || {
         name:        'time',
-        priorityAsc: true,
-        timeAsc:     true,
+        asc:     true,
         isComplete:  false
       };
   }
