@@ -9,11 +9,11 @@ class SettingsController {
     if (!this.Authentication.user) this.$location.path('/');
 
     /*@ngInject*/
-    this.Users        = $injector.get('Users');
-    this.user         = this.Authentication.user;
-    this.imageURL     = this.user.profileImageURL;
-    this.$timeout     = $injector.get('$timeout');
-    this.$window      = $injector.get('$window');
+    this.Users = $injector.get('Users');
+    this.user = Object.assign({}, this.Authentication.user);
+    this.imageURL = this.user.profileImageURL;
+    this.$timeout = $injector.get('$timeout');
+    this.$window = $injector.get('$window');
     this.FileUploader = $injector.get('FileUploader');
     // TODO: move to root controller + share
     // TODO: refactor into directive so that we do not need to always inject it
@@ -29,43 +29,34 @@ class SettingsController {
   }
 
   initFileUploader() {
-    var onAfterAddingFile = (fileItem) => {
-      if (this.$window.FileReader) {
-        var fileReader = new this.$window.FileReader();
-        fileReader.readAsDataURL(fileItem._file);
-
-        fileReader.onload = (fileReaderEvent) => {
-          this.$timeout(() => {
-            this.imageURL = fileReaderEvent.target.result;
-          }, 0);
-        };
-      }
+    let onAfterAddingFile = () => {
+      this.uploadProfilePicture();
     };
 
-    var onSuccessItem = (fileItem, response, status, headers) => {
+    let onSuccessItem = (fileItem, response) => {
+      this.imageURL = response.profileImageURL;
       this.Notification.success('file upload Success');
-      angular.extend(this.user, response);
-      this.cancelUpload();
+      this.uploader.clearQueue();
     };
 
-    var onErrorItem = (fileItem, response, status, headers) => {
+    let onErrorItem = (fileItem, response) => {
       this.cancelUpload();
       this.Notification.error(response.message);
     };
 
     this.uploader = new this.FileUploader({
-      url:               'users/picture',
-      alias:             'newProfilePicture',
-      onAfterAddingFile: onAfterAddingFile,
-      onSuccessItem:     onSuccessItem,
-      onErrorItem:       onErrorItem
+      url:    'users/picture',
+      alias:  'newProfilePicture',
+      onAfterAddingFile,
+      onSuccessItem,
+      onErrorItem
     });
 
     // Set file uploader image filter
     this.uploader.filters.push({
       name: 'imageFilter',
       fn (item, options) {
-        var type = '|' + item.type.slice(item.type.lastIndexOf('/') + 1) + '|';
+        let type = '|' + item.type.slice(item.type.lastIndexOf('/') + 1) + '|';
         return '|jpg|png|jpeg|bmp|gif|'.indexOf(type) !== -1;
       }
     });
@@ -84,7 +75,7 @@ class SettingsController {
 
   updateUserProfile(isValid) {
     if (isValid) {
-      var user = new this.Users(this.user);
+      let user = new this.Users(this.user);
 
       user.$update(response => {
         this.Notification.success(`Profile Saved Successfully`);
