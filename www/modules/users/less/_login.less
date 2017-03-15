@@ -16,6 +16,10 @@
   height: 100%;
   color: @login-font-color;
 
+  &.user-login--virtual-key-board {
+    .auth-form__form-group--socials { display: none; }
+  }
+
   &.user-login--sing-up {
     .auth-form {
       &__form-group {
@@ -40,6 +44,10 @@
           }
         }
       }
+    }
+
+    .login-view__form-control {
+      &--password { margin: 0; }
     }
   }
 
@@ -97,14 +105,10 @@
 
   .app-logo {
     position: relative;
-    z-index: 2;
     padding: 0;
-    text-align: left;
+    margin-bottom: 5rem;
 
-    &__img {
-      height: 6.5rem;
-      margin: 0 0 5rem 5rem;
-    }
+    &__img { height: 6.5rem; }
   }
 
   fieldset {
@@ -128,9 +132,9 @@
       &--socials {
         color: @login-input-font-color-mobile;
         position: absolute;
-        bottom: 28px;
+        bottom: @mobile-padding;
         left: 50%;
-        transform: translateX(-50%);
+        transform: translate(-50%);
       }
 
       &--btns {
@@ -154,7 +158,7 @@
         }
 
         .login-view__btn {
-          margin-bottom: 2rem;
+          margin-bottom: 1.6rem;
           vertical-align: middle;
           height: 3.6rem;
           padding: 0;
@@ -192,9 +196,10 @@
     border: none;
     line-height: 1em;
     height: 4.5rem;
-    border-bottom: 1px solid @login-input-border-custom-color;
+    border-bottom: 1px solid @login-input-border-custom-mobile-color;
     padding: 2.6rem 0 1rem 0;
     margin-bottom: 2.5rem;
+    outline: none;
     .placeholder(@login-input-font-color-mobile);
 
     &.ng-invalid:not(.ng-pristine) {
