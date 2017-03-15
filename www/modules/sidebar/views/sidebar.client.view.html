@@ -1,8 +1,11 @@
-<div class="sidebar">
+<div class="content-overflow" data-ng-class="{'content-overflow--active': sidebarCtrl.active}" ng-click="sidebarCtrl.disableSidebar()"></div>
+<div class="sidebar" data-ng-class="{'sidebar-active': sidebarCtrl.active}">
     <header>
         <div class="user-info">
             <div class="user-info__avatar">
-                <img data-ng-src="{{user.profileImageURL}}" alt="{{user.username}}">
+                <a data-ui-sref="restricted.profile" data-ng-click="sidebarCtrl.disableSidebar()">
+                    <img data-ng-src="{{user.profileImageURL}}" alt="{{user.username}}">
+                </a>
             </div>
             <div class="user-info__username">{{user.username}}</div>
             <div class="user-info__email">{{user.email}}</div>
@@ -11,38 +14,38 @@
     <nav class="sidebar-menu">
         <ul>
             <li>
-                <img src="modules/sidebar/img/date.png">
-                <a ui-sref="restricted.todo_state">Calendar</a>
+                <i class="icon icon-date_range"></i>
+                <a data-ui-sref="restricted.todo_state" data-ng-click="sidebarCtrl.disableSidebar()">Calendar</a>
             </li>
             <li>
-                <img src="modules/sidebar/img/favorite.png">
-                <a ui-sref="restricted.todo_state.events.create({eventPresetType: sick})">Sick today</a>
+                <i class="icon icon-favorite"></i>
+                <a data-ui-sref="restricted.todo_state.events.create({eventPresetType: sick})" data-ng-click="sidebarCtrl.disableSidebar()">Sick today</a>
             </li>
             <li>
-                <img src="modules/sidebar/img/airplane.png">
-                <a href="restricted.todo_state.events.create(eventPresetType:vacation)">Vacation</a>
+                <i class="icon icon-airplanemode_active"></i>
+                <a href="restricted.todo_state.events.create(eventPresetType:vacation)" data-ng-click="sidebarCtrl.disableSidebar()">Vacation</a>
             </li>
             <li>
-                <img src="modules/sidebar/img/notifications.png">
-                <a href="#">Reminder</a>
-            </li>
-            <li class="separator"></li>
-            <li>
-                <img src="modules/sidebar/img/star.png">
-                <a ui-sref="restricted.todo_state.tasks.list">Tasks</a>
-            </li>
-            <li>
-                <img src="modules/sidebar/img/event.png">
-                <a ui-sref="restricted.todo_state.events.list">Events</a>
+                <i class="icon icon-notifications"></i>
+                <a href="#" data-ng-click="sidebarCtrl.disableSidebar()">Reminder</a>
             </li>
             <li class="separator"></li>
             <li>
-                <img src="modules/sidebar/img/repeat.png">
-                <a ui-sref="restricted.migrate">Import content</a>
+                <i class="icon icon-star"></i>
+                <a data-ui-sref="restricted.todo_state.tasks.list" data-ng-click="sidebarCtrl.disableSidebar()">Tasks</a>
             </li>
             <li>
-                <img src="modules/sidebar/img/exit.png">
-                <button ng-click="sidebarCtrl.signOut()">Sign Out</button>
+                <i class="icon icon-event"></i>
+                <a data-ui-sref="restricted.todo_state.events.list" data-ng-click="sidebarCtrl.disableSidebar()">Events</a>
+            </li>
+            <li class="separator"></li>
+            <li>
+                <i class="icon icon-repeat"></i>
+                <a data-ui-sref="restricted.migrate" data-ng-click="sidebarCtrl.disableSidebar()">Import content</a>
+            </li>
+            <li>
+                <i class="icon icon-exit_to_app"></i>
+                <button data-ng-click="sidebarCtrl.signOut()">Sign Out</button>
             </li>
         </ul>
     </nav>
