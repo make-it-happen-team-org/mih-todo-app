@@ -19,8 +19,6 @@ class SettingsController {
 
     this.user        = this.Authentication.user;
     this.imageURL    = this.user.profileImageURL;
-    this.workingDays = ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun'];
-    this.reminders   = [5, 10, 15, 20, 25, 30];
     this.initFileUploader();
   }
 
