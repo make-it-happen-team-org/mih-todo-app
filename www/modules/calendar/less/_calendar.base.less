@@ -57,6 +57,7 @@
   .fc-widget-header {
     border: 0;
     background: @calendar-day-header-bg-color;
+    width: 50px!important;
 
     .fc-row { border-right: 1px solid @calendar-header-border-color; }
 
@@ -65,10 +66,9 @@
       border-left: 1px solid @calendar-header-border-color;
       color: @calendar-secondary-font-color;
       text-transform: uppercase;
+      height: 4.75rem;
     }
   }
-
-  .fc-agenda-view { padding: 0 @calendar-wrapper-padding @calendar-wrapper-padding; }
 
   .fc-view-container:before {
     width: 100%;
@@ -116,7 +116,7 @@
   }
 
   .fc-day-grid .fc-axis {
-    padding: @calendar-wrapper-padding .61em .77em 0;
+    padding: @calendar-wrapper-padding .31em .77em .3em;
     font-size: .93em;
     text-transform: capitalize;
   }

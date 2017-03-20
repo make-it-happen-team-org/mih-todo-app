@@ -1,37 +1,31 @@
 class SettingsController {
-  static get $inject() {
-    return ['$injector'];
-  }
+  /*@ngInject*/
+  constructor(Authentication, Notification, Users, FileUploader, MIHUtils, $timeout, $window, $rootScope, $location) {
+    Object.assign(this, {
+      Authentication,
+      Notification,
+      Users,
+      FileUploader,
+      MIHUtils,
+      $timeout,
+      $window,
+      $rootScope,
+      $location
+    });
 
-  constructor($injector) {
-    this.Authentication = $injector.get('Authentication');
-    this.$location      = $injector.get('$location');
-    if (!this.Authentication.user) this.$location.path('/');
+    if (!this.Authentication.user) {
+      this.$location.path('/');
+    }
 
-    /*@ngInject*/
-    this.Users        = $injector.get('Users');
-    this.user         = this.Authentication.user;
-    this.imageURL     = this.user.profileImageURL;
-    this.$timeout     = $injector.get('$timeout');
-    this.$window      = $injector.get('$window');
-    this.FileUploader = $injector.get('FileUploader');
-    // TODO: move to root controller + share
-    // TODO: refactor into directive so that we do not need to always inject it
-    this.MIHUtils     = $injector.get('MIHUtils');
-    this.$rootScope   = $injector.get('$rootScope');
-    this.Notification = $injector.get('Notification');
-
-    /*fields*/
-    this.workingDays = ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun'];
-    this.reminders   = [5, 10, 15, 20, 25, 30];
-
+    this.user        = this.Authentication.user;
+    this.imageURL    = this.user.profileImageURL;
     this.initFileUploader();
   }
 
   initFileUploader() {
-    var onAfterAddingFile = (fileItem) => {
+    const onAfterAddingFile = (fileItem) => {
       if (this.$window.FileReader) {
-        var fileReader = new this.$window.FileReader();
+        const fileReader = new this.$window.FileReader();
         fileReader.readAsDataURL(fileItem._file);
 
         fileReader.onload = (fileReaderEvent) => {
@@ -42,30 +36,30 @@ class SettingsController {
       }
     };
 
-    var onSuccessItem = (fileItem, response, status, headers) => {
+    const onSuccessItem = (fileItem, response, status, headers) => {
       this.Notification.success('file upload Success');
       angular.extend(this.user, response);
       this.cancelUpload();
     };
 
-    var onErrorItem = (fileItem, response, status, headers) => {
+    const onErrorItem = (fileItem, response, status, headers) => {
       this.cancelUpload();
       this.Notification.error(response.message);
     };
 
     this.uploader = new this.FileUploader({
-      url:               'users/picture',
-      alias:             'newProfilePicture',
-      onAfterAddingFile: onAfterAddingFile,
-      onSuccessItem:     onSuccessItem,
-      onErrorItem:       onErrorItem
+      url:    'users/picture',
+      alias:  'newProfilePicture',
+      onAfterAddingFile,
+      onSuccessItem,
+      onErrorItem
     });
 
     // Set file uploader image filter
     this.uploader.filters.push({
       name: 'imageFilter',
-      fn (item, options) {
-        var type = '|' + item.type.slice(item.type.lastIndexOf('/') + 1) + '|';
+      fn (item) {
+        let type = '|' + item.type.slice(item.type.lastIndexOf('/') + 1) + '|';
         return '|jpg|png|jpeg|bmp|gif|'.indexOf(type) !== -1;
       }
     });
@@ -84,7 +78,7 @@ class SettingsController {
 
   updateUserProfile(isValid) {
     if (isValid) {
-      var user = new this.Users(this.user);
+      let user = new this.Users(this.user);
 
       user.$update(response => {
         this.Notification.success(`Profile Saved Successfully`);
@@ -108,4 +102,6 @@ class SettingsController {
   }
 }
 
-angular.module('users').controller('SettingsController', SettingsController);
+angular
+  .module('users')
+  .controller('SettingsController', SettingsController);
