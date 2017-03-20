@@ -23,7 +23,10 @@
                         <p class="main-info--email"> {{ settings.user.email }}</p>
                     </div>
                     <div class="main-info--upload flex-item main-info--col">
-                        <i ng-click="settings.uploadProfilePicture()" class="icon icon-photo_camera"></i>
+                        <label>
+                            <i class="icon icon-photo_camera"></i>
+                            <input class="hidden" nv-file-select type="file" uploader="settings.uploader">
+                        </label>
                     </div>
                 </div>
             </fieldset>

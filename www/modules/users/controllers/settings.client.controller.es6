@@ -50,18 +50,18 @@ class SettingsController {
     };
 
     this.uploader = new this.FileUploader({
-      url:               'users/picture',
-      alias:             'newProfilePicture',
-      onAfterAddingFile: onAfterAddingFile,
-      onSuccessItem:     onSuccessItem,
-      onErrorItem:       onErrorItem
+      url:    'users/picture',
+      alias:  'newProfilePicture',
+      onAfterAddingFile,
+      onSuccessItem,
+      onErrorItem
     });
 
     // Set file uploader image filter
     this.uploader.filters.push({
       name: 'imageFilter',
-      fn (item, options) {
-        var type = '|' + item.type.slice(item.type.lastIndexOf('/') + 1) + '|';
+      fn (item) {
+        let type = '|' + item.type.slice(item.type.lastIndexOf('/') + 1) + '|';
         return '|jpg|png|jpeg|bmp|gif|'.indexOf(type) !== -1;
       }
     });
@@ -80,7 +80,7 @@ class SettingsController {
 
   updateUserProfile(isValid) {
     if (isValid) {
-      var user = new this.Users(this.user);
+      let user = new this.Users(this.user);
 
       user.$update(response => {
         this.Notification.success(`Profile Saved Successfully`);
