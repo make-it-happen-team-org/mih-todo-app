@@ -25,14 +25,15 @@ class Calendar {
         height:        700,
         editable:      true,
         header:        {
-          left:   'today prev,next',
+          left:   'prev,next',
           center: 'title',
           right:  'agendaDay, agendaWeek, month'
         },
+        allDaySlot:    false,
         scrollTime:    hours.map(day => day.start).min().value(),
         businessHours: false,
         firstDay:      1,
-        defaultView:   'agendaWeek',
+        defaultView:   'agendaDay',
         timezone:      'local',
         eventDrop:     (event, delta, revertFunc) => this.eventDropHandler(event, delta, revertFunc)
       }
