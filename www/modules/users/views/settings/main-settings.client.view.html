@@ -17,35 +17,27 @@
             <fieldset>
                 <div class="field-group">
                     <h2 class="field-group--name">Email</h2>
-                    <input ng-model="settings.user.email" class="field-group--field" type="email">
+                    <input data-ng-model="settings.user.email" class="field-group--field" type="email">
                 </div>
 
                 <div class="field-group">
                     <h2 class="field-group--name">Username</h2>
-                    <input ng-model="settings.user.username" class="field-group--field" type="text">
+                    <input data-ng-model="settings.user.username" class="field-group--field" type="text">
                 </div>
 
                 <div class="field-group">
                     <h2 class="field-group--name">Current password</h2>
-                    <input ng-model="settings.currentPassowrd" class="field-group--field" type="password">
+                    <input data-ng-model="settings.currentPassowrd" class="field-group--field" type="password">
                 </div>
 
                 <div class="field-group">
                     <h2 class="field-group--name">New Password</h2>
-                    <input ng-model="settings.newPassword" class="field-group--field" type="text">
+                    <input data-ng-model="settings.newPassword" class="field-group--field" type="text">
                 </div>
 
                 <div class="field-group">
                     <h2 class="field-group--name">Verify Password</h2>
-                    <input ng-model="settings.verifyPassword" class="field-group--field" type="text">
-                </div>
-
-                <div class="field-group field-group__select">
-                    <h2 class="field-group--name">Remind me in</h2>
-                    <select class="field-group--field">
-                        <option ng-repeat="reminder in settings.reminders"> {{ reminder }} </option>
-                    </select>
-                    <span class="field-group--unit">min</span>
+                    <input data-ng-model="settings.verifyPassword" class="field-group--field" type="text">
                 </div>
             </fieldset>
         </form>
