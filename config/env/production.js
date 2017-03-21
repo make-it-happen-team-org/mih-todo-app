@@ -7,9 +7,9 @@ module.exports = {
         keywords: 'Make It Happen'
     },
     appFolder: './public/build',
-    endpointUrl: 'https://mih-todo-app.herokuapp.com',
+    endpointUrl: process.env.ENDPOINT_URL || 'https://mih-todo-app.herokuapp.com',
     db: {
-        uri: 'mongodb://devuser:devuser2day@ds031167.mlab.com:31167/mih'
+        uri: process.env.MONGODB_URI
     },
     log: {
         format: 'combined',
