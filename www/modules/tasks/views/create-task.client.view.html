@@ -15,7 +15,8 @@
                 </button>
             </div>
         </header>
-        <section class="screen-panel with-fixed-header with-fixed-footer">
+        <section class="screen-panel with-fixed-header"
+                 data-ng-class="{'with-fixed-footer': !slotsRange.length}">
             <div class="form-box" data-ng-class="{ 'has-error': validationError.title }">
                 <input type="text" data-ng-model="newTask.title" class="form-input form-input--required"
                        placeholder="Title*" required>
@@ -78,7 +79,7 @@
                 </button>
             </div>
         </section>
-        <div data-ng-if="slotsRange.length" class="screen-panel generate-slots">
+        <div data-ng-if="slotsRange.length" class="screen-panel with-fixed-footer generate-slots">
             <table>
                 <thead class="generate-slots-head">
                 <tr>
