@@ -9,6 +9,7 @@
   .calendar-wrap {
     padding-top: @header-height;
     padding-bottom: @footer-height;
+    background-color: @calendar-bg-color;
   }
 
   .fc { padding: 0; }
@@ -17,7 +18,7 @@
 
   .fc-toolbar {
     margin: 0;
-    padding: .71em 1.07em;
+    padding: .5rem 1.8rem 0.7rem;
     background: @calendar-toolbar-bg-color;
 
     .fc-button-group { margin-left: 0; }
@@ -34,10 +35,6 @@
       .fc-icon { margin: 0; }
     }
 
-    .fc-today-button {
-      display: none;
-    }
-
     .fc-center {
       vertical-align: text-top;
       font-family: @font-open-sans-light;
@@ -46,8 +43,7 @@
 
       h2 {
         float: none;
-        font-size: 1.5em;
-        line-height: 1em;
+        font-size: 1.6rem;
       }
     }
 
@@ -57,25 +53,17 @@
   .fc-widget-header {
     border: 0;
     background: @calendar-day-header-bg-color;
-    width: 50px!important;
 
     .fc-row { border-right: 1px solid @calendar-header-border-color; }
 
     .fc-day-header {
-      padding: 1em 0;
+      padding: .5rem 0;
       border-left: 1px solid @calendar-header-border-color;
       color: @calendar-secondary-font-color;
       text-transform: uppercase;
-      height: 4.75rem;
+      word-spacing: 9999999px;
+      font-size: 1.2rem;
     }
-  }
-
-  .fc-view-container:before {
-    width: 100%;
-    height: 3.43em;
-    position: absolute;
-    background: @calendar-day-header-bg-color;
-    content: '';
   }
 
   .fc-body {

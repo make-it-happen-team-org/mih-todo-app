@@ -12,11 +12,10 @@
 
   .fc-end-resizer {
     bottom: 3px;
-    left: -@calendar-slot-border-width;
-    font-family: 'FontAwesome';
+    font-family: 'Material Icons';
     opacity: .6;
 
-    &:after { content: "\f0dd"; }
+    &:after { content: "\e5c5"; }
 
     &:hover { opacity: 1; }
   }
@@ -56,8 +55,9 @@
         text-align: center;
 
         &:before {
-          margin-right: .5em;
-          font-family: 'FontAwesome';
+          margin-right: .5rem;
+          font-family: 'Material Icons';
+          vertical-align: middle;
         }
       }
     }
@@ -66,14 +66,14 @@
       background-color: @calendar-event-sick-bg-color;
       color: @calendar-event-sick-font-color;
 
-      .fc-title:before { content: "\f21e"; }
+      .fc-title:before { content: "\e87d"; }
     }
 
     &.vacation {
       background-color: @calendar-event-vac-bg-color;
       color: @calendar-event-vac-font-color;
 
-      .fc-title:before { content: "\f072"; }
+      .fc-title:before { content: "\e53d"; }
     }
 
     .fc-end-resizer { left: 0; }
