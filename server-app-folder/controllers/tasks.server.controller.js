@@ -2,7 +2,7 @@
  * Module dependencies.
  */
 var mongoose = require('mongoose'),
-	ObjectId = require("mongodb").ObjectID,
+	ObjectId = mongoose.Schema.ObjectID,
 	errorHandler = require('./errors.server.controller'),
 	Task = mongoose.model('Activity'),
 	Slot = mongoose.model('Slot'),
