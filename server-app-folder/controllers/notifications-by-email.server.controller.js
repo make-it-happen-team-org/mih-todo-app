@@ -3,7 +3,6 @@
  */
 var mongoose = require('mongoose'),
 	errorHandler = require('./errors.server.controller'),
-	ObjectId = require("mongodb").ObjectID,
 	nodemailer = require('nodemailer'),
 	config = require('../../config/config'),
 	Slot = mongoose.model('Slot'),
