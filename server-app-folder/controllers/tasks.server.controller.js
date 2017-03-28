@@ -2,7 +2,7 @@
  * Module dependencies.
  */
 var mongoose = require('mongoose'),
-	ObjectId = require("mongodb").ObjectID,
+	ObjectId = mongoose.Types.ObjectId,
 	errorHandler = require('./errors.server.controller'),
 	Task = mongoose.model('Activity'),
 	Slot = mongoose.model('Slot'),
@@ -105,7 +105,7 @@ exports.getSlotsByTask = function (req, res, next) {
 			return res.status(400).send({
 				message: errorHandler.getErrorMessage(err)
 			});
-		} else {			
+		} else {
 			res.jsonp(slots);
 		}
 	});
@@ -119,7 +119,7 @@ exports.deleteSlotsByTask = function (req, res, next) {
 		} else {
 			res.jsonp(slots);
 		}
-	});	
+	});
 };
 
 /**
