@@ -1,5 +1,5 @@
 var mongoose = require('mongoose'),
-	ObjectId = mongoose.Schema.ObjectID,
+	ObjectId = mongoose.Types.ObjectId,
 	errorHandler = require('./errors.server.controller'),
 	Event = mongoose.model('Activity'),
 	Slot = mongoose.model('Slot'),

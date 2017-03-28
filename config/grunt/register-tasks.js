@@ -20,7 +20,6 @@ module.exports = (grunt) => {
         'htmlmin',
         'copy:prodImg',
         'copy:prodFonts',
-        'uglify'
     ]);
     grunt.registerTask('build', [
         'env:production',
