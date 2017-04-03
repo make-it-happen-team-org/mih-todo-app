@@ -9,7 +9,8 @@
     "postinstall": "node scripts/postinstall.js",
     "build:web": "grunt browser",
     "build:mobile": "grunt cordova",
-    "start": "set NODE_ENV=mobile&&node server-app-folder/server.js"
+    "start": "set NODE_ENV=mobile&&node server-app-folder/server.js",
+    "start:unix": "export NODE_ENV=mobile&&node server-app-folder/server.js"
   },
   "dependencies": {
     "angular-bootstrap-datetimepicker": "^1.0.1",

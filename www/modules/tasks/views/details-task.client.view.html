@@ -53,8 +53,8 @@
                   data-ng-class="tasksDetails.isOpenNotes ? 'icon-keyboard_arrow_up' : 'icon-keyboard_arrow_down'"
                   data-ng-click="tasksDetails.isOpenNotes = !tasksDetails.isOpenNotes"></span>
         </li>
-        <li class="tasks-details__list-item" data-ng-if="details.isOpenNotes">
-            <span class="tasks-details-item__notes">{{ details.event.notes }}</span>
+        <li class="tasks-details__list-item" data-ng-if="tasksDetails.isOpenNotes">
+            <span class="tasks-details-item__notes">{{ tasksDetails.task.notes }}</span>
         </li>
         <li class="tasks-details__list-item"
             data-ng-class="{active: tasksDetails.isOpenTimeSlots}">
