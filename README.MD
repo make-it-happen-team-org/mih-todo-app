@@ -20,12 +20,12 @@
 - Install ```JDK 1.8``` ;
 - Install ```Android SDK``` and set ANDROID_HOME with path to your Android SDK folder in system variables;
 - Run ```android.bat``` in root of Android SDK folder and install all from folder "Tools" and "Android 7.1.1 (API 25)". You cant choose another API level if you want.;
-- Install Cordova ```npm install cordova -g```;
+- Install Cordova ```npm install cordova -g``` (or ```yarn global add cordova```);
 - Add android platform by running ```cordova platform add android```;
-- Execute command: ``` npm install```;
-- Command ```npm install -g eslint``` to install eslint;
-- ```[optional]``` Command ```npm install -g karma-cli``` to install karma CLI for windows;
-- ```[optional]``` Command ```npm install -g grunt-cli``` to install grunt CLI for windows;
+- Execute command: ``` npm install``` (or ```yarn install```);
+- Command ```npm install -g eslint``` (or ```yarn globall add eslint```) to install eslint;
+- ```[optional]``` Command ```npm install -g karma-cli``` (or ```yarn globall add karma-cli```) to install karma CLI for windows;
+- ```[optional]``` Command ```npm install -g grunt-cli``` (or ```yarn globall add grunt-cli```) to install grunt CLI for windows;
 - P.S. EditorConfig ```mih_editorconfig.xml``` (import to IDE config)
 
 ### Set up android emulator
@@ -36,11 +36,15 @@
 - Pick device you want to emulate and click "Create AVD...";
 - Go
 
+### For those who prefer using yarn over npm:
+ - Command ```yarn install --ignore-engines``` to install all needed dependencies
+ (NOTE if there is an error tight with phantomJS module: INSTALL 'phantomjs' module globally
+
 ### Running Application (common)
 - Command ```mongod``` to run mongo server (to specify db path use --dbpath option);
-- Command ```npm run build:web``` to build app for browser;
-- Command ```npm run build:mobile``` to build app for android device;
-- Command ```npm start``` run server;
+- Command ```npm run build:web``` (or ```yarn run build:web```) to build app for browser;
+- Command ```npm run build:mobile``` (or ```yarn run build:mobile```) to build app for android device;
+- Command ```npm start``` (or ```yarn run start```) run server;
 - If running on browser, target endpoint [http://localhost:3000/](http://localhost:3000/).
 
 ### Running application on mobile device
@@ -105,7 +109,7 @@
 ##### Common Rules
 ```less
   .slots-table { max-height: 300px; }
-  
+
   .overdue-badge {
     background: transparent;
     color: @base-color;
@@ -143,7 +147,7 @@
     z-index: 10;
     top: 0;
     right: 0;
-  
+
     //----------Display & Box Model------------
     display: inline-block;
     overflow: hidden;
@@ -153,17 +157,17 @@
     padding: 10px;
     border: 10px solid #333;
     margin: 10px;
-    
+
     //------------------Color--------------------
     background: #000;
     color: #FFF;
-    
+
     //-------------------Text---------------------
     font-family: sans-serif;
     font-size: 16rem;
     line-height: 1.4;
     text-align: right;
-    
+
     //-------------------Other---------------------
     cursor: pointer;
   }

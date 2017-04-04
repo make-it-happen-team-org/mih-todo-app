@@ -1,9 +1,5 @@
 {
   "name": "MIH",
-  "engines": {
-    "node": ">=0.10.28",
-    "npm": ">=1.4.28"
-  },
   "scripts": {
     "preinstall": "node scripts/preinstall.js",
     "postinstall": "node scripts/postinstall.js",
@@ -81,6 +77,7 @@
     "moment": "^2.14.1",
     "nodemon": "^1.11.0",
     "should": "~4.1.0",
-    "supertest": "~0.14.0"
+    "supertest": "~0.14.0",
+    "yarn": "^0.21.3"
   }
 }
