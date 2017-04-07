@@ -1,5 +1,5 @@
 class TasksController {
-  constructor($scope, $rootScope, $stateParams, $location,
+  constructor($scope, $rootScope, $stateParams, $location, $state,
               Authentication, Tasks, Users, $timeout, Algorithm,
               Slots, Notification, TasksListService) {
     $scope.authentication   = Authentication;
@@ -11,6 +11,7 @@ class TasksController {
     this.$rootScope       = $rootScope;
     this.$stateParams     = $stateParams;
     this.$location        = $location;
+    this.$state           = $state;
     this.Authentication   = Authentication;
     this.Tasks            = Tasks;
     this.Users            = Users;
@@ -102,7 +103,7 @@ class TasksController {
         type:         'task',
         title:        '',
         priority:     1,
-        estimation:   TasksController.getOptimalEstimation($scope.dt.startDate, $scope.dt.endDate),
+        estimation:   1,
         notes:        '',
         days:         {
           startTime: $scope.dt.startDate,
@@ -156,7 +157,7 @@ class TasksController {
         }
 
         Promise.all(queries).then(() => {
-          $location.path('/');
+          $state.go('restricted.todo_state.tasks.list');
           $rootScope.$broadcast('NEW_TASK_MODIFY');
           Notification.success(`Task '${task.title}' was successfully created`);
         });
@@ -165,14 +166,10 @@ class TasksController {
       }
     };
 
-    $scope.cancel = () => {
-      $location.path('/');
-    };
-
     $scope.remove = (task) => {
       if (task) {
         task.$remove(() => {
-          $location.path('/');
+          $state.go('restricted.todo_state.tasks.list');
           $rootScope.$broadcast('NEW_TASK_MODIFY');
           this.removeSlotsByTask();
           Notification.success(`Task '${task.title}' was successfully removed`);
@@ -196,7 +193,7 @@ class TasksController {
       });
       if (task) {
         task.$update(() => {
-          $location.path('tasks/' + task._id);
+          this.$state.go('restricted.todo_state.tasks.details', { taskId: $stateParams.taskId });
           $rootScope.$broadcast('NEW_TASK_MODIFY');
           Notification.success(`Task '${task.title}' was successfully updated`);
         }, (errorResponse) => {
@@ -205,10 +202,6 @@ class TasksController {
       } else {
         console.error('Error. Task is not defined');
       }
-    };
-
-    $scope.completeSlot = (slot) => {
-      this.updateProgress(slot, $scope.task);
     };
   }
 
@@ -230,23 +223,13 @@ class TasksController {
     return TasksController.getEstimationDaysRange(startDate, endDate).length * 12;
   }
 
-  static getOptimalEstimation(startDate, endDate) {
-    // TODO: what is considered optimal?
-    let optimalEstimation = 1 /* hour */;
-    return optimalEstimation;
-  }
-
-  removeAvailHoursInfo() {
-    delete this.$scope.timeAvailability;
-  }
-
   updateEstimation(model) {
     let maxEstimation               = TasksController.getMaxEstimation(model.days.startTime, model.days.endTime);
     this.$scope.slider.options.ceil = maxEstimation;
     if (model.estimation > maxEstimation) {
       model.estimation = maxEstimation;
     }
-    this.removeAvailHoursInfo();
+    delete this.$scope.timeAvailability;
   };
 
   static setEstimationExtremes(model) {
@@ -284,29 +267,6 @@ class TasksController {
         taskId: this.$stateParams.taskId
       }
     );
-  };
-
-  updateProgress(slot, task) {
-    slot.isComplete = true;
-
-    this.Slots.update(slot, () => {
-      let slotsQty         = this.$scope.slotsRange.map(function (slot) {
-        return slot.isComplete;
-      });
-      let completeSlotsQty = slotsQty.filter(Boolean);
-
-      task.progress += slot.duration;
-
-      if (slotsQty.length === completeSlotsQty.length) {
-        task.isComplete = true;
-      }
-
-      task.$update(() => {
-        this.$rootScope.$broadcast('NEW_TASK_MODIFY');
-      }, (errorResponse) => {
-        this.$scope.error = errorResponse.data.message;
-      });
-    });
   };
 
   clearSlotsList() {
@@ -431,7 +391,7 @@ class TasksController {
   }
 }
 
-TasksController.$inject = ['$scope', '$rootScope', '$stateParams', '$location',
+TasksController.$inject = ['$scope', '$rootScope', '$stateParams', '$location', '$state',
   'Authentication', 'Tasks', 'Users', '$timeout', 'Algorithm', 'Slots', 'Notification', 'TasksListService'];
 
 angular.module('tasks').controller('TasksController', TasksController);

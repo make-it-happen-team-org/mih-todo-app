@@ -1,7 +1,7 @@
 // Events controller
 angular.module('events').controller('EventsController',
-  ['$scope', '$rootScope', '$stateParams', '$location', 'Users', 'Authentication', 'Events', 'Notification',
-    function ($scope, $rootScope, $stateParams, $location, Users, Authentication, Events, Notification) {
+  ['$scope', '$rootScope', '$stateParams', '$location', '$state', 'Users', 'Authentication', 'Events', 'Notification',
+    function ($scope, $rootScope, $stateParams, $location, $state, Users, Authentication, Events, Notification) {
 
       $scope.selectedTemplate = false;
       $scope.authentication   = Authentication;
@@ -141,7 +141,7 @@ angular.module('events').controller('EventsController',
         new Events($scope.eventData).$save(() => {
           $scope.events = [];
           $location.search('');
-          $location.path('/');
+          $state.go('restricted.todo_state.events.list');
           $rootScope.$broadcast('NEW_EVENTS_MODIFY');
         }, err => {
           $scope.eventData.validationError = err.data.message.errors.title;
@@ -158,7 +158,7 @@ angular.module('events').controller('EventsController',
         let event = $scope.event;
 
         event.$update(function () {
-          $location.path('events/' + event._id);
+          $state.go('restricted.todo_state.events.details', { eventId: event._id });
           $rootScope.$broadcast('NEW_EVENTS_MODIFY');
         }, function (errorResponse) {
           $scope.error = errorResponse.data.message;
@@ -167,8 +167,7 @@ angular.module('events').controller('EventsController',
 
       $scope.deleteEvent    = function () {
         $scope.event.$remove(function () {
-          $location.search('');
-          $location.path('/');
+          $state.go('restricted.todo_state.events.list');
           Events.deleteSlotsByEvent({
               eventId: $stateParams.eventId
             }
@@ -176,10 +175,5 @@ angular.module('events').controller('EventsController',
           Notification.success(`Event "${$scope.event.title}" was successfully removed`);
           $rootScope.$broadcast('NEW_EVENTS_MODIFY');
         });
-      };
-
-      $scope.closeEventForm = function () {
-        $location.search('');
-        $location.path('/');
       };
     }]);
