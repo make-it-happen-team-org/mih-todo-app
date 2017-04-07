@@ -1,5 +1,5 @@
 class TasksController {
-  constructor($scope, $rootScope, $stateParams, $location,
+  constructor($scope, $rootScope, $stateParams, $location, $state,
               Authentication, Tasks, Users, $timeout, Algorithm,
               Slots, Notification, TasksListService) {
     $scope.authentication   = Authentication;
@@ -11,6 +11,7 @@ class TasksController {
     this.$rootScope       = $rootScope;
     this.$stateParams     = $stateParams;
     this.$location        = $location;
+    this.$state = $state;
     this.Authentication   = Authentication;
     this.Tasks            = Tasks;
     this.Users            = Users;
@@ -156,7 +157,7 @@ class TasksController {
         }
 
         Promise.all(queries).then(() => {
-          $location.path('/');
+          $state.go('restricted.todo_state.tasks.list');
           $rootScope.$broadcast('NEW_TASK_MODIFY');
           Notification.success(`Task '${task.title}' was successfully created`);
         });
@@ -172,7 +173,7 @@ class TasksController {
     $scope.remove = (task) => {
       if (task) {
         task.$remove(() => {
-          $location.path('/');
+          $state.go('restricted.todo_state.tasks.list');
           $rootScope.$broadcast('NEW_TASK_MODIFY');
           this.removeSlotsByTask();
           Notification.success(`Task '${task.title}' was successfully removed`);
@@ -196,7 +197,7 @@ class TasksController {
       });
       if (task) {
         task.$update(() => {
-          $location.path('tasks/' + task._id);
+          this.$state.go('restricted.todo_state.tasks.details', { taskId: $stateParams.taskId });
           $rootScope.$broadcast('NEW_TASK_MODIFY');
           Notification.success(`Task '${task.title}' was successfully updated`);
         }, (errorResponse) => {
@@ -431,7 +432,7 @@ class TasksController {
   }
 }
 
-TasksController.$inject = ['$scope', '$rootScope', '$stateParams', '$location',
+TasksController.$inject = ['$scope', '$rootScope', '$stateParams', '$location', '$state',
   'Authentication', 'Tasks', 'Users', '$timeout', 'Algorithm', 'Slots', 'Notification', 'TasksListService'];
 
 angular.module('tasks').controller('TasksController', TasksController);
