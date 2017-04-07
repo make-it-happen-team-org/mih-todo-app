@@ -176,9 +176,4 @@ angular.module('events').controller('EventsController',
           $rootScope.$broadcast('NEW_EVENTS_MODIFY');
         });
       };
-
-      $scope.closeEventForm = function () {
-        $location.search('');
-        $location.path('/');
-      };
     }]);
