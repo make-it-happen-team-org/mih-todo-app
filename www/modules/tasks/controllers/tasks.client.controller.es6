@@ -254,9 +254,6 @@ class TasksController {
     ).then(slotsRange => {
       this.$timeout(() => {
         this.$scope.timeAvailability = this.Algorithm.getTimeAvailabilityFromSlotsGroupedByDays();
-        if (!slotsRange.length) {
-          this.Algorithm.AlgorithmNegative.initialize('task', this.$scope.timeAvailability.totalAvailHours);
-        }
         return this.$scope.slotsRange = slotsRange;
       });
     });
@@ -358,35 +355,6 @@ class TasksController {
     this.$scope.$on('slideEnded', () => {
       this.clearSlotsList();
       this.$scope.$apply();
-    });
-
-    this.$scope.$on('slotShiftedFromNegative', () => {
-      let model = this.$scope.newTask;
-
-      this.Algorithm.generateSlots(
-        new Date(model.days.startTime),
-        new Date(model.days.endTime),
-        model.priority,
-        model.estimation,
-        this.$scope.user.predefinedSettings.workingHours
-      ).then(slotsRange => {
-        if (!slotsRange.length) {
-          return;
-        }
-        this.$scope.slotsRange = slotsRange;
-
-        let queries = [this.saveTask(model)];
-
-        if (model.isATemplate || this.$scope.selectedTemplate) {
-          queries.push(this.updateTaskTemplates(model));
-        }
-
-        Promise.all(queries).then(() => {
-          this.$location.path('/');
-          this.$rootScope.$broadcast('NEW_TASK_MODIFY');
-          this.Notification.success(`Task '${model.title}' was successfully created`);
-        });
-      });
     });
   }
 }
