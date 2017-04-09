@@ -70,15 +70,15 @@ class Day {
 class Algorithm {
 
   /** @ngInject */
-  constructor($q, Slots, Authentication, AlgorithmServer, AlgorithmPositive, AlgorithmNegative, TimeService) {
+  constructor($q, Slots, Authentication, AlgorithmServer, AlgorithmPositive, TimeService, Notification) {
     Object.assign(this, {
       $q,
       Slots,
       user: Authentication.user,
       AlgorithmServer,
       AlgorithmPositive,
-      AlgorithmNegative,
-      TimeService
+      TimeService,
+      Notification
     });
 
     this.slotsRange         = [];
@@ -133,14 +133,6 @@ class Algorithm {
 
     startDate.setHours(0, 0, 0, 0);
     endDate.setHours(0, 0, 0, 0);
-
-    Algorithm.algorithmBranchDataSetter([this.AlgorithmNegative, this.AlgorithmPositive], {
-      startDate:  this.TimeService.fromDateToISOFormat(startDate),
-      endDate:    this.TimeService.fromDateToISOFormat(endDate),
-      estimation: estimation,
-      priority:   priority,
-      delegate:   this
-    });
 
     this.getSlots(this.TimeService.fromDateToISOFormat(startDate), this.TimeService.fromDateToISOFormat(endDate), 'free-time')
         .then(res => {
@@ -212,7 +204,9 @@ class Algorithm {
 
     if (estimation <= totalAvailHours) {
       recommendations = isBalancedLoad ? this.AlgorithmPositive.getBalancedRecommendations(data) : this.AlgorithmPositive.getIntensiveRecommendations(data);
-    }
+    } else {
+			this.Notification.warning('No sufficient free time');
+		}
     this.slotsRange = this.getSuitableSlots(recommendations, priority);
   }
 }
