@@ -205,7 +205,7 @@ class Algorithm {
     if (estimation <= totalAvailHours) {
       recommendations = isBalancedLoad ? this.AlgorithmPositive.getBalancedRecommendations(data) : this.AlgorithmPositive.getIntensiveRecommendations(data);
     } else {
-			this.Notification.warning('No sufficient free time. Please, use desktop application to add new task and recalculate existing');
+			this.Notification.warning('No sufficient free time');
 		}
     this.slotsRange = this.getSuitableSlots(recommendations, priority);
   }
