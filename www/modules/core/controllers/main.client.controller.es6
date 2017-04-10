@@ -38,7 +38,7 @@ class MainController {
   };
 
   toggleSidebar() {
-    this.sidebarCollapsed = !this.sidebarCollapsed;
+    this.$scope.$emit('toggle_sidebar');
   }
 
   toggleDropdown(dropdownItem) {

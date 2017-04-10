@@ -11,7 +11,9 @@ angular.module('core').config(['$stateProvider', '$urlRouterProvider', function 
       abstract: true,
       views:    {
         'root':    {
-          templateUrl: 'modules/core/views/base.client.view.html'
+          templateUrl: 'modules/core/views/base.client.view.html',
+          controller: 'MainController',
+          controllerAs: 'mainCtrl'
         },
         'sidebar': {
           templateUrl:  'modules/sidebar/views/sidebar.client.view.html',

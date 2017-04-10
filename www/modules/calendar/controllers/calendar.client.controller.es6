@@ -105,10 +105,6 @@ class Calendar {
     this.config.calendars.main.fullCalendar('addEventSource', slots);
     this.bookedSlots = slots;
   }
-
-  toggleSidebar() {
-    this.$scope.$emit('toggle_sidebar');
-  }
 }
 
 angular.module('calendar').controller('CalendarController', Calendar);
