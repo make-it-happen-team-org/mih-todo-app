@@ -167,6 +167,7 @@ angular.module('events').controller('EventsController',
 
       $scope.deleteEvent    = function () {
         $scope.event.$remove(function () {
+          $location.search('');
           $state.go('restricted.todo_state.events.list');
           Events.deleteSlotsByEvent({
               eventId: $stateParams.eventId
