@@ -44,10 +44,16 @@
   }
 
   .sidebar-menu {
-    padding: 15px;
 
     li {
       line-height: 48px;
+
+      &:first-child .sidebar-control {
+        padding-top: 1.5rem;
+      }
+      &:last-child .sidebar-control {
+        padding-bottom: 1.5rem;
+      }
 
       &.separator {
         padding: 4px 0;
@@ -64,7 +70,10 @@
         }
       }
 
-      a, button {
+      .sidebar-control {
+        display: block;
+        padding-left: 1.5rem;
+        padding-right: 1.5rem;
         color: @color-biscay-blue-s41;
         .phoneX2 ({ font-size: 16px; });
       }
