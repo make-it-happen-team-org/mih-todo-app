@@ -11,7 +11,6 @@ angular.module('users').config(['$stateProvider', ($stateProvider) => {
     .state('restricted.profile', {
     url:   '/settings/profile',
     views: {
-      'aside':     { templateUrl: 'modules/core/views/sidebar/todo.client.view.html' },
       'main-view': {
         templateUrl:  'modules/users/views/settings/edit-profile.client.view.html',
         controller:   'SettingsController',
