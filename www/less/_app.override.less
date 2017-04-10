@@ -15,7 +15,12 @@ body {
   transform:  scale(1);
 }
 
-a { color: @link-color; }
+a {
+  color: @link-color;
+  &:hover {
+    text-decoration: none;
+  }
+}
 
 ol,
 ul { list-style: none; }
