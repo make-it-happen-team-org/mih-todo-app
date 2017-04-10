@@ -4,34 +4,37 @@
     color: @color-bali-hai-blue-s24;
   }
 
+  .icon--rotated {
+    transform: rotate(180deg);
+  }
+
   &__sort {
-    padding: 14px;
+    padding: 1.4rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
     .phoneX2({ padding: 28px; });
 
     &-label {
       font-size: 12px;
-      float: left;
       .phoneX2({ font-size: 24px; });
     }
 
-    &-actions {
-      float: right;
-    }
-
     &-button {
-      width: 22px;
-      height: 22px;
-      margin: 0 0 0 22px;
-      opacity: 0.5;
-      .phoneX2({ width: 44px; height: 44px; margin: 0 0 0 44px; });
+      display: inline-block;
+      margin: 0 0 0 2.2rem;
 
       &--active {
-        opacity: 1;
+        color: @color-white;
       }
     }
   }
 
   &__tabs {
+    overflow: hidden;
+
     &-tab {
       float: left;
       width: 50%;
@@ -53,30 +56,11 @@
   &__list {
 
     &-item {
-      background-color: @color-white;
+      padding: 14px;
       border-bottom: 1px solid @color-sidebar-separator;
-      .phoneX2({ border-bottom-width: 2px; });
-
-      a {
-        position: relative;
-        color: @color-biscay-blue-s41;
-        display: block;
-        padding: 14px;
-        .phoneX2({ padding: 28px; font-size: 28px; });
-
-        &:after {
-          position: absolute;
-          background: url('/modules/templates/img/edit.png') no-repeat;
-          background-size: cover;
-          height: 22px;
-          width: 22px;
-          content: '';
-          right: 13px;
-          top: 13px;
-          opacity: 0.2;
-          .phoneX2({ height: 44px; width: 44px; right: 26px; top: 26px; });
-        }
-      }
+      background-color: @color-white;
+      color: @color-biscay-blue-s41;
+      .phoneX2({ padding: 28px; font-size: 28px; border-bottom-width: 2px; });
     }
   }
 }
