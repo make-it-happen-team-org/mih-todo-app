@@ -1,8 +1,11 @@
 class SidebarController {
-  constructor(Authentication, $rootScope) {
+  constructor(Authentication, $rootScope, $http, $state, Notification) {
     this.user = Authentication.user;
     this.$rootScope = $rootScope;
     this.active = false;
+    this.$http = $http;
+    this.$state = $state;
+    this.Notification = Notification;
 
     this.$rootScope.$on('toggle_sidebar',() => {
       this.toggleSidebar();
@@ -31,6 +34,18 @@ class SidebarController {
     this.$rootScope.$on('$stateChangeSuccess', () => {
       this.disableSidebar();
     });
+
+    this.signOut = () => {
+      $http.get('auth/signout')
+        .then(() => {
+            this.$state.go('auth.signin');
+        })
+        .catch(() => {
+          Notification.error({
+            message: 'Error logout'
+          });
+        });
+    }
   }
 }
 
