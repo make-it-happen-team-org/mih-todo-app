@@ -14,38 +14,60 @@
     <nav class="sidebar-menu">
         <ul>
             <li>
-                <i class="icon icon-date_range"></i>
-                <a data-ui-sref="restricted.todo_state" data-ng-click="sidebarCtrl.disableSidebar()">Calendar</a>
+                <a data-ui-sref="restricted.todo_state" data-ng-click="sidebarCtrl.disableSidebar()"
+                   class="sidebar-control">
+                    <i class="icon icon-date_range"></i>
+                    Calendar
+                </a>
             </li>
             <li>
-                <i class="icon icon-favorite"></i>
-                <a data-ui-sref="restricted.todo_state.events.create({eventPresetType: 'sick'})" data-ng-click="sidebarCtrl.disableSidebar()">Sick today</a>
+                <a data-ui-sref="restricted.todo_state.events.create({eventPresetType: 'sick'})"
+                   data-ng-click="sidebarCtrl.disableSidebar()" class="sidebar-control">
+                    <i class="icon icon-favorite"></i>
+                    Sick today
+                </a>
             </li>
             <li>
-                <i class="icon icon-airplanemode_active"></i>
-                <a data-ui-sref="restricted.todo_state.events.create({eventPresetType: 'vacation'})" data-ng-click="sidebarCtrl.disableSidebar()">Vacation</a>
+                <a data-ui-sref="restricted.todo_state.events.create({eventPresetType: 'vacation'})"
+                   data-ng-click="sidebarCtrl.disableSidebar()" class="sidebar-control">
+                    <i class="icon icon-airplanemode_active"></i>
+                    Vacation
+                </a>
             </li>
             <li>
-                <i class="icon icon-notifications"></i>
-                <a href="#" data-ng-click="sidebarCtrl.disableSidebar()">Reminder</a>
+                <a href="#" data-ng-click="sidebarCtrl.disableSidebar()" class="sidebar-control">
+                    <i class="icon icon-notifications"></i>
+                    Reminder
+                </a>
             </li>
             <li class="separator"></li>
             <li>
-                <i class="icon icon-star"></i>
-                <a data-ui-sref="restricted.todo_state.tasks.list" data-ng-click="sidebarCtrl.disableSidebar()">Tasks</a>
+                <a data-ui-sref="restricted.todo_state.tasks.list" data-ng-click="sidebarCtrl.disableSidebar()"
+                   class="sidebar-control">
+                    <i class="icon icon-star"></i>
+                    Tasks
+                </a>
             </li>
             <li>
-                <i class="icon icon-event"></i>
-                <a data-ui-sref="restricted.todo_state.events.list" data-ng-click="sidebarCtrl.disableSidebar()">Events</a>
+                <a data-ui-sref="restricted.todo_state.events.list" data-ng-click="sidebarCtrl.disableSidebar()"
+                   class="sidebar-control">
+                    <i class="icon icon-event"></i>
+                    Events
+                </a>
             </li>
             <li class="separator"></li>
+            <!--<li>-->
+                <!--<a data-ui-sref="restricted.migrate" data-ng-click="sidebarCtrl.disableSidebar()"-->
+                   <!--class="sidebar-control">-->
+                    <!--<i class="icon icon-repeat"></i>-->
+                    <!--Import content-->
+                <!--</a>-->
+            <!--</li>-->
             <li>
-                <i class="icon icon-repeat"></i>
-                <a data-ui-sref="restricted.migrate" data-ng-click="sidebarCtrl.disableSidebar()">Import content</a>
-            </li>
-            <li>
-                <i class="icon icon-exit_to_app"></i>
-                <button data-ng-click="sidebarCtrl.signOut()">Sign Out</button>
+                <button data-ng-click="sidebarCtrl.signOut()" class="sidebar-control">
+                    <i class="icon icon-exit_to_app"></i>
+                    Sign Out
+                </button>
             </li>
         </ul>
     </nav>

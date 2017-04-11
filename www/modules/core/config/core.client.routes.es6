@@ -1,9 +1,6 @@
-// Setting up route
-
 angular.module('core').config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
   let HOME_URL = '/todo';
 
-  // Redirect to home view when route not found
   $urlRouterProvider.otherwise(HOME_URL);
 
   $stateProvider
@@ -11,7 +8,9 @@ angular.module('core').config(['$stateProvider', '$urlRouterProvider', function 
       abstract: true,
       views:    {
         'root':    {
-          templateUrl: 'modules/core/views/base.client.view.html'
+          templateUrl: 'modules/core/views/base.client.view.html',
+          controller: 'MainController',
+          controllerAs: 'mainCtrl'
         },
         'sidebar': {
           templateUrl:  'modules/sidebar/views/sidebar.client.view.html',
@@ -44,15 +43,9 @@ angular.module('core').config(['$stateProvider', '$urlRouterProvider', function 
     .state('restricted.todo_state', {
       url:   HOME_URL,
       views: {
-        'aside':     {
-          templateUrl: 'modules/core/views/sidebar/todo.client.view.html'
-        },
         'main-view': {
           templateUrl: 'modules/calendar/views/calendar.client.view.html'
         }
-      },
-      data:  {
-        menuLabel: "plan your day"
       }
     });
 }]);

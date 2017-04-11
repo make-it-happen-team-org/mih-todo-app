@@ -1,7 +1,8 @@
 <div class="events-list" data-ng-controller="EventsListController as eventCtrl">
     <header class="main-header-mobile">
         <div class="main-header-mobile__main-tab-info">
-            <span class="main-header-mobile-control__icon icon icon-dehaze"></span>
+            <span class="main-header-mobile-control__icon icon icon-dehaze"
+                  data-ng-click="mainCtrl.toggleSidebar()"></span>
             <h3 class="main-header-mobile__title">Events</h3>
         </div>
         <div class="main-header-mobile__icons">

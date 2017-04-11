@@ -1,7 +1,8 @@
 <div class="main-content-wrapper templates">
     <div class="main-header-mobile">
         <div class="main-header-mobile__main-tab-info">
-            <span class="main-header-mobile-control__icon icon icon-dehaze"></span>
+            <span class="main-header-mobile-control__icon icon icon-dehaze"
+                  data-ng-click="mainCtrl.toggleSidebar()"></span>
             <h3 class="main-header-mobile__title">Templates</h3>
         </div>
         <div class="main-header-mobile__icons">
@@ -11,20 +12,22 @@
         </div>
     </div>
     <header>
-        <div class="templates__sort clearfix">
+        <div class="templates__sort">
             <div class="templates__sort-label">Sort by last date of use:</div>
-            <div class="templates__sort-actions clearfix">
-                <img src="modules/templates/img/sort-desc.png"
-                     class="templates__sort-button"
+            <div class="templates__sort-actions">
+                <span class="templates__sort-button"
                      data-ng-class="{'templates__sort-button--active': !templatesCtrl.soprtingReverse}"
-                     data-ng-click="templatesCtrl.deactivateSortingReverse()"/>
-                <img src="modules/templates/img/sort-asc.png"
-                     class="templates__sort-button"
+                     data-ng-click="templatesCtrl.deactivateSortingReverse()">
+                    <span class="icon icon-sort"></span>
+                </span>
+                <span class="templates__sort-button"
                      data-ng-class="{'templates__sort-button--active': templatesCtrl.soprtingReverse}"
-                     data-ng-click="templatesCtrl.activateSortingReverse()"/>
+                      data-ng-click="templatesCtrl.activateSortingReverse()">
+                    <span class="icon icon-sort icon--rotated"></span>
+                </span>
             </div>
         </div>
-        <ul class="templates__tabs clearfix">
+        <ul class="templates__tabs">
             <li class="templates__tabs-tab"
                 data-ng-class="{'templates__tabs-tab--active': templatesCtrl.isTasksTabActive()}"
                 data-ng-click="templatesCtrl.setTasksTabActive()">
@@ -41,17 +44,13 @@
         <ul data-ng-show="templatesCtrl.isTasksTabActive()">
             <li class="templates__list-item"
                 data-ng-repeat="task in user.taskTemplates | orderBy: 'lastUsingDate' : templatesCtrl.soprtingReverse">
-                <a href="#!.todo/tasks/{{task._id}}/edit">
-                    <span>{{task.title}}</span>
-                </a>
+                <span data-ng-bind="task.title"></span>
             </li>
         </ul>
         <ul ng-show="templatesCtrl.isEventsTabActive()">
             <li class="templates__list-item"
                 data-ng-repeat="event in user.eventTemplates | orderBy: 'lastUsingDate' : templatesCtrl.soprtingReverse">
-                <a href="#!.todo/events/{{event._id}}/edit">
-                    <span>{{event.title}}</span>
-                </a>
+                <span data-ng-bind="event.title"></span>
             </li>
         </ul>
     </div>
